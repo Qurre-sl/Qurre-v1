@@ -21,7 +21,7 @@ framework for scp sl
 # Configs
 You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/^server.port^-cfg.yml` 
 
-~~---------------~~Configs~~---------------~~
+cfg
 ```yml
 Qurre_debug: false
 ```
