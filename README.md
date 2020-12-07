@@ -25,3 +25,4 @@ You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/
 ```yml
 Qurre_debug: false
 ```
+Based on [Exiled](https://github.com/galaxy119/EXILED)
