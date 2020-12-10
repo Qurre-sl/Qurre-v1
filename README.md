@@ -18,8 +18,13 @@ framework for scp sl
 # Configs
 You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/^server.port^-cfg.yml` 
 
-cfg
 ```yml
 Qurre_debug: false
+Qurre_spawn_blood: true
+Qurre_banned: banned
+Qurre_kicked: kicked
+Qurre_BanOrKick_msg: You have been %bok%.
+Qurre_reason: Reason
 ```
+
 Based on [Exiled](https://github.com/galaxy119/EXILED)
