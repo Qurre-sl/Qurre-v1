@@ -7,7 +7,7 @@ namespace Qurre.API
     {
         public static System.Collections.Generic.Dictionary<int, ReferenceHub> IdHubs;
         public static System.Collections.Generic.Dictionary<string, ReferenceHub> StrHubs;
-
+         
         public static MethodInfo SendSpawnMessage { get; }
 
         public static void AddAHP(this ReferenceHub player, float amount);
