@@ -4,9 +4,6 @@
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord Qurre">
       <img src="https://discordapp.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
   </a>
-   <a href="https://discord.gg/UCUBU2z" alt="Discord fydne">
-      <img src="https://discordapp.com/api/guilds/616697847261298688/embed.png" alt="Discord Server"/>
-  </a>
 </p>
 
 # Qurre
@@ -18,8 +15,13 @@ framework for scp sl
 # Configs
 You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/^server.port^-cfg.yml` 
 
-cfg
 ```yml
 Qurre_debug: false
+Qurre_spawn_blood: true
+Qurre_banned: banned
+Qurre_kicked: kicked
+Qurre_BanOrKick_msg: You have been %bok%.
+Qurre_reason: Reason
 ```
+
 Based on [Exiled](https://github.com/galaxy119/EXILED)
