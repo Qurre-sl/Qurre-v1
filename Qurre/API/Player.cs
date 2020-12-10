@@ -21,6 +21,7 @@ namespace Qurre.API
         public static void ChangeModel(this ReferenceHub player, RoleType newModel, System.Collections.Generic.List<ReferenceHub> newList);
         public static void ClearBroadcasts(this ReferenceHub player);
         public static void ClearInventory(this ReferenceHub player);
+        public static void Damage(this ReferenceHub player, int amount, DamageTypes.DamageType damageType);
         public static void Disconnect(this ReferenceHub player, string reason = null);
         public static void DropItem(this ReferenceHub player, Inventory.SyncItemInfo item);
         public static ReferenceHub Get(int playerId);
