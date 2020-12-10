@@ -7,9 +7,6 @@
    <a href="https://discord.gg/UCUBU2z" alt="Discord fydne">
       <img src="https://discordapp.com/api/guilds/616697847261298688/embed.png" alt="Discord Server"/>
   </a>
-<a href="https://github.com/fydne/Qurre-sl/blob/master/LICENSE" target="_blank">
-    <img alt="License" src="https://camo.githubusercontent.com/36e58a726f1073bad0361276f09d0e5782d58857/68747470733a2f2f696d672e736869656c64732e696f2f6372617465732f6c2f706e672e737667" />
-  </a>
 </p>
 
 # Qurre
