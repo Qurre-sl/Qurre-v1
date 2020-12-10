@@ -4,9 +4,6 @@
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord Qurre">
       <img src="https://discordapp.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
   </a>
-   <a href="https://discord.gg/UCUBU2z" alt="Discord fydne">
-      <img src="https://discordapp.com/api/guilds/616697847261298688/embed.png" alt="Discord Server"/>
-  </a>
 </p>
 
 # Qurre
