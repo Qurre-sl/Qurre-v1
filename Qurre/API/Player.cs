@@ -17,6 +17,7 @@ namespace Qurre.API
         public static void AddItem(this ReferenceHub player, ItemType itemType, float duration = float.NegativeInfinity, int sight = 0, int barrel = 0, int other = 0);
         public static void Ban(this ReferenceHub player, int duration, string reason, string issuer = "API");
         public static void Ban(this global::UnityEngine.GameObject player, int duration, string reason, string issuer = "API");
+        public static void BodyDelete(this ReferenceHub player);
         public static void Broadcast(this ReferenceHub player, ushort time, string message, Broadcast.BroadcastFlags flag = 0);
         public static void ChangeModel(this ReferenceHub player, RoleType newModel, System.Collections.Generic.List<ReferenceHub> newList);
         public static void ClearBroadcasts(this ReferenceHub player);

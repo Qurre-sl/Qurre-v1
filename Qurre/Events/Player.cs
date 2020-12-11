@@ -38,6 +38,7 @@ namespace Qurre.Events
         public static event main.AllEvents<JoinEvent> Join;
         public static event main.AllEvents<RagdollSpawnEvent> RagdollSpawn;
         public static event main.AllEvents<BannedEvent> Banned;
+        public static event main.AllEvents<SpawnEvent> Spawn;
 
         public static void ban(BanEvent ev);
         public static void banned(BannedEvent ev);
@@ -73,5 +74,6 @@ namespace Qurre.Events
         public static void unCuff(UnCuffEvent ev);
         public static void usedMedical(UsedMedicalEvent ev);
         public static void usingMedical(UsingMedicalEvent ev);
+        public static void spawn(SpawnEvent ev);
     }
 }
