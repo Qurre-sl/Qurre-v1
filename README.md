@@ -7,7 +7,7 @@
 </p>
 
 # Qurre
-framework for scp sl
+Framework for SCP:SL servers with unique functions & api
 
 # Installation
 * Move `Assembly-CSharp.dll` into the `SCPSL_Data/Managed` 
