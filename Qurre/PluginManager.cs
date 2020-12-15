@@ -2,7 +2,7 @@
 {
     public class PluginManager
     {
-        public const string Version = "1.1.0";
+        public const string Version = "1.0.1";
         public static readonly List<Plugin> plugins;
         public static string ManagedAssembliesDirectory { get; }
         public static string Plan { get; }
