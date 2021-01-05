@@ -1,5 +1,5 @@
 
-<img src="https://bot2.fydne.xyz/Qurre-mini.gif" align="right" />
+<img src="https://bot2.fydne.xyz/Qurre-web.gif" align="right" />
 <p>
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord Qurre">
       <img src="https://discordapp.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
