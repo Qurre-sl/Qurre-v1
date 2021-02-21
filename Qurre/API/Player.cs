@@ -1,124 +1,155 @@
 ﻿using Qurre.API.Objects;
-using System;
+using System.Collections.Generic;
 using System.Reflection;
 namespace Qurre.API
 {
-    public static class Player
+    public class Player
     {
-        public static System.Collections.Generic.Dictionary<int, ReferenceHub> IdHubs;
-        public static System.Collections.Generic.Dictionary<string, ReferenceHub> StrHubs;
-         
-        public static MethodInfo SendSpawnMessage { get; }
+        public static Dictionary<int, Player> IdPlayers;
+        public static Dictionary<string, Player> UserIDPlayers;
 
-        public static void AddAHP(this ReferenceHub player, float amount);
-        public static void AddHP(this ReferenceHub player, float amount);
-        public static void AddItem(this ReferenceHub player, Inventory.SyncItemInfo item);
-        public static void AddItem(this ReferenceHub player, ItemType itemType);
-        public static void AddItem(this ReferenceHub player, ItemType itemType, float duration = float.NegativeInfinity, int sight = 0, int barrel = 0, int other = 0);
-        public static void Ban(this ReferenceHub player, int duration, string reason, string issuer = "API");
-        public static void Ban(this global::UnityEngine.GameObject player, int duration, string reason, string issuer = "API");
-        public static void BodyDelete(this ReferenceHub player);
-        public static void Broadcast(this ReferenceHub player, ushort time, string message, Broadcast.BroadcastFlags flag = 0);
-        public static void ChangeModel(this ReferenceHub player, RoleType newModel, System.Collections.Generic.List<ReferenceHub> newList);
-        public static void ClearBroadcasts(this ReferenceHub player);
-        public static void ClearInventory(this ReferenceHub player);
-        public static void Damage(this ReferenceHub player, int amount, DamageTypes.DamageType damageType);
-        public static void Disconnect(this ReferenceHub player, string reason = null);
-        public static void DropItem(this ReferenceHub player, Inventory.SyncItemInfo item);
-        public static ReferenceHub Get(int playerId);
-        public static ReferenceHub Get(this global::UnityEngine.GameObject player);
-        public static ReferenceHub Get(string args);
-        public static float GetAHP(this ReferenceHub player);
-        public static System.Collections.Generic.List<Inventory.SyncItemInfo> GetAllItems(this ReferenceHub player);
-        public static string GetBadgeName(this ReferenceHub rh);
-        public static bool GetBypassMode(this ReferenceHub player);
-        public static global::Mirror.NetworkConnection GetConnection(this ReferenceHub player);
-        public static int GetCufferId(this ReferenceHub rh);
-        public static Inventory.SyncItemInfo GetCurrentItem(this ReferenceHub player);
-        public static Room GetCurrentRoom(this ReferenceHub player);
-        public static GlobalBadge GetGlobalBadge(this ReferenceHub player);
-        public static bool GetGodMode(this ReferenceHub player);
-        public static UserGroup GetGroup(this ReferenceHub player);
-        public static string GetGroupName(this ReferenceHub player);
-        public static bool GetHandCuffer(this ReferenceHub player);
-        public static float GetHP(this ReferenceHub player);
-        public static System.Collections.Generic.IEnumerable<ReferenceHub> GetHubs();
-        public static System.Collections.Generic.IEnumerable<ReferenceHub> GetHubs(this RoleType role);
-        public static System.Collections.Generic.IEnumerable<ReferenceHub> GetHubs(this Team team);
-        public static string GetIpAddress(this ReferenceHub player);
-        public static float GetMaxAHP(this ReferenceHub player);
-        public static float GetMaxHP(this ReferenceHub player);
-        public static string GetNickname(this ReferenceHub player);
-        public static int GetPlayerId(this ReferenceHub player);
-        public static global::UnityEngine.Vector3 GetPosition(this ReferenceHub player);
-        public static RoleType GetRole(this ReferenceHub player);
-        public static global::UnityEngine.Vector2 GetRotations(this ReferenceHub player);
-        public static global::UnityEngine.Vector3 GetRotationVector(this ReferenceHub player);
-        public static global::UnityEngine.Vector3 GetScale(this ReferenceHub player);
-        public static Side GetSide(this ReferenceHub hub);
-        public static Side GetSide(this Team team);
-        public static Side GetSide(this RoleType type);
-        public static Team GetTeam(this RoleType roleType);
-        public static Team GetTeam(this ReferenceHub player);
-        public static string GetUserId(this ReferenceHub player);
-        public static void Handcuff(this ReferenceHub player, ReferenceHub target);
-        public static void Heal(this ReferenceHub player);
-        public static void Heal(this ReferenceHub player, float amount);
-        public static void IntercomMute(this ReferenceHub player);
-        public static void IntercomUnmute(this ReferenceHub player);
-        public static void InvokeStaticMethod(this Type type, string methodName, object[] param);
-        public static bool IsCuffed(this ReferenceHub rh);
-        public static bool IsHandCuffed(this ReferenceHub player);
-        public static bool IsHost(this ReferenceHub player);
-        public static bool IsIntercomMuted(this ReferenceHub player);
-        public static bool IsMuted(this ReferenceHub player);
-        public static bool IsReloading(this ReferenceHub player);
-        public static bool IsZooming(this ReferenceHub player);
-        public static bool ItsNTF(this ReferenceHub hub);
-        public static bool ItsScp(this ReferenceHub hub);
-        public static void Kick(this ReferenceHub player, string reason, string issuer = "API");
-        public static void Kick(this global::UnityEngine.GameObject player, string reason, string issuer = "API");
-        public static void Kill(this ReferenceHub player, DamageTypes.DamageType damageType = null);
-        public static void Mute(this ReferenceHub player);
-        public static bool OfflineBan(string ip, string id, string Nick, int duration, string reason, string AdminNick);
-        public static bool Overwatch(this ReferenceHub player);
-        public static void Overwatch(this ReferenceHub player, bool over);
-        public static void PlayReloadAnimation(System.Collections.Generic.List<ReferenceHub> players);
-        public static void RAMessage(this CommandSender sender, string message, bool success = true, string pluginName = null);
-        public static void RemoveItem(this ReferenceHub player, Inventory.SyncItemInfo item);
-        public static void SendConsoleMessage(this ReferenceHub player, string message, string color);
-        public static void SetAHP(this ReferenceHub player, float amount);
-        public static void SetBypassMode(this ReferenceHub player, bool isEnabled);
-        public static void SetCufferId(this ReferenceHub rh, int id);
-        public static void SetCurrentItem(this ReferenceHub player, ItemType itemType);
-        public static void SetFriendlyFire(this ReferenceHub player, bool value);
-        public static void SetGodMode(this ReferenceHub player, bool enable);
-        public static void SetGroup(this ReferenceHub player, string name, string color, bool show);
-        public static void SetGroup(this ReferenceHub player, string name, string color, bool show, string rankName);
-        public static void SetGroup(this ReferenceHub player, UserGroup userGroup);
-        public static void SetGroupColor(this ReferenceHub player, string color);
-        public static void SetGroupName(this ReferenceHub player, string name);
-        public static void SetHP(this ReferenceHub player, float amount);
-        public static void SetInventory(this ReferenceHub player, System.Collections.Generic.List<Inventory.SyncItemInfo> items);
-        public static float SetMaxAHP(this ReferenceHub player, int amount);
-        public static void SetMaxHP(this ReferenceHub player, float amount);
-        public static void SetNickname(this ReferenceHub player, string nickname);
-        public static void SetPlayerId(this ReferenceHub player, int newId);
-        public static void SetPosition(this ReferenceHub player, float x, float y, float z);
-        public static void SetPosition(this ReferenceHub player, global::UnityEngine.Vector3 position);
-        public static void SetRole(this ReferenceHub player, RoleType newRole, bool keepPosition);
-        public static void SetRole(this ReferenceHub player, RoleType newRole);
-        public static void SetRotation(this ReferenceHub player, global::UnityEngine.Vector2 rotations);
-        public static void SetRotation(this ReferenceHub player, float x, float y);
-        public static void SetScale(this ReferenceHub player, global::UnityEngine.Vector3 scale);
-        public static void SetScale(this ReferenceHub player, float x, float y, float z);
-        public static void SetScale(this ReferenceHub player, float scale);
-        public static void SetUserId(this ReferenceHub player, string newId);
-        public static void ShowHint(string text, float duration = 1);
-        public static void SizeCamera(this ReferenceHub player, global::UnityEngine.Vector3 size);
-        public static void SizeModel(this ReferenceHub player, global::UnityEngine.Vector3 size);
-        public static Stamina Stamina(this ReferenceHub rh);
-        public static void Uncuff(this ReferenceHub player);
-        public static void Unmute(this ReferenceHub player);
+        public Player(ReferenceHub RH);
+        public Player(global::UnityEngine.GameObject gameObject);
+
+        public static IEnumerable<Player> List { get; }
+        public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
+        public static MethodInfo SendSpawnMessage { get; }
+        public global::UnityEngine.GameObject LookingAt { get; }
+        public global::UnityEngine.Vector3 Scale { get; set; }
+        public global::UnityEngine.Vector3 Rotation { get; set; }
+        public global::UnityEngine.Vector2 Rotations { get; set; }
+        public global::UnityEngine.Vector3 Position { get; set; }
+        public bool IsCuffed { get; }
+        public int CufferId { get; set; }
+        public bool Overwatch { get; set; }
+        public bool RemoteAdminAccess { get; }
+        public bool DoNotTrack { get; }
+        public string Nickname { get; }
+        public string DisplayNickname { get; set; }
+        public string CustomUserId { get; set; }
+        public string UserId { get; set; }
+        public Team Team { get; }
+        public int Id { get; set; }
+        public PlayerEffectsController PlayerEffectsController { get; }
+        public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
+        public Scp079PlayerScript Scp079PlayerScript { get; }
+        public PlayerStats PlayerStats { get; }
+        public AnimationController AnimationController { get; }
+        public WeaponManager WeaponManager { get; }
+        public CharacterClassManager CharacterClassManager { get; }
+        public ServerRoles ServerRoles { get; }
+        public Handcuffs Handcuffs { get; }
+        public global::Mirror.NetworkIdentity NetworkIdentity { get; }
+        public GameConsoleTransmission GameConsoleTransmission { get; }
+        public global::Grenades.GrenadeManager GrenadeManager { get; }
+        public global::UnityEngine.Transform CameraTransform { get; }
+        public Inventory Inventory { get; }
+        public NicknameSync NicknameSync { get; }
+        public global::Hints.HintDisplay HintDisplay { get; }
+        public Side Side { get; }
+        public bool IsReloading { get; }
+        public long DeathTime { get; set; }
+        public float AliveTime { get; }
+        public string UnitName { get; set; }
+        public string RoleName { get; set; }
+        public string RoleColor { get; set; }
+        public UserGroup Group { get; set; }
+        public bool GlobalRemoteAdmin { get; }
+        public CommandSender Sender { get; }
+        public Room CurrentRoom { get; }
+        public string GroupName { get; set; }
+        public float StaminaUsage { get; set; }
+        public Stamina Stamina { get; }
+        public int CurrentItemIndex { get; }
+        public List<Inventory.SyncItemInfo> AllItems { get; }
+        public RoleType Role { get; set; }
+        public Inventory.SyncItemInfo CurrentItem { get; set; }
+        public float AHP { get; set; }
+        public int MaxHP { get; set; }
+        public float HP { get; set; }
+        public bool GodMode { get; set; }
+        public bool IntercomMuted { get; set; }
+        public bool Muted { get; set; }
+        public bool BypassMode { get; set; }
+        public bool FriendlyFire { set; }
+        public bool IsHost { get; }
+        public global::Mirror.NetworkConnection Connection { get; }
+        public string IP { get; }
+        public bool IsJumping { get; }
+        public PlayerMovementState MoveState { get; }
+        public bool IsZooming { get; }
+        public int MaxAHP { get; set; }
+        public AmmoBox Ammo { get; }
+        public global::UnityEngine.GameObject GameObject { get; }
+        public int Ping { get; }
+        public ReferenceHub ReferenceHub { get; }
+
+        public static IEnumerable<Player> Get(RoleType role);
+        public static Player Get(ReferenceHub referenceHub);
+        public static Player Get(global::UnityEngine.GameObject gameObject);
+        public static Player Get(int playerId);
+        public static Player Get(string args);
+        public static Player Get(CommandSender sender);
+        public static IEnumerable<Player> Get(Team team);
+        public static void ShowHitmark();
+        public void AddDisplayInfo(PlayerInfoArea playerInfo);
+        public void AddItem(Inventory.SyncItemInfo item);
+        public void AddItem(ItemType itemType);
+        public void AddItem(ItemType itemType, float duration = float.NegativeInfinity, int sight = 0, int barrel = 0, int other = 0);
+        public void Ban(int duration, string reason, string issuer = "API");
+        public void Blink();
+        public void BodyDelete();
+        public void Broadcast(ushort time, string message, Broadcast.BroadcastFlags flag = 0);
+        public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
+        public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
+        public void ChangeModel(RoleType newModel);
+        public void ClearBroadcasts(float delay = 0);
+        public void ClearInventory();
+        public void Create106Portal();
+        public void Damage(int amount, DamageTypes.DamageType damageType);
+        public void DimScreen();
+        public void DisableAllEffects();
+        public void DisableEffect(EffectType effect);
+        public void DisableEffect<T>() where T : global::CustomPlayerEffects.PlayerEffect;
+        public void Disconnect(string reason = null);
+        public void DropItem(Inventory.SyncItemInfo item);
+        public void DropItems();
+        public void EnableEffect(EffectType effect, float duration = 0, bool addDurationIfActive = false);
+        public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
+        public void EnableEffect<T>(float duration = 0, bool addDurationIfActive = false) where T : global::CustomPlayerEffects.PlayerEffect;
+        public void ExecuteCommand(string command, bool RA = true);
+        public global::UnityEngine.Vector3 Get106Portal();
+        public global::CustomPlayerEffects.PlayerEffect GetEffect(EffectType effect);
+        public bool GetEffectActive<T>() where T : global::CustomPlayerEffects.PlayerEffect;
+        public byte GetEffectIntensity<T>() where T : global::CustomPlayerEffects.PlayerEffect;
+        public List<string> GetGameObjectsInRange(float range);
+        public void Handcuff(Player player);
+        public bool HasItem(ItemType targetItem);
+        public void Kick(string reason, string issuer = "API");
+        public void Kill(DamageTypes.DamageType damageType = null);
+        public void OpenReportWindow(string text);
+        public void PlaceBlood(global::UnityEngine.Vector3 pos, int type = 1, float size = 2);
+        public void Play106ContainAnimation();
+        public void Play106TeleportAnimation();
+        public void PlayFallSound();
+        public void PlayNeckSnapSound();
+        public void PlayReloadAnimation(sbyte weapon = 0);
+        public void RaLogin();
+        public void RaLogout();
+        public void RAMessage(string message, bool success = true, string pluginName = null);
+        public void Reconnect();
+        public void Redirect(float timeOffset, ushort port);
+        public void RemoveDisplayInfo(PlayerInfoArea playerInfo);
+        public void RemoveItem(Inventory.SyncItemInfo item);
+        public void RemoveItem();
+        public void SendConsoleMessage(string message, string color);
+        public void SetInventory(List<Inventory.SyncItemInfo> items);
+        public void SetRole(RoleType newRole, bool lite = false, bool escape = false);
+        public void ShakeScreen(bool achieve = false);
+        public void ShowHint(string text, float duration = 1);
+        public void SizeCamera(global::UnityEngine.Vector3 size);
+        public bool TryGetEffect(EffectType effect, out global::CustomPlayerEffects.PlayerEffect playerEffect);
+        public void Uncuff();
+        public void Use106Portal();
     }
 }

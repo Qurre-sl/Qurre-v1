@@ -2,10 +2,10 @@
 {
     public enum GeneratorStatus
     {
-        TabletInjected,
-        TabledEjected,
-        Unlocked,
-        OpenDoor,
-        CloseDoor
+        TabletInjected = 0,
+        TabledEjected = 1,
+        Unlocked = 2,
+        OpenDoor = 3,
+        CloseDoor = 4
     }
 }

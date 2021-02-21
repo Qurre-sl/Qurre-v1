@@ -4,7 +4,7 @@ namespace Qurre.Events
 {
     public static class Player
     {
-        public static event main.AllEvents<SpeakEvent> Speak;
+        public static event main.AllEvents<SpawnEvent> Spawn;
         public static event main.AllEvents<InteractLiftEvent> InteractLift;
         public static event main.AllEvents<InteractDoorEvent> InteractDoor;
         public static event main.AllEvents<InteractEvent> Interact;
@@ -20,15 +20,16 @@ namespace Qurre.Events
         public static event main.AllEvents<KickEvent> Kick;
         public static event main.AllEvents<BanEvent> Ban;
         public static event main.AllEvents<EscapeEvent> Escape;
-        public static event main.AllEvents<InteractGeneratorEvent> InteractGenerator;
         public static event main.AllEvents<IcomSpeakEvent> IcomSpeak;
+        public static event main.AllEvents<DroppingItemEvent> DroppingItem;
         public static event main.AllEvents<DropItemEvent> DropItem;
+        public static event main.AllEvents<InteractGeneratorEvent> InteractGenerator;
         public static event main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
         public static event main.AllEvents<ThrowGrenadeEvent> ThrowGrenade;
         public static event main.AllEvents<SyncDataEvent> SyncData;
         public static event main.AllEvents<UsedMedicalEvent> UsedMedical;
         public static event main.AllEvents<UsingMedicalEvent> UsingMedical;
-        public static event main.AllEvents<DroppingItemEvent> DroppingItem;
+        public static event main.AllEvents<SpeakEvent> Speak;
         public static event main.AllEvents<StoppingMedicalUsingEvent> StoppingMedicalUsing;
         public static event main.AllEvents<ShootingEvent> Shooting;
         public static event main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
@@ -38,7 +39,6 @@ namespace Qurre.Events
         public static event main.AllEvents<JoinEvent> Join;
         public static event main.AllEvents<RagdollSpawnEvent> RagdollSpawn;
         public static event main.AllEvents<BannedEvent> Banned;
-        public static event main.AllEvents<SpawnEvent> Spawn;
 
         public static void ban(BanEvent ev);
         public static void banned(BannedEvent ev);
@@ -66,6 +66,7 @@ namespace Qurre.Events
         public static void rechargeWeapon(RechargeWeaponEvent ev);
         public static void rolechange(RoleChangeEvent ev);
         public static void shooting(ShootingEvent ev);
+        public static void spawn(SpawnEvent ev);
         public static void speak(SpeakEvent ev);
         public static void stoppingMedicalUsing(StoppingMedicalUsingEvent ev);
         public static void syncData(SyncDataEvent ev);
@@ -74,6 +75,5 @@ namespace Qurre.Events
         public static void unCuff(UnCuffEvent ev);
         public static void usedMedical(UsedMedicalEvent ev);
         public static void usingMedical(UsingMedicalEvent ev);
-        public static void spawn(SpawnEvent ev);
     }
 }

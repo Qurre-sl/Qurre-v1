@@ -1,8 +1,9 @@
-﻿namespace Qurre
+﻿using System.Collections.Generic;
+namespace Qurre
 {
     public class PluginManager
     {
-        public const string Version = "1.0.1";
+        public const string Version = "1.1.0";
         public static readonly List<Plugin> plugins;
         public static string ManagedAssembliesDirectory { get; }
         public static string Plan { get; }

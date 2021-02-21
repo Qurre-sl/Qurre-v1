@@ -2,10 +2,10 @@
 {
     public enum Side
     {
-        SCP,
-        MTF,
-        CHAOS,
-        TUTORIAL,
-        NONE
+        SCP = 0,
+        MTF = 1,
+        CHAOS = 2,
+        TUTORIAL = 3,
+        NONE = 4
     }
 }

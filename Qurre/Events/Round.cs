@@ -10,6 +10,7 @@ namespace Qurre.Events
         public static event main.AllEvents<RoundEndEvent> End;
         public static event main.AllEvents<CheckEvent> Check;
         public static event main.AllEvents<TeamRespawnEvent> TeamRespawn;
+
         public static void check(CheckEvent ev);
         public static void end(RoundEndEvent ev);
         public static void restart();

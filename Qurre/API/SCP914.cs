@@ -1,9 +1,9 @@
 ﻿namespace Qurre.API
 {
-    public class SCP914
+    public class Scp914
     {
-        public SCP914();
         public static bool IsWorking { get; }
+
         public static global::Utils.ConfigHandler.ConfigEntry<global::Scp914.Scp914Mode> Cfg();
         public static void Cfg(global::Utils.ConfigHandler.ConfigEntry<global::Scp914.Scp914Mode> config);
         public static global::UnityEngine.Transform Intake();

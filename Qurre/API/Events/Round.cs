@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Qurre.API.Events
 {
     public class CheckEvent : EventArgs
@@ -19,9 +20,9 @@ namespace Qurre.API.Events
     }
     public class TeamRespawnEvent : EventArgs
     {
-        public TeamRespawnEvent(System.Collections.Generic.List<ReferenceHub> players, int maxRespAmount, global::Respawning.SpawnableTeamType nextKnownTeam);
+        public TeamRespawnEvent(List<Player> players, int maxRespAmount, global::Respawning.SpawnableTeamType nextKnownTeam);
 
-        public System.Collections.Generic.List<ReferenceHub> Players { get; }
+        public List<Player> Players { get; }
         public int MaxRespAmount { get; set; }
         public global::Respawning.SpawnableTeamType NextKnownTeam { get; set; }
     }
