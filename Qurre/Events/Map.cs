@@ -17,7 +17,7 @@ namespace Qurre.Events
         public static void mtfAnnouncement(MTFAnnouncementEvent ev);
         public static void newblood(NewBloodEvent ev);
         public static void newdecal(NewDecalEvent ev);
-        public static void OnGenerated();
+        public static void generated();
         public static void grenadeexplode(API.Events.GrenadeExplodeEvent ev);
     }
 }
