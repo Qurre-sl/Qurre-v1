@@ -1,11 +1,13 @@
-﻿namespace Qurre
+﻿using System;
+namespace Qurre
 {
     public abstract class Plugin
     {
         public static YamlConfig Config;
-        public abstract string Version { get; }
-        public abstract string Developer { get; }
-        public abstract string Name { get; }
+        public virtual string Developer { get; }
+        public virtual string Name { get; }
+        public virtual Version Version { get; }
+        public virtual Version NeededQurreVersion { get; }
 
         public abstract void Disable();
         public abstract void Enable();

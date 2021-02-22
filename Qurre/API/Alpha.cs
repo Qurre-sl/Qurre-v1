@@ -8,6 +8,7 @@
         public static bool IsInProgress { get; }
         public static float TimeToDetonation { get; set; }
         public static bool IsLocked { get; set; }
+        public static int Cooldown { get; set; }
 
         public static void Detonate();
         public static void Start();

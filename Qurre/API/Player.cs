@@ -40,12 +40,12 @@ namespace Qurre.API
         public ServerRoles ServerRoles { get; }
         public Handcuffs Handcuffs { get; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
-        public GameConsoleTransmission GameConsoleTransmission { get; }
-        public global::Grenades.GrenadeManager GrenadeManager { get; }
-        public global::UnityEngine.Transform CameraTransform { get; }
         public Inventory Inventory { get; }
-        public NicknameSync NicknameSync { get; }
+        public global::UnityEngine.Transform CameraTransform { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
+        public AmmoBox Ammo { get; }
+        public NicknameSync NicknameSync { get; }
+        public global::UnityEngine.GameObject GameObject { get; }
         public Side Side { get; }
         public bool IsReloading { get; }
         public long DeathTime { get; set; }
@@ -71,7 +71,7 @@ namespace Qurre.API
         public bool IntercomMuted { get; set; }
         public bool Muted { get; set; }
         public bool BypassMode { get; set; }
-        public bool FriendlyFire { set; }
+        public bool FriendlyFire { get; set; }
         public bool IsHost { get; }
         public global::Mirror.NetworkConnection Connection { get; }
         public string IP { get; }
@@ -79,8 +79,8 @@ namespace Qurre.API
         public PlayerMovementState MoveState { get; }
         public bool IsZooming { get; }
         public int MaxAHP { get; set; }
-        public AmmoBox Ammo { get; }
-        public global::UnityEngine.GameObject GameObject { get; }
+        public GameConsoleTransmission GameConsoleTransmission { get; }
+        public global::Grenades.GrenadeManager GrenadeManager { get; }
         public int Ping { get; }
         public ReferenceHub ReferenceHub { get; }
 
@@ -103,7 +103,7 @@ namespace Qurre.API
         public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
         public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ChangeModel(RoleType newModel);
-        public void ClearBroadcasts(float delay = 0);
+        public void ClearBroadcasts();
         public void ClearInventory();
         public void Create106Portal();
         public void Damage(int amount, DamageTypes.DamageType damageType);
