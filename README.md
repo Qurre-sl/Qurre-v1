@@ -1,5 +1,5 @@
 
-<img src="https://bot2.fydne.xyz/Qurre-mini.gif" align="right" />
+<img src="https://scpsl.store/img/etc/Qurre-mini.gif" align="right" />
 <p>
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord Qurre">
       <img src="https://discordapp.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
@@ -19,7 +19,6 @@ You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/
 Qurre_debug: false
 Qurre_logging: true
 Qurre_all_logging: false
-Qurre_console_anti_flood: true
 Qurre_spawn_blood: true
 Qurre_banned: banned
 Qurre_kicked: kicked
