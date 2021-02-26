@@ -4,6 +4,7 @@ namespace Qurre
     public class PluginManager
     {
         public static readonly List<Plugin> plugins;
+        public static string LogsDirectory { get; }
         public static string ConfigsDirectory { get; }
         public static string LoadedDependenciesDirectory { get; }
         public static string PluginsDirectory { get; }

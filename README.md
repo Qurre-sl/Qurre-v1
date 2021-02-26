@@ -17,6 +17,9 @@ You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/
 
 ```yml
 Qurre_debug: false
+Qurre_logging: true
+Qurre_all_logging: false
+Qurre_console_anti_flood: true
 Qurre_spawn_blood: true
 Qurre_banned: banned
 Qurre_kicked: kicked

@@ -12,6 +12,7 @@ namespace Qurre.API.Events
         public Player Player { get; }
         public string Command { get; }
         public string ReplyMessage { get; set; }
+        public string Prefix { get; set; }
         public bool Success { get; set; }
         public bool IsAllowed { get; set; }
     }
