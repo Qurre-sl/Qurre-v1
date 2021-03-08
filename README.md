@@ -1,5 +1,5 @@
 
-<img src="https://scpsl.store/img/etc/Qurre-mini.gif" align="right" />
+<img src="https://scpsl.store/img/etc/Qurre-web_ol.gif" align="right" />
 <p>
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord Qurre">
       <img src="https://discordapp.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
@@ -26,4 +26,4 @@ Qurre_BanOrKick_msg: You have been %bok%.
 Qurre_reason: Reason
 ```
 
-Based on [Exiled](https://github.com/galaxy119/EXILED)
+Based on [Exiled](https://github.com/Exiled-Team/EXILED)
