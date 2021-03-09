@@ -1,5 +1,5 @@
 
-<img src="https://scpsl.store/img/etc/Qurre-web_ol.gif" align="right" />
+<img src="https://cdn.fydne.xyz/qurre/Qurre-web_ol.gif" align="right" />
 <p>
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord Qurre">
       <img src="https://discordapp.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
