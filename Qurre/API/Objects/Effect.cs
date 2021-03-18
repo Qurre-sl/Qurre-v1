@@ -1,4 +1,5 @@
-﻿using Qurre.API.Objects;
+﻿using CustomPlayerEffects;
+using Qurre.API.Objects;
 using System;
 namespace Qurre.API
 {
@@ -6,4 +7,5 @@ namespace Qurre.API
     {
         public static Type Type(this EffectType effect);
     }
+}
 }

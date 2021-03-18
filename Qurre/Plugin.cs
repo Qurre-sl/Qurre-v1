@@ -11,6 +11,6 @@ namespace Qurre
 
         public abstract void Disable();
         public abstract void Enable();
-        public abstract void Reload();
+        public virtual void Reload();
     }
 }

@@ -8,12 +8,12 @@ namespace Qurre.Events
         public static event main.AllEvents<InteractLiftEvent> InteractLift;
         public static event main.AllEvents<InteractDoorEvent> InteractDoor;
         public static event main.AllEvents<InteractEvent> Interact;
-        public static event main.AllEvents<DyingEvent> Dying;
+        public static event main.AllEvents<DiesEvent> Dies;
         public static event main.AllEvents<DamageEvent> Damage;
         public static event main.AllEvents<UnCuffEvent> UnCuff;
         public static event main.AllEvents<InteractLockerEvent> InteractLocker;
         public static event main.AllEvents<CuffEvent> Cuff;
-        public static event main.AllEvents<DiedEvent> Died;
+        public static event main.AllEvents<DeadEvent> Dead;
         public static event main.AllEvents<RoleChangeEvent> RoleChange;
         public static event main.AllEvents<ItemChangeEvent> ItemChange;
         public static event main.AllEvents<GroupChangeEvent> GroupChange;
@@ -27,10 +27,10 @@ namespace Qurre.Events
         public static event main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
         public static event main.AllEvents<ThrowGrenadeEvent> ThrowGrenade;
         public static event main.AllEvents<SyncDataEvent> SyncData;
-        public static event main.AllEvents<UsedMedicalEvent> UsedMedical;
-        public static event main.AllEvents<UsingMedicalEvent> UsingMedical;
+        public static event main.AllEvents<MedicalUsedEvent> MedicalUsed;
+        public static event main.AllEvents<MedicalUsingEvent> MedicalUsing;
         public static event main.AllEvents<SpeakEvent> Speak;
-        public static event main.AllEvents<StoppingMedicalUsingEvent> StoppingMedicalUsing;
+        public static event main.AllEvents<MedicalStoppingEvent> MedicalStopping;
         public static event main.AllEvents<ShootingEvent> Shooting;
         public static event main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
         public static event main.AllEvents<PickupItemEvent> PickupItem;
@@ -44,10 +44,10 @@ namespace Qurre.Events
         public static void banned(BannedEvent ev);
         public static void cuff(CuffEvent ev);
         public static void damage(DamageEvent ev);
-        public static void died(DiedEvent ev);
+        public static void dead(DeadEvent ev);
+        public static void dies(DiesEvent ev);
         public static void dropItem(DropItemEvent ev);
         public static void droppingItem(DroppingItemEvent ev);
-        public static void dying(DyingEvent ev);
         public static void escape(EscapeEvent ev);
         public static void groupchange(GroupChangeEvent ev);
         public static void icomSpeak(IcomSpeakEvent ev);
@@ -61,6 +61,9 @@ namespace Qurre.Events
         public static void kick(KickEvent ev);
         public static void kicked(KickedEvent ev);
         public static void leave(LeaveEvent ev);
+        public static void medicalStopping(MedicalStoppingEvent ev);
+        public static void medicalUsed(MedicalUsedEvent ev);
+        public static void medicalUsing(MedicalUsingEvent ev);
         public static void pickupItem(PickupItemEvent ev);
         public static void ragdollSpawn(RagdollSpawnEvent ev);
         public static void rechargeWeapon(RechargeWeaponEvent ev);
@@ -68,12 +71,9 @@ namespace Qurre.Events
         public static void shooting(ShootingEvent ev);
         public static void spawn(SpawnEvent ev);
         public static void speak(SpeakEvent ev);
-        public static void stoppingMedicalUsing(StoppingMedicalUsingEvent ev);
         public static void syncData(SyncDataEvent ev);
         public static void teslaTrigger(TeslaTriggerEvent ev);
         public static void throwGrenade(ThrowGrenadeEvent ev);
         public static void unCuff(UnCuffEvent ev);
-        public static void usedMedical(UsedMedicalEvent ev);
-        public static void usingMedical(UsingMedicalEvent ev);
     }
 }

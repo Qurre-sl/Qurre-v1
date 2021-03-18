@@ -20,10 +20,11 @@ Qurre_debug: false
 Qurre_logging: true
 Qurre_all_logging: false
 Qurre_spawn_blood: true
+Qurre_ScpTrigger173: false
 Qurre_banned: banned
 Qurre_kicked: kicked
 Qurre_BanOrKick_msg: You have been %bok%.
 Qurre_reason: Reason
 ```
 
-Based on [Exiled](https://github.com/Exiled-Team/EXILED)
+Based on [Exiled](https://github.com/Exiled-Team/EXILED) && [Synapse](https://github.com/SynapseSL/Synapse)

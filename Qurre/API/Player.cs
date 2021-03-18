@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Reflection;
 namespace Qurre.API
 {
-    public class Player
+    public class Player : MonoBehaviour
     {
         public static Dictionary<int, Player> IdPlayers;
         public static Dictionary<string, Player> UserIDPlayers;
+        public readonly Scp079 Scp079Controller;
+        public readonly Scp096 Scp096Controller;
+        public readonly Scp106 Scp106Controller;
+        public readonly Scp173 Scp173Controller;
 
         public Player(ReferenceHub RH);
         public Player(global::UnityEngine.GameObject gameObject);
@@ -14,8 +18,7 @@ namespace Qurre.API
         public static IEnumerable<Player> List { get; }
         public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
         public static MethodInfo SendSpawnMessage { get; }
-        public global::UnityEngine.GameObject LookingAt { get; }
-        public global::UnityEngine.Vector3 Scale { get; set; }
+        public global::Grenades.GrenadeManager GrenadeManager { get; }
         public global::UnityEngine.Vector3 Rotation { get; set; }
         public global::UnityEngine.Vector2 Rotations { get; set; }
         public global::UnityEngine.Vector3 Position { get; set; }
@@ -28,69 +31,71 @@ namespace Qurre.API
         public string DisplayNickname { get; set; }
         public string CustomUserId { get; set; }
         public string UserId { get; set; }
-        public Team Team { get; }
         public int Id { get; set; }
+        public NicknameSync NicknameSync { get; }
         public PlayerEffectsController PlayerEffectsController { get; }
         public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
         public Scp079PlayerScript Scp079PlayerScript { get; }
-        public PlayerStats PlayerStats { get; }
-        public AnimationController AnimationController { get; }
-        public WeaponManager WeaponManager { get; }
-        public CharacterClassManager CharacterClassManager { get; }
-        public ServerRoles ServerRoles { get; }
-        public Handcuffs Handcuffs { get; }
-        public global::Mirror.NetworkIdentity NetworkIdentity { get; }
-        public Inventory Inventory { get; }
-        public global::UnityEngine.Transform CameraTransform { get; }
-        public global::Hints.HintDisplay HintDisplay { get; }
-        public AmmoBox Ammo { get; }
-        public NicknameSync NicknameSync { get; }
-        public global::UnityEngine.GameObject GameObject { get; }
-        public Side Side { get; }
-        public bool IsReloading { get; }
-        public long DeathTime { get; set; }
-        public float AliveTime { get; }
-        public string UnitName { get; set; }
-        public string RoleName { get; set; }
-        public string RoleColor { get; set; }
-        public UserGroup Group { get; set; }
-        public bool GlobalRemoteAdmin { get; }
-        public CommandSender Sender { get; }
-        public Room CurrentRoom { get; }
-        public string GroupName { get; set; }
-        public float StaminaUsage { get; set; }
-        public Stamina Stamina { get; }
-        public int CurrentItemIndex { get; }
-        public List<Inventory.SyncItemInfo> AllItems { get; }
-        public RoleType Role { get; set; }
-        public Inventory.SyncItemInfo CurrentItem { get; set; }
-        public float AHP { get; set; }
-        public int MaxHP { get; set; }
-        public float HP { get; set; }
-        public bool GodMode { get; set; }
-        public bool IntercomMuted { get; set; }
-        public bool Muted { get; set; }
-        public bool BypassMode { get; set; }
-        public bool FriendlyFire { get; set; }
-        public bool IsHost { get; }
-        public global::Mirror.NetworkConnection Connection { get; }
-        public string IP { get; }
-        public bool IsJumping { get; }
-        public PlayerMovementState MoveState { get; }
-        public bool IsZooming { get; }
-        public int MaxAHP { get; set; }
-        public GameConsoleTransmission GameConsoleTransmission { get; }
-        public global::Grenades.GrenadeManager GrenadeManager { get; }
-        public int Ping { get; }
+        public ListBroadcasts Broadcasts { get; }
         public ReferenceHub ReferenceHub { get; }
+        public AmmoBox Ammo { get; }
+        public global::Hints.HintDisplay HintDisplay { get; }
+        public global::UnityEngine.Transform CameraTransform { get; }
+        public int Ping { get; }
+        public global::UnityEngine.Vector3 Scale { get; set; }
+        public Inventory Inventory { get; }
+        public Handcuffs Handcuffs { get; }
+        public ServerRoles ServerRoles { get; }
+        public CharacterClassManager ClassManager { get; }
+        public WeaponManager WeaponManager { get; }
+        public AnimationController AnimationController { get; }
+        public PlayerStats PlayerStats { get; }
+        public global::Mirror.NetworkIdentity NetworkIdentity { get; }
+        public global::UnityEngine.GameObject LookingAt { get; }
+        public Team Team { get; }
+        public Side Side { get; }
+        public List<Inventory.SyncItemInfo> AllItems { get; }
+        public int CurrentItemIndex { get; }
+        public Stamina Stamina { get; }
+        public float StaminaUsage { get; set; }
+        public string GroupName { get; set; }
+        public Room Room { get; set; }
+        public Inventory.SyncItemInfo CurrentItem { get; set; }
+        public CommandSender Sender { get; }
+        public UserGroup Group { get; set; }
+        public string RoleColor { get; set; }
+        public string RoleName { get; set; }
+        public string UnitName { get; set; }
+        public float AliveTime { get; }
+        public long DeathTime { get; set; }
+        public bool GlobalRemoteAdmin { get; }
+        public global::UnityEngine.GameObject GameObject { get; }
+        public int MaxAHP { get; set; }
+        public int MaxHP { get; set; }
+        public RoleType Role { get; set; }
+        public bool IsReloading { get; }
+        public bool IsZooming { get; }
+        public PlayerMovementState MoveState { get; }
+        public bool IsJumping { get; }
+        public string IP { get; }
+        public float AHP { get; set; }
+        public global::Mirror.NetworkConnection Connection { get; }
+        public bool FriendlyFire { get; set; }
+        public bool BypassMode { get; set; }
+        public bool Muted { get; set; }
+        public bool IntercomMuted { get; set; }
+        public bool GodMode { get; set; }
+        public float HP { get; set; }
+        public bool IsHost { get; }
+        public GameConsoleTransmission GameConsoleTransmission { get; }
 
-        public static IEnumerable<Player> Get(RoleType role);
         public static Player Get(ReferenceHub referenceHub);
+        public static IEnumerable<Player> Get(Team team);
+        public static IEnumerable<Player> Get(RoleType role);
         public static Player Get(global::UnityEngine.GameObject gameObject);
         public static Player Get(int playerId);
         public static Player Get(string args);
         public static Player Get(CommandSender sender);
-        public static IEnumerable<Player> Get(Team team);
         public static void ShowHitmark();
         public void AddDisplayInfo(PlayerInfoArea playerInfo);
         public void AddItem(Inventory.SyncItemInfo item);
@@ -99,7 +104,7 @@ namespace Qurre.API
         public void Ban(int duration, string reason, string issuer = "API");
         public void Blink();
         public void BodyDelete();
-        public void Broadcast(ushort time, string message, Broadcast.BroadcastFlags flag = 0);
+        public Broadcast Broadcast(ushort time, string message, bool instant = false);
         public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
         public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ChangeModel(RoleType newModel);
