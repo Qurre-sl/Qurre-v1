@@ -27,4 +27,4 @@ Qurre_BanOrKick_msg: You have been %bok%.
 Qurre_reason: Reason
 ```
 
-Based on [Exiled](https://github.com/Exiled-Team/EXILED) && [Synapse](https://github.com/SynapseSL/Synapse)
+Based on [Exiled](https://github.com/Exiled-Team/EXILED) & [Synapse](https://github.com/SynapseSL/Synapse)
