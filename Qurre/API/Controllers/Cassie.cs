@@ -11,7 +11,7 @@
         public static bool Lock { get; set; }
         public bool Active { get; }
 
-        public static void Send(string msg, bool makeHold = false, bool makeNoise = false);
+        public static void Send(string msg, bool makeHold = false, bool makeNoise = false, bool instant = false);
         public void Send();
     }
 }
