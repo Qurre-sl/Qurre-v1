@@ -12,6 +12,7 @@ namespace Qurre.API
         public static List<Lift> Lifts { get; }
         public static List<Door> Doors { get; }
         public static Scp914 Scp914 { get; }
+        public static CassieList Cassies { get; }
         public static MapListBroadcasts Broadcasts { get; }
         public static Heavy Heavy { get; }
         public static Decontamination DecontaminationLCZ { get; }
