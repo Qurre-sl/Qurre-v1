@@ -6,6 +6,7 @@
         public global::UnityEngine.Transform Transform { get; }
         public global::UnityEngine.Vector3 Position { get; }
         public string Name { get; }
+        public bool IsLightsOff { get; }
         public List<Door> Doors { get; }
         public List<Player> Players { get; }
         public ZoneType Zone { get; }
