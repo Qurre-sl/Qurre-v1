@@ -6,6 +6,7 @@ namespace Qurre.API
     public class Map
     {
         public static int roundtime;
+        public static List<Tesla> Teslas { get; }
         public static List<Room> Rooms { get; }
         public static List<Ragdoll> Ragdolls { get; }
         public static List<Generator> Generators { get; }
@@ -17,8 +18,8 @@ namespace Qurre.API
         public static Heavy Heavy { get; }
         public static Decontamination DecontaminationLCZ { get; }
         public static Alpha Alpha { get; }
-        public static List<Tesla> Teslas { get; }
         public static List<WorkStation> WorkStations { get; }
+        public static List<Pickup> Pickups { get; }
 
         public static MapBroadcast Broadcast(string message, ushort duration, bool instant = false);
         public static void ClearBroadcasts();

@@ -14,7 +14,6 @@ namespace Qurre.API
         public static int CurrentRound { get; }
         public static DateTime StartedTime { get; }
         public static int ScpKills { get; set; }
-        public static Player Host { get; }
 
         public static void AddUnit(TeamUnitType team, string text);
         public static void CallCICar();
