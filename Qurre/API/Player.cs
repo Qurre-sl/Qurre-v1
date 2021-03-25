@@ -37,7 +37,7 @@ namespace Qurre.API
         public NicknameSync NicknameSync { get; }
         public PlayerEffectsController PlayerEffectsController { get; }
         public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
-        public ReferenceHub ReferenceHub { get; }
+        public GameConsoleTransmission GameConsoleTransmission { get; }
         public global::UnityEngine.GameObject GameObject { get; }
         public AmmoBox Ammo { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
@@ -53,7 +53,7 @@ namespace Qurre.API
         public PlayerStats PlayerStats { get; }
         public Scp079PlayerScript Scp079PlayerScript { get; }
         public Team Team { get; }
-        public GameConsoleTransmission GameConsoleTransmission { get; }
+        public ReferenceHub ReferenceHub { get; }
         public Side Side { get; }
         public bool IsReloading { get; }
         public float StaminaUsage { get; set; }
@@ -102,14 +102,15 @@ namespace Qurre.API
         public static void ShowHitmark();
         public void AddDisplayInfo(PlayerInfoArea playerInfo);
         public void AddItem(Inventory.SyncItemInfo item);
-        public void AddItem(ItemType itemType);
         public void AddItem(ItemType itemType, float duration = float.NegativeInfinity, int sight = 0, int barrel = 0, int other = 0);
+        public void AddItem(ItemType itemType);
         public void Ban(int duration, string reason, string issuer = "API");
         public void Blink();
         public void BodyDelete();
         public Broadcast Broadcast(ushort time, string message, bool instant = false);
-        public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
+        public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
+        public void ChangeModel(RoleType newRole, bool spawnRagdoll = false, global::UnityEngine.Vector3 newPosition = null, global::UnityEngine.Vector3 newRotation = null, DamageTypes.DamageType damageType = null);
         public void ChangeModel(RoleType newModel);
         public void ClearBroadcasts();
         public void ClearInventory();
@@ -122,8 +123,8 @@ namespace Qurre.API
         public void Disconnect(string reason = null);
         public void DropItem(Inventory.SyncItemInfo item);
         public void DropItems();
-        public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
         public void EnableEffect<T>(float duration = 0, bool addDurationIfActive = false) where T : global::CustomPlayerEffects.PlayerEffect;
+        public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
         public void EnableEffect(EffectType effect, float duration = 0, bool addDurationIfActive = false);
         public void ExecuteCommand(string command, bool RA = true);
         public global::UnityEngine.Vector3 Get106Portal();
@@ -148,8 +149,8 @@ namespace Qurre.API
         public void Reconnect();
         public void Redirect(float timeOffset, ushort port);
         public void RemoveDisplayInfo(PlayerInfoArea playerInfo);
-        public void RemoveItem(Inventory.SyncItemInfo item);
         public void RemoveItem();
+        public void RemoveItem(Inventory.SyncItemInfo item);
         public void SendConsoleMessage(string message, string color);
         public void SetInventory(List<Inventory.SyncItemInfo> items);
         public void SetRole(RoleType newRole, bool lite = false, bool escape = false);

@@ -221,9 +221,10 @@ namespace Qurre.API.Events
     }
     public class AddTargetEvent : EventArgs
     {
-        public AddTargetEvent(global::PlayableScps.Scp096 scp096, Player target, bool allowed = true);
+        public AddTargetEvent(global::PlayableScps.Scp096 scp096, Player player, Player target, bool allowed = true);
 
         public global::PlayableScps.Scp096 Scp096 { get; }
+        public Player Player { get; }
         public Player Target { get; }
         public bool Allowed { get; set; }
     }
@@ -572,11 +573,12 @@ namespace Qurre.API.Events
     }
     public class ReportLocalEvent : EventArgs
     {
-        public ReportLocalEvent(Player issuer, Player target, string reason, bool allowed = true);
+        public ReportLocalEvent(Player issuer, Player target, string reason, bool global, bool allowed = true);
 
         public Player Issuer { get; }
         public Player Target { get; }
         public string Reason { get; set; }
+        public bool GlobalReport { get; set; }
         public bool Allowed { get; set; }
     }
 }
