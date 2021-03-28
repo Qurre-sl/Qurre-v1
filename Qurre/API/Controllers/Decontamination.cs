@@ -1,12 +1,12 @@
 ﻿namespace Qurre.API.Controllers
 {
-    public class Decontamination
+    public static class Decontamination
     {
-        public global::LightContainmentZoneDecontamination.DecontaminationController Controller { get; }
-        public bool DisableDecontamination { get; set; }
-        public bool Locked { get; set; }
-        public bool InProgress { get; }
+        public static global::LightContainmentZoneDecontamination.DecontaminationController Controller { get; }
+        public static bool DisableDecontamination { get; set; }
+        public static bool Locked { get; set; }
+        public static bool InProgress { get; }
 
-        public void InstantStart();
+        public static void InstantStart();
     }
 }
