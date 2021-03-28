@@ -26,5 +26,6 @@ Qurre_kicked: kicked
 Qurre_BanOrKick_msg: You have been %bok%.
 Qurre_reason: Reason
 ```
+## [Example Plugin](https://github.com/Qurre-Team/example-plugin)
 
 Based on [Exiled](https://github.com/Exiled-Team/EXILED) & [Synapse](https://github.com/SynapseSL/Synapse)
