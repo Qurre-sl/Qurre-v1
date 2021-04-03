@@ -36,11 +36,12 @@ namespace Qurre.API.Events
     }
     public class TeamRespawnEvent : EventArgs
     {
-        public TeamRespawnEvent(List<Player> players, int maxRespAmount, global::Respawning.SpawnableTeamType nextKnownTeam);
+        public TeamRespawnEvent(List<Player> players, int maxRespAmount, global::Respawning.SpawnableTeamType nextKnownTeam, bool allowed = true);
 
         public List<Player> Players { get; }
         public int MaxRespAmount { get; set; }
         public global::Respawning.SpawnableTeamType NextKnownTeam { get; set; }
+        public bool Allowed { get; set; }
     }
     public class RoundEndEvent : EventArgs
     {
