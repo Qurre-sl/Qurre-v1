@@ -8,6 +8,7 @@ namespace Qurre
         public virtual string Name { get; }
         public virtual Version Version { get; }
         public virtual Version NeededQurreVersion { get; }
+        public virtual int Priority { get; }
 
         public abstract void Disable();
         public abstract void Enable();

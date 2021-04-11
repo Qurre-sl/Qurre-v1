@@ -5,8 +5,10 @@ namespace Qurre.Events
     public static class Server
     {
         public static event main.AllEvents<SendingRAEvent> SendingRA;
+        public static event main.AllEvents<RaRequestPlayerListEvent> RaRequestPlayerList;
         public static event main.AllEvents<SendingConsoleEvent> SendingConsole;
 
+        public static void raRequestPlayerList(RaRequestPlayerListEvent ev);
         public static void sendingconsole(SendingConsoleEvent ev);
         public static void sendingra(SendingRAEvent ev);
 

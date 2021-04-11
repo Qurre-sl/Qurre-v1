@@ -5,6 +5,7 @@ namespace Qurre.API
     {
         public static ServerConsole ServerConsole { get; }
         public static ushort Port { get; }
+        public static string Ip { get; }
         public static string Name { get; set; }
         public static int Slots { get; set; }
         public static bool FriendlyFire { get; set; }

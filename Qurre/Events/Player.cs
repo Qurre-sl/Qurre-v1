@@ -4,40 +4,41 @@ namespace Qurre.Events
 {
     public static class Player
     {
-        public static event main.AllEvents<SpawnEvent> Spawn;
+        public static event main.AllEvents<RadioUpdateEvent> RadioUpdate;
+        public static event main.AllEvents<InteractLockerEvent> InteractLocker;
         public static event main.AllEvents<InteractLiftEvent> InteractLift;
         public static event main.AllEvents<InteractDoorEvent> InteractDoor;
         public static event main.AllEvents<InteractEvent> Interact;
         public static event main.AllEvents<DiesEvent> Dies;
         public static event main.AllEvents<DamageEvent> Damage;
         public static event main.AllEvents<UnCuffEvent> UnCuff;
-        public static event main.AllEvents<InteractLockerEvent> InteractLocker;
         public static event main.AllEvents<CuffEvent> Cuff;
+        public static event main.AllEvents<EscapeEvent> Escape;
         public static event main.AllEvents<DeadEvent> Dead;
         public static event main.AllEvents<RoleChangeEvent> RoleChange;
         public static event main.AllEvents<ItemChangeEvent> ItemChange;
         public static event main.AllEvents<GroupChangeEvent> GroupChange;
         public static event main.AllEvents<KickEvent> Kick;
         public static event main.AllEvents<BanEvent> Ban;
-        public static event main.AllEvents<EscapeEvent> Escape;
         public static event main.AllEvents<IcomSpeakEvent> IcomSpeak;
+        public static event main.AllEvents<SpawnEvent> Spawn;
         public static event main.AllEvents<DroppingItemEvent> DroppingItem;
-        public static event main.AllEvents<DropItemEvent> DropItem;
+        public static event main.AllEvents<JoinEvent> Join;
+        public static event main.AllEvents<SpeakEvent> Speak;
         public static event main.AllEvents<InteractGeneratorEvent> InteractGenerator;
         public static event main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
         public static event main.AllEvents<ThrowGrenadeEvent> ThrowGrenade;
         public static event main.AllEvents<SyncDataEvent> SyncData;
         public static event main.AllEvents<MedicalUsedEvent> MedicalUsed;
+        public static event main.AllEvents<DropItemEvent> DropItem;
         public static event main.AllEvents<MedicalUsingEvent> MedicalUsing;
-        public static event main.AllEvents<SpeakEvent> Speak;
-        public static event main.AllEvents<MedicalStoppingEvent> MedicalStopping;
+        public static event main.AllEvents<RagdollSpawnEvent> RagdollSpawn;
         public static event main.AllEvents<ShootingEvent> Shooting;
         public static event main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
         public static event main.AllEvents<PickupItemEvent> PickupItem;
         public static event main.AllEvents<LeaveEvent> Leave;
         public static event main.AllEvents<KickedEvent> Kicked;
-        public static event main.AllEvents<JoinEvent> Join;
-        public static event main.AllEvents<RagdollSpawnEvent> RagdollSpawn;
+        public static event main.AllEvents<MedicalStoppingEvent> MedicalStopping;
         public static event main.AllEvents<BannedEvent> Banned;
 
         public static void ban(BanEvent ev);
@@ -65,6 +66,7 @@ namespace Qurre.Events
         public static void medicalUsed(MedicalUsedEvent ev);
         public static void medicalUsing(MedicalUsingEvent ev);
         public static void pickupItem(PickupItemEvent ev);
+        public static void radioUpdate(RadioUpdateEvent ev);
         public static void ragdollSpawn(RagdollSpawnEvent ev);
         public static void rechargeWeapon(RechargeWeaponEvent ev);
         public static void rolechange(RoleChangeEvent ev);

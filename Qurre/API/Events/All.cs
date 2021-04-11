@@ -4,8 +4,9 @@ namespace Qurre.API.Events
 {
     public class BlinkEvent : EventArgs
     {
-        public BlinkEvent(HashSet<Player> players);
+        public BlinkEvent(Player scp, HashSet<Player> players);
 
+        public Player Scp { get; }
         public HashSet<Player> Players { get; }
     }
     public class UpgradeEvent : EventArgs
@@ -285,11 +286,12 @@ namespace Qurre.API.Events
     }
     public class ShootingEvent : EventArgs
     {
-        public ShootingEvent(Player shooter, global::UnityEngine.GameObject target, global::UnityEngine.Vector3 position, bool allowed = true);
+        public ShootingEvent(Player shooter, global::UnityEngine.GameObject target, global::UnityEngine.Vector3 position, WeaponType wt, bool allowed = true);
 
         public Player Shooter { get; }
         public global::UnityEngine.GameObject Target { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
+        public WeaponType WeaponType { get; set; }
         public bool Allowed { get; set; }
     }
     public class RechargeWeaponEvent : EventArgs
@@ -581,5 +583,39 @@ namespace Qurre.API.Events
         public string Reason { get; set; }
         public bool GlobalReport { get; set; }
         public bool Allowed { get; set; }
+    }
+    public class RaRequestPlayerListEvent : EventArgs
+    {
+        public RaRequestPlayerListEvent(CommandSender commandSender, Player player, string command, string name, string[] args, bool allowed = true);
+
+        public CommandSender CommandSender { get; }
+        public Player Player { get; }
+        public string Command { get; }
+        public string Name { get; }
+        public string[] Args { get; }
+        public bool Allowed { get; set; }
+    }
+    public class UpgradePlayerEvent : EventArgs
+    {
+        public UpgradePlayerEvent(global::Scp914.Scp914Machine scp914, Player player, global::Scp914.Scp914Knob knob, bool allowed = true);
+
+        public global::Scp914.Scp914Machine Scp914 { get; }
+        public Player Player { get; }
+        public global::Scp914.Scp914Knob Knob { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class RadioUpdateEvent : EventArgs
+    {
+        public RadioUpdateEvent(Player player, RadioStatus changeTo, bool allowed = true);
+
+        public Player Player { get; }
+        public RadioStatus ChangeTo { get; }
+        public bool Allowed { get; set; }
+    }
+    public class SetSeedEvent : EventArgs
+    {
+        public SetSeedEvent(int seed);
+
+        public int Seed { get; set; }
     }
 }

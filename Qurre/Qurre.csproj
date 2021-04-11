@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9DEF6992-F530-43D7-8CC6-50C682F197D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Qurre</RootNamespace>
+    <AssemblyName>Qurre</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Qurre">
+      <HintPath>..\..\lib\Qurre.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API\Controllers\Cassie.cs" />
+    <Compile Include="API\Controllers\Alpha.cs" />
+    <Compile Include="API\Controllers\Broadcast.cs" />
+    <Compile Include="API\Controllers\CassieList.cs" />
+    <Compile Include="API\Controllers\Lights.cs" />
+    <Compile Include="API\Controllers\WorkStation.cs" />
+    <Compile Include="API\Controllers\ListBroadcasts.cs" />
+    <Compile Include="API\Controllers\Decontamination.cs" />
+    <Compile Include="API\Controllers\Door.cs" />
+    <Compile Include="API\Controllers\Generator.cs" />
+    <Compile Include="API\Controllers\Heavy.cs" />
+    <Compile Include="API\Controllers\Lift.cs" />
+    <Compile Include="API\Controllers\Ragdoll.cs" />
+    <Compile Include="API\Controllers\Room.cs" />
+    <Compile Include="API\Controllers\Scp079.cs" />
+    <Compile Include="API\Controllers\Scp096.cs" />
+    <Compile Include="API\Controllers\Scp106.cs" />
+    <Compile Include="API\Controllers\Scp173.cs" />
+    <Compile Include="API\Controllers\Scp914.cs" />
+    <Compile Include="API\Controllers\Tesla.cs" />
+    <Compile Include="API\Extensions.cs" />
+    <Compile Include="API\Objects\RadioStatus.cs" />
+    <Compile Include="API\Objects\Class2.cs" />
+    <Compile Include="API\Objects\DoorType.cs" />
+    <Compile Include="API\Objects\Effect.cs" />
+    <Compile Include="API\Objects\EffectType.cs" />
+    <Compile Include="API\Objects\GeneratorStatus.cs" />
+    <Compile Include="API\Objects\GrenadeType.cs" />
+    <Compile Include="API\Objects\LiftType.cs" />
+    <Compile Include="API\Objects\RoomType.cs" />
+    <Compile Include="API\Objects\Side.cs" />
+    <Compile Include="API\Objects\TeamUnitType.cs" />
+    <Compile Include="API\Objects\ZoneType.cs" />
+    <Compile Include="API\Server.cs" />
+    <Compile Include="API\Events\All.cs" />
+    <Compile Include="API\Item.cs" />
+    <Compile Include="API\Map.cs" />
+    <Compile Include="API\Player.cs" />
+    <Compile Include="API\Round.cs" />
+    <Compile Include="Events\Alpha.cs" />
+    <Compile Include="Events\Map.cs" />
+    <Compile Include="Events\Player.cs" />
+    <Compile Include="Events\Round.cs" />
+    <Compile Include="Events\SCPs.cs" />
+    <Compile Include="Events\Server.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="MainLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

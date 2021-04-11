@@ -9,10 +9,12 @@ namespace Qurre.Events
             public static event main.AllEvents<ActivatingEvent> Activating;
             public static event main.AllEvents<ChangeKnobEvent> ChangeKnob;
             public static event main.AllEvents<UpgradeEvent> Upgrade;
+            public static event main.AllEvents<UpgradePlayerEvent> UpgradePlayer;
 
             public static void activating(ActivatingEvent ev);
             public static void changeknob(ChangeKnobEvent ev);
             public static void upgrade(UpgradeEvent ev);
+            public static void upgradePlayer(UpgradePlayerEvent ev);
         }
         public static class SCP173
         {

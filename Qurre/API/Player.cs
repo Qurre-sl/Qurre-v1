@@ -1,4 +1,5 @@
-﻿using Qurre.API.Objects;
+﻿using Qurre.API.Controllers;
+using Qurre.API.Objects;
 using System.Collections.Generic;
 using System.Reflection;
 namespace Qurre.API
@@ -53,26 +54,27 @@ namespace Qurre.API
         public PlayerStats PlayerStats { get; }
         public Scp079PlayerScript Scp079PlayerScript { get; }
         public Team Team { get; }
-        public ReferenceHub ReferenceHub { get; }
         public Side Side { get; }
+        public RoleType Role { get; set; }
         public bool IsReloading { get; }
+        public Stamina Stamina { get; }
         public float StaminaUsage { get; set; }
         public string GroupName { get; set; }
         public Room Room { get; set; }
         public CommandSender Sender { get; }
         public bool GlobalRemoteAdmin { get; }
         public UserGroup Group { get; set; }
-        public Stamina Stamina { get; }
         public string RoleColor { get; set; }
+        public string RoleName { get; set; }
         public string UnitName { get; set; }
         public float AliveTime { get; }
         public long DeathTime { get; set; }
         public int Ping { get; }
         public uint Ammo5 { get; set; }
         public uint Ammo7 { get; set; }
-        public string RoleName { get; set; }
+        public ItemType ItemInHand { get; set; }
+        public ReferenceHub ReferenceHub { get; }
         public int CurrentItemIndex { get; }
-        public List<Inventory.SyncItemInfo> AllItems { get; }
         public Inventory.SyncItemInfo CurrentItem { get; set; }
         public bool IsZooming { get; }
         public PlayerMovementState MoveState { get; }
@@ -89,7 +91,7 @@ namespace Qurre.API
         public int MaxHP { get; set; }
         public float AHP { get; set; }
         public int MaxAHP { get; set; }
-        public RoleType Role { get; set; }
+        public List<Inventory.SyncItemInfo> AllItems { get; }
         public global::Grenades.GrenadeManager GrenadeManager { get; }
 
         public static Player Get(ReferenceHub referenceHub);
@@ -108,9 +110,9 @@ namespace Qurre.API
         public void Blink();
         public void BodyDelete();
         public Broadcast Broadcast(ushort time, string message, bool instant = false);
+        public void ChangeBody(RoleType newRole, bool spawnRagdoll = false, global::UnityEngine.Vector3 newPosition = null, global::UnityEngine.Vector3 newRotation = null, DamageTypes.DamageType damageType = null);
         public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
         public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
-        public void ChangeModel(RoleType newRole, bool spawnRagdoll = false, global::UnityEngine.Vector3 newPosition = null, global::UnityEngine.Vector3 newRotation = null, DamageTypes.DamageType damageType = null);
         public void ChangeModel(RoleType newModel);
         public void ClearBroadcasts();
         public void ClearInventory();
@@ -163,6 +165,7 @@ namespace Qurre.API
         public void TeleportToRoom(RoomType room);
         public bool TryGetEffect(EffectType effect, out global::CustomPlayerEffects.PlayerEffect playerEffect);
         public void Uncuff();
+        public void UnitUpdate();
         public void Use106Portal();
     }
 }
