@@ -17,7 +17,7 @@ You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/
 
 ```yml
 Qurre_debug: false
-Qurre_AllUnit: true
+Qurre_AllUnit: false
 Qurre_OnlyTutorialUnit: false
 Qurre_logging: true
 Qurre_all_logging: false
