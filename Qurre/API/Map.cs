@@ -6,9 +6,6 @@ namespace Qurre.API
     public class Map
     {
         public static int roundtime;
-
-        public Map();
-
         public static List<Tesla> Teslas { get; }
         public static List<Room> Rooms { get; }
         public static List<Ragdoll> Ragdolls { get; }
@@ -37,6 +34,7 @@ namespace Qurre.API
         public static void ShakeScreen(float times);
         public static void ShowHint(string message, float duration);
         public static global::UnityEngine.GameObject SpawnBot(RoleType role, string name, float health, global::UnityEngine.Vector3 position, global::UnityEngine.Vector3 rotation, global::UnityEngine.Vector3 scale);
+        public static void SpawnGrenade(bool frag, global::UnityEngine.Vector3 position);
         public static void SpawnGrenade(string grenadeType, global::UnityEngine.Vector3 position);
         public static global::UnityEngine.GameObject SpawnPlayer(RoleType role, string name, string userSteamID, global::UnityEngine.Vector3 position, global::UnityEngine.Vector3 rotation, global::UnityEngine.Vector3 scale);
         public static void UnitUpdate();

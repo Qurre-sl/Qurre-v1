@@ -66,7 +66,7 @@
     <Compile Include="API\Controllers\Tesla.cs" />
     <Compile Include="API\Extensions.cs" />
     <Compile Include="API\Objects\RadioStatus.cs" />
-    <Compile Include="API\Objects\Class2.cs" />
+    <Compile Include="API\Objects\WeaponType.cs" />
     <Compile Include="API\Objects\DoorType.cs" />
     <Compile Include="API\Objects\Effect.cs" />
     <Compile Include="API\Objects\EffectType.cs" />

@@ -294,6 +294,14 @@ namespace Qurre.API.Events
         public WeaponType WeaponType { get; set; }
         public bool Allowed { get; set; }
     }
+    public class HealEvent : EventArgs
+    {
+        public HealEvent(Player player, float hp, bool allowed = true);
+
+        public Player Player { get; }
+        public float Hp { get; }
+        public bool Allowed { get; }
+    }
     public class RechargeWeaponEvent : EventArgs
     {
         public RechargeWeaponEvent(Player player, bool animationOnly, bool allowed = true);

@@ -21,8 +21,8 @@ namespace Qurre.Events
         public static event main.AllEvents<KickEvent> Kick;
         public static event main.AllEvents<BanEvent> Ban;
         public static event main.AllEvents<IcomSpeakEvent> IcomSpeak;
-        public static event main.AllEvents<SpawnEvent> Spawn;
         public static event main.AllEvents<DroppingItemEvent> DroppingItem;
+        public static event main.AllEvents<DropItemEvent> DropItem;
         public static event main.AllEvents<JoinEvent> Join;
         public static event main.AllEvents<SpeakEvent> Speak;
         public static event main.AllEvents<InteractGeneratorEvent> InteractGenerator;
@@ -30,8 +30,9 @@ namespace Qurre.Events
         public static event main.AllEvents<ThrowGrenadeEvent> ThrowGrenade;
         public static event main.AllEvents<SyncDataEvent> SyncData;
         public static event main.AllEvents<MedicalUsedEvent> MedicalUsed;
-        public static event main.AllEvents<DropItemEvent> DropItem;
+        public static event main.AllEvents<SpawnEvent> Spawn;
         public static event main.AllEvents<MedicalUsingEvent> MedicalUsing;
+        public static event main.AllEvents<HealEvent> Heal;
         public static event main.AllEvents<RagdollSpawnEvent> RagdollSpawn;
         public static event main.AllEvents<ShootingEvent> Shooting;
         public static event main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
@@ -51,6 +52,7 @@ namespace Qurre.Events
         public static void droppingItem(DroppingItemEvent ev);
         public static void escape(EscapeEvent ev);
         public static void groupchange(GroupChangeEvent ev);
+        public static void heal(HealEvent ev);
         public static void icomSpeak(IcomSpeakEvent ev);
         public static void interact(InteractEvent ev);
         public static void interactdoor(InteractDoorEvent ev);
