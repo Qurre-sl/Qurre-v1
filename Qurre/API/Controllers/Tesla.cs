@@ -7,7 +7,6 @@
         public float SizeOfTrigger { get; set; }
 
         public void Destroy();
-        public void InstantTrigger();
-        public void Trigger();
+        public void Trigger(bool instant = false);
     }
 }
