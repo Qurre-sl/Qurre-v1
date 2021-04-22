@@ -626,4 +626,13 @@ namespace Qurre.API.Events
 
         public int Seed { get; set; }
     }
+    public class DoorDamageEvent : EventArgs
+    {
+        public DoorDamageEvent(Door door, float hp, global::Interactables.Interobjects.DoorUtils.DoorDamageType damageType, bool allowed = true);
+
+        public Door Door { get; }
+        public float Hp { get; }
+        public global::Interactables.Interobjects.DoorUtils.DoorDamageType DamageType { get; }
+        public bool Allowed { get; set; }
+    }
 }

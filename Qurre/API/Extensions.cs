@@ -2,9 +2,13 @@
 {
     public static class Extensions
     {
-        public static global::Interactables.Interobjects.DoorUtils.DoorVariant DoorVariant { get; }
+        public static global::Interactables.Interobjects.DoorUtils.DoorVariant DoorPrefabLCZ { get; }
+        public static global::Interactables.Interobjects.DoorUtils.DoorVariant DoorPrefabHCZ { get; }
+        public static global::Interactables.Interobjects.DoorUtils.DoorVariant DoorPrefabEZ { get; }
+
         public static Door GetDoor(DoorType type);
         public static Door GetDoor(this global::Interactables.Interobjects.DoorUtils.DoorVariant door);
+        public static global::Interactables.Interobjects.DoorUtils.DoorVariant GetDoorPrefab(DoorPrefabs prefab);
         public static Generator GetGenerator(this Generator079 generator079);
         public static Lift GetLift(LiftType type);
         public static Lift GetLift(this Lift lift);

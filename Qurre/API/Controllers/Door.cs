@@ -14,7 +14,7 @@
         public bool Locked { get; set; }
         public List<Room> Rooms { get; }
 
-        public static Door Spawn(global::UnityEngine.Vector3 position, global::UnityEngine.Quaternion? rotation = null, global::Interactables.Interobjects.DoorUtils.DoorPermissions permissions = null);
+        public static Door Spawn(global::UnityEngine.Vector3 position, DoorPrefabs prefab, global::UnityEngine.Quaternion? rotation = null, global::Interactables.Interobjects.DoorUtils.DoorPermissions permissions = null);
         public bool BreakDoor();
         public bool Pry();
     }
