@@ -16,5 +16,6 @@ namespace Qurre.API
         public static List<TObject> GetObjectsOf<TObject>() where TObject : global::UnityEngine.Object;
         public static int MaxPlayers();
         public static void MaxPlayers(int amount);
+        public static void Restart();
     }
 }

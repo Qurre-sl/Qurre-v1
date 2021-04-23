@@ -93,6 +93,7 @@ namespace Qurre.API
         public int MaxAHP { get; set; }
         public List<Inventory.SyncItemInfo> AllItems { get; }
         public global::Grenades.GrenadeManager GrenadeManager { get; }
+        public static bool Noclip { get; set; }
 
         public static Player Get(ReferenceHub referenceHub);
         public static IEnumerable<Player> Get(Team team);
@@ -167,5 +168,6 @@ namespace Qurre.API
         public void Uncuff();
         public void UnitUpdate();
         public void Use106Portal();
+        public static void Invisible(bool value);
     }
 }
