@@ -23,6 +23,8 @@ Qurre_logging: true
 Qurre_all_logging: false
 Qurre_spawn_blood: true
 Qurre_ScpTrigger173: false
+#SCP 079 and SCP 096 will not see the wearer of SCP 268
+Qurre_Better268: false
 Qurre_banned: banned
 Qurre_kicked: kicked
 Qurre_BanOrKick_msg: You have been %bok%.
