@@ -635,4 +635,23 @@ namespace Qurre.API.Events
         public global::Interactables.Interobjects.DoorUtils.DoorDamageType DamageType { get; }
         public bool Allowed { get; set; }
     }
+    public class DoorLockEvent : EventArgs
+    {
+        public DoorLockEvent(Door door, global::Interactables.Interobjects.DoorUtils.DoorLockReason reason, bool newState, bool allowed = true);
+
+        public Door Door { get; }
+        public global::Interactables.Interobjects.DoorUtils.DoorLockReason Reason { get; }
+        public bool NewState { get; }
+        public bool Allowed { get; set; }
+    }
+    public class TransmitPlayerDataEvent : EventArgs
+    {
+        public TransmitPlayerDataEvent(Player player, Player playerToShow, global::UnityEngine.Vector3 pos, float rot, bool invisible);
+
+        public Player Player { get; }
+        public Player PlayerToShow { get; }
+        public float Rotation { get; set; }
+        public global::UnityEngine.Vector3 Position { get; set; }
+        public bool Invisible { get; set; }
+    }
 }

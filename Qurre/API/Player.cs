@@ -19,31 +19,32 @@ namespace Qurre.API
         public static IEnumerable<Player> List { get; }
         public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
         public static MethodInfo SendSpawnMessage { get; }
-        public ListBroadcasts Broadcasts { get; }
+        public global::Grenades.GrenadeManager GrenadeManager { get; }
         public string UserId { get; set; }
         public string CustomUserId { get; set; }
         public string DisplayNickname { get; set; }
         public string Nickname { get; }
         public bool DoNotTrack { get; }
         public bool RemoteAdminAccess { get; }
-        public int Id { get; set; }
         public bool Overwatch { get; set; }
+        public int CufferId { get; set; }
         public bool IsCuffed { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
         public global::UnityEngine.Vector2 Rotations { get; set; }
         public global::UnityEngine.Vector3 Rotation { get; set; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.GameObject LookingAt { get; }
-        public int CufferId { get; set; }
+        public bool Noclip { get; set; }
+        public int Id { get; set; }
+        public Team Team { get; }
         public NicknameSync NicknameSync { get; }
-        public PlayerEffectsController PlayerEffectsController { get; }
         public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
-        public GameConsoleTransmission GameConsoleTransmission { get; }
-        public global::UnityEngine.GameObject GameObject { get; }
         public AmmoBox Ammo { get; }
+        public ListBroadcasts Broadcasts { get; }
+        public ReferenceHub ReferenceHub { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
-        public uint Ammo9 { get; set; }
         public global::UnityEngine.Transform CameraTransform { get; }
+        public uint Ammo9 { get; set; }
         public Inventory Inventory { get; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
         public Handcuffs Handcuffs { get; }
@@ -53,7 +54,7 @@ namespace Qurre.API
         public AnimationController AnimationController { get; }
         public PlayerStats PlayerStats { get; }
         public Scp079PlayerScript Scp079PlayerScript { get; }
-        public Team Team { get; }
+        public PlayerEffectsController PlayerEffectsController { get; }
         public Side Side { get; }
         public RoleType Role { get; set; }
         public bool IsReloading { get; }
@@ -73,8 +74,8 @@ namespace Qurre.API
         public uint Ammo5 { get; set; }
         public uint Ammo7 { get; set; }
         public ItemType ItemInHand { get; set; }
-        public ReferenceHub ReferenceHub { get; }
         public int CurrentItemIndex { get; }
+        public List<Inventory.SyncItemInfo> AllItems { get; }
         public Inventory.SyncItemInfo CurrentItem { get; set; }
         public bool IsZooming { get; }
         public PlayerMovementState MoveState { get; }
@@ -83,7 +84,8 @@ namespace Qurre.API
         public global::Mirror.NetworkConnection Connection { get; }
         public bool IsHost { get; }
         public bool FriendlyFire { get; set; }
-        public bool BypassMode { get; set; }
+        public GameConsoleTransmission GameConsoleTransmission { get; }
+        public bool Invisible { get; set; }
         public bool Muted { get; set; }
         public bool IntercomMuted { get; set; }
         public bool GodMode { get; set; }
@@ -91,9 +93,8 @@ namespace Qurre.API
         public int MaxHP { get; set; }
         public float AHP { get; set; }
         public int MaxAHP { get; set; }
-        public List<Inventory.SyncItemInfo> AllItems { get; }
-        public global::Grenades.GrenadeManager GrenadeManager { get; }
-        public static bool Noclip { get; set; }
+        public bool BypassMode { get; set; }
+        public global::UnityEngine.GameObject GameObject { get; }
 
         public static Player Get(ReferenceHub referenceHub);
         public static IEnumerable<Player> Get(Team team);
@@ -166,8 +167,6 @@ namespace Qurre.API
         public void TeleportToRoom(RoomType room);
         public bool TryGetEffect(EffectType effect, out global::CustomPlayerEffects.PlayerEffect playerEffect);
         public void Uncuff();
-        public void UnitUpdate();
         public void Use106Portal();
-        public static void Invisible(bool value);
     }
 }

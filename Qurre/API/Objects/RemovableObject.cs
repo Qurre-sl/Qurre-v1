@@ -1,4 +1,4 @@
-namespace Qurre.API.Objects
+﻿namespace Qurre.API.Objects
 {
     public enum RemovableObject
     {
