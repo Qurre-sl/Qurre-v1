@@ -10,7 +10,7 @@
         public bool Active { get; }
 
         public void End();
-        public void Start(Player player);
+        public void Start();
         public void Update();
     }
 }

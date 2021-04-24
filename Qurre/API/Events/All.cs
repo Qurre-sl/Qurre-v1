@@ -644,6 +644,14 @@ namespace Qurre.API.Events
         public bool NewState { get; }
         public bool Allowed { get; set; }
     }
+    public class DoorOpenEvent : EventArgs
+    {
+        public DoorOpenEvent(Door door, global::Interactables.Interobjects.DoorUtils.DoorEventOpenerExtension.OpenerEventType eventType, bool allowed = true);
+
+        public Door Door { get; }
+        public global::Interactables.Interobjects.DoorUtils.DoorEventOpenerExtension.OpenerEventType EventType { get; }
+        public bool Allowed { get; set; }
+    }
     public class TransmitPlayerDataEvent : EventArgs
     {
         public TransmitPlayerDataEvent(Player player, Player playerToShow, global::UnityEngine.Vector3 pos, float rot, bool invisible);
