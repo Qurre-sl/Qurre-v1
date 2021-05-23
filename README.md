@@ -29,6 +29,7 @@ Qurre_banned: banned
 Qurre_kicked: kicked
 Qurre_BanOrKick_msg: You have been %bok%.
 Qurre_reason: Reason
+Qurre_DataBase: undefined
 ```
 ## [Example Plugin](https://github.com/Qurre-Team/example-plugin)
 
