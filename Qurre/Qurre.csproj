@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Config.cs" />
     <Compile Include="API\Controllers\Cassie.cs" />
     <Compile Include="API\Controllers\Alpha.cs" />
     <Compile Include="API\Controllers\Broadcast.cs" />
@@ -64,7 +65,10 @@
     <Compile Include="API\Controllers\Scp173.cs" />
     <Compile Include="API\Controllers\Scp914.cs" />
     <Compile Include="API\Controllers\Tesla.cs" />
+    <Compile Include="API\DataBase\MongoDataBase.cs" />
+    <Compile Include="API\DataBase\DataBase.cs" />
     <Compile Include="API\Extensions.cs" />
+    <Compile Include="API\Objects\ConfigObjects.cs" />
     <Compile Include="API\Objects\RemovableObject.cs" />
     <Compile Include="API\Objects\DoorPrefabs.cs" />
     <Compile Include="API\Objects\RadioStatus.cs" />

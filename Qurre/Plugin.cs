@@ -3,7 +3,7 @@ namespace Qurre
 {
     public abstract class Plugin
     {
-        public static YamlConfig Config;
+        public static Config Config;
         public virtual string Developer { get; }
         public virtual string Name { get; }
         public virtual Version Version { get; }

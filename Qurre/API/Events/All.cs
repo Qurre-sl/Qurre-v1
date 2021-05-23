@@ -274,14 +274,15 @@ namespace Qurre.API.Events
     }
     public class SpeakEvent : EventArgs
     {
-        public SpeakEvent(global::Assets._Scripts.Dissonance.DissonanceUserSetup userSetup, bool icom, bool radio, bool mimicAs939, bool scpChat, bool ripChat, bool allowed = true);
+        public SpeakEvent(global::Assets._Scripts.Dissonance.DissonanceUserSetup userSetup, bool icom, bool radio, bool mimicAs939, bool scpChat, bool ripChat, bool value, bool allowed = true);
 
         public global::Assets._Scripts.Dissonance.DissonanceUserSetup UserSetup { get; }
-        public bool Intercom { get; }
-        public bool Radio { get; }
-        public bool MimicAs939 { get; }
-        public bool ScpChat { get; }
-        public bool RipChat { get; }
+        public bool Intercom { get; set; }
+        public bool Radio { get; set; }
+        public bool MimicAs939 { get; set; }
+        public bool ScpChat { get; set; }
+        public bool RipChat { get; set; }
+        public bool Value { get; }
         public bool Allowed { get; set; }
     }
     public class ShootingEvent : EventArgs

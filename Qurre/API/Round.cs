@@ -8,12 +8,13 @@ namespace Qurre.API
         public static bool LobbyLock { get; set; }
         public static bool Lock { get; set; }
         public static bool Ended { get; }
-        public static bool IsStarted { get; }
+        public static bool Started { get; }
         public static float NextRespawn { get; set; }
+        public static int ActiveGenerators { get; }
         public static int CurrentRound { get; }
-        public static DateTime StartedTime { get; }
         public static int EscapedScientists { get; set; }
         public static TimeSpan ElapsedTime { get; }
+        public static DateTime StartedTime { get; }
 
         public static void AddUnit(TeamUnitType team, string unit);
         public static void CallCICar();
