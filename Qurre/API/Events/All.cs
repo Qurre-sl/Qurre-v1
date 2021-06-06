@@ -663,4 +663,12 @@ namespace Qurre.API.Events
         public global::UnityEngine.Vector3 Position { get; set; }
         public bool Invisible { get; set; }
     }
+    public class UseLiftEvent : EventArgs
+    {
+        public UseLiftEvent(Lift lift, bool result, bool allowed = true);
+
+        public Lift Lift { get; }
+        public bool Result { get; set; }
+        public bool Allowed { get; set; }
+    }
 }
