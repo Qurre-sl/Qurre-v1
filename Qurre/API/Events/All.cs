@@ -665,10 +665,9 @@ namespace Qurre.API.Events
     }
     public class UseLiftEvent : EventArgs
     {
-        public UseLiftEvent(Lift lift, bool result, bool allowed = true);
+        public UseLiftEvent(Lift lift, bool allowed);
 
         public Lift Lift { get; }
-        public bool Result { get; set; }
         public bool Allowed { get; set; }
     }
 }
