@@ -3,7 +3,7 @@
     public class Scp079
     {
         public static int ActivatedGenerators { get; }
-        public Camera079[] Camers { get; }
+        public static Camera079[] Camers { get; }
         public Camera079 Camera { get; set; }
         public float MaxEnergy { get; set; }
         public float Energy { get; set; }
