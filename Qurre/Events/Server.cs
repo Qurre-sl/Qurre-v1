@@ -4,21 +4,14 @@ namespace Qurre.Events
 {
     public static class Server
     {
-        public static event main.AllEvents<SendingRAEvent> SendingRA;
-        public static event main.AllEvents<RaRequestPlayerListEvent> RaRequestPlayerList;
-        public static event main.AllEvents<SendingConsoleEvent> SendingConsole;
-
-        public static void raRequestPlayerList(RaRequestPlayerListEvent ev);
-        public static void sendingconsole(SendingConsoleEvent ev);
-        public static void sendingra(SendingRAEvent ev);
+        public static event Main.AllEvents<SendingRAEvent> SendingRA;
+        public static event Main.AllEvents<RaRequestPlayerListEvent> RaRequestPlayerList;
+        public static event Main.AllEvents<SendingConsoleEvent> SendingConsole;
 
         public static class Report
         {
-            public static event main.AllEvents<ReportCheaterEvent> Cheater;
-            public static event main.AllEvents<ReportLocalEvent> Local;
-
-            public static void cheater(ReportCheaterEvent ev);
-            public static void local(ReportLocalEvent ev);
+            public static event Main.AllEvents<ReportCheaterEvent> Cheater;
+            public static event Main.AllEvents<ReportLocalEvent> Local;
         }
     }
 }

@@ -2,73 +2,42 @@
 using Qurre.Events.modules;
 namespace Qurre.Events
 {
-    public static class SCPs
+    public static class Scp049
     {
-        public static class SCP914
-        {
-            public static event main.AllEvents<ActivatingEvent> Activating;
-            public static event main.AllEvents<ChangeKnobEvent> ChangeKnob;
-            public static event main.AllEvents<UpgradeEvent> Upgrade;
-            public static event main.AllEvents<UpgradePlayerEvent> UpgradePlayer;
-
-            public static void activating(ActivatingEvent ev);
-            public static void changeknob(ChangeKnobEvent ev);
-            public static void upgrade(UpgradeEvent ev);
-            public static void upgradePlayer(UpgradePlayerEvent ev);
-        }
-        public static class SCP173
-        {
-            public static event main.AllEvents<BlinkEvent> Blink;
-
-            public static void blink(BlinkEvent ev);
-        }
-        public static class SCP106
-        {
-            public static event main.AllEvents<PortalUsingEvent> PortalUsing;
-            public static event main.AllEvents<PortalCreateEvent> PortalCreate;
-            public static event main.AllEvents<ContainEvent> Contain;
-            public static event main.AllEvents<FemurBreakerEnterEvent> FemurBreakerEnter;
-            public static event main.AllEvents<PocketDimensionEnterEvent> PocketDimensionEnter;
-            public static event main.AllEvents<PocketDimensionEscapeEvent> PocketDimensionEscape;
-            public static event main.AllEvents<PocketDimensionFailEscapeEvent> PocketDimensionFailEscape;
-
-            public static void contain(ContainEvent ev);
-            public static void femurbreakerenter(FemurBreakerEnterEvent ev);
-            public static void pocketdimensionenter(PocketDimensionEnterEvent ev);
-            public static void pocketdimensionescape(PocketDimensionEscapeEvent ev);
-            public static void pocketdimensionfailescape(PocketDimensionFailEscapeEvent ev);
-            public static void portalcreate(PortalCreateEvent ev);
-            public static void portalusing(PortalUsingEvent ev);
-        }
-        public static class SCP096
-        {
-            public static event main.AllEvents<EnrageEvent> Enrage;
-            public static event main.AllEvents<CalmDownEvent> CalmDown;
-            public static event main.AllEvents<AddTargetEvent> AddTarget;
-
-            public static void addtarget(AddTargetEvent ev);
-            public static void calmdown(CalmDownEvent ev);
-            public static void enrage(EnrageEvent ev);
-        }
-        public static class SCP079
-        {
-            public static event main.AllEvents<GeneratorActivateEvent> GeneratorActivate;
-            public static event main.AllEvents<RecontainEvent> Recontain;
-            public static event main.AllEvents<GetEXPEvent> GetEXP;
-            public static event main.AllEvents<GetLVLEvent> GetLVL;
-
-            public static void generatoractivate(GeneratorActivateEvent ev);
-            public static void getEXP(GetEXPEvent ev);
-            public static void getLVL(GetLVLEvent ev);
-            public static void recontain(RecontainEvent ev);
-        }
-        public static class SCP049
-        {
-            public static event main.AllEvents<StartRecallEvent> StartRecall;
-            public static event main.AllEvents<FinishRecallEvent> FinishRecall;
-
-            public static void finishrecall(FinishRecallEvent ev);
-            public static void startrecall(StartRecallEvent ev);
-        }
+        public static event Main.AllEvents<StartRecallEvent> StartRecall;
+        public static event Main.AllEvents<FinishRecallEvent> FinishRecall;
+    }
+    public static class Scp079
+    {
+        public static event Main.AllEvents<GeneratorActivateEvent> GeneratorActivate;
+        public static event Main.AllEvents<GetEXPEvent> GetEXP;
+        public static event Main.AllEvents<GetLVLEvent> GetLVL;
+    }
+    public static class Scp096
+    {
+        public static event Main.AllEvents<EnrageEvent> Enrage;
+        public static event Main.AllEvents<CalmDownEvent> CalmDown;
+        public static event Main.AllEvents<AddTargetEvent> AddTarget;
+    }
+    public static class Scp106
+    {
+        public static event Main.AllEvents<PortalUsingEvent> PortalUsing;
+        public static event Main.AllEvents<PortalCreateEvent> PortalCreate;
+        public static event Main.AllEvents<ContainEvent> Contain;
+        public static event Main.AllEvents<FemurBreakerEnterEvent> FemurBreakerEnter;
+        public static event Main.AllEvents<PocketDimensionEnterEvent> PocketDimensionEnter;
+        public static event Main.AllEvents<PocketDimensionEscapeEvent> PocketDimensionEscape;
+        public static event Main.AllEvents<PocketDimensionFailEscapeEvent> PocketDimensionFailEscape;
+    }
+    public static class Scp173
+    {
+        public static event Main.AllEvents<BlinkEvent> Blink;
+    }
+    public static class Scp914
+    {
+        public static event Main.AllEvents<ActivatingEvent> Activating;
+        public static event Main.AllEvents<ChangeKnobEvent> ChangeKnob;
+        public static event Main.AllEvents<UpgradeEvent> Upgrade;
+        public static event Main.AllEvents<UpgradePlayerEvent> UpgradePlayer;
     }
 }

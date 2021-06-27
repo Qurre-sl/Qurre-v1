@@ -91,6 +91,12 @@
     <Compile Include="API\Player.cs" />
     <Compile Include="API\Round.cs" />
     <Compile Include="Events\Alpha.cs" />
+    <Compile Include="Events\Invoke\Alpha.cs" />
+    <Compile Include="Events\Invoke\Server.cs" />
+    <Compile Include="Events\Invoke\SCPs.cs" />
+    <Compile Include="Events\Invoke\Round.cs" />
+    <Compile Include="Events\Invoke\Player.cs" />
+    <Compile Include="Events\Invoke\Map.cs" />
     <Compile Include="Events\Map.cs" />
     <Compile Include="Events\Player.cs" />
     <Compile Include="Events\Round.cs" />

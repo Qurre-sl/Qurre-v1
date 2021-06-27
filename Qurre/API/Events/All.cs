@@ -96,18 +96,23 @@ namespace Qurre.API.Events
         public byte CurrentAnimation { get; set; }
         public bool Allowed { get; set; }
     }
-    public class MedicalStoppingEvent : MedicalUsingEvent
+    public class MedicalStoppingEvent : EventArgs
     {
         public MedicalStoppingEvent(Player player, ItemType item, float cooldown, bool allowed = true);
 
-        public float Cooldown { get; }
+        public float Cooldown { get; set; }
+        public bool Allowed { get; set; }
+        public Player Player { get; }
+        public ItemType Item { get; }
     }
-    public class MedicalUsingEvent : MedicalUsedEvent
+    public class MedicalUsingEvent : EventArgs
     {
         public MedicalUsingEvent(Player player, ItemType item, float cooldown, bool allowed = true);
 
         public float Cooldown { get; set; }
         public bool Allowed { get; set; }
+        public Player Player { get; }
+        public ItemType Item { get; }
     }
     public class MedicalUsedEvent : EventArgs
     {
@@ -178,9 +183,13 @@ namespace Qurre.API.Events
         public bool Success { get; set; }
         public bool Allowed { get; set; }
     }
-    public class FinishRecallEvent : StartRecallEvent
+    public class FinishRecallEvent : EventArgs
     {
         public FinishRecallEvent(Player scp049, Player target, bool allowed = true);
+
+        public Player Scp049 { get; }
+        public Player Target { get; }
+        public bool Allowed { get; set; }
     }
     public class StartRecallEvent : EventArgs
     {
@@ -230,9 +239,13 @@ namespace Qurre.API.Events
         public Player Target { get; }
         public bool Allowed { get; set; }
     }
-    public class CalmDownEvent : EnrageEvent
+    public class CalmDownEvent : EventArgs
     {
         public CalmDownEvent(global::PlayableScps.Scp096 scp096, Player player, bool allowed = true);
+
+        public global::PlayableScps.Scp096 Scp096 { get; }
+        public Player Player { get; }
+        public bool Allowed { get; set; }
     }
     public class EnrageEvent : EventArgs
     {
@@ -240,6 +253,15 @@ namespace Qurre.API.Events
 
         public global::PlayableScps.Scp096 Scp096 { get; }
         public Player Player { get; }
+        public bool Allowed { get; set; }
+    }
+    public class WindupEvent : EventArgs
+    {
+        public WindupEvent(global::PlayableScps.Scp096 scp096, Player player, bool force, bool allowed = true);
+
+        public global::PlayableScps.Scp096 Scp096 { get; }
+        public Player Player { get; }
+        public bool Force { get; }
         public bool Allowed { get; set; }
     }
     public class PocketDimensionFailEscapeEvent : EventArgs
@@ -337,11 +359,16 @@ namespace Qurre.API.Events
         public string FullMessage { get; set; }
         public bool Allowed { get; set; }
     }
-    public class BanEvent : KickEvent
+    public class BanEvent : EventArgs
     {
         public BanEvent(Player target, Player issuer, int duration, string reason, string fullMessage, bool allowed = true);
 
         public int Duration { get; set; }
+        public Player Target { get; set; }
+        public Player Issuer { get; set; }
+        public string Reason { get; set; }
+        public string FullMessage { get; set; }
+        public bool Allowed { get; set; }
     }
     public class BannedEvent : EventArgs
     {
@@ -428,9 +455,12 @@ namespace Qurre.API.Events
 
         public bool Allowed { get; set; }
     }
-    public class AlphaStartEvent : AlphaStopEvent
+    public class AlphaStartEvent : EventArgs
     {
         public AlphaStartEvent(Player player, bool allowed = true);
+
+        public Player Player { get; }
+        public bool Allowed { get; set; }
     }
     public class RoleChangeEvent : EventArgs
     {
@@ -458,9 +488,11 @@ namespace Qurre.API.Events
         public RoleType NewRole { get; set; }
         public bool Allowed { get; set; }
     }
-    public class LeaveEvent : JoinEvent
+    public class LeaveEvent : EventArgs
     {
         public LeaveEvent(Player player);
+
+        public Player Player { get; }
     }
     public class JoinEvent : EventArgs
     {
@@ -468,11 +500,13 @@ namespace Qurre.API.Events
 
         public Player Player { get; }
     }
-    public class PickupItemEvent : DropItemEvent
+    public class PickupItemEvent : EventArgs
     {
         public PickupItemEvent(Player player, Pickup pickup, bool allowed = true);
 
         public bool Allowed { get; set; }
+        public Player Player { get; }
+        public Pickup Pickup { get; }
     }
     public class DropItemEvent : EventArgs
     {
@@ -561,9 +595,13 @@ namespace Qurre.API.Events
         public float Amount { get; set; }
         public bool Allowed { get; set; }
     }
-    public class UnCuffEvent : CuffEvent
+    public class UnCuffEvent : EventArgs
     {
         public UnCuffEvent(Player cuffer, Player target, bool allowed = true);
+
+        public Player Cuffer { get; }
+        public Player Target { get; }
+        public bool Allowed { get; set; }
     }
     public class CuffEvent : EventArgs
     {

@@ -19,10 +19,6 @@ namespace Qurre.API
         public static IEnumerable<Player> List { get; }
         public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
         public static MethodInfo SendSpawnMessage { get; }
-        public GameConsoleTransmission GameConsoleTransmission { get; }
-        public string UserId { get; set; }
-        public string CustomUserId { get; set; }
-        public string DisplayNickname { get; set; }
         public string Nickname { get; }
         public bool DoNotTrack { get; }
         public bool RemoteAdminAccess { get; }
@@ -35,19 +31,18 @@ namespace Qurre.API
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.GameObject LookingAt { get; }
         public bool Noclip { get; set; }
+        public Team Team { get; }
+        public Side Side { get; }
+        public RoleType Role { get; set; }
+        public string DisplayNickname { get; set; }
+        public bool IsReloading { get; }
+        public string CustomUserId { get; set; }
         public int Id { get; set; }
-        public string Tag { get; set; }
-        public NicknameSync NicknameSync { get; }
-        public PlayerEffectsController PlayerEffectsController { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
-        public global::Grenades.GrenadeManager GrenadeManager { get; }
-        public ListBroadcasts Broadcasts { get; }
-        public ReferenceHub ReferenceHub { get; }
         public global::UnityEngine.Transform CameraTransform { get; }
         public Inventory Inventory { get; }
-        public uint Ammo9 { get; set; }
-        public Team Team { get; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
+        public Handcuffs Handcuffs { get; }
         public ServerRoles ServerRoles { get; }
         public CharacterClassManager ClassManager { get; }
         public WeaponManager WeaponManager { get; }
@@ -55,19 +50,21 @@ namespace Qurre.API
         public PlayerStats PlayerStats { get; }
         public Scp079PlayerScript Scp079PlayerScript { get; }
         public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
-        public Handcuffs Handcuffs { get; }
-        public Side Side { get; }
-        public RoleType Role { get; set; }
-        public bool IsReloading { get; }
-        public Inventory.SyncItemInfo ItemInfoInHand { get; }
+        public PlayerEffectsController PlayerEffectsController { get; }
+        public NicknameSync NicknameSync { get; }
+        public string Tag { get; set; }
+        public string UserId { get; set; }
+        public AmmoBox Ammo { get; }
+        public bool IsZooming { get; }
+        public bool IsJumping { get; }
         public Stamina Stamina { get; }
         public float StaminaUsage { get; set; }
         public string GroupName { get; set; }
         public Room Room { get; set; }
         public CommandSender Sender { get; }
         public bool GlobalRemoteAdmin { get; }
-        public ItemType ItemInHand { get; set; }
         public UserGroup Group { get; set; }
+        public string RoleColor { get; set; }
         public string RoleName { get; set; }
         public string UnitName { get; set; }
         public float AliveTime { get; }
@@ -75,36 +72,40 @@ namespace Qurre.API
         public int Ping { get; }
         public uint Ammo5 { get; set; }
         public uint Ammo7 { get; set; }
-        public string RoleColor { get; set; }
-        public global::UnityEngine.GameObject GameObject { get; }
-        public int CurrentItemIndex { get; }
-        public Inventory.SyncItemInfo CurrentItem { get; set; }
-        public bool IsZooming { get; }
+        public Inventory.SyncItemInfo ItemInfoInHand { get; }
         public PlayerMovementState MoveState { get; }
-        public bool IsJumping { get; }
-        public string IP { get; }
+        public ItemType ItemInHand { get; set; }
+        public List<Inventory.SyncItemInfo> AllItems { get; }
+        public string Ip { get; }
         public global::Mirror.NetworkConnection Connection { get; }
         public bool IsHost { get; }
         public bool FriendlyFire { get; set; }
-        public List<Inventory.SyncItemInfo> AllItems { get; }
         public bool Invisible { get; set; }
+        public bool BypassMode { get; set; }
         public bool Muted { get; set; }
         public bool IntercomMuted { get; set; }
         public bool GodMode { get; set; }
-        public float HP { get; set; }
-        public int MaxHP { get; set; }
-        public float AHP { get; set; }
-        public int MaxAHP { get; set; }
-        public bool BypassMode { get; set; }
-        public AmmoBox Ammo { get; }
+        public float Health { get; set; }
+        public int MaxHealth { get; set; }
+        public float ArtificialHealthDecay { get; set; }
+        public float ArtificialHealth { get; set; }
+        public int MaxArtificialHealth { get; set; }
+        public Inventory.SyncItemInfo CurrentItem { get; set; }
+        public int CurrentItemIndex { get; }
+        public global::UnityEngine.GameObject GameObject { get; }
+        public GameConsoleTransmission GameConsoleTransmission { get; }
+        public ListBroadcasts Broadcasts { get; }
+        public ReferenceHub ReferenceHub { get; }
+        public uint Ammo9 { get; set; }
+        public global::Grenades.GrenadeManager GrenadeManager { get; }
 
-        public static Player Get(ReferenceHub referenceHub);
-        public static IEnumerable<Player> Get(Team team);
         public static IEnumerable<Player> Get(RoleType role);
+        public static Player Get(ReferenceHub referenceHub);
         public static Player Get(global::UnityEngine.GameObject gameObject);
         public static Player Get(int playerId);
         public static Player Get(string args);
         public static Player Get(CommandSender sender);
+        public static IEnumerable<Player> Get(Team team);
         public static void ShowHitmark();
         public void AddDisplayInfo(PlayerInfoArea playerInfo);
         public void AddItem(Inventory.SyncItemInfo item);
@@ -113,8 +114,8 @@ namespace Qurre.API
         public void Ban(int duration, string reason, string issuer = "API");
         public void Blink();
         public void BodyDelete();
-        public Broadcast Broadcast(string message, ushort time, bool instant = false);
         public Broadcast Broadcast(ushort time, string message, bool instant = false);
+        public Broadcast Broadcast(string message, ushort time, bool instant = false);
         public void ChangeBody(RoleType newRole, bool spawnRagdoll = false, global::UnityEngine.Vector3 newPosition = null, global::UnityEngine.Vector3 newRotation = null, DamageTypes.DamageType damageType = null);
         public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
@@ -125,13 +126,13 @@ namespace Qurre.API
         public void Damage(int amount, DamageTypes.DamageType damageType);
         public void DimScreen();
         public void DisableAllEffects();
-        public void DisableEffect<T>() where T : global::CustomPlayerEffects.PlayerEffect;
         public void DisableEffect(EffectType effect);
+        public void DisableEffect<T>() where T : global::CustomPlayerEffects.PlayerEffect;
         public void Disconnect(string reason = null);
         public void DropItem(Inventory.SyncItemInfo item);
         public void DropItems();
-        public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
         public void EnableEffect(EffectType effect, float duration = 0, bool addDurationIfActive = false);
+        public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
         public void EnableEffect<T>(float duration = 0, bool addDurationIfActive = false) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ExecuteCommand(string command, bool RA = true);
         public global::UnityEngine.Vector3 Get106Portal();
