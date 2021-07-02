@@ -104,7 +104,7 @@
     <Compile Include="Events\Server.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="MainLoader.cs" />
+    <Compile Include="PluginManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
