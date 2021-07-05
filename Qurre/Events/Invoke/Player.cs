@@ -28,8 +28,10 @@ namespace Qurre.Events.Invoke
         public static void MedicalStopping(MedicalStoppingEvent ev);
         public static void MedicalUsed(MedicalUsedEvent ev);
         public static void MedicalUsing(MedicalUsingEvent ev);
+        public static void MicroHidUsing(MicroHidUsingEvent ev);
         public static void PickupItem(PickupItemEvent ev);
         public static void RadioUpdate(RadioUpdateEvent ev);
+        public static void RadioUse(RadioUseEvent ev);
         public static void RagdollSpawn(RagdollSpawnEvent ev);
         public static void RechargeWeapon(RechargeWeaponEvent ev);
         public static void RoleChange(RoleChangeEvent ev);

@@ -653,10 +653,11 @@ namespace Qurre.API.Events
     }
     public class RadioUpdateEvent : EventArgs
     {
-        public RadioUpdateEvent(Player player, RadioStatus changeTo, bool allowed = true);
+        public RadioUpdateEvent(Player player, Radio radio, RadioStatus changeTo, bool allowed = true);
 
         public Player Player { get; }
-        public RadioStatus ChangeTo { get; }
+        public Radio Radio { get; }
+        public RadioStatus ChangeTo { get; set; }
         public bool Allowed { get; set; }
     }
     public class SetSeedEvent : EventArgs
@@ -706,6 +707,25 @@ namespace Qurre.API.Events
         public UseLiftEvent(Lift lift, bool allowed);
 
         public Lift Lift { get; }
+        public bool Allowed { get; set; }
+    }
+    public class MicroHidUsingEvent : EventArgs
+    {
+        public MicroHidUsingEvent(Player player, Inventory.SyncItemInfo microHid, MicroHID.MicroHidState state, bool allowed = true);
+
+        public Player Player { get; }
+        public Inventory.SyncItemInfo MicroHid { get; }
+        public float Energy { get; set; }
+        public MicroHID.MicroHidState State { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class RadioUseEvent : EventArgs
+    {
+        public RadioUseEvent(Player player, Radio radio, float battery, bool allowed = true);
+
+        public Player Player { get; }
+        public Radio Radio { get; }
+        public float Battery { get; set; }
         public bool Allowed { get; set; }
     }
 }
