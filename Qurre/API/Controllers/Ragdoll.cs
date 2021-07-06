@@ -7,6 +7,7 @@
         public global::UnityEngine.GameObject GameObject { get; }
         public string Name { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
+        public global::UnityEngine.Quaternion Rotation { get; set; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public Player Owner { get; set; }
         public bool AllowRecall { get; set; }

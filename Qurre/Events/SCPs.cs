@@ -16,6 +16,7 @@ namespace Qurre.Events
     public static class Scp096
     {
         public static event Main.AllEvents<EnrageEvent> Enrage;
+        public static event Main.AllEvents<WindupEvent> Windup;
         public static event Main.AllEvents<CalmDownEvent> CalmDown;
         public static event Main.AllEvents<AddTargetEvent> AddTarget;
     }

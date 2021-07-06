@@ -7,6 +7,7 @@
         public string Name { get; set; }
         public global::UnityEngine.Vector3 Position { get; set; }
         public global::UnityEngine.Quaternion Rotation { get; set; }
+        public global::UnityEngine.Vector3 Scale { get; set; }
         public global::Interactables.Interobjects.DoorUtils.DoorPermissions Permissions { get; set; }
         public DoorType Type { get; }
         public bool Pryable { get; }

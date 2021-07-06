@@ -50,6 +50,7 @@
     <Compile Include="API\Controllers\Alpha.cs" />
     <Compile Include="API\Controllers\Broadcast.cs" />
     <Compile Include="API\Controllers\CassieList.cs" />
+    <Compile Include="API\Controllers\Locker.cs" />
     <Compile Include="API\Controllers\Lights.cs" />
     <Compile Include="API\Controllers\WorkStation.cs" />
     <Compile Include="API\Controllers\ListBroadcasts.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="API\DataBase\MongoDataBase.cs" />
     <Compile Include="API\DataBase\DataBase.cs" />
     <Compile Include="API\Extensions.cs" />
+    <Compile Include="API\Objects\LockerType.cs" />
     <Compile Include="API\Objects\ConfigObjects.cs" />
     <Compile Include="API\Objects\RemovableObject.cs" />
     <Compile Include="API\Objects\DoorPrefabs.cs" />

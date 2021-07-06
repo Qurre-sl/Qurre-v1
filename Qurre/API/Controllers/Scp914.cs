@@ -5,10 +5,12 @@
         public static global::UnityEngine.GameObject GameObject { get; }
         public static bool Working { get; }
         public static global::Scp914.Scp914Knob KnobState { get; set; }
-        public static global::Utils.ConfigHandler.ConfigEntry<global::Scp914.Scp914Mode> Cfg { get; set; }
+        public static global::Utils.ConfigHandler.ConfigEntry<global::Scp914.Scp914Mode> Config { get; set; }
         public static global::UnityEngine.Transform Intake { get; set; }
         public static global::UnityEngine.Transform Output { get; set; }
         public static List<Recipe> RecipesList { get; }
+        [Obsolete("Use Scp914.Config")]
+        public static global::Utils.ConfigHandler.ConfigEntry<global::Scp914.Scp914Mode> Cfg { get; set; }
 
         public static void Activate();
         public static void Activate(float time);
@@ -24,8 +26,6 @@
             public List<int> oneToOne;
             public List<int> fine;
             public List<int> veryFine;
-
-            public Recipe();
             public Recipe(global::Scp914.Scp914Recipe recipe);
         }
     }

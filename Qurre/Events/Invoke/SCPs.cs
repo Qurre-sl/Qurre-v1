@@ -17,6 +17,7 @@ namespace Qurre.Events.Invoke
         public static void AddTarget(AddTargetEvent ev);
         public static void CalmDown(CalmDownEvent ev);
         public static void Enrage(EnrageEvent ev);
+        public static void Windup(WindupEvent ev);
     }
     public static class Scp106
     {

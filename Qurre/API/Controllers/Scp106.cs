@@ -11,6 +11,8 @@
         public void Contain();
         public void CreatePortal();
         public void DeletePortal();
+        public void PlayContainAnimation();
+        public void PlayTeleportAnimation();
         public void UsePortal();
     }
 }

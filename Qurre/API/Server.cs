@@ -16,6 +16,7 @@ namespace Qurre.API
 
         public static TObject GetObjectOf<TObject>() where TObject : global::UnityEngine.Object;
         public static List<TObject> GetObjectsOf<TObject>() where TObject : global::UnityEngine.Object;
+        public static void InvokeStaticMethod(this Type type, string methodName, object[] param);
         public static void Restart();
     }
 }
