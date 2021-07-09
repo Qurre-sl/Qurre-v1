@@ -532,10 +532,10 @@ namespace Qurre.API.Events
     }
     public class InteractLockerEvent : EventArgs
     {
-        public InteractLockerEvent(Player player, Locker locker, LockerChamber lockerChamber, byte lockerId, byte chamberId, bool allowed);
+        public InteractLockerEvent(Player player, Controllers.Locker locker, LockerChamber lockerChamber, byte lockerId, byte chamberId, bool allowed);
 
         public Player Player { get; }
-        public Locker Locker { get; }
+        public Controllers.Locker Locker { get; }
         public LockerChamber Chamber { get; }
         public byte LockerId { get; }
         public byte ChamberId { get; }
