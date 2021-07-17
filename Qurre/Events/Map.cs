@@ -10,7 +10,6 @@ namespace Qurre.Events
         public static event Main.AllEvents<NewBloodEvent> NewBlood;
         public static event Main.AllEvents<NewDecalEvent> NewDecal;
         public static event Main.AllEvents Generated;
-        public static event Main.AllEvents<GrenadeExplodeEvent> GrenadeExplode;
         public static event Main.AllEvents<SetSeedEvent> SetSeed;
         public static event Main.AllEvents<DoorDamageEvent> DoorDamage;
         public static event Main.AllEvents<DoorLockEvent> DoorLock;

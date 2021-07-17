@@ -12,6 +12,8 @@ namespace Qurre.Events.Invoke
         public static void DropItem(DropItemEvent ev);
         public static void DroppingItem(DroppingItemEvent ev);
         public static void Escape(EscapeEvent ev);
+        public static void FlashExplosion(FlashExplosionEvent ev);
+        public static void FragExplosion(FragExplosionEvent ev);
         public static void GroupChange(GroupChangeEvent ev);
         public static void Heal(HealEvent ev);
         public static void IcomSpeak(IcomSpeakEvent ev);
@@ -31,7 +33,7 @@ namespace Qurre.Events.Invoke
         public static void MicroHidUsing(MicroHidUsingEvent ev);
         public static void PickupItem(PickupItemEvent ev);
         public static void RadioUpdate(RadioUpdateEvent ev);
-        public static void RadioUse(RadioUseEvent ev);
+        public static void RadioUsing(RadioUsingEvent ev);
         public static void RagdollSpawn(RagdollSpawnEvent ev);
         public static void RechargeWeapon(RechargeWeaponEvent ev);
         public static void RoleChange(RoleChangeEvent ev);

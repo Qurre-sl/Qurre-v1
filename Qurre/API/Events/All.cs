@@ -401,6 +401,7 @@ namespace Qurre.API.Events
         public Player Player { get; }
         public bool Allowed { get; set; }
     }
+    [Obsolete("Use FlashExplosionEvent/FragExplosionEvent")]
     public class GrenadeExplodeEvent : EventArgs
     {
         public GrenadeExplodeEvent(Player thrower, Dictionary<Player, float> targetToDamages, bool isFrag, global::UnityEngine.GameObject grenade, bool allowed = true);
@@ -719,13 +720,31 @@ namespace Qurre.API.Events
         public MicroHID.MicroHidState State { get; set; }
         public bool Allowed { get; set; }
     }
-    public class RadioUseEvent : EventArgs
+    public class RadioUsingEvent : EventArgs
     {
-        public RadioUseEvent(Player player, Radio radio, float battery, bool allowed = true);
+        public RadioUsingEvent(Player player, Radio radio, float battery, bool allowed = true);
 
         public Player Player { get; }
         public Radio Radio { get; }
         public float Battery { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class FlashExplosionEvent : EventArgs
+    {
+        public FlashExplosionEvent(Player thrower, List<Player> targets, global::UnityEngine.Vector3 position, bool allowed = true);
+
+        public Player Thrower { get; }
+        public List<Player> Targets { get; }
+        public global::UnityEngine.Vector3 Position { get; }
+        public bool Allowed { get; set; }
+    }
+    public class FragExplosionEvent : EventArgs
+    {
+        public FragExplosionEvent(Player thrower, List<Player> targets, global::UnityEngine.Vector3 position, bool allowed = true);
+
+        public Player Thrower { get; }
+        public List<Player> Targets { get; }
+        public global::UnityEngine.Vector3 Position { get; }
         public bool Allowed { get; set; }
     }
 }
