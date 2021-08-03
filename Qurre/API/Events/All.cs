@@ -309,12 +309,13 @@ namespace Qurre.API.Events
     }
     public class ShootingEvent : EventArgs
     {
-        public ShootingEvent(Player shooter, global::UnityEngine.GameObject target, global::UnityEngine.Vector3 position, WeaponType wt, bool allowed = true);
+        public ShootingEvent(Player shooter, global::UnityEngine.GameObject target, global::UnityEngine.Vector3 position, WeaponType wt, HitBoxType hitboxType, bool allowed = true);
 
         public Player Shooter { get; }
         public global::UnityEngine.GameObject Target { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
         public WeaponType WeaponType { get; set; }
+        public HitBoxType HitboxType { get; }
         public bool Allowed { get; set; }
     }
     public class HealEvent : EventArgs
