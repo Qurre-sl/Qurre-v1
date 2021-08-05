@@ -13,8 +13,8 @@ namespace Qurre.Events
         public static event Main.AllEvents<MedicalUsingEvent> MedicalUsing;
         public static event Main.AllEvents<MedicalUsedEvent> MedicalUsed;
         public static event Main.AllEvents<SyncDataEvent> SyncData;
+        public static event Main.AllEvents<PickupItemEvent> PickupItem;
         public static event Main.AllEvents<ThrowGrenadeEvent> ThrowGrenade;
-        public static event Main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
         public static event Main.AllEvents<InteractGeneratorEvent> InteractGenerator;
         public static event Main.AllEvents<SpeakEvent> Speak;
         public static event Main.AllEvents<SpawnEvent> Spawn;
@@ -22,9 +22,10 @@ namespace Qurre.Events
         public static event Main.AllEvents<TransmitPlayerDataEvent> TransmitPlayerData;
         public static event Main.AllEvents<MicroHidUsingEvent> MicroHidUsing;
         public static event Main.AllEvents<RadioUsingEvent> RadioUsing;
-        public static event Main.AllEvents<PickupItemEvent> PickupItem;
+        public static event Main.AllEvents<FlashExplosionEvent> FlashExplosion;
+        public static event Main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
+        public static event Main.AllEvents<FragExplosionEvent> FragExplosion;
         public static event Main.AllEvents<LeaveEvent> Leave;
-        public static event Main.AllEvents<JoinEvent> Join;
         public static event Main.AllEvents<DropItemEvent> DropItem;
         public static event Main.AllEvents<BanEvent> Ban;
         public static event Main.AllEvents<KickEvent> Kick;
@@ -34,7 +35,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<RoleChangeEvent> RoleChange;
         public static event Main.AllEvents<DeadEvent> Dead;
         public static event Main.AllEvents<EscapeEvent> Escape;
-        public static event Main.AllEvents<FlashExplosionEvent> FlashExplosion;
+        public static event Main.AllEvents<JoinEvent> Join;
         public static event Main.AllEvents<CuffEvent> Cuff;
         public static event Main.AllEvents<DamageEvent> Damage;
         public static event Main.AllEvents<DiesEvent> Dies;
@@ -45,6 +46,6 @@ namespace Qurre.Events
         public static event Main.AllEvents<IcomSpeakEvent> IcomSpeak;
         public static event Main.AllEvents<DroppingItemEvent> DroppingItem;
         public static event Main.AllEvents<UnCuffEvent> UnCuff;
-        public static event Main.AllEvents<FragExplosionEvent> FragExplosion;
+        public static event Main.AllEvents<FlashedEvent> Flashed;
     }
 }

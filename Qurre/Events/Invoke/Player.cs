@@ -12,6 +12,7 @@ namespace Qurre.Events.Invoke
         public static void DropItem(DropItemEvent ev);
         public static void DroppingItem(DroppingItemEvent ev);
         public static void Escape(EscapeEvent ev);
+        public static void Flashed(FlashedEvent ev);
         public static void FlashExplosion(FlashExplosionEvent ev);
         public static void FragExplosion(FragExplosionEvent ev);
         public static void GroupChange(GroupChangeEvent ev);
