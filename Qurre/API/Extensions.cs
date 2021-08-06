@@ -5,6 +5,7 @@
         public static global::Interactables.Interobjects.DoorUtils.DoorVariant DoorPrefabLCZ { get; }
         public static global::Interactables.Interobjects.DoorUtils.DoorVariant DoorPrefabHCZ { get; }
         public static global::Interactables.Interobjects.DoorUtils.DoorVariant DoorPrefabEZ { get; }
+        public static Random Random { get; }
 
         public static Door GetDoor(DoorType type);
         public static Door GetDoor(this global::Interactables.Interobjects.DoorUtils.DoorVariant door);
@@ -17,5 +18,6 @@
         public static Tesla GetTesla(this TeslaGate teslaGate);
         public static WeaponType GetWeaponType(this ItemType item);
         public static WorkStation GetWorkStation(this WorkStation station);
+        public static void Shuffle<T>(this IList<T> list);
     }
 }
