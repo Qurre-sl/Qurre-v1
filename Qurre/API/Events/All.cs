@@ -41,7 +41,7 @@ namespace Qurre.API.Events
 
         public List<Player> Players { get; }
         public int MaxRespAmount { get; set; }
-        public global::Respawning.SpawnableTeamType NextKnownTeam { get; set; }
+        public global::Respawning.SpawnableTeamType NextKnownTeam { get; }
         public bool Allowed { get; set; }
     }
     public class RoundEndEvent : EventArgs
@@ -70,10 +70,11 @@ namespace Qurre.API.Events
     }
     public class TeslaTriggerEvent : EventArgs
     {
-        public TeslaTriggerEvent(Player player, bool inHurtingRange, bool triggerable = true);
+        public TeslaTriggerEvent(Player player, Tesla tesla, bool inHurtingRange, bool triggerable = true);
 
         public Player Player { get; }
-        public bool InHurtingRange { get; set; }
+        public Tesla Tesla { get; }
+        public bool InHurtingRange { get; }
         public bool Triggerable { get; set; }
     }
     public class ThrowGrenadeEvent : EventArgs
@@ -100,7 +101,7 @@ namespace Qurre.API.Events
     {
         public MedicalStoppingEvent(Player player, ItemType item, float cooldown, bool allowed = true);
 
-        public float Cooldown { get; set; }
+        public float Cooldown { get; }
         public bool Allowed { get; set; }
         public Player Player { get; }
         public ItemType Item { get; }
@@ -313,8 +314,8 @@ namespace Qurre.API.Events
 
         public Player Shooter { get; }
         public global::UnityEngine.GameObject Target { get; }
-        public global::UnityEngine.Vector3 Position { get; set; }
-        public WeaponType WeaponType { get; set; }
+        public global::UnityEngine.Vector3 Position { get; }
+        public WeaponType WeaponType { get; }
         public HitBoxType HitboxType { get; }
         public bool Allowed { get; set; }
     }
@@ -323,8 +324,8 @@ namespace Qurre.API.Events
         public HealEvent(Player player, float hp, bool allowed = true);
 
         public Player Player { get; }
-        public float Hp { get; }
-        public bool Allowed { get; }
+        public float Hp { get; set; }
+        public bool Allowed { get; set; }
     }
     public class RechargeWeaponEvent : EventArgs
     {
@@ -339,7 +340,7 @@ namespace Qurre.API.Events
         public GroupChangeEvent(Player player, UserGroup newGroup, bool allowed = true);
 
         public Player Player { get; }
-        public UserGroup NewGroup { get; set; }
+        public UserGroup NewGroup { get; }
         public bool Allowed { get; set; }
     }
     public class KickedEvent : EventArgs
@@ -566,7 +567,7 @@ namespace Qurre.API.Events
         public InteractDoorEvent(Player player, Door door, bool allowed = true);
 
         public Player Player { get; }
-        public Door Door { get; set; }
+        public Door Door { get; }
         public bool Allowed { get; set; }
     }
     public class InteractEvent : EventArgs
@@ -581,7 +582,7 @@ namespace Qurre.API.Events
 
         public Player Killer { get; }
         public Player Target { get; }
-        public PlayerStats.HitInfo HitInfo { get; set; }
+        public PlayerStats.HitInfo HitInfo { get; }
         public bool Allowed { get; set; }
     }
     public class DamageEvent : EventArgs
@@ -620,7 +621,7 @@ namespace Qurre.API.Events
         public Player Sender { get; }
         public Player Target { get; }
         public int Port { get; }
-        public string Reason { get; set; }
+        public string Reason { get; }
         public bool Allowed { get; set; }
     }
     public class ReportLocalEvent : EventArgs
@@ -629,7 +630,7 @@ namespace Qurre.API.Events
 
         public Player Issuer { get; }
         public Player Target { get; }
-        public string Reason { get; set; }
+        public string Reason { get; }
         public bool GlobalReport { get; set; }
         public bool Allowed { get; set; }
     }
@@ -673,7 +674,7 @@ namespace Qurre.API.Events
         public DoorDamageEvent(Door door, float hp, global::Interactables.Interobjects.DoorUtils.DoorDamageType damageType, bool allowed = true);
 
         public Door Door { get; }
-        public float Hp { get; }
+        public float Hp { get; set; }
         public global::Interactables.Interobjects.DoorUtils.DoorDamageType DamageType { get; }
         public bool Allowed { get; set; }
     }
@@ -757,7 +758,7 @@ namespace Qurre.API.Events
         public Player Thrower { get; }
         public Player Target { get; }
         public global::UnityEngine.Vector3 Position { get; }
-        public int IgnoreMask { get; set; }
+        public int IgnoreMask { get; }
         public bool Allowed { get; set; }
     }
 }
