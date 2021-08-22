@@ -10,9 +10,9 @@
         public global::UnityEngine.Vector3 Position { get; set; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.Quaternion Rotation { get; set; }
-        public bool TabletConnected { get; set; }
-        public Pickup ConnectedTablet { get; set; }
-        public Player TabletOwner { get; set; }
+        public Player KnownUser { get; set; }
+        public WorkstationStatus Status { get; set; }
+        public bool Activated { get; set; }
 
         public static WorkStation Create(global::UnityEngine.Vector3 position, global::UnityEngine.Vector3 rotation, global::UnityEngine.Vector3 scale);
     }

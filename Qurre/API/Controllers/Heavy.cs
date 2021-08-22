@@ -2,7 +2,6 @@
 {
     public static class Heavy
     {
-        public static bool ForcedOvercharge { get; }
         public static byte ActiveGenerators { get; }
         public static bool Recontained079 { get; }
 

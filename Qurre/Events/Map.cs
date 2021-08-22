@@ -8,7 +8,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<AnnouncementDecontaminationEvent> AnnouncementDecontaminationZDecon;
         public static event Main.AllEvents<MTFAnnouncementEvent> MTFAnnouncement;
         public static event Main.AllEvents<NewBloodEvent> NewBlood;
-        public static event Main.AllEvents<NewDecalEvent> NewDecal;
+        public static event Main.AllEvents<PlaceBulletHoleEvent> PlaceBulletHole;
         public static event Main.AllEvents Generated;
         public static event Main.AllEvents<SetSeedEvent> SetSeed;
         public static event Main.AllEvents<DoorDamageEvent> DoorDamage;

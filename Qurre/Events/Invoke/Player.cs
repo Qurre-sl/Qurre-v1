@@ -24,13 +24,13 @@ namespace Qurre.Events.Invoke
         public static void InteractLift(InteractLiftEvent ev);
         public static void InteractLocker(InteractLockerEvent ev);
         public static void ItemChange(ItemChangeEvent ev);
+        public static void ItemStopping(ItemStoppingEvent ev);
+        public static void ItemUsed(ItemUsedEvent ev);
+        public static void ItemUsing(ItemUsingEvent ev);
         public static void Join(JoinEvent ev);
         public static void Kick(KickEvent ev);
         public static void Kicked(KickedEvent ev);
         public static void Leave(LeaveEvent ev);
-        public static void MedicalStopping(MedicalStoppingEvent ev);
-        public static void MedicalUsed(MedicalUsedEvent ev);
-        public static void MedicalUsing(MedicalUsingEvent ev);
         public static void MicroHidUsing(MicroHidUsingEvent ev);
         public static void PickupItem(PickupItemEvent ev);
         public static void RadioUpdate(RadioUpdateEvent ev);
@@ -43,7 +43,7 @@ namespace Qurre.Events.Invoke
         public static void Speak(SpeakEvent ev);
         public static void SyncData(SyncDataEvent ev);
         public static void TeslaTrigger(TeslaTriggerEvent ev);
-        public static void ThrowGrenade(ThrowGrenadeEvent ev);
+        public static void ThrowItem(ThrowItemEvent ev);
         public static void TransmitPlayerData(TransmitPlayerDataEvent ev);
         public static void UnCuff(UnCuffEvent ev);
     }

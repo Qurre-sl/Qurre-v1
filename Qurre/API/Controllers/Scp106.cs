@@ -4,7 +4,7 @@
     {
         public bool Is106 { get; }
         public global::UnityEngine.Vector3 PortalPosition { get; set; }
-        public bool IsUsingPortal { get; }
+        public bool UsingPortal { get; }
         public HashSet<Player> PocketPlayers { get; }
 
         public void CapturePlayer(Player player);

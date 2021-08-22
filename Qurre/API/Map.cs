@@ -5,16 +5,16 @@ namespace Qurre.API
 {
     public static class Map
     {
-        public static List<Pickup> Pickups { get; }
-        public static CassieList Cassies { get; }
+        public static ListBroadcasts Broadcasts { get; }
         public static List<Door> Doors { get; }
         public static List<Lift> Lifts { get; }
         public static List<Locker> Lockers { get; }
         public static List<Generator> Generators { get; }
         public static List<Ragdoll> Ragdolls { get; }
-        public static float BreakableWindowHp { get; set; }
-        public static List<Tesla> Teslas { get; }
         public static List<Room> Rooms { get; }
+        public static List<Camera> Cameras { get; }
+        public static CassieList Cassies { get; }
+        public static List<Tesla> Teslas { get; }
         public static float WalkSpeedMultiplier { get; set; }
         public static float SprintSpeedMultiplier { get; set; }
         public static bool DisabledLCZDecontamination { get; set; }
@@ -23,15 +23,16 @@ namespace Qurre.API
         public static bool FemurBreakerState { get; set; }
         public static float Seed { get; }
         public static List<WorkStation> WorkStations { get; }
-        public static ListBroadcasts Broadcasts { get; }
+        public static float BreakableWindowHp { get; set; }
+        public static List<Item> Items { get; }
 
         public static void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter);
         public static void AnnounceScpKill(string scpNumber, Player killer = null);
         public static Broadcast Broadcast(string message, ushort duration, bool instant = false);
         public static void ClearBroadcasts();
-        public static void ContainSCP106(ReferenceHub executor);
+        public static void ContainSCP106(Player executor);
         public static void DecontaminateLCZ();
-        public static void Explode(global::UnityEngine.Vector3 position, GrenadeType grenadeType = GrenadeType.Grenade, Player player = null);
+        public static Room FindRoom(global::UnityEngine.GameObject objectInRoom);
         public static global::UnityEngine.Vector3 GetRandomSpawnPoint(RoleType roleType);
         public static void PlaceBlood(global::UnityEngine.Vector3 position, int type, float size);
         public static void PlayAmbientSound(int id);
@@ -42,7 +43,6 @@ namespace Qurre.API
         public static void ShakeScreen(float times);
         public static void ShowHint(string message, float duration);
         public static global::UnityEngine.GameObject SpawnBot(RoleType role, string name, float health, global::UnityEngine.Vector3 position, global::UnityEngine.Vector3 rotation, global::UnityEngine.Vector3 scale);
-        public static void SpawnGrenade(bool frag, global::UnityEngine.Vector3 position);
         public static void SpawnGrenade(string grenadeType, global::UnityEngine.Vector3 position);
         public static global::UnityEngine.GameObject SpawnPlayer(RoleType role, string name, string userSteamID, global::UnityEngine.Vector3 position, global::UnityEngine.Vector3 rotation, global::UnityEngine.Vector3 scale);
     }

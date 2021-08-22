@@ -4,10 +4,11 @@ namespace Qurre.API.Events
 {
     public class BlinkEvent : EventArgs
     {
-        public BlinkEvent(Player scp, HashSet<Player> players);
+        public BlinkEvent(Player scp, global::UnityEngine.Vector3 pos, bool allowed = true);
 
         public Player Scp { get; }
-        public HashSet<Player> Players { get; }
+        public global::UnityEngine.Vector3 Position { get; set; }
+        public bool Allowed { get; set; }
     }
     public class UpgradeEvent : EventArgs
     {
@@ -77,17 +78,6 @@ namespace Qurre.API.Events
         public bool InHurtingRange { get; }
         public bool Triggerable { get; set; }
     }
-    public class ThrowGrenadeEvent : EventArgs
-    {
-        public ThrowGrenadeEvent(Player player, global::Grenades.GrenadeManager grenadeManager, int id, bool slow, double fuseTime, bool allowed = true);
-
-        public Player Player { get; }
-        public global::Grenades.GrenadeManager GrenadeManager { get; }
-        public int Id { get; }
-        public bool Slow { get; set; }
-        public double FuseTime { get; set; }
-        public bool Allowed { get; set; }
-    }
     public class SyncDataEvent : EventArgs
     {
         public SyncDataEvent(Player player, global::UnityEngine.Vector2 speed, byte currentAnimation, bool allowed = true);
@@ -96,31 +86,6 @@ namespace Qurre.API.Events
         public global::UnityEngine.Vector2 Speed { get; }
         public byte CurrentAnimation { get; set; }
         public bool Allowed { get; set; }
-    }
-    public class MedicalStoppingEvent : EventArgs
-    {
-        public MedicalStoppingEvent(Player player, ItemType item, float cooldown, bool allowed = true);
-
-        public float Cooldown { get; }
-        public bool Allowed { get; set; }
-        public Player Player { get; }
-        public ItemType Item { get; }
-    }
-    public class MedicalUsingEvent : EventArgs
-    {
-        public MedicalUsingEvent(Player player, ItemType item, float cooldown, bool allowed = true);
-
-        public float Cooldown { get; set; }
-        public bool Allowed { get; set; }
-        public Player Player { get; }
-        public ItemType Item { get; }
-    }
-    public class MedicalUsedEvent : EventArgs
-    {
-        public MedicalUsedEvent(Player player, ItemType item);
-
-        public Player Player { get; }
-        public ItemType Item { get; }
     }
     public class SpawnEvent : EventArgs
     {
@@ -291,9 +256,10 @@ namespace Qurre.API.Events
     }
     public class GeneratorActivateEvent : EventArgs
     {
-        public GeneratorActivateEvent(Generator generator);
+        public GeneratorActivateEvent(Generator generator, bool allowed = true);
 
         public Generator Generator { get; }
+        public bool Allowed { get; set; }
     }
     public class SpeakEvent : EventArgs
     {
@@ -310,13 +276,10 @@ namespace Qurre.API.Events
     }
     public class ShootingEvent : EventArgs
     {
-        public ShootingEvent(Player shooter, global::UnityEngine.GameObject target, global::UnityEngine.Vector3 position, WeaponType wt, HitBoxType hitboxType, bool allowed = true);
+        public ShootingEvent(Player shooter, global::InventorySystem.Items.Firearms.BasicMessages.ShotMessage msg, bool allowed = true);
 
         public Player Shooter { get; }
-        public global::UnityEngine.GameObject Target { get; }
-        public global::UnityEngine.Vector3 Position { get; }
-        public WeaponType WeaponType { get; }
-        public HitBoxType HitboxType { get; }
+        public global::InventorySystem.Items.Firearms.BasicMessages.ShotMessage Message { get; }
         public bool Allowed { get; set; }
     }
     public class HealEvent : EventArgs
@@ -329,10 +292,11 @@ namespace Qurre.API.Events
     }
     public class RechargeWeaponEvent : EventArgs
     {
-        public RechargeWeaponEvent(Player player, bool animationOnly, bool allowed = true);
+        public RechargeWeaponEvent(Player player, Item item, global::InventorySystem.Items.Firearms.BasicMessages.RequestType request, bool allowed = true);
 
         public Player Player { get; }
-        public bool AnimationOnly { get; }
+        public Item Item { get; }
+        public global::InventorySystem.Items.Firearms.BasicMessages.RequestType Request { get; }
         public bool Allowed { get; set; }
     }
     public class GroupChangeEvent : EventArgs
@@ -363,9 +327,9 @@ namespace Qurre.API.Events
     }
     public class BanEvent : EventArgs
     {
-        public BanEvent(Player target, Player issuer, int duration, string reason, string fullMessage, bool allowed = true);
+        public BanEvent(Player target, Player issuer, long duration, string reason, string fullMessage, bool allowed = true);
 
-        public int Duration { get; set; }
+        public long Duration { get; set; }
         public Player Target { get; set; }
         public Player Issuer { get; set; }
         public string Reason { get; set; }
@@ -390,11 +354,12 @@ namespace Qurre.API.Events
     }
     public class ItemChangeEvent : EventArgs
     {
-        public ItemChangeEvent(Player player, Inventory.SyncItemInfo oldItem, Inventory.SyncItemInfo newItem);
+        public ItemChangeEvent(Player player, Item oldItem, Item newItem, bool allowed = true);
 
         public Player Player { get; }
-        public Inventory.SyncItemInfo OldItem { get; set; }
-        public Inventory.SyncItemInfo NewItem { get; }
+        public Item OldItem { get; set; }
+        public Item NewItem { get; }
+        public bool Allowed { get; set; }
     }
     public class AlphaStopEvent : EventArgs
     {
@@ -413,16 +378,6 @@ namespace Qurre.API.Events
         public List<Player> Targets { get; }
         public bool IsFrag { get; }
         public global::UnityEngine.GameObject Grenade { get; }
-        public bool Allowed { get; set; }
-    }
-    public class NewDecalEvent : EventArgs
-    {
-        public NewDecalEvent(Player owner, global::UnityEngine.Vector3 position, global::UnityEngine.Quaternion rotation, int type, bool allowed = true);
-
-        public Player Owner { get; }
-        public global::UnityEngine.Vector3 Position { get; set; }
-        public global::UnityEngine.Quaternion Rotation { get; set; }
-        public int Type { get; set; }
         public bool Allowed { get; set; }
     }
     public class NewBloodEvent : EventArgs
@@ -467,13 +422,14 @@ namespace Qurre.API.Events
     }
     public class RoleChangeEvent : EventArgs
     {
-        public RoleChangeEvent(Player player, RoleType newRole, List<ItemType> items, bool savePos, bool escaped);
+        public RoleChangeEvent(Player player, RoleType newRole, bool savePos, CharacterClassManager.SpawnReason reason, bool allowed = true);
 
         public Player Player { get; }
         public RoleType NewRole { get; set; }
-        public List<ItemType> Items { get; }
-        public bool Escaped { get; set; }
+        public System.Collections.Generic.List<ItemType> Items { get; }
         public bool SavePos { get; set; }
+        public CharacterClassManager.SpawnReason Reason { get; set; }
+        public bool Allowed { get; set; }
     }
     public class DeadEvent : EventArgs
     {
@@ -505,25 +461,25 @@ namespace Qurre.API.Events
     }
     public class PickupItemEvent : EventArgs
     {
-        public PickupItemEvent(Player player, Pickup pickup, bool allowed = true);
+        public PickupItemEvent(Player player, Item item, bool allowed = true);
 
         public bool Allowed { get; set; }
         public Player Player { get; }
-        public Pickup Pickup { get; }
+        public Item Item { get; }
     }
     public class DropItemEvent : EventArgs
     {
-        public DropItemEvent(Player player, Pickup pickup);
+        public DropItemEvent(Player player, Item item);
 
         public Player Player { get; }
-        public Pickup Pickup { get; }
+        public Item Item { get; }
     }
     public class DroppingItemEvent : EventArgs
     {
-        public DroppingItemEvent(Player player, Inventory.SyncItemInfo item, bool allowed = true);
+        public DroppingItemEvent(Player player, Item item, bool allowed = true);
 
         public Player Player { get; }
-        public Inventory.SyncItemInfo Item { get; set; }
+        public Item Item { get; set; }
         public bool Allowed { get; set; }
     }
     public class IcomSpeakEvent : EventArgs
@@ -535,13 +491,10 @@ namespace Qurre.API.Events
     }
     public class InteractLockerEvent : EventArgs
     {
-        public InteractLockerEvent(Player player, Controllers.Locker locker, LockerChamber lockerChamber, byte lockerId, byte chamberId, bool allowed);
+        public InteractLockerEvent(Player player, Locker locker, bool allowed);
 
         public Player Player { get; }
-        public Controllers.Locker Locker { get; }
-        public LockerChamber Chamber { get; }
-        public byte LockerId { get; }
-        public byte ChamberId { get; }
+        public Locker Locker { get; }
         public bool Allowed { get; set; }
     }
     public class InteractLiftEvent : EventArgs
@@ -594,7 +547,6 @@ namespace Qurre.API.Events
         public PlayerStats.HitInfo HitInformations { get; }
         public int Time { get; }
         public DamageTypes.DamageType DamageType { get; }
-        public int Tool { get; }
         public float Amount { get; set; }
         public bool Allowed { get; set; }
     }
@@ -656,11 +608,12 @@ namespace Qurre.API.Events
     }
     public class RadioUpdateEvent : EventArgs
     {
-        public RadioUpdateEvent(Player player, Radio radio, RadioStatus changeTo, bool allowed = true);
+        public RadioUpdateEvent(Player player, global::InventorySystem.Items.Radio.RadioItem radio, RadioStatus changeTo, bool enabled, bool allowed = true);
 
         public Player Player { get; }
-        public Radio Radio { get; }
+        public global::InventorySystem.Items.Radio.RadioItem Radio { get; }
         public RadioStatus ChangeTo { get; set; }
+        public bool Enabled { get; set; }
         public bool Allowed { get; set; }
     }
     public class SetSeedEvent : EventArgs
@@ -714,51 +667,91 @@ namespace Qurre.API.Events
     }
     public class MicroHidUsingEvent : EventArgs
     {
-        public MicroHidUsingEvent(Player player, Inventory.SyncItemInfo microHid, MicroHID.MicroHidState state, bool allowed = true);
+        public MicroHidUsingEvent(Player player, global::InventorySystem.Items.MicroHID.MicroHIDItem microHid, global::InventorySystem.Items.MicroHID.HidState state, bool allowed = true);
 
         public Player Player { get; }
-        public Inventory.SyncItemInfo MicroHid { get; }
+        public global::InventorySystem.Items.MicroHID.MicroHIDItem MicroHid { get; }
         public float Energy { get; set; }
-        public MicroHID.MicroHidState State { get; set; }
+        public global::InventorySystem.Items.MicroHID.HidState State { get; set; }
+        public float Coefficient { get; set; }
         public bool Allowed { get; set; }
     }
     public class RadioUsingEvent : EventArgs
     {
-        public RadioUsingEvent(Player player, Radio radio, float battery, bool allowed = true);
+        public RadioUsingEvent(Player player, global::InventorySystem.Items.Radio.RadioItem radio, byte battery, bool allowed = true);
 
         public Player Player { get; }
-        public Radio Radio { get; }
-        public float Battery { get; set; }
+        public global::InventorySystem.Items.Radio.RadioItem Radio { get; }
+        public byte Battery { get; set; }
         public bool Allowed { get; set; }
     }
     public class FlashExplosionEvent : EventArgs
     {
-        public FlashExplosionEvent(Player thrower, global::UnityEngine.Vector3 position, bool allowed = true);
+        public FlashExplosionEvent(Player thrower, global::InventorySystem.Items.ThrowableProjectiles.FlashbangGrenade grenade, global::UnityEngine.Vector3 position, bool allowed = true);
 
         public Player Thrower { get; }
+        public global::InventorySystem.Items.ThrowableProjectiles.FlashbangGrenade Grenade { get; }
         public global::UnityEngine.Vector3 Position { get; }
         public bool Allowed { get; set; }
-        [Obsolete("Not used anymore")]
-        public List<Player> Targets { get; }
     }
     public class FragExplosionEvent : EventArgs
     {
-        public FragExplosionEvent(Player thrower, global::UnityEngine.Vector3 position, bool allowed = true);
+        public FragExplosionEvent(Player thrower, global::InventorySystem.Items.ThrowableProjectiles.ExplosionGrenade grenade, global::UnityEngine.Vector3 position, bool allowed = true);
 
         public Player Thrower { get; }
-        [Obsolete("Not used anymore")]
-        public List<Player> Targets { get; }
+        public global::InventorySystem.Items.ThrowableProjectiles.ExplosionGrenade Grenade { get; }
         public global::UnityEngine.Vector3 Position { get; }
         public bool Allowed { get; set; }
     }
     public class FlashedEvent : EventArgs
     {
-        public FlashedEvent(Player thrower, Player target, global::UnityEngine.Vector3 position, int ignoreMask, bool allowed);
+        public FlashedEvent(Player thrower, Player target, global::UnityEngine.Vector3 position, bool allowed);
 
         public Player Thrower { get; }
         public Player Target { get; }
         public global::UnityEngine.Vector3 Position { get; }
-        public int IgnoreMask { get; }
+        public bool Allowed { get; set; }
+    }
+    public class PlaceBulletHoleEvent : EventArgs
+    {
+        public PlaceBulletHoleEvent(Player owner, global::UnityEngine.Ray ray, global::UnityEngine.RaycastHit hit, bool allowed = true);
+
+        public Player Owner { get; }
+        public global::UnityEngine.Ray Ray { get; set; }
+        public global::UnityEngine.Vector3 Position { get; set; }
+        public global::UnityEngine.Vector3 Rotation { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class ItemUsedEvent : EventArgs
+    {
+        public ItemUsedEvent(Player player, global::InventorySystem.Items.ItemIdentifier item);
+
+        public Player Player { get; }
+        public global::InventorySystem.Items.ItemIdentifier Item { get; }
+    }
+    public class ItemUsingEvent : EventArgs
+    {
+        public ItemUsingEvent(Player player, Item item, bool allowed = true);
+
+        public Player Player { get; }
+        public Item Item { get; }
+        public bool Allowed { get; set; }
+    }
+    public class ItemStoppingEvent : EventArgs
+    {
+        public ItemStoppingEvent(Player player, Item item, bool allowed = true);
+
+        public Player Player { get; }
+        public Item Item { get; }
+        public bool Allowed { get; set; }
+    }
+    public class ThrowItemEvent : EventArgs
+    {
+        public ThrowItemEvent(Player player, Item item, global::InventorySystem.Items.ThrowableProjectiles.ThrowableNetworkHandler.RequestType request, bool allowed = true);
+
+        public Player Player { get; }
+        public Item Item { get; }
+        public global::InventorySystem.Items.ThrowableProjectiles.ThrowableNetworkHandler.RequestType Request { get; set; }
         public bool Allowed { get; set; }
     }
 }

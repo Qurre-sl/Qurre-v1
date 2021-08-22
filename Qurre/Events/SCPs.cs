@@ -37,7 +37,6 @@ namespace Qurre.Events
     public static class Scp914
     {
         public static event Main.AllEvents<ActivatingEvent> Activating;
-        public static event Main.AllEvents<ChangeKnobEvent> ChangeKnob;
         public static event Main.AllEvents<UpgradeEvent> Upgrade;
         public static event Main.AllEvents<UpgradePlayerEvent> UpgradePlayer;
     }

@@ -11,7 +11,7 @@ namespace Qurre.Events.Invoke
         public static void LCZDecon(LCZDeconEvent ev);
         public static void MTFAnnouncement(MTFAnnouncementEvent ev);
         public static void NewBlood(NewBloodEvent ev);
-        public static void NewDecal(NewDecalEvent ev);
+        public static void PlaceBulletHole(PlaceBulletHoleEvent ev);
         public static void SetSeed(SetSeedEvent ev);
         public static void UseLift(UseLiftEvent ev);
     }

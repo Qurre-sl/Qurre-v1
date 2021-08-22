@@ -9,12 +9,12 @@ namespace Qurre.Events
         public static event Main.AllEvents<ShootingEvent> Shooting;
         public static event Main.AllEvents<RagdollSpawnEvent> RagdollSpawn;
         public static event Main.AllEvents<HealEvent> Heal;
-        public static event Main.AllEvents<MedicalStoppingEvent> MedicalStopping;
-        public static event Main.AllEvents<MedicalUsingEvent> MedicalUsing;
-        public static event Main.AllEvents<MedicalUsedEvent> MedicalUsed;
+        public static event Main.AllEvents<ItemStoppingEvent> ItemStopping;
+        public static event Main.AllEvents<ItemUsingEvent> ItemUsing;
+        public static event Main.AllEvents<ItemUsedEvent> ItemUsed;
         public static event Main.AllEvents<SyncDataEvent> SyncData;
         public static event Main.AllEvents<PickupItemEvent> PickupItem;
-        public static event Main.AllEvents<ThrowGrenadeEvent> ThrowGrenade;
+        public static event Main.AllEvents<ThrowItemEvent> ThrowItem;
         public static event Main.AllEvents<InteractGeneratorEvent> InteractGenerator;
         public static event Main.AllEvents<SpeakEvent> Speak;
         public static event Main.AllEvents<SpawnEvent> Spawn;
