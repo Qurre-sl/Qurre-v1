@@ -15,16 +15,16 @@ namespace Qurre.API
         public static List<Camera> Cameras { get; }
         public static CassieList Cassies { get; }
         public static List<Tesla> Teslas { get; }
+        public static List<Pickup> Pickups { get; }
         public static float WalkSpeedMultiplier { get; set; }
         public static float SprintSpeedMultiplier { get; set; }
         public static bool DisabledLCZDecontamination { get; set; }
         public static global::UnityEngine.Vector3 Gravitation { get; set; }
         public static float ElevatorsMovingSpeed { get; set; }
         public static bool FemurBreakerState { get; set; }
-        public static float Seed { get; }
         public static List<WorkStation> WorkStations { get; }
+        public static float Seed { get; }
         public static float BreakableWindowHp { get; set; }
-        public static List<Item> Items { get; }
 
         public static void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter);
         public static void AnnounceScpKill(string scpNumber, Player killer = null);
