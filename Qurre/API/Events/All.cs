@@ -612,8 +612,8 @@ namespace Qurre.API.Events
 
         public Player Player { get; }
         public global::InventorySystem.Items.Radio.RadioItem Radio { get; }
-        public RadioStatus ChangeTo { get; set; }
-        public bool Enabled { get; set; }
+        public RadioStatus ChangeTo { get; }
+        public bool Enabled { get; }
         public bool Allowed { get; set; }
     }
     public class SetSeedEvent : EventArgs
@@ -678,11 +678,11 @@ namespace Qurre.API.Events
     }
     public class RadioUsingEvent : EventArgs
     {
-        public RadioUsingEvent(Player player, global::InventorySystem.Items.Radio.RadioItem radio, byte battery, bool allowed = true);
+        public RadioUsingEvent(Player player, global::InventorySystem.Items.Radio.RadioItem radio, float battery, bool allowed = true);
 
         public Player Player { get; }
         public global::InventorySystem.Items.Radio.RadioItem Radio { get; }
-        public byte Battery { get; set; }
+        public float Battery { get; set; }
         public bool Allowed { get; set; }
     }
     public class FlashExplosionEvent : EventArgs
@@ -751,7 +751,7 @@ namespace Qurre.API.Events
 
         public Player Player { get; }
         public Item Item { get; }
-        public global::InventorySystem.Items.ThrowableProjectiles.ThrowableNetworkHandler.RequestType Request { get; set; }
+        public global::InventorySystem.Items.ThrowableProjectiles.ThrowableNetworkHandler.RequestType Request { get; }
         public bool Allowed { get; set; }
     }
 }
