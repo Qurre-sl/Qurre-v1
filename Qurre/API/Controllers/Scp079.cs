@@ -5,7 +5,8 @@
         public static Camera079[] Cameras { get; }
         public static System.Collections.Generic.IEnumerable<Scp079Interactable> Speakers { get; }
         public Scp079PlayerScript.Level079[] Lvls { get; set; }
-        public Camera079 Camera { get; set; }
+        public Camera079 Camera079 { get; set; }
+        public Camera Camera { get; set; }
         public float MaxEnergy { get; set; }
         public float Energy { get; set; }
         public float Exp { get; set; }

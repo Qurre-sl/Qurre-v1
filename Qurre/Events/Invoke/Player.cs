@@ -9,6 +9,7 @@ namespace Qurre.Events.Invoke
         public static void Damage(DamageEvent ev);
         public static void Dead(DeadEvent ev);
         public static void Dies(DiesEvent ev);
+        public static void DropAmmo(DropAmmoEvent ev);
         public static void DropItem(DropItemEvent ev);
         public static void DroppingItem(DroppingItemEvent ev);
         public static void Escape(EscapeEvent ev);

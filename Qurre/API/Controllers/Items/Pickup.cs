@@ -10,6 +10,7 @@
         public float Weight { get; set; }
         public global::InventorySystem.Items.Pickups.ItemPickupBase Base { get; }
         public ItemType Type { get; }
+        public ItemCategory Category { get; }
         public bool Locked { get; set; }
         public bool InUse { get; set; }
         public global::UnityEngine.Vector3 Position { get; set; }

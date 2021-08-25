@@ -10,6 +10,7 @@
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::InventorySystem.Items.ItemBase Base { get; }
         public ItemType Type { get; }
+        public ItemCategory Category { get; }
         public float Weight { get; }
         public Player Owner { get; }
 

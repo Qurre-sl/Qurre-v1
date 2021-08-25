@@ -754,4 +754,13 @@ namespace Qurre.API.Events
         public global::InventorySystem.Items.ThrowableProjectiles.ThrowableNetworkHandler.RequestType Request { get; }
         public bool Allowed { get; set; }
     }
+    public class DropAmmoEvent : EventArgs
+    {
+        public DropAmmoEvent(Player player, AmmoType type, ushort amount, bool allowed = true);
+
+        public Player Player { get; }
+        public AmmoType Type { get; set; }
+        public ushort Amount { get; set; }
+        public bool Allowed { get; set; }
+    }
 }
