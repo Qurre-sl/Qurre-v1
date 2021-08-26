@@ -39,6 +39,7 @@ namespace Qurre.Events.Invoke
         public static void RagdollSpawn(RagdollSpawnEvent ev);
         public static void RechargeWeapon(RechargeWeaponEvent ev);
         public static void RoleChange(RoleChangeEvent ev);
+        public static void ScpAttack(ScpAttackEvent ev);
         public static void Shooting(ShootingEvent ev);
         public static void Spawn(SpawnEvent ev);
         public static void Speak(SpeakEvent ev);

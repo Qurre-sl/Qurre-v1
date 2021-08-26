@@ -13,8 +13,8 @@ namespace Qurre.Events
         public static event Main.AllEvents<ItemUsedEvent> ItemUsed;
         public static event Main.AllEvents<SyncDataEvent> SyncData;
         public static event Main.AllEvents<ThrowItemEvent> ThrowItem;
-        public static event Main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
         public static event Main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
+        public static event Main.AllEvents<InteractGeneratorEvent> InteractGenerator;
         public static event Main.AllEvents<SpeakEvent> Speak;
         public static event Main.AllEvents<SpawnEvent> Spawn;
         public static event Main.AllEvents<RadioUpdateEvent> RadioUpdate;
@@ -23,9 +23,10 @@ namespace Qurre.Events
         public static event Main.AllEvents<RadioUsingEvent> RadioUsing;
         public static event Main.AllEvents<FlashExplosionEvent> FlashExplosion;
         public static event Main.AllEvents<FragExplosionEvent> FragExplosion;
-        public static event Main.AllEvents<InteractGeneratorEvent> InteractGenerator;
+        public static event Main.AllEvents<FlashedEvent> Flashed;
+        public static event Main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
+        public static event Main.AllEvents<DropAmmoEvent> DropAmmo;
         public static event Main.AllEvents<PickupItemEvent> PickupItem;
-        public static event Main.AllEvents<LeaveEvent> Leave;
         public static event Main.AllEvents<JoinEvent> Join;
         public static event Main.AllEvents<BanEvent> Ban;
         public static event Main.AllEvents<KickEvent> Kick;
@@ -46,7 +47,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<IcomSpeakEvent> IcomSpeak;
         public static event Main.AllEvents<DroppingItemEvent> DroppingItem;
         public static event Main.AllEvents<DropItemEvent> DropItem;
-        public static event Main.AllEvents<FlashedEvent> Flashed;
-        public static event Main.AllEvents<DropAmmoEvent> DropAmmo;
+        public static event Main.AllEvents<LeaveEvent> Leave;
+        public static event Main.AllEvents<ScpAttackEvent> ScpAttack;
     }
 }

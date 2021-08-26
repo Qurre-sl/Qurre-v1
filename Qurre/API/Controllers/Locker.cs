@@ -12,15 +12,19 @@
         public global::MapGeneration.Distributors.LockerLoot[] Loot { get; }
         public Chamber[] Chambers { get; }
         public LockerType Type { get; }
+        public global::UnityEngine.AudioClip GrantedBeep { get; }
+        public global::UnityEngine.AudioClip DeniedBeep { get; }
 
         public class Chamber
         {
             public global::MapGeneration.Distributors.LockerChamber LockerChamber { get; }
+            public Locker Locker { get; }
             public System.Collections.Generic.HashSet<global::InventorySystem.Items.Pickups.ItemPickupBase> ToBeSpawned { get; }
             public bool Opened { get; set; }
             public ItemType[] AcceptableItems { get; set; }
             public bool CanInteract { get; }
             public float Cooldown { get; set; }
+            public KeycardPermissions Permissions { get; set; }
 
             public void SpawnItem(ItemType id, int amount);
         }

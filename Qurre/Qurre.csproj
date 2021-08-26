@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Qurre">
+      <HintPath>..\..\lib\Qurre.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -82,6 +85,8 @@
     <Compile Include="API\DataBase\DataBase.cs" />
     <Compile Include="API\Extensions.cs" />
     <Compile Include="API\Objects\AmmoType.cs" />
+    <Compile Include="API\Objects\ScpAttackType.cs" />
+    <Compile Include="API\Objects\RoomType.cs" />
     <Compile Include="API\Objects\RadioStatusSettings.cs" />
     <Compile Include="API\Objects\KeycardPermissions.cs" />
     <Compile Include="API\Objects\WorkstationStatus.cs" />
