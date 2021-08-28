@@ -773,4 +773,14 @@ namespace Qurre.API.Events
         public ScpAttackType Type { get; set; }
         public bool Allowed { get; set; }
     }
+    public class ScpDeadAnnouncementEvent : EventArgs
+    {
+        public ScpDeadAnnouncementEvent(Player killer, Role role, PlayerStats.HitInfo hitInfo, string groupId, bool allowed = true);
+
+        public Player Killer { get; }
+        public Role Role { get; }
+        public PlayerStats.HitInfo HitInfo { get; set; }
+        public string GroupId { get; set; }
+        public bool Allowed { get; set; }
+    }
 }

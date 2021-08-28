@@ -15,5 +15,6 @@ namespace Qurre.Events
         public static event Main.AllEvents<DoorLockEvent> DoorLock;
         public static event Main.AllEvents<DoorOpenEvent> DoorOpen;
         public static event Main.AllEvents<UseLiftEvent> UseLift;
+        public static event Main.AllEvents<ScpDeadAnnouncementEvent> ScpDeadAnnouncement;
     }
 }

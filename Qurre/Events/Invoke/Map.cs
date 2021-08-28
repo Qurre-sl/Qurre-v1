@@ -12,6 +12,7 @@ namespace Qurre.Events.Invoke
         public static void MTFAnnouncement(MTFAnnouncementEvent ev);
         public static void NewBlood(NewBloodEvent ev);
         public static void PlaceBulletHole(PlaceBulletHoleEvent ev);
+        public static void ScpDeadAnnouncement(ScpDeadAnnouncementEvent ev);
         public static void SetSeed(SetSeedEvent ev);
         public static void UseLift(UseLiftEvent ev);
     }
