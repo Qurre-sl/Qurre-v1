@@ -783,4 +783,12 @@ namespace Qurre.API.Events
         public string GroupId { get; set; }
         public bool Allowed { get; set; }
     }
+    public class CreatePickupEvent : EventArgs
+    {
+        public CreatePickupEvent(global::InventorySystem.Items.Pickups.PickupSyncInfo psi, global::InventorySystem.Inventory inv, bool allowed);
+
+        public global::InventorySystem.Items.Pickups.PickupSyncInfo Info { get; }
+        public global::InventorySystem.Inventory Inventory { get; }
+        public bool Allowed { get; set; }
+    }
 }

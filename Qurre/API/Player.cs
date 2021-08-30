@@ -41,8 +41,8 @@ namespace Qurre.API
         public string CustomUserId { get; set; }
         public string UserId { get; set; }
         public int Id { get; set; }
+        public ListBroadcasts Broadcasts { get; }
         public ReferenceHub ReferenceHub { get; }
-        public Radio Radio { get; }
         public Escape Escape { get; }
         public AmmoBoxManager Ammo { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
@@ -59,7 +59,7 @@ namespace Qurre.API
         public NicknameSync NicknameSync { get; }
         public string Tag { get; set; }
         public RoleType Role { get; set; }
-        public ListBroadcasts Broadcasts { get; }
+        public Radio Radio { get; }
         public PlayerMovementState MoveState { get; set; }
         public string Ip { get; }
         public string GroupName { get; set; }
@@ -114,35 +114,35 @@ namespace Qurre.API
         public void AddItem(List<Item> items);
         public void AddItem(Item item, int amount);
         public Item AddItem(global::InventorySystem.Items.ItemBase itemBase);
+        public Item AddItem(Pickup pickup);
         public void AddItem(Item item);
         public void AddItem(List<ItemType> items);
         public void AddItem(ItemType itemType, int amount);
         public Item AddItem(ItemType itemType);
-        public Item AddItem(Pickup pickup);
         public void Ban(int duration, string reason, string issuer = "API");
         public void BodyDelete();
         public Broadcast Broadcast(ushort time, string message, bool instant = false);
         public Broadcast Broadcast(string message, ushort time, bool instant = false);
         public void ChangeBody(RoleType newRole, bool spawnRagdoll = false, global::UnityEngine.Vector3 newPosition = null, global::UnityEngine.Vector3 newRotation = null, DamageTypes.DamageType damageType = null);
-        public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
+        public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ChangeModel(RoleType newModel);
         public void ClearBroadcasts();
         public void ClearInventory();
         public int CountItems(ItemType item);
-        public void Damage(PlayerStats.HitInfo info);
         public bool Damage(int amount, DamageTypes.DamageType damageType, Player attacker = null);
+        public void Damage(PlayerStats.HitInfo info);
         public void DimScreen();
         public void DisableAllEffects();
-        public void DisableEffect(EffectType effect);
         public void DisableEffect<T>() where T : global::CustomPlayerEffects.PlayerEffect;
+        public void DisableEffect(EffectType effect);
         public void Disconnect(string reason = null);
         public void DropItem(Item item);
         public void DropItems();
-        public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
-        public void EnableEffect(global::CustomPlayerEffects.PlayerEffect effect, float duration = 0, bool addDurationIfActive = false);
-        public void EnableEffect(EffectType effect, float duration = 0, bool addDurationIfActive = false);
         public void EnableEffect<T>(float duration = 0, bool addDurationIfActive = false) where T : global::CustomPlayerEffects.PlayerEffect;
+        public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
+        public void EnableEffect(EffectType effect, float duration = 0, bool addDurationIfActive = false);
+        public void EnableEffect(global::CustomPlayerEffects.PlayerEffect effect, float duration = 0, bool addDurationIfActive = false);
         public void ExecuteCommand(string command, bool RA = true);
         public T GetEffect<T>() where T : global::CustomPlayerEffects.PlayerEffect;
         public global::CustomPlayerEffects.PlayerEffect GetEffect(EffectType effect);
@@ -162,10 +162,9 @@ namespace Qurre.API
         public void Redirect(float timeOffset, ushort port);
         public void RemoveDisplayInfo(PlayerInfoArea playerInfo);
         public bool RemoveHandItem();
-        public bool RemoveItem(ushort id);
         public bool RemoveItem(global::InventorySystem.Items.ItemBase item);
+        public bool RemoveItem(ushort id);
         public bool RemoveItem(Item item);
-        public void ResetInventory(List<Item> newItems);
         public void ResetInventory(List<global::InventorySystem.Items.ItemBase> newItems);
         public void ResetInventory(List<ItemType> newItems);
         public void SendConsoleMessage(string message, string color);
