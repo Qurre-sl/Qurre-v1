@@ -17,10 +17,10 @@ namespace Qurre.API
 
         public static IEnumerable<Player> List { get; }
         public static Dictionary<string, Player> ArgsPlayers { get; set; }
-        public static Dictionary<string, Player> UserIDPlayers { get; set; }
         public static MethodInfo SendSpawnMessage { get; }
         public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
-        public GameConsoleTransmission GameConsoleTransmission { get; }
+        public static Dictionary<string, Player> UserIDPlayers { get; set; }
+        public global::UnityEngine.GameObject GameObject { get; }
         public string Nickname { get; }
         public bool DoNotTrack { get; }
         public bool RemoteAdminAccess { get; }
@@ -41,9 +41,9 @@ namespace Qurre.API
         public string CustomUserId { get; set; }
         public string UserId { get; set; }
         public int Id { get; set; }
+        public GameConsoleTransmission GameConsoleTransmission { get; }
         public ListBroadcasts Broadcasts { get; }
         public ReferenceHub ReferenceHub { get; }
-        public Escape Escape { get; }
         public AmmoBoxManager Ammo { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
         public global::UnityEngine.Transform CameraTransform { get; }
@@ -59,9 +59,10 @@ namespace Qurre.API
         public NicknameSync NicknameSync { get; }
         public string Tag { get; set; }
         public RoleType Role { get; set; }
-        public Radio Radio { get; }
         public PlayerMovementState MoveState { get; set; }
+        public bool IsJumping { get; }
         public string Ip { get; }
+        public float StaminaUsage { get; set; }
         public string GroupName { get; set; }
         public Room Room { get; set; }
         public CommandSender Sender { get; }
@@ -69,8 +70,8 @@ namespace Qurre.API
         public UserGroup Group { get; set; }
         public string RoleColor { get; set; }
         public string RoleName { get; set; }
-        public float StaminaUsage { get; set; }
         public string UnitName { get; set; }
+        public float AliveTime { get; }
         public long DeathTime { get; set; }
         public int Ping { get; }
         public ushort Ammo12Gauge { get; set; }
@@ -78,14 +79,15 @@ namespace Qurre.API
         public ushort Ammo44Cal { get; set; }
         public ushort Ammo762 { get; set; }
         public ushort Ammo9 { get; set; }
-        public float AliveTime { get; }
         public Stamina Stamina { get; }
+        public Escape Escape { get; }
         public Item ItemInHand { get; set; }
-        public ItemType ItemTypeInHand { get; }
+        public IReadOnlyCollection<Item> AllItems { get; }
         public global::Mirror.NetworkConnection Connection { get; }
         public bool IsHost { get; }
         public bool FriendlyFire { get; set; }
         public bool Zoomed { get; }
+        public bool UseStamina { get; set; }
         public bool Invisible { get; set; }
         public bool BypassMode { get; set; }
         public bool Muted { get; set; }
@@ -98,9 +100,8 @@ namespace Qurre.API
         public int MaxAhp { get; set; }
         public global::InventorySystem.Items.ItemIdentifier CurrentItem { get; set; }
         public global::InventorySystem.Items.ItemBase CurInstance { get; set; }
-        public IReadOnlyCollection<Item> AllItems { get; }
-        public bool IsJumping { get; }
-        public global::UnityEngine.GameObject GameObject { get; }
+        public ItemType ItemTypeInHand { get; }
+        public Radio Radio { get; }
 
         public static Player Get(uint netId);
         public static IEnumerable<Player> Get(Team team);

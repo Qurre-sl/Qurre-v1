@@ -48,5 +48,6 @@ namespace Qurre.Events.Invoke
         public static void ThrowItem(ThrowItemEvent ev);
         public static void TransmitPlayerData(TransmitPlayerDataEvent ev);
         public static void UnCuff(UnCuffEvent ev);
+        public static void WalkingOnSinkhole(WalkingOnSinkholeEvent ev);
     }
 }

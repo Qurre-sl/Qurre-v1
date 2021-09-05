@@ -32,11 +32,14 @@ namespace Qurre.Events.Invoke
     public static class Scp173
     {
         public static void Blink(BlinkEvent ev);
+        public static void TantrumPlace(TantrumPlaceEvent ev);
     }
     public static class Scp914
     {
         public static void Activating(ActivatingEvent ev);
+        public static void KnobChange(KnobChangeEvent ev);
         public static void Upgrade(UpgradeEvent ev);
+        public static void UpgradePickup(UpgradePickupEvent ev);
         public static void UpgradePlayer(UpgradePlayerEvent ev);
     }
 }

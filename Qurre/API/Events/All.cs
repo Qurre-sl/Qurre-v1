@@ -791,4 +791,28 @@ namespace Qurre.API.Events
         public global::InventorySystem.Inventory Inventory { get; }
         public bool Allowed { get; set; }
     }
+    public class WalkingOnSinkholeEvent : EventArgs
+    {
+        public WalkingOnSinkholeEvent(Player pl, SinkholeEnvironmentalHazard sinkhole, bool allowed = true);
+
+        public Player Player { get; }
+        public SinkholeEnvironmentalHazard Sinkhole { get; }
+        public bool Allowed { get; set; }
+    }
+    public class KnobChangeEvent : EventArgs
+    {
+        public KnobChangeEvent(Player player, global::Scp914.Scp914KnobSetting setting, bool allowed = true);
+
+        public Player Player { get; }
+        public global::Scp914.Scp914KnobSetting Setting { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class TantrumPlaceEvent : EventArgs
+    {
+        public TantrumPlaceEvent(Player scp, float cooldown = 30, bool allowed = true);
+
+        public Player Scp { get; }
+        public float Cooldown { get; set; }
+        public bool Allowed { get; set; }
+    }
 }

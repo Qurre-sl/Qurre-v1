@@ -1,4 +1,4 @@
-﻿
+﻿using Qurre.API.Events;
 using Qurre.Events.modules;
 namespace Qurre.Events
 {
@@ -33,11 +33,14 @@ namespace Qurre.Events
     public static class Scp173
     {
         public static event Main.AllEvents<BlinkEvent> Blink;
+        public static event Main.AllEvents<TantrumPlaceEvent> TantrumPlace;
     }
     public static class Scp914
     {
         public static event Main.AllEvents<ActivatingEvent> Activating;
+        public static event Main.AllEvents<KnobChangeEvent> KnobChange;
         public static event Main.AllEvents<UpgradeEvent> Upgrade;
         public static event Main.AllEvents<UpgradePlayerEvent> UpgradePlayer;
+        public static event Main.AllEvents<UpgradePickupEvent> UpgradePickup;
     }
 }
