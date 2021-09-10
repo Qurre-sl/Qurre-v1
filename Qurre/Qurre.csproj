@@ -51,6 +51,7 @@
     <Compile Include="API\Controllers\Broadcast.cs" />
     <Compile Include="API\Controllers\CassieList.cs" />
     <Compile Include="API\Controllers\Camera.cs" />
+    <Compile Include="API\Controllers\Bot.cs" />
     <Compile Include="API\Controllers\Item.cs" />
     <Compile Include="API\Controllers\Items\Ammo.cs" />
     <Compile Include="API\Controllers\Items\Armor.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="API\DataBase\DataBase.cs" />
     <Compile Include="API\Extensions.cs" />
     <Compile Include="API\Objects\AmmoType.cs" />
+    <Compile Include="API\Objects\MovementDirection.cs" />
     <Compile Include="API\Objects\ScpAttackType.cs" />
     <Compile Include="API\Objects\RoomType.cs" />
     <Compile Include="API\Objects\RadioStatusSettings.cs" />

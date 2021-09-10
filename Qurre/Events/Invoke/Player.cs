@@ -41,13 +41,14 @@ namespace Qurre.Events.Invoke
         public static void RoleChange(RoleChangeEvent ev);
         public static void ScpAttack(ScpAttackEvent ev);
         public static void Shooting(ShootingEvent ev);
+        public static void SinkholeWalking(SinkholeWalkingEvent ev);
         public static void Spawn(SpawnEvent ev);
         public static void Speak(SpeakEvent ev);
         public static void SyncData(SyncDataEvent ev);
+        public static void TantrumWalking(TantrumWalkingEvent ev);
         public static void TeslaTrigger(TeslaTriggerEvent ev);
         public static void ThrowItem(ThrowItemEvent ev);
         public static void TransmitPlayerData(TransmitPlayerDataEvent ev);
         public static void UnCuff(UnCuffEvent ev);
-        public static void WalkingOnSinkhole(WalkingOnSinkholeEvent ev);
     }
 }

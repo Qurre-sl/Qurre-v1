@@ -14,8 +14,8 @@ namespace Qurre.Events
         public static event Main.AllEvents<ThrowItemEvent> ThrowItem;
         public static event Main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
         public static event Main.AllEvents<InteractGeneratorEvent> InteractGenerator;
+        public static event Main.AllEvents<ShootingEvent> Shooting;
         public static event Main.AllEvents<SpeakEvent> Speak;
-        public static event Main.AllEvents<SpawnEvent> Spawn;
         public static event Main.AllEvents<RadioUpdateEvent> RadioUpdate;
         public static event Main.AllEvents<TransmitPlayerDataEvent> TransmitPlayerData;
         public static event Main.AllEvents<MicroHidUsingEvent> MicroHidUsing;
@@ -24,9 +24,10 @@ namespace Qurre.Events
         public static event Main.AllEvents<FragExplosionEvent> FragExplosion;
         public static event Main.AllEvents<FlashedEvent> Flashed;
         public static event Main.AllEvents<DropAmmoEvent> DropAmmo;
-        public static event Main.AllEvents<ShootingEvent> Shooting;
+        public static event Main.AllEvents<ScpAttackEvent> ScpAttack;
+        public static event Main.AllEvents<SpawnEvent> Spawn;
+        public static event Main.AllEvents<SinkholeWalkingEvent> SinkholeWalking;
         public static event Main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
-        public static event Main.AllEvents<PickupItemEvent> PickupItem;
         public static event Main.AllEvents<LeaveEvent> Leave;
         public static event Main.AllEvents<BanEvent> Ban;
         public static event Main.AllEvents<KickEvent> Kick;
@@ -37,7 +38,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<DeadEvent> Dead;
         public static event Main.AllEvents<EscapeEvent> Escape;
         public static event Main.AllEvents<CuffEvent> Cuff;
-        public static event Main.AllEvents<ScpAttackEvent> ScpAttack;
+        public static event Main.AllEvents<PickupItemEvent> PickupItem;
         public static event Main.AllEvents<UnCuffEvent> UnCuff;
         public static event Main.AllEvents<DiesEvent> Dies;
         public static event Main.AllEvents<InteractEvent> Interact;
@@ -49,6 +50,6 @@ namespace Qurre.Events
         public static event Main.AllEvents<DropItemEvent> DropItem;
         public static event Main.AllEvents<JoinEvent> Join;
         public static event Main.AllEvents<DamageEvent> Damage;
-        public static event Main.AllEvents<WalkingOnSinkholeEvent> WalkingOnSinkhole;
+        public static event Main.AllEvents<TantrumWalkingEvent> TantrumWalking;
     }
 }

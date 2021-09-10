@@ -791,14 +791,6 @@ namespace Qurre.API.Events
         public global::InventorySystem.Inventory Inventory { get; }
         public bool Allowed { get; set; }
     }
-    public class WalkingOnSinkholeEvent : EventArgs
-    {
-        public WalkingOnSinkholeEvent(Player pl, SinkholeEnvironmentalHazard sinkhole, bool allowed = true);
-
-        public Player Player { get; }
-        public SinkholeEnvironmentalHazard Sinkhole { get; }
-        public bool Allowed { get; set; }
-    }
     public class KnobChangeEvent : EventArgs
     {
         public KnobChangeEvent(Player player, global::Scp914.Scp914KnobSetting setting, bool allowed = true);
@@ -813,6 +805,22 @@ namespace Qurre.API.Events
 
         public Player Scp { get; }
         public float Cooldown { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class SinkholeWalkingEvent : EventArgs
+    {
+        public SinkholeWalkingEvent(Player pl, SinkholeEnvironmentalHazard sinkhole, bool allowed = true);
+
+        public Player Player { get; }
+        public SinkholeEnvironmentalHazard Sinkhole { get; }
+        public bool Allowed { get; set; }
+    }
+    public class TantrumWalkingEvent : EventArgs
+    {
+        public TantrumWalkingEvent(Player pl, TantrumEnvironmentalHazard tantrum, bool allowed = true);
+
+        public Player Player { get; }
+        public TantrumEnvironmentalHazard Tantrum { get; }
         public bool Allowed { get; set; }
     }
 }

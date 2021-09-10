@@ -15,12 +15,13 @@ namespace Qurre.API
         public Player(ReferenceHub RH);
         public Player(global::UnityEngine.GameObject gameObject);
 
-        public static IEnumerable<Player> List { get; }
-        public static Dictionary<string, Player> ArgsPlayers { get; set; }
         public static MethodInfo SendSpawnMessage { get; }
-        public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
+        public static Dictionary<string, Player> ArgsPlayers { get; set; }
         public static Dictionary<string, Player> UserIDPlayers { get; set; }
-        public global::UnityEngine.GameObject GameObject { get; }
+        public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
+        public static IEnumerable<Player> List { get; }
+        public Escape Escape { get; }
+        public string DisplayNickname { get; set; }
         public string Nickname { get; }
         public bool DoNotTrack { get; }
         public bool RemoteAdminAccess { get; }
@@ -28,8 +29,8 @@ namespace Qurre.API
         public Player Cuffer { get; set; }
         public bool Cuffed { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
-        public string DisplayNickname { get; set; }
         public global::UnityEngine.Vector2 Rotations { get; set; }
+        public global::UnityEngine.Vector3 Rotation { get; set; }
         public global::UnityEngine.Quaternion FullRotation { get; set; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.GameObject LookingAt { get; }
@@ -37,19 +38,20 @@ namespace Qurre.API
         public Team Team { get; }
         public Side Side { get; }
         public Faction Faction { get; }
-        public global::UnityEngine.Vector3 Rotation { get; set; }
         public string CustomUserId { get; set; }
         public string UserId { get; set; }
         public int Id { get; set; }
+        public string Tag { get; set; }
+        public AmmoBoxManager Ammo { get; }
+        public global::UnityEngine.Transform Transform { get; }
+        public Radio Radio { get; }
+        public global::UnityEngine.GameObject GameObject { get; }
         public GameConsoleTransmission GameConsoleTransmission { get; }
         public ListBroadcasts Broadcasts { get; }
         public ReferenceHub ReferenceHub { get; }
-        public AmmoBoxManager Ammo { get; }
-        public global::Hints.HintDisplay HintDisplay { get; }
-        public global::UnityEngine.Transform CameraTransform { get; }
         public global::InventorySystem.Inventory Inventory { get; }
+        public RoleType Role { get; set; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
-        public ServerRoles ServerRoles { get; }
         public CharacterClassManager ClassManager { get; }
         public AnimationController AnimationController { get; }
         public PlayerStats PlayerStats { get; }
@@ -57,8 +59,8 @@ namespace Qurre.API
         public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
         public PlayerEffectsController PlayerEffectsController { get; }
         public NicknameSync NicknameSync { get; }
-        public string Tag { get; set; }
-        public RoleType Role { get; set; }
+        public PlayerMovementSync PlayerMovementSync { get; }
+        public ServerRoles ServerRoles { get; }
         public PlayerMovementState MoveState { get; set; }
         public bool IsJumping { get; }
         public string Ip { get; }
@@ -70,17 +72,18 @@ namespace Qurre.API
         public UserGroup Group { get; set; }
         public string RoleColor { get; set; }
         public string RoleName { get; set; }
+        public Stamina Stamina { get; }
         public string UnitName { get; set; }
-        public float AliveTime { get; }
         public long DeathTime { get; set; }
+        public string GlobalBadge { get; }
         public int Ping { get; }
         public ushort Ammo12Gauge { get; set; }
         public ushort Ammo556 { get; set; }
         public ushort Ammo44Cal { get; set; }
         public ushort Ammo762 { get; set; }
         public ushort Ammo9 { get; set; }
-        public Stamina Stamina { get; }
-        public Escape Escape { get; }
+        public float AliveTime { get; }
+        public global::Hints.HintDisplay HintDisplay { get; }
         public Item ItemInHand { get; set; }
         public IReadOnlyCollection<Item> AllItems { get; }
         public global::Mirror.NetworkConnection Connection { get; }
@@ -89,9 +92,10 @@ namespace Qurre.API
         public bool Zoomed { get; }
         public bool UseStamina { get; set; }
         public bool Invisible { get; set; }
+        public bool Bot { get; }
         public bool BypassMode { get; set; }
+        public ItemType ItemTypeInHand { get; }
         public bool Muted { get; set; }
-        public bool IntercomMuted { get; set; }
         public bool GodMode { get; set; }
         public float Hp { get; set; }
         public int MaxHp { get; set; }
@@ -100,8 +104,8 @@ namespace Qurre.API
         public int MaxAhp { get; set; }
         public global::InventorySystem.Items.ItemIdentifier CurrentItem { get; set; }
         public global::InventorySystem.Items.ItemBase CurInstance { get; set; }
-        public ItemType ItemTypeInHand { get; }
-        public Radio Radio { get; }
+        public bool IntercomMuted { get; set; }
+        public global::UnityEngine.Transform CameraTransform { get; }
 
         public static Player Get(uint netId);
         public static IEnumerable<Player> Get(Team team);
