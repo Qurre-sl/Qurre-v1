@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 namespace Qurre.API
 {
+    [Obsolete("Сurrently unavailable")]
     public static class Audio
     {
         public static global::Dissonance.Integrations.MirrorIgnorance.MirrorIgnoranceClient client;

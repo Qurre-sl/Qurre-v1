@@ -29,8 +29,8 @@ namespace Qurre.API
         public Player Cuffer { get; set; }
         public bool Cuffed { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
+        public string CustomUserId { get; set; }
         public global::UnityEngine.Vector2 Rotations { get; set; }
-        public global::UnityEngine.Vector3 Rotation { get; set; }
         public global::UnityEngine.Quaternion FullRotation { get; set; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.GameObject LookingAt { get; }
@@ -38,19 +38,20 @@ namespace Qurre.API
         public Team Team { get; }
         public Side Side { get; }
         public Faction Faction { get; }
-        public string CustomUserId { get; set; }
+        public RoleType Role { get; set; }
+        public global::UnityEngine.Vector3 Rotation { get; set; }
+        public PlayerMovementState MoveState { get; set; }
         public string UserId { get; set; }
-        public int Id { get; set; }
         public string Tag { get; set; }
+        public global::Hints.HintDisplay HintDisplay { get; }
         public AmmoBoxManager Ammo { get; }
-        public global::UnityEngine.Transform Transform { get; }
+        public global::InventorySystem.Inventory Inventory { get; }
         public Radio Radio { get; }
         public global::UnityEngine.GameObject GameObject { get; }
         public GameConsoleTransmission GameConsoleTransmission { get; }
         public ListBroadcasts Broadcasts { get; }
         public ReferenceHub ReferenceHub { get; }
-        public global::InventorySystem.Inventory Inventory { get; }
-        public RoleType Role { get; set; }
+        public int Id { get; set; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
         public CharacterClassManager ClassManager { get; }
         public AnimationController AnimationController { get; }
@@ -61,9 +62,9 @@ namespace Qurre.API
         public NicknameSync NicknameSync { get; }
         public PlayerMovementSync PlayerMovementSync { get; }
         public ServerRoles ServerRoles { get; }
-        public PlayerMovementState MoveState { get; set; }
+        public global::UnityEngine.Transform CameraTransform { get; }
         public bool IsJumping { get; }
-        public string Ip { get; }
+        public global::Mirror.NetworkConnection Connection { get; }
         public float StaminaUsage { get; set; }
         public string GroupName { get; set; }
         public Room Room { get; set; }
@@ -83,16 +84,16 @@ namespace Qurre.API
         public ushort Ammo762 { get; set; }
         public ushort Ammo9 { get; set; }
         public float AliveTime { get; }
-        public global::Hints.HintDisplay HintDisplay { get; }
+        public string Ip { get; }
         public Item ItemInHand { get; set; }
         public IReadOnlyCollection<Item> AllItems { get; }
-        public global::Mirror.NetworkConnection Connection { get; }
         public bool IsHost { get; }
         public bool FriendlyFire { get; set; }
         public bool Zoomed { get; }
         public bool UseStamina { get; set; }
         public bool Invisible { get; set; }
         public bool Bot { get; }
+        public bool BlockSpawnTeleport { get; set; }
         public bool BypassMode { get; set; }
         public ItemType ItemTypeInHand { get; }
         public bool Muted { get; set; }
@@ -105,7 +106,7 @@ namespace Qurre.API
         public global::InventorySystem.Items.ItemIdentifier CurrentItem { get; set; }
         public global::InventorySystem.Items.ItemBase CurInstance { get; set; }
         public bool IntercomMuted { get; set; }
-        public global::UnityEngine.Transform CameraTransform { get; }
+        public global::UnityEngine.Transform Transform { get; }
 
         public static Player Get(uint netId);
         public static IEnumerable<Player> Get(Team team);
