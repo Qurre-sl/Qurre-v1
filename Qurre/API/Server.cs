@@ -7,11 +7,12 @@ namespace Qurre.API
         public static DataBase.DataBase DataBase { get; }
         public static ushort Port { get; }
         public static string Ip { get; }
+        public static bool RealEscape { get; set; }
         public static string Name { get; set; }
         public static int Slots { get; set; }
         public static bool FriendlyFire { get; set; }
         public static Player Host { get; }
-        public static Inventory InventoryHost { get; }
+        public static global::InventorySystem.Inventory InventoryHost { get; }
         public static int MaxPlayers { get; set; }
 
         public static TObject GetObjectOf<TObject>() where TObject : global::UnityEngine.Object;

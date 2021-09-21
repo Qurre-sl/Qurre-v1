@@ -52,6 +52,7 @@
     <Compile Include="API\Controllers\CassieList.cs" />
     <Compile Include="API\Controllers\Camera.cs" />
     <Compile Include="API\Controllers\Bot.cs" />
+    <Compile Include="API\Controllers\MapBroadcast.cs" />
     <Compile Include="API\Controllers\Item.cs" />
     <Compile Include="API\Controllers\Items\Ammo.cs" />
     <Compile Include="API\Controllers\Items\Armor.cs" />

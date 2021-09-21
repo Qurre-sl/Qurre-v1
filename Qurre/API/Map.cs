@@ -5,7 +5,7 @@ namespace Qurre.API
 {
     public static class Map
     {
-        public static ListBroadcasts Broadcasts { get; }
+        public static CassieList Cassies { get; }
         public static List<Lift> Lifts { get; }
         public static List<Locker> Lockers { get; }
         public static List<Generator> Generators { get; }
@@ -23,13 +23,12 @@ namespace Qurre.API
         public static float ElevatorsMovingSpeed { get; set; }
         public static bool FemurBreakerState { get; set; }
         public static List<Bot> Bots { get; }
-        public static CassieList Cassies { get; }
-        public static float BreakableWindowHp { get; set; }
         public static float Seed { get; }
+        public static float BreakableWindowHp { get; set; }
 
         public static void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter);
         public static void AnnounceScpKill(string scpNumber, Player killer = null);
-        public static Broadcast Broadcast(string message, ushort duration, bool instant = false);
+        public static MapBroadcast Broadcast(string message, ushort duration, bool instant = false);
         public static void ClearBroadcasts();
         public static void ContainSCP106(Player executor);
         public static void DecontaminateLCZ();

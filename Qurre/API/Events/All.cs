@@ -263,7 +263,7 @@ namespace Qurre.API.Events
     }
     public class SpeakEvent : EventArgs
     {
-        public SpeakEvent(global::Assets._Scripts.Dissonance.DissonanceUserSetup userSetup, bool icom, bool radio, bool mimicAs939, bool scpChat, bool ripChat, bool value, bool allowed = true);
+        public SpeakEvent(global::Assets._Scripts.Dissonance.DissonanceUserSetup userSetup, bool icom, bool radio, bool mimicAs939, bool scpChat, bool ripChat, TriggerType triggerType, global::Assets._Scripts.Dissonance.RoleType roleType, bool allowed = true);
 
         public global::Assets._Scripts.Dissonance.DissonanceUserSetup UserSetup { get; }
         public bool Intercom { get; set; }
@@ -271,7 +271,8 @@ namespace Qurre.API.Events
         public bool MimicAs939 { get; set; }
         public bool ScpChat { get; set; }
         public bool RipChat { get; set; }
-        public bool Value { get; }
+        public TriggerType Trigger { get; }
+        public global::Assets._Scripts.Dissonance.RoleType Role { get; }
         public bool Allowed { get; set; }
     }
     public class ShootingEvent : EventArgs

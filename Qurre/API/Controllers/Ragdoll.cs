@@ -3,7 +3,7 @@
     public class Ragdoll
     {
         public Ragdoll(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::UnityEngine.Vector3 velocity, PlayerStats.HitInfo info, bool allowRecall, Player owner);
-        public Ragdoll(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::UnityEngine.Vector3 velocity, PlayerStats.HitInfo info, bool allowRecall, string nickname, int id, int ownerId);
+        public Ragdoll(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::UnityEngine.Vector3 velocity, PlayerStats.HitInfo info, bool allowRecall, string nickname, int id);
 
         public global::UnityEngine.GameObject GameObject { get; }
         public string Name { get; }
@@ -14,7 +14,7 @@
         public bool AllowRecall { get; set; }
 
         public static Ragdoll Create(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::UnityEngine.Vector3 velocity, PlayerStats.HitInfo info, bool allowRecall, Player owner);
-        public static Ragdoll Create(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::UnityEngine.Vector3 velocity, PlayerStats.HitInfo info, bool allowRecall, string nickname, int id, int ownerId);
+        public static Ragdoll Create(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::UnityEngine.Vector3 velocity, PlayerStats.HitInfo info, bool allowRecall, string nickname, int id);
         public void Destroy();
     }
 }
