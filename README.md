@@ -3,10 +3,16 @@
 <p>
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord">
       <img src="https://discord.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
-  </a>
+   </a>
+   <a href="https://github.com/Qurre-Team/Qurre-sl/releases" alt="Downloads">
+      <img src="https://img.shields.io/github/downloads/Qurre-Team/Qurre-sl/total?color=%2300b813&style=plastic" alt="Discord Server"/>
+   </a>
+   <a href="https://github.com/Qurre-Team/Qurre-sl/releases" alt="Release">
+      <img src="https://img.shields.io/github/v/release/Qurre-Team/Qurre-sl.svg?style=plastic" alt="Discord Server"/>
+   </a>
 </p>
 
-# Qurre <a href="https://github.com/Qurre-Team/Qurre-sl/releases" alt="Downloads"><img src="https://img.shields.io/github/downloads/Qurre-Team/Qurre-sl/total?color=%2300b813&style=plastic" alt="Discord Server"/></a> <a href="https://github.com/Qurre-Team/Qurre-sl/releases" alt="Release"><img src="https://img.shields.io/github/v/release/Qurre-Team/Qurre-sl.svg?style=plastic" alt="Discord Server"/></a>
+# Qurre
 Framework for SCP:SL servers with unique functions & api
 
 # Installation
