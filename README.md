@@ -16,19 +16,27 @@ Framework for SCP:SL servers with unique functions & api
 You can configure configs in `~/.config`(`%AppData%` on Windows)`/Qurre/Configs/^server.port^-cfg.yml` 
 
 ```yml
-Qurre_debug: false
+#Are Debug logs enabled?
+Qurre_Debug: false
+#Are errors saved to the log file?
+Qurre_Logging: true
+#Are all console output being saved to a log file?
+Qurre_All_Logging: false
+#Should I show the Qurre version on Units for all roles?
 Qurre_AllUnit: false
+#Should I show the Qurre version on Units only for the Tutorial role?
 Qurre_OnlyTutorialUnit: false
-Qurre_logging: true
-Qurre_all_logging: false
-Qurre_spawn_blood: true
+#Allow the appearance of blood?
+Qurre_Spawn_Blood: true
+#Can other SCPs look at SCP-173?
 Qurre_ScpTrigger173: false
-#SCP 079 and SCP 096 will not see the wearer of SCP 268
+#SCP 079 & SCP 096 will not see the wearer of SCP 268
 Qurre_Better268: false
-Qurre_banned: banned
-Qurre_kicked: kicked
+Qurre_Banned: banned
+Qurre_Kicked: kicked
 Qurre_BanOrKick_msg: You have been %bok%.
-Qurre_reason: Reason
+Qurre_Reason: Reason
+#Link-access to your database(MongoDB)
 Qurre_DataBase: undefined
 ```
 ## [Example Plugin](https://github.com/Qurre-Team/example-plugin)

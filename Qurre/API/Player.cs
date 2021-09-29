@@ -21,6 +21,7 @@ namespace Qurre.API
         public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
         public static IEnumerable<Player> List { get; }
         public Escape Escape { get; }
+        public string CustomUserId { get; set; }
         public string DisplayNickname { get; set; }
         public string Nickname { get; }
         public bool DoNotTrack { get; }
@@ -28,9 +29,9 @@ namespace Qurre.API
         public bool Overwatch { get; set; }
         public Player Cuffer { get; set; }
         public bool Cuffed { get; }
+        public string UserId { get; set; }
         public global::UnityEngine.Vector3 Position { get; set; }
-        public string CustomUserId { get; set; }
-        public global::UnityEngine.Vector2 Rotations { get; set; }
+        public global::UnityEngine.Vector3 Rotation { get; set; }
         public global::UnityEngine.Quaternion FullRotation { get; set; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.GameObject LookingAt { get; }
@@ -38,11 +39,10 @@ namespace Qurre.API
         public Team Team { get; }
         public Side Side { get; }
         public Faction Faction { get; }
+        public global::UnityEngine.Vector2 Rotations { get; set; }
         public RoleType Role { get; set; }
-        public global::UnityEngine.Vector3 Rotation { get; set; }
-        public PlayerMovementState MoveState { get; set; }
-        public string UserId { get; set; }
-        public string Tag { get; set; }
+        public int Id { get; set; }
+        public PlayerMovementSync PlayerMovementSync { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
         public AmmoBoxManager Ammo { get; }
         public global::InventorySystem.Inventory Inventory { get; }
@@ -51,8 +51,9 @@ namespace Qurre.API
         public GameConsoleTransmission GameConsoleTransmission { get; }
         public ListBroadcasts Broadcasts { get; }
         public ReferenceHub ReferenceHub { get; }
-        public int Id { get; set; }
+        public string Tag { get; set; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
+        public ServerRoles ServerRoles { get; }
         public CharacterClassManager ClassManager { get; }
         public AnimationController AnimationController { get; }
         public PlayerStats PlayerStats { get; }
@@ -60,10 +61,9 @@ namespace Qurre.API
         public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
         public PlayerEffectsController PlayerEffectsController { get; }
         public NicknameSync NicknameSync { get; }
-        public PlayerMovementSync PlayerMovementSync { get; }
-        public ServerRoles ServerRoles { get; }
+        public global::Assets._Scripts.Dissonance.DissonanceUserSetup Dissonance { get; }
         public global::UnityEngine.Transform CameraTransform { get; }
-        public bool IsJumping { get; }
+        public PlayerMovementState MoveState { get; set; }
         public global::Mirror.NetworkConnection Connection { get; }
         public float StaminaUsage { get; set; }
         public string GroupName { get; set; }
