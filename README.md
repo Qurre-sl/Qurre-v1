@@ -10,6 +10,12 @@
    <a href="https://github.com/Qurre-Team/Qurre-sl/releases" alt="Release">
       <img src="https://img.shields.io/github/v/release/Qurre-Team/Qurre-sl.svg?style=plastic" alt="Discord Server"/>
    </a>
+   <a href="https://www.nuget.org/packages/Qurre" alt="nuget downloads">
+      <img src="https://img.shields.io/nuget/dt/Qurre?label=nuget%20downloads&style=plastic" alt="Discord Server"/>
+   </a>
+   <a href="https://www.nuget.org/packages/Qurre" alt="nuget release">
+      <img src="https://img.shields.io/nuget/vpre/Qurre?style=plastic" alt="Discord Server"/>
+   </a>
 </p>
 
 # Qurre
