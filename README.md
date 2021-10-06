@@ -44,6 +44,8 @@ Qurre_Spawn_Blood: true
 Qurre_ScpTrigger173: false
 #SCP 079 & SCP 096 will not see the wearer of SCP 268
 Qurre_Better268: false
+#If enabled, will spawn those who entered after the start of the round
+Qurre_LateJoinSpawn: true
 Qurre_Banned: banned
 Qurre_Kicked: kicked
 Qurre_BanOrKick_msg: You have been %bok%.
