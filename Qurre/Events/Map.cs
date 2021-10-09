@@ -1,11 +1,11 @@
 ﻿using Qurre.API.Events;
-using Qurre.Events.modules;
+using Qurre.Events.Modules;
 namespace Qurre.Events
 {
     public static class Map
     {
-        public static event Main.AllEvents<LCZDeconEvent> LCZDecon;
-        public static event Main.AllEvents<AnnouncementDecontaminationEvent> AnnouncementDecontaminationZDecon;
+        public static event Main.AllEvents<LczDeconEvent> LczDecon;
+        public static event Main.AllEvents<LczAnnounceEvent> LczAnnounce;
         public static event Main.AllEvents<MTFAnnouncementEvent> MTFAnnouncement;
         public static event Main.AllEvents<NewBloodEvent> NewBlood;
         public static event Main.AllEvents<PlaceBulletHoleEvent> PlaceBulletHole;

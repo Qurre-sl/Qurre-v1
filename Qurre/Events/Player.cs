@@ -1,5 +1,5 @@
 ﻿using Qurre.API.Events;
-using Qurre.Events.modules;
+using Qurre.Events.Modules;
 namespace Qurre.Events
 {
     public static class Player

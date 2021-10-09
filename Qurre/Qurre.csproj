@@ -52,6 +52,7 @@
     <Compile Include="API\Controllers\CassieList.cs" />
     <Compile Include="API\Controllers\Camera.cs" />
     <Compile Include="API\Controllers\Bot.cs" />
+    <Compile Include="API\Controllers\Window.cs" />
     <Compile Include="API\Controllers\MapBroadcast.cs" />
     <Compile Include="API\Controllers\Item.cs" />
     <Compile Include="API\Controllers\Items\Ammo.cs" />
@@ -115,7 +116,9 @@
     <Compile Include="API\Player.cs" />
     <Compile Include="API\Round.cs" />
     <Compile Include="Events\Alpha.cs" />
+    <Compile Include="Events\Report.cs" />
     <Compile Include="Events\Invoke\Alpha.cs" />
+    <Compile Include="Events\Invoke\Report.cs" />
     <Compile Include="Events\Invoke\Server.cs" />
     <Compile Include="Events\Invoke\SCPs.cs" />
     <Compile Include="Events\Invoke\Round.cs" />

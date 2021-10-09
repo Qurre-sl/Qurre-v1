@@ -8,6 +8,6 @@ namespace Qurre.Events.Invoke
         public static void Restart();
         public static void Start();
         public static void TeamRespawn(TeamRespawnEvent ev);
-        public static void WaitingForPlayers();
+        public static void Waiting();
     }
 }

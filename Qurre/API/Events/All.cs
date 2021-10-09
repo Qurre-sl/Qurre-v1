@@ -230,25 +230,25 @@ namespace Qurre.API.Events
         public bool Force { get; }
         public bool Allowed { get; set; }
     }
-    public class PocketDimensionFailEscapeEvent : EventArgs
+    public class PocketFailEscapeEvent : EventArgs
     {
-        public PocketDimensionFailEscapeEvent(Player player, PocketDimensionTeleport teleporter, bool allowed = true);
+        public PocketFailEscapeEvent(Player player, PocketDimensionTeleport teleporter, bool allowed = true);
 
         public Player Player { get; }
         public PocketDimensionTeleport Teleporter { get; }
         public bool Allowed { get; set; }
     }
-    public class PocketDimensionEscapeEvent : EventArgs
+    public class PocketEscapeEvent : EventArgs
     {
-        public PocketDimensionEscapeEvent(Player player, global::UnityEngine.Vector3 teleportPosition, bool allowed = true);
+        public PocketEscapeEvent(Player player, global::UnityEngine.Vector3 teleportPosition, bool allowed = true);
 
         public Player Player { get; }
         public global::UnityEngine.Vector3 TeleportPosition { get; set; }
         public bool Allowed { get; set; }
     }
-    public class PocketDimensionEnterEvent : EventArgs
+    public class PocketEnterEvent : EventArgs
     {
-        public PocketDimensionEnterEvent(Player player, global::UnityEngine.Vector3 position, bool allowed = true);
+        public PocketEnterEvent(Player player, global::UnityEngine.Vector3 position, bool allowed = true);
 
         public Player Player { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
@@ -259,20 +259,6 @@ namespace Qurre.API.Events
         public GeneratorActivateEvent(Generator generator, bool allowed = true);
 
         public Generator Generator { get; }
-        public bool Allowed { get; set; }
-    }
-    public class SpeakEvent : EventArgs
-    {
-        public SpeakEvent(global::Assets._Scripts.Dissonance.DissonanceUserSetup userSetup, bool icom, bool radio, bool mimicAs939, bool scpChat, bool ripChat, TriggerType triggerType, global::Assets._Scripts.Dissonance.RoleType roleType, bool allowed = true);
-
-        public global::Assets._Scripts.Dissonance.DissonanceUserSetup UserSetup { get; }
-        public bool Intercom { get; set; }
-        public bool Radio { get; set; }
-        public bool MimicAs939 { get; set; }
-        public bool ScpChat { get; set; }
-        public bool RipChat { get; set; }
-        public TriggerType Trigger { get; }
-        public global::Assets._Scripts.Dissonance.RoleType Role { get; }
         public bool Allowed { get; set; }
     }
     public class ShootingEvent : EventArgs
@@ -400,17 +386,17 @@ namespace Qurre.API.Events
         public int UnitNumber { get; set; }
         public bool Allowed { get; set; }
     }
-    public class AnnouncementDecontaminationEvent : EventArgs
+    public class LczAnnounceEvent : EventArgs
     {
-        public AnnouncementDecontaminationEvent(int announcementId, bool isGlobal, bool allowed = true);
+        public LczAnnounceEvent(int announcementId, bool isGlobal, bool allowed = true);
 
         public int Id { get; set; }
         public bool IsGlobal { get; set; }
         public bool Allowed { get; set; }
     }
-    public class LCZDeconEvent : EventArgs
+    public class LczDeconEvent : EventArgs
     {
-        public LCZDeconEvent(bool allowed = true);
+        public LczDeconEvent(bool allowed = true);
 
         public bool Allowed { get; set; }
     }

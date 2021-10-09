@@ -1,5 +1,5 @@
 ﻿using Qurre.API.Events;
-using Qurre.Events.modules;
+using Qurre.Events.Modules;
 namespace Qurre.Events
 {
     public static class Scp049
@@ -26,9 +26,9 @@ namespace Qurre.Events
         public static event Main.AllEvents<PortalCreateEvent> PortalCreate;
         public static event Main.AllEvents<ContainEvent> Contain;
         public static event Main.AllEvents<FemurBreakerEnterEvent> FemurBreakerEnter;
-        public static event Main.AllEvents<PocketDimensionEnterEvent> PocketDimensionEnter;
-        public static event Main.AllEvents<PocketDimensionEscapeEvent> PocketDimensionEscape;
-        public static event Main.AllEvents<PocketDimensionFailEscapeEvent> PocketDimensionFailEscape;
+        public static event Main.AllEvents<PocketEnterEvent> PocketEnter;
+        public static event Main.AllEvents<PocketEscapeEvent> PocketEscape;
+        public static event Main.AllEvents<PocketFailEscapeEvent> PocketFailEscape;
     }
     public static class Scp173
     {

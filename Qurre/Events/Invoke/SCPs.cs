@@ -23,9 +23,9 @@ namespace Qurre.Events.Invoke
     {
         public static void Contain(ContainEvent ev);
         public static void FemurBreakerEnter(FemurBreakerEnterEvent ev);
-        public static void PocketDimensionEnter(PocketDimensionEnterEvent ev);
-        public static void PocketDimensionEscape(PocketDimensionEscapeEvent ev);
-        public static void PocketDimensionFailEscape(PocketDimensionFailEscapeEvent ev);
+        public static void PocketEnter(PocketEnterEvent ev);
+        public static void PocketEscape(PocketEscapeEvent ev);
+        public static void PocketFailEscape(PocketFailEscapeEvent ev);
         public static void PortalCreate(PortalCreateEvent ev);
         public static void PortalUsing(PortalUsingEvent ev);
     }

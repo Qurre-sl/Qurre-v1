@@ -13,7 +13,7 @@ namespace Qurre.API
         public static bool FriendlyFire { get; set; }
         public static Player Host { get; }
         public static global::InventorySystem.Inventory InventoryHost { get; }
-        public static int MaxPlayers { get; set; }
+        public static int MaxConnections { get; set; }
 
         public static TObject GetObjectOf<TObject>() where TObject : global::UnityEngine.Object;
         public static List<TObject> GetObjectsOf<TObject>() where TObject : global::UnityEngine.Object;
