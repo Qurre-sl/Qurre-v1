@@ -2,19 +2,19 @@
 <img src="https://cdn.fydne.xyz/qurre/Qurre-web_ol.gif" align="right" />
 <p>
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord">
-      <img src="https://discord.com/api/guilds/779412392651653130/embed.png" alt="Discord Server"/>
+      <img src="https://discord.com/api/guilds/779412392651653130/embed.png" alt="Discord"/>
    </a>
    <a href="https://github.com/Qurre-Team/Qurre-sl/releases" alt="Downloads">
-      <img src="https://img.shields.io/github/downloads/Qurre-Team/Qurre-sl/total?color=%2300b813&style=plastic" alt="Discord Server"/>
+      <img src="https://img.shields.io/github/downloads/Qurre-Team/Qurre-sl/total?color=%2300b813&style=plastic" alt="Downloads"/>
    </a>
    <a href="https://github.com/Qurre-Team/Qurre-sl/releases" alt="Release">
-      <img src="https://img.shields.io/github/v/release/Qurre-Team/Qurre-sl.svg?style=plastic" alt="Discord Server"/>
+      <img src="https://img.shields.io/github/v/release/Qurre-Team/Qurre-sl.svg?style=plastic" alt="Release"/>
    </a>
    <a href="https://www.nuget.org/packages/Qurre" alt="nuget downloads">
-      <img src="https://img.shields.io/nuget/dt/Qurre?label=nuget%20downloads&style=plastic" alt="Discord Server"/>
+      <img src="https://img.shields.io/nuget/dt/Qurre?label=nuget%20downloads&style=plastic" alt="nuget downloads"/>
    </a>
    <a href="https://www.nuget.org/packages/Qurre" alt="nuget release">
-      <img src="https://img.shields.io/nuget/vpre/Qurre?style=plastic" alt="Discord Server"/>
+      <img src="https://img.shields.io/nuget/vpre/Qurre?style=plastic" alt="nuget release"/>
    </a>
 </p>
 
