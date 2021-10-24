@@ -3,8 +3,8 @@
     public enum DoorType
     {
         Unknown = 0,
-        LCZ_012 = 1,
-        LCZ_012_Bottom = 2,
+        LCZ_330 = 1,
+        LCZ_330_Chamber = 2,
         LCZ_012_Locker = 3,
         HCZ_049_Armory = 4,
         HCZ_049_Gate = 5,
