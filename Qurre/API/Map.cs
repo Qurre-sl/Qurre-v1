@@ -32,7 +32,6 @@ namespace Qurre.API
         public static void ClearBroadcasts();
         public static void ContainSCP106(Player executor);
         public static void DecontaminateLCZ();
-        public static Room FindRoom(global::UnityEngine.GameObject objectInRoom);
         public static global::UnityEngine.Vector3 GetRandomSpawnPoint(RoleType roleType);
         public static void PlaceBlood(global::UnityEngine.Vector3 position, int type, float size);
         public static void PlayAmbientSound(int id);

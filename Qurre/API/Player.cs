@@ -21,6 +21,7 @@ namespace Qurre.API
         public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
         public static IEnumerable<Player> List { get; }
         public Escape Escape { get; }
+        public string UserId { get; set; }
         public string CustomUserId { get; set; }
         public string DisplayNickname { get; set; }
         public string Nickname { get; }
@@ -29,41 +30,39 @@ namespace Qurre.API
         public bool Overwatch { get; set; }
         public Player Cuffer { get; set; }
         public bool Cuffed { get; }
-        public string UserId { get; set; }
         public global::UnityEngine.Vector3 Position { get; set; }
-        public global::UnityEngine.Vector3 Rotation { get; set; }
-        public global::UnityEngine.Quaternion FullRotation { get; set; }
+        public global::UnityEngine.Vector2 Rotation { get; set; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.GameObject LookingAt { get; }
         public bool Noclip { get; set; }
         public Team Team { get; }
         public Side Side { get; }
         public Faction Faction { get; }
-        public global::UnityEngine.Vector2 Rotations { get; set; }
-        public RoleType Role { get; set; }
         public int Id { get; set; }
+        public string Tag { get; set; }
         public PlayerMovementSync PlayerMovementSync { get; }
-        public global::Hints.HintDisplay HintDisplay { get; }
+        public NicknameSync NicknameSync { get; }
         public AmmoBoxManager Ammo { get; }
-        public global::InventorySystem.Inventory Inventory { get; }
+        public global::UnityEngine.Transform Transform { get; }
         public Radio Radio { get; }
         public global::UnityEngine.GameObject GameObject { get; }
         public GameConsoleTransmission GameConsoleTransmission { get; }
         public ListBroadcasts Broadcasts { get; }
         public ReferenceHub ReferenceHub { get; }
-        public string Tag { get; set; }
+        public global::InventorySystem.Inventory Inventory { get; }
+        public RoleType Role { get; set; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
         public ServerRoles ServerRoles { get; }
         public CharacterClassManager ClassManager { get; }
         public AnimationController AnimationController { get; }
         public PlayerStats PlayerStats { get; }
         public Scp079PlayerScript Scp079PlayerScript { get; }
+        public Scp106PlayerScript Scp106PlayerScript { get; }
         public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
         public PlayerEffectsController PlayerEffectsController { get; }
-        public NicknameSync NicknameSync { get; }
         public global::Assets._Scripts.Dissonance.DissonanceUserSetup Dissonance { get; }
-        public global::UnityEngine.Transform CameraTransform { get; }
         public PlayerMovementState MoveState { get; set; }
+        public string Ip { get; }
         public global::Mirror.NetworkConnection Connection { get; }
         public float StaminaUsage { get; set; }
         public string GroupName { get; set; }
@@ -84,7 +83,7 @@ namespace Qurre.API
         public ushort Ammo762 { get; set; }
         public ushort Ammo9 { get; set; }
         public float AliveTime { get; }
-        public string Ip { get; }
+        public global::Hints.HintDisplay HintDisplay { get; }
         public Item ItemInHand { get; set; }
         public IReadOnlyCollection<Item> AllItems { get; }
         public bool IsHost { get; }
@@ -106,7 +105,7 @@ namespace Qurre.API
         public global::InventorySystem.Items.ItemIdentifier CurrentItem { get; set; }
         public global::InventorySystem.Items.ItemBase CurInstance { get; set; }
         public bool IntercomMuted { get; set; }
-        public global::UnityEngine.Transform Transform { get; }
+        public global::UnityEngine.Transform CameraTransform { get; }
 
         public static Player Get(uint netId);
         public static IEnumerable<Player> Get(Team team);
@@ -129,7 +128,7 @@ namespace Qurre.API
         public void BodyDelete();
         public Broadcast Broadcast(ushort time, string message, bool instant = false);
         public Broadcast Broadcast(string message, ushort time, bool instant = false);
-        public void ChangeBody(RoleType newRole, bool spawnRagdoll = false, global::UnityEngine.Vector3 newPosition = null, global::UnityEngine.Vector3 newRotation = null, DamageTypes.DamageType damageType = null);
+        public void ChangeBody(RoleType newRole, bool spawnRagdoll = false, global::UnityEngine.Vector3 newPosition = null, global::UnityEngine.Vector2 newRotation = null, DamageTypes.DamageType damageType = null);
         public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0);
         public void ChangeEffectIntensity<T>(byte intensity) where T : global::CustomPlayerEffects.PlayerEffect;
         public void ChangeModel(RoleType newModel);
@@ -145,9 +144,9 @@ namespace Qurre.API
         public void Disconnect(string reason = null);
         public void DropItem(Item item);
         public void DropItems();
+        public void EnableEffect(EffectType effect, float duration = 0, bool addDurationIfActive = false);
         public void EnableEffect<T>(float duration = 0, bool addDurationIfActive = false) where T : global::CustomPlayerEffects.PlayerEffect;
         public bool EnableEffect(string effect, float duration = 0, bool addDurationIfActive = false);
-        public void EnableEffect(EffectType effect, float duration = 0, bool addDurationIfActive = false);
         public void EnableEffect(global::CustomPlayerEffects.PlayerEffect effect, float duration = 0, bool addDurationIfActive = false);
         public void ExecuteCommand(string command, bool RA = true);
         public T GetEffect<T>() where T : global::CustomPlayerEffects.PlayerEffect;
