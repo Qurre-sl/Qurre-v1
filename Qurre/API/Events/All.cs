@@ -392,7 +392,6 @@ namespace Qurre.API.Events
 
         public int Id { get; set; }
         public bool IsGlobal { get; set; }
-        public bool Allowed { get; set; }
     }
     public class LczDeconEvent : EventArgs
     {
