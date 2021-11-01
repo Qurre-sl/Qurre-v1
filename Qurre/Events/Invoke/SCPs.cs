@@ -39,6 +39,8 @@ namespace Qurre.Events.Invoke
         public static void Activating(ActivatingEvent ev);
         public static void KnobChange(KnobChangeEvent ev);
         public static void Upgrade(UpgradeEvent ev);
+        public static void UpgradedItemInventory(UpgradedItemInventoryEvent ev);
+        public static void UpgradedItemPickup(UpgradedItemPickupEvent ev);
         public static void UpgradePickup(UpgradePickupEvent ev);
         public static void UpgradePlayer(UpgradePlayerEvent ev);
     }

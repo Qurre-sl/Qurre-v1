@@ -42,5 +42,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<UpgradeEvent> Upgrade;
         public static event Main.AllEvents<UpgradePlayerEvent> UpgradePlayer;
         public static event Main.AllEvents<UpgradePickupEvent> UpgradePickup;
+        public static event Main.AllEvents<UpgradedItemInventoryEvent> UpgradedItemInventory;
+        public static event Main.AllEvents<UpgradedItemPickupEvent> UpgradedItemPickup;
     }
 }

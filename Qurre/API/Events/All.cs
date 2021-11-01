@@ -810,4 +810,22 @@ namespace Qurre.API.Events
         public TantrumEnvironmentalHazard Tantrum { get; }
         public bool Allowed { get; set; }
     }
+    public class UpgradedItemInventoryEvent : EventArgs
+    {
+        public UpgradedItemInventoryEvent(Item item, Player player, global::Scp914.Scp914KnobSetting setting, bool allowed = true);
+
+        public Item Item { get; }
+        public Player Player { get; set; }
+        public global::Scp914.Scp914KnobSetting Setting { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class UpgradedItemPickupEvent : EventArgs
+    {
+        public UpgradedItemPickupEvent(Pickup pickup, global::UnityEngine.Vector3 pos, global::Scp914.Scp914KnobSetting setting, bool allowed = true);
+
+        public Pickup Pickup { get; }
+        public global::UnityEngine.Vector3 Position { get; set; }
+        public global::Scp914.Scp914KnobSetting Setting { get; set; }
+        public bool Allowed { get; set; }
+    }
 }

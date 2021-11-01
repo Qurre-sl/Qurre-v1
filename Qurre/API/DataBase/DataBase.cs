@@ -6,9 +6,10 @@
         public bool Enabled { get; }
         public bool Connected { get; }
 
+        public global::MongoDB.Driver.IMongoCollection<TDocument> GetCollection<TDocument>(global::MongoDB.Driver.IMongoDatabase database, string name);
         public global::MongoDB.Driver.IMongoCollection<global::MongoDB.Bson.BsonDocument> GetCollection(global::MongoDB.Driver.IMongoDatabase database, string name);
         public global::MongoDB.Driver.IMongoDatabase GetDatabase(string name);
-        public List<global::MongoDB.Bson.BsonDocument> GetDocuments(global::MongoDB.Driver.IMongoCollection<global::MongoDB.Bson.BsonDocument> collection, global::MongoDB.Bson.BsonDocument parameters);
+        public System.Collections.Generic.List<global::MongoDB.Bson.BsonDocument> GetDocuments(global::MongoDB.Driver.IMongoCollection<global::MongoDB.Bson.BsonDocument> collection, global::MongoDB.Bson.BsonDocument parameters);
         public object GetValue(global::MongoDB.Bson.BsonDocument document, string key);
     }
 }
