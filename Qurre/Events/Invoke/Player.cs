@@ -5,6 +5,7 @@ namespace Qurre.Events.Invoke
     {
         public static void Ban(BanEvent ev);
         public static void Banned(BannedEvent ev);
+        public static void ChangeSpectate(ChangeSpectateEvent ev);
         public static void Cuff(CuffEvent ev);
         public static void Damage(DamageEvent ev);
         public static void Dead(DeadEvent ev);
@@ -43,7 +44,6 @@ namespace Qurre.Events.Invoke
         public static void Shooting(ShootingEvent ev);
         public static void SinkholeWalking(SinkholeWalkingEvent ev);
         public static void Spawn(SpawnEvent ev);
-        public static void Speak(SpeakEvent ev);
         public static void SyncData(SyncDataEvent ev);
         public static void TantrumWalking(TantrumWalkingEvent ev);
         public static void TeslaTrigger(TeslaTriggerEvent ev);

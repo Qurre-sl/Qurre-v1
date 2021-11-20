@@ -15,8 +15,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<TeslaTriggerEvent> TeslaTrigger;
         public static event Main.AllEvents<InteractGeneratorEvent> InteractGenerator;
         public static event Main.AllEvents<ShootingEvent> Shooting;
-        public static event Main.AllEvents<SpeakEvent> Speak;
-        public static event Main.AllEvents<RadioUpdateEvent> RadioUpdate;
+        public static event Main.AllEvents<SpawnEvent> Spawn;
         public static event Main.AllEvents<TransmitPlayerDataEvent> TransmitPlayerData;
         public static event Main.AllEvents<MicroHidUsingEvent> MicroHidUsing;
         public static event Main.AllEvents<RadioUsingEvent> RadioUsing;
@@ -25,8 +24,9 @@ namespace Qurre.Events
         public static event Main.AllEvents<FlashedEvent> Flashed;
         public static event Main.AllEvents<DropAmmoEvent> DropAmmo;
         public static event Main.AllEvents<ScpAttackEvent> ScpAttack;
-        public static event Main.AllEvents<SpawnEvent> Spawn;
         public static event Main.AllEvents<SinkholeWalkingEvent> SinkholeWalking;
+        public static event Main.AllEvents<RadioUpdateEvent> RadioUpdate;
+        public static event Main.AllEvents<TantrumWalkingEvent> TantrumWalking;
         public static event Main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
         public static event Main.AllEvents<LeaveEvent> Leave;
         public static event Main.AllEvents<BanEvent> Ban;
@@ -50,6 +50,6 @@ namespace Qurre.Events
         public static event Main.AllEvents<DropItemEvent> DropItem;
         public static event Main.AllEvents<JoinEvent> Join;
         public static event Main.AllEvents<DamageEvent> Damage;
-        public static event Main.AllEvents<TantrumWalkingEvent> TantrumWalking;
+        public static event Main.AllEvents<ChangeSpectateEvent> ChangeSpectate;
     }
 }

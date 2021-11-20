@@ -827,4 +827,27 @@ namespace Qurre.API.Events
         public global::Scp914.Scp914KnobSetting Setting { get; set; }
         public bool Allowed { get; set; }
     }
+    public class ChangeSpectateEvent : EventArgs
+    {
+        public ChangeSpectateEvent(Player pl, Player old, Player _new, bool allowed = true);
+
+        public Player Player { get; }
+        public Player OldTarget { get; }
+        public Player NewTarget { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class PressAltChatEvent : EventArgs
+    {
+        public PressAltChatEvent(Player pl, bool value);
+
+        public Player Player { get; }
+        public bool Value { get; set; }
+    }
+    public class PressPrimaryChatEvent : EventArgs
+    {
+        public PressPrimaryChatEvent(Player pl, bool value);
+
+        public Player Player { get; }
+        public bool Value { get; set; }
+    }
 }

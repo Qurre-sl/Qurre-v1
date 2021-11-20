@@ -116,6 +116,8 @@
     <Compile Include="API\Player.cs" />
     <Compile Include="API\Round.cs" />
     <Compile Include="Events\Alpha.cs" />
+    <Compile Include="Events\Voice.cs" />
+    <Compile Include="Events\Invoke\Voice.cs" />
     <Compile Include="Events\Report.cs" />
     <Compile Include="Events\Invoke\Alpha.cs" />
     <Compile Include="Events\Invoke\Report.cs" />
