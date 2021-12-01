@@ -10,6 +10,7 @@
         public global::UnityEngine.Vector3 SizeOfKiller { get; set; }
         public bool InProgress { get; set; }
         public float SizeOfTrigger { get; set; }
+        public string Name { get; set; }
 
         public void Destroy();
         public void Trigger(bool instant = false);

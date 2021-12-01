@@ -17,12 +17,18 @@
         Flashed = 12,
         Hemorrhage = 13,
         Invigorated = 14,
-        Panic = 15,
+        BodyshotReduction = 15,
         Poisoned = 16,
         Scp207 = 17,
-        Scp268 = 18,
+        Invisible = 18,
         SinkHole = 19,
         Visuals939 = 20,
-        Stained = 21
+        DamageReduction = 21,
+        MovementBoost = 22,
+        RainbowTaste = 23,
+        SeveredHands = 24,
+        Stained = 25,
+        Visual173Blink = 26,
+        Vitality = 27
     }
 }

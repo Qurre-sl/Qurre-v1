@@ -98,9 +98,8 @@ namespace Qurre.API.Events
     }
     public class RagdollSpawnEvent : EventArgs
     {
-        public RagdollSpawnEvent(Player killer, Player owner, Ragdoll ragdoll, bool allowed = true);
+        public RagdollSpawnEvent(Player owner, Ragdoll ragdoll, bool allowed = true);
 
-        public Player Killer { get; }
         public Player Owner { get; }
         public Ragdoll Ragdoll { get; }
         public bool Allowed { get; set; }
@@ -419,11 +418,13 @@ namespace Qurre.API.Events
     }
     public class DeadEvent : EventArgs
     {
-        public DeadEvent(Player killer, Player target, PlayerStats.HitInfo hitInfo);
+        public DeadEvent(Player killer, Player target, global::PlayerStatsSystem.DamageHandlerBase damageInfo, DamageTypes type);
 
         public Player Killer { get; }
         public Player Target { get; }
-        public PlayerStats.HitInfo HitInfo { get; set; }
+        public DamageTypes DamageType { get; }
+        public DamageTypesPrimitive PrimitiveType { get; }
+        public global::PlayerStatsSystem.DamageHandlerBase DamageInfo { get; set; }
     }
     public class EscapeEvent : EventArgs
     {
@@ -518,22 +519,24 @@ namespace Qurre.API.Events
     }
     public class DiesEvent : EventArgs
     {
-        public DiesEvent(Player killer, Player target, PlayerStats.HitInfo hitInfo, bool allowed = true);
+        public DiesEvent(Player killer, Player target, global::PlayerStatsSystem.DamageHandlerBase damageInfo, DamageTypes type, bool allowed = true);
 
         public Player Killer { get; }
         public Player Target { get; }
-        public PlayerStats.HitInfo HitInfo { get; }
+        public DamageTypes DamageType { get; }
+        public DamageTypesPrimitive PrimitiveType { get; }
+        public global::PlayerStatsSystem.DamageHandlerBase DamageInfo { get; }
         public bool Allowed { get; set; }
     }
     public class DamageEvent : EventArgs
     {
-        public DamageEvent(Player attacker, Player target, PlayerStats.HitInfo hitInformations, bool allowed = true);
+        public DamageEvent(Player attacker, Player target, global::PlayerStatsSystem.DamageHandlerBase dInfo, DamageTypes type, float amount, bool allowed = true);
 
         public Player Attacker { get; }
         public Player Target { get; }
-        public PlayerStats.HitInfo HitInformations { get; }
-        public int Time { get; }
-        public DamageTypes.DamageType DamageType { get; }
+        public global::PlayerStatsSystem.DamageHandlerBase DamageInfo { get; }
+        public DamageTypes DamageType { get; }
+        public DamageTypesPrimitive PrimitiveType { get; }
         public float Amount { get; set; }
         public bool Allowed { get; set; }
     }
@@ -665,11 +668,12 @@ namespace Qurre.API.Events
     }
     public class RadioUsingEvent : EventArgs
     {
-        public RadioUsingEvent(Player player, global::InventorySystem.Items.Radio.RadioItem radio, float battery, bool allowed = true);
+        public RadioUsingEvent(Player player, global::InventorySystem.Items.Radio.RadioItem radio, float battery, float сonsumption, bool allowed = true);
 
         public Player Player { get; }
         public global::InventorySystem.Items.Radio.RadioItem Radio { get; }
         public float Battery { get; set; }
+        public float Consumption { get; set; }
         public bool Allowed { get; set; }
     }
     public class FlashExplosionEvent : EventArgs
@@ -761,12 +765,10 @@ namespace Qurre.API.Events
     }
     public class ScpDeadAnnouncementEvent : EventArgs
     {
-        public ScpDeadAnnouncementEvent(Player killer, Role role, PlayerStats.HitInfo hitInfo, string groupId, bool allowed = true);
+        public ScpDeadAnnouncementEvent(Player scp, string cassieDeath, bool allowed = true);
 
-        public Player Killer { get; }
-        public Role Role { get; }
-        public PlayerStats.HitInfo HitInfo { get; set; }
-        public string GroupId { get; set; }
+        public Player Scp { get; }
+        public string CassieDeath { get; set; }
         public bool Allowed { get; set; }
     }
     public class CreatePickupEvent : EventArgs

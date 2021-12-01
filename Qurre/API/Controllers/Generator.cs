@@ -3,7 +3,7 @@
     public class Generator
     {
         public global::UnityEngine.GameObject GameObject { get; }
-        public string Name { get; }
+        public string Name { get; set; }
         public global::UnityEngine.Transform Transform { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
         public global::UnityEngine.Quaternion Rotation { get; set; }
