@@ -15,6 +15,7 @@ namespace Qurre.API
         public static List<Window> Windows { get; }
         public static List<Light> Lights { get; }
         public static List<Primitive> Primitives { get; }
+        public static List<ShootingTarget> ShootingTargets { get; }
         public static List<Pickup> Pickups { get; }
         public static float WalkSpeedMultiplier { get; set; }
         public static float SprintSpeedMultiplier { get; set; }

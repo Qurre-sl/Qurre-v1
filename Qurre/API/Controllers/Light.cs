@@ -2,7 +2,6 @@
 {
     public class Light
     {
-        public Light(global::AdminToys.LightSourceToy lightBase);
         public Light(global::UnityEngine.Vector3 position, global::UnityEngine.Color lightColor = null, float lightIntensivity = 1, float lightRange = 10);
 
         public global::UnityEngine.Vector3 Position { get; set; }

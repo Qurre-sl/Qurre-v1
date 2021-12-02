@@ -2,7 +2,9 @@
 {
     public class Ragdoll
     {
+        public Ragdoll(global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::PlayerStatsSystem.DamageHandlerBase handler, Player owner);
         public Ragdoll(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::PlayerStatsSystem.DamageHandlerBase handler, Player owner);
+        public Ragdoll(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::PlayerStatsSystem.DamageHandlerBase handler, string nickname, int id);
 
         public global::UnityEngine.GameObject GameObject { get; }
         public string Name { get; }
@@ -12,6 +14,8 @@
         public Player Owner { get; set; }
 
         public static Ragdoll Create(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::PlayerStatsSystem.DamageHandlerBase handler, Player owner);
+        public static Ragdoll Create(global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::PlayerStatsSystem.DamageHandlerBase handler, Player owner);
+        public static Ragdoll Create(RoleType roletype, global::UnityEngine.Vector3 pos, global::UnityEngine.Quaternion rot, global::PlayerStatsSystem.DamageHandlerBase handler, string nickname, int id);
         public void Destroy();
     }
 }
