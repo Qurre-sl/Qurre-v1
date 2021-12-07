@@ -8,6 +8,7 @@ namespace Qurre.Events.Invoke
         public static void ChangeSpectate(ChangeSpectateEvent ev);
         public static void Cuff(CuffEvent ev);
         public static void Damage(DamageEvent ev);
+        public static void DamageProcess(DamageProcessEvent ev);
         public static void Dead(DeadEvent ev);
         public static void Dies(DiesEvent ev);
         public static void DropAmmo(DropAmmoEvent ev);

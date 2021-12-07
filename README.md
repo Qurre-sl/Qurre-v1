@@ -46,6 +46,8 @@ Qurre_ScpTrigger173: false
 Qurre_Better268: false
 #If enabled, will spawn those who entered after the start of the round
 Qurre_LateJoinSpawn: true
+#Those who can use the "reload" command
+Qurre_ReloadAccess: owner, 746538986@steam,309800126721@discord
 Qurre_Banned: banned
 Qurre_Kicked: kicked
 Qurre_BanOrKick_msg: You have been %bok%.

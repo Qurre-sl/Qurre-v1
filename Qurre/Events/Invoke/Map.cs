@@ -3,6 +3,7 @@ namespace Qurre.Events.Invoke
 {
     public static class Map
     {
+        public static void ConvertUnitName(ConvertUnitNameEvent ev);
         public static void CreatePickup(CreatePickupEvent ev);
         public static void DoorDamage(DoorDamageEvent ev);
         public static void DoorLock(DoorLockEvent ev);

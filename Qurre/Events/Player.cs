@@ -26,8 +26,8 @@ namespace Qurre.Events
         public static event Main.AllEvents<ScpAttackEvent> ScpAttack;
         public static event Main.AllEvents<SinkholeWalkingEvent> SinkholeWalking;
         public static event Main.AllEvents<RadioUpdateEvent> RadioUpdate;
-        public static event Main.AllEvents<TantrumWalkingEvent> TantrumWalking;
         public static event Main.AllEvents<RechargeWeaponEvent> RechargeWeapon;
+        public static event Main.AllEvents<PickupItemEvent> PickupItem;
         public static event Main.AllEvents<LeaveEvent> Leave;
         public static event Main.AllEvents<BanEvent> Ban;
         public static event Main.AllEvents<KickEvent> Kick;
@@ -38,8 +38,9 @@ namespace Qurre.Events
         public static event Main.AllEvents<DeadEvent> Dead;
         public static event Main.AllEvents<EscapeEvent> Escape;
         public static event Main.AllEvents<CuffEvent> Cuff;
-        public static event Main.AllEvents<PickupItemEvent> PickupItem;
         public static event Main.AllEvents<UnCuffEvent> UnCuff;
+        public static event Main.AllEvents<DamageEvent> Damage;
+        public static event Main.AllEvents<DamageProcessEvent> DamageProcess;
         public static event Main.AllEvents<DiesEvent> Dies;
         public static event Main.AllEvents<InteractEvent> Interact;
         public static event Main.AllEvents<InteractDoorEvent> InteractDoor;
@@ -49,7 +50,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<DroppingItemEvent> DroppingItem;
         public static event Main.AllEvents<DropItemEvent> DropItem;
         public static event Main.AllEvents<JoinEvent> Join;
-        public static event Main.AllEvents<DamageEvent> Damage;
+        public static event Main.AllEvents<TantrumWalkingEvent> TantrumWalking;
         public static event Main.AllEvents<ChangeSpectateEvent> ChangeSpectate;
     }
 }

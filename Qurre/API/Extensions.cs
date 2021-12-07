@@ -14,6 +14,7 @@
         public static DamageTypesPrimitive GetDamageTypesPrimitive(this global::PlayerStatsSystem.DamageHandlerBase handler);
         public static Door GetDoor(this DoorType type);
         public static Door GetDoor(this global::Interactables.Interobjects.DoorUtils.DoorVariant door);
+        public static Door GetDoor(this GameObject gameObject);
         public static global::Interactables.Interobjects.DoorUtils.DoorVariant GetDoorPrefab(this DoorPrefabs prefab);
         public static Generator GetGenerator(this global::UnityEngine.GameObject gameObject);
         public static Generator GetGenerator(this global::MapGeneration.Distributors.Scp079Generator generator079);

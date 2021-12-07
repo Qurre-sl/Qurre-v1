@@ -17,5 +17,6 @@ namespace Qurre.Events
         public static event Main.AllEvents<UseLiftEvent> UseLift;
         public static event Main.AllEvents<ScpDeadAnnouncementEvent> ScpDeadAnnouncement;
         public static event Main.AllEvents<CreatePickupEvent> CreatePickup;
+        public static event Main.AllEvents<ConvertUnitNameEvent> ConvertUnitName;
     }
 }

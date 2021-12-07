@@ -768,7 +768,7 @@ namespace Qurre.API.Events
         public ScpDeadAnnouncementEvent(Player scp, string cassieDeath, bool allowed = true);
 
         public Player Scp { get; }
-        public string CassieDeath { get; set; }
+        public string CassieDeath { get; }
         public bool Allowed { get; set; }
     }
     public class CreatePickupEvent : EventArgs
@@ -851,5 +851,23 @@ namespace Qurre.API.Events
 
         public Player Player { get; }
         public bool Value { get; set; }
+    }
+    public class ConvertUnitNameEvent : EventArgs
+    {
+        public ConvertUnitNameEvent(string unitName);
+
+        public string UnitName { get; set; }
+    }
+    public class DamageProcessEvent : EventArgs
+    {
+        public DamageProcessEvent(Player attacker, Player target, global::PlayerStatsSystem.DamageHandlerBase dInfo, DamageTypes type, float amount, bool allowed = true);
+
+        public Player Attacker { get; }
+        public Player Target { get; }
+        public global::PlayerStatsSystem.DamageHandlerBase DamageInfo { get; }
+        public DamageTypes DamageType { get; }
+        public DamageTypesPrimitive PrimitiveType { get; }
+        public float Amount { get; set; }
+        public bool Allowed { get; set; }
     }
 }
