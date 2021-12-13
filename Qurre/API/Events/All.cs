@@ -860,7 +860,7 @@ namespace Qurre.API.Events
     }
     public class DamageProcessEvent : EventArgs
     {
-        public DamageProcessEvent(Player attacker, Player target, global::PlayerStatsSystem.DamageHandlerBase dInfo, DamageTypes type, float amount, bool allowed = true);
+        public DamageProcessEvent(Player attacker, Player target, global::PlayerStatsSystem.DamageHandlerBase dInfo, DamageTypes type, float amount, bool friendlyFire, bool allowed = true);
 
         public Player Attacker { get; }
         public Player Target { get; }
@@ -868,6 +868,7 @@ namespace Qurre.API.Events
         public DamageTypes DamageType { get; }
         public DamageTypesPrimitive PrimitiveType { get; }
         public float Amount { get; set; }
+        public bool FriendlyFire { get; set; }
         public bool Allowed { get; set; }
     }
 }

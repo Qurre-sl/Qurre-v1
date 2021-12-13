@@ -136,7 +136,8 @@ namespace Qurre.API
         public void ClearBroadcasts();
         public void ClearInventory();
         public int CountItems(ItemType item);
-        public bool Damage(float damage, global::PlayerStatsSystem.DeathTranslation deathReason, Player attacker = null);
+        public bool Damage(float damage, global::PlayerStatsSystem.DeathTranslation deathReason);
+        public bool Damage(float damage, global::PlayerStatsSystem.DeathTranslation deathReason, Player attacker);
         public bool Damage(float damage, string deathReason);
         public bool DealDamage(global::PlayerStatsSystem.DamageHandlerBase handler);
         public void DimScreen();
