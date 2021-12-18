@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qurre.API.Controllers.Items;
+using System;
 using System.Collections.Generic;
 namespace Qurre.API.Events
 {
@@ -456,10 +457,10 @@ namespace Qurre.API.Events
     }
     public class DropItemEvent : EventArgs
     {
-        public DropItemEvent(Player player, Item item);
+        public DropItemEvent(Player player, Pickup item);
 
         public Player Player { get; }
-        public Item Item { get; }
+        public Pickup Item { get; }
     }
     public class DroppingItemEvent : EventArgs
     {
