@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Addons\ListConfigs.cs" />
+    <Compile Include="API\Addons\KillElement.cs" />
+    <Compile Include="API\Addons\IConfig.cs" />
     <Compile Include="API\Audio.cs" />
     <Compile Include="API\Config.cs" />
     <Compile Include="API\Controllers\Cassie.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="API\DataBase\DataBase.cs" />
     <Compile Include="API\Extensions.cs" />
     <Compile Include="API\Objects\AmmoType.cs" />
+    <Compile Include="API\Objects\AuthType.cs" />
     <Compile Include="API\Objects\ShootingTargetType.cs" />
     <Compile Include="API\Objects\DamageTypesPrimitive.cs" />
     <Compile Include="API\Objects\DamageTypes.cs" />

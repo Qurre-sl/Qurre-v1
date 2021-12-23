@@ -872,4 +872,22 @@ namespace Qurre.API.Events
         public bool FriendlyFire { get; set; }
         public bool Allowed { get; set; }
     }
+    public class ZoomingEvent : EventArgs
+    {
+        public ZoomingEvent(Player player, Item item, global::InventorySystem.Items.Firearms.BasicMessages.RequestType request, bool value, bool allowed = true);
+
+        public Player Player { get; }
+        public Item Item { get; }
+        public global::InventorySystem.Items.Firearms.BasicMessages.RequestType Request { get; }
+        public bool Value { get; }
+        public bool Allowed { get; set; }
+    }
+    public class CoinFlipEvent : EventArgs
+    {
+        public CoinFlipEvent(Player player, bool tails, bool allowed = true);
+
+        public Player Player { get; }
+        public bool Tails { get; set; }
+        public bool Allowed { get; set; }
+    }
 }

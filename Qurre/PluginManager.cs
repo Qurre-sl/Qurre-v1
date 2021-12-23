@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 namespace Qurre
 {
-    public class PluginManager
+    public static class PluginManager
     {
         public static readonly List<Plugin> plugins;
         public static string LogsDirectory { get; }
+        public static string CustomConfigsDirectory { get; }
         public static string ConfigsDirectory { get; }
         public static string LoadedDependenciesDirectory { get; }
         public static string PluginsDirectory { get; }
@@ -16,7 +17,7 @@ namespace Qurre
 
         public static void Disable();
         public static void Enable();
-        public static void LoadPlugin(string mod);
+        public static void LoadPlugin(Assembly assembly);
         public static void Reload();
         public static void ReloadPlugins();
     }

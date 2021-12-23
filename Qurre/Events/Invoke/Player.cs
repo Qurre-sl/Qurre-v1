@@ -6,6 +6,7 @@ namespace Qurre.Events.Invoke
         public static void Ban(BanEvent ev);
         public static void Banned(BannedEvent ev);
         public static void ChangeSpectate(ChangeSpectateEvent ev);
+        public static void CoinFlip(CoinFlipEvent ev);
         public static void Cuff(CuffEvent ev);
         public static void Damage(DamageEvent ev);
         public static void DamageProcess(DamageProcessEvent ev);
@@ -51,5 +52,6 @@ namespace Qurre.Events.Invoke
         public static void ThrowItem(ThrowItemEvent ev);
         public static void TransmitPlayerData(TransmitPlayerDataEvent ev);
         public static void UnCuff(UnCuffEvent ev);
+        public static void Zooming(ZoomingEvent ev);
     }
 }
