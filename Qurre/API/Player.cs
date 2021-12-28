@@ -202,7 +202,6 @@ namespace Qurre.API
         public Throwable ThrowGrenade(GrenadeType type, bool fullForce = true);
         public void ThrowItem(Throwable throwable, bool fullForce = true);
         public bool TryGetEffect(EffectType effect, out global::CustomPlayerEffects.PlayerEffect playerEffect);
-
         [DefaultMember("Item")]
         public class AmmoBoxManager
         {
