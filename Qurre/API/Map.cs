@@ -8,6 +8,7 @@ namespace Qurre.API
         public static List<Lift> Lifts { get; }
         public static List<Ragdoll> Ragdolls { get; }
         public static List<Room> Rooms { get; }
+        public static List<Sinkhole> Sinkholes { get; }
         public static List<Camera> Cameras { get; }
         public static List<Tesla> Teslas { get; }
         public static List<WorkStation> WorkStations { get; }

@@ -55,6 +55,7 @@
     <Compile Include="API\Controllers\CassieList.cs" />
     <Compile Include="API\Controllers\Camera.cs" />
     <Compile Include="API\Controllers\Bot.cs" />
+    <Compile Include="API\Controllers\Sinkhole.cs" />
     <Compile Include="API\Controllers\ShootingTarget.cs" />
     <Compile Include="API\Controllers\Light.cs" />
     <Compile Include="API\Controllers\Primitive.cs" />

@@ -17,8 +17,8 @@
         public static Door GetDoor(this global::UnityEngine.GameObject gameObject);
         public static Door GetDoor(this global::Interactables.Interobjects.DoorUtils.DoorVariant door);
         public static global::Interactables.Interobjects.DoorUtils.DoorVariant GetDoorPrefab(this DoorPrefabs prefab);
-        public static Generator GetGenerator(this global::UnityEngine.GameObject gameObject);
         public static Generator GetGenerator(this global::MapGeneration.Distributors.Scp079Generator generator079);
+        public static Generator GetGenerator(this global::UnityEngine.GameObject gameObject);
         public static ItemType GetItemType(this AmmoType type);
         public static Lift GetLift(this LiftType type);
         public static Lift GetLift(this Lift lift);
@@ -28,6 +28,8 @@
         public static Room GetRoom(this global::MapGeneration.RoomIdentifier identifier);
         public static Room GetRoom(this RoomType type);
         public static Room GetRoom(this global::MapGeneration.RoomName type);
+        public static Sinkhole GetSinkhole(this SinkholeEnvironmentalHazard hole);
+        public static Team GetTeam(this RoleType roleType);
         public static Tesla GetTesla(this global::UnityEngine.GameObject gameObject);
         public static Tesla GetTesla(this TeslaGate teslaGate);
         public static Window GetWindow(this BreakableWindow station);
