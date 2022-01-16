@@ -57,4 +57,8 @@ Qurre_DataBase: undefined
 ```
 ## [Example Plugin](https://github.com/Qurre-Team/example-plugin)
 
-Based on [Exiled](https://github.com/Exiled-Team/EXILED) & [Synapse](https://github.com/SynapseSL/Synapse)
+## Credits
+
+**Assembly-CSharp - Owned by [Northwood Studios](https://github.com/northwood-studios)**
+
+**Some parts of the code may be similar to [Exiled](https://github.com/Exiled-Team/EXILED) or [Synapse](https://github.com/SynapseSL/Synapse)**
