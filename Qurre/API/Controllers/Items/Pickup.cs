@@ -5,6 +5,7 @@
         public Pickup(global::InventorySystem.Items.Pickups.ItemPickupBase pickupBase);
         public Pickup(ItemType type);
 
+        public string Tag { get; set; }
         public ushort Serial { get; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public float Weight { get; set; }

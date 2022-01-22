@@ -5,6 +5,7 @@
         public Item(global::InventorySystem.Items.ItemBase itemBase);
         public Item(ItemType type);
 
+        public string Tag { get; set; }
         public ushort Serial { get; }
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::InventorySystem.Items.ItemBase Base { get; }

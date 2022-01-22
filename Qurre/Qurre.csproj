@@ -47,6 +47,10 @@
     <Compile Include="API\Addons\ListConfigs.cs" />
     <Compile Include="API\Addons\KillElement.cs" />
     <Compile Include="API\Addons\IConfig.cs" />
+    <Compile Include="API\Addons\Textures\ModelPrimitive.cs" />
+    <Compile Include="API\Addons\Textures\ModelLight.cs" />
+    <Compile Include="API\Addons\Textures\ModelEnums.cs" />
+    <Compile Include="API\Addons\Textures\Model.cs" />
     <Compile Include="API\Audio.cs" />
     <Compile Include="API\Config.cs" />
     <Compile Include="API\Controllers\Cassie.cs" />

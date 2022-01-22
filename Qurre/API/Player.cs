@@ -15,13 +15,12 @@ namespace Qurre.API
         public Player(ReferenceHub RH);
         public Player(global::UnityEngine.GameObject gameObject);
 
-        public static Dictionary<string, Player> UserIDPlayers { get; set; }
+        public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
         public static Dictionary<string, Player> ArgsPlayers { get; set; }
         public static IEnumerable<Player> List { get; }
-        public static Dictionary<global::UnityEngine.GameObject, Player> Dictionary { get; }
+        public static Dictionary<string, Player> UserIDPlayers { get; set; }
         public static MethodInfo SendSpawnMessage { get; }
-        public Team Team { get; }
-        public string CustomUserId { get; set; }
+        public Faction Faction { get; }
         public string DisplayNickname { get; set; }
         public string Nickname { get; }
         public bool DoNotTrack { get; }
@@ -34,14 +33,15 @@ namespace Qurre.API
         public global::UnityEngine.Vector3 Scale { get; set; }
         public global::UnityEngine.GameObject LookingAt { get; }
         public bool Noclip { get; set; }
-        public string UserId { get; set; }
-        public RoleType Role { get; set; }
-        public Faction Faction { get; }
+        public Team Team { get; }
+        public string Ip { get; }
+        public string CustomUserId { get; set; }
+        public PlayerMovementState MoveState { get; set; }
         public Side Side { get; }
-        public AuthType AuthType { get; }
-        public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
-        public string Tag { get; set; }
-        public Escape Escape { get; }
+        public RoleType Role { get; set; }
+        public string UserId { get; set; }
+        public PlayerEffectsController PlayerEffectsController { get; }
+        public int Id { get; set; }
         public AmmoBoxManager Ammo { get; }
         public global::Hints.HintDisplay HintDisplay { get; }
         public global::UnityEngine.Transform CameraTransform { get; }
@@ -49,22 +49,21 @@ namespace Qurre.API
         public global::InventorySystem.Inventory Inventory { get; }
         public global::Mirror.NetworkIdentity NetworkIdentity { get; }
         public global::Assets._Scripts.Dissonance.DissonanceUserSetup Dissonance { get; }
-        public int Id { get; set; }
         public ServerRoles ServerRoles { get; }
-        public AnimationController AnimationController { get; }
+        public AuthType AuthType { get; }
+        public CharacterClassManager ClassManager { get; }
         public global::PlayerStatsSystem.PlayerStats PlayerStats { get; }
         public Scp079PlayerScript Scp079PlayerScript { get; }
         public Scp106PlayerScript Scp106PlayerScript { get; }
-        public PlayerMovementState MoveState { get; set; }
-        public PlayerEffectsController PlayerEffectsController { get; }
+        public global::RemoteAdmin.QueryProcessor QueryProcessor { get; }
+        public global::Mirror.NetworkConnection Connection { get; }
         public NicknameSync NicknameSync { get; }
         public PlayerMovementSync Movement { get; }
-        public CharacterClassManager ClassManager { get; }
-        public string Ip { get; }
-        public bool Zoomed { get; }
+        public string Tag { get; set; }
+        public AnimationController AnimationController { get; }
         public bool IsHost { get; }
-        public string HiddenTag { get; }
-        public bool TagHidden { get; set; }
+        public bool Invisible { get; set; }
+        public bool Zoomed { get; }
         public ZoneType Zone { get; }
         public Room Room { get; set; }
         public CommandSender Sender { get; }
@@ -72,10 +71,10 @@ namespace Qurre.API
         public string GroupName { get; set; }
         public UserGroup Group { get; set; }
         public string RoleColor { get; set; }
-        public global::PlayableScps.PlayableScp CurrentScp { get; set; }
         public string RoleName { get; set; }
+        public string UnitName { get; set; }
+        public bool BadgeHidden { get; set; }
         public float AliveTime { get; }
-        public long DeathTime { get; set; }
         public string GlobalBadge { get; }
         public int Ping { get; }
         public ushort Ammo12Gauge { get; set; }
@@ -83,23 +82,25 @@ namespace Qurre.API
         public ushort Ammo44Cal { get; set; }
         public ushort Ammo762 { get; set; }
         public ushort Ammo9 { get; set; }
-        public string UnitName { get; set; }
-        public global::Mirror.NetworkConnection Connection { get; }
-        public PlayableScpsController ScpsController { get; }
-        public Stamina Stamina { get; }
+        [Obsolete("Use 'Movement'")]
+        public PlayerMovementSync PlayerMovementSync { get; }
+        [Obsolete("Use 'HiddenBadge'")]
+        public string HiddenTag { get; }
+        public long DeathTime { get; set; }
         public bool FriendlyFire { get; set; }
-        public Radio Radio { get; }
+        public string HiddenBadge { get; }
+        public PlayableScpsController ScpsController { get; }
         public bool UseStamina { get; set; }
-        public bool Invisible { get; set; }
+        public Escape Escape { get; }
         public bool Bot { get; }
         public bool BlockSpawnTeleport { get; set; }
         public bool BypassMode { get; set; }
         public bool Muted { get; set; }
         public bool IntercomMuted { get; set; }
-        public float StaminaUsage { get; set; }
         public bool GodMode { get; set; }
+        public float Hp { get; set; }
+        public global::PlayableScps.PlayableScp CurrentScp { get; set; }
         public int MaxHp { get; set; }
-        public float Ahp { get; set; }
         public float MaxAhp { get; set; }
         public List<global::PlayerStatsSystem.AhpStat.AhpProcess> AhpActiveProcesses { get; }
         public global::InventorySystem.Items.ItemIdentifier CurrentItem { get; set; }
@@ -107,34 +108,37 @@ namespace Qurre.API
         public IReadOnlyCollection<Item> AllItems { get; }
         public ItemType ItemTypeInHand { get; }
         public Item ItemInHand { get; set; }
-        public float Hp { get; set; }
-        public global::UnityEngine.GameObject GameObject { get; }
-        public int KillsCount { get; }
-        public ListBroadcasts Broadcasts { get; }
-        public ReferenceHub ReferenceHub { get; }
+        public Stamina Stamina { get; }
+        public float StaminaUsage { get; set; }
+        public float Ahp { get; set; }
+        public Radio Radio { get; }
         public int DeathsCount { get; }
-        [Obsolete("Use 'Movement'")]
-        public PlayerMovementSync PlayerMovementSync { get; }
-        public IEnumerator<KillElement> Kills { get; }
         public GameConsoleTransmission GameConsoleTransmission { get; }
+        public IEnumerator<KillElement> Kills { get; }
+        public int KillsCount { get; }
+        public global::UnityEngine.GameObject GameObject { get; }
+        public ReferenceHub ReferenceHub { get; }
+        public ListBroadcasts Broadcasts { get; }
+        [Obsolete("Use 'BadgeHidden'")]
+        public bool TagHidden { get; set; }
 
-        public static Player Get(string args);
-        public static Player Get(int playerId);
         public static Player Get(uint netId);
+        public static Player Get(string args);
+        public static Player Get(global::UnityEngine.GameObject gameObject);
+        public static Player Get(int playerId);
+        public static Player Get(ReferenceHub referenceHub);
         public static IEnumerable<Player> Get(Team team);
         public static IEnumerable<Player> Get(RoleType role);
         public static Player Get(CommandSender sender);
-        public static Player Get(global::UnityEngine.GameObject gameObject);
-        public static Player Get(ReferenceHub referenceHub);
         public void AddDisplayInfo(PlayerInfoArea playerInfo);
-        public void AddItem(ItemType itemType, int amount);
-        public void AddItem(List<ItemType> items);
-        public Item AddItem(ItemType itemType);
         public void AddItem(List<Item> items);
-        public void AddItem(Item item, int amount);
         public Item AddItem(Pickup pickup);
         public Item AddItem(global::InventorySystem.Items.ItemBase itemBase);
         public void AddItem(Item item);
+        public void AddItem(List<ItemType> items);
+        public void AddItem(ItemType itemType, int amount);
+        public void AddItem(Item item, int amount);
+        public Item AddItem(ItemType itemType);
         public void Ban(int duration, string reason, string issuer = "API");
         public void BodyDelete();
         public Broadcast Broadcast(ushort time, string message, bool instant = false);
@@ -146,14 +150,14 @@ namespace Qurre.API
         public void ClearBroadcasts();
         public void ClearInventory();
         public int CountItems(ItemType item);
-        public bool Damage(float damage, global::PlayerStatsSystem.DeathTranslation deathReason, Player attacker);
-        public bool Damage(float damage, global::PlayerStatsSystem.DeathTranslation deathReason);
         public bool Damage(float damage, string deathReason);
+        public bool Damage(float damage, global::PlayerStatsSystem.DeathTranslation deathReason);
+        public bool Damage(float damage, global::PlayerStatsSystem.DeathTranslation deathReason, Player attacker);
         public bool DealDamage(global::PlayerStatsSystem.DamageHandlerBase handler);
         public void DimScreen();
         public void DisableAllEffects();
-        public void DisableEffect(EffectType effect);
         public void DisableEffect<T>() where T : global::CustomPlayerEffects.PlayerEffect;
+        public void DisableEffect(EffectType effect);
         public void Disconnect(string reason = null);
         public float DistanceTo(global::UnityEngine.GameObject Object);
         public float DistanceTo(global::UnityEngine.Vector3 position);
@@ -173,8 +177,8 @@ namespace Qurre.API
         public bool HasItem(ItemType item);
         public void HideTag();
         public void Kick(string reason, string issuer = "API");
-        public void Kill(string deathReason = "");
         public void Kill(global::PlayerStatsSystem.DeathTranslation deathReason);
+        public void Kill(string deathReason = "");
         public void OpenReportWindow(string text);
         public void PlaceBlood(global::UnityEngine.Vector3 pos, int type = 1, float size = 2);
         public void PlayFallSound();
@@ -202,6 +206,7 @@ namespace Qurre.API
         public Throwable ThrowGrenade(GrenadeType type, bool fullForce = true);
         public void ThrowItem(Throwable throwable, bool fullForce = true);
         public bool TryGetEffect(EffectType effect, out global::CustomPlayerEffects.PlayerEffect playerEffect);
+
         [DefaultMember("Item")]
         public class AmmoBoxManager
         {
