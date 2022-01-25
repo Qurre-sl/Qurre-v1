@@ -6,6 +6,7 @@
         public Radio(ItemType type);
 
         public global::InventorySystem.Items.Radio.RadioItem Base { get; }
+        public byte Battery { get; set; }
         public RadioStatus Status { get; set; }
         public RadioStatusSettings StatusSettings { get; set; }
 

@@ -9,6 +9,7 @@
         public byte Ammo { get; set; }
         public byte MaxAmmo { get; }
         public AmmoType AmmoType { get; }
+        public bool FlashlightEnabled { get; }
         public global::InventorySystem.Items.Firearms.Attachments.FirearmAttachment[] Attachments { get; set; }
         public float FireRate { get; set; }
         public global::CameraShaking.RecoilSettings Recoil { get; set; }

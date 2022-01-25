@@ -2,7 +2,6 @@
 {
     public class Primitive
     {
-        public Primitive(global::UnityEngine.PrimitiveType type);
         public Primitive(global::UnityEngine.PrimitiveType type, global::UnityEngine.Vector3 position, global::UnityEngine.Color color = null, global::UnityEngine.Quaternion rotation = null, global::UnityEngine.Vector3 size = null);
 
         public global::UnityEngine.Vector3 Position { get; set; }

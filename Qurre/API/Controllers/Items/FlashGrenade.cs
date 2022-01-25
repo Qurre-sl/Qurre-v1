@@ -1,5 +1,6 @@
 ﻿namespace Qurre.API.Controllers.Items
 {
+    [System.Obsolete("Use 'GrenadeFlash'")]
     public class FlashGrenade : Throwable
     {
         public FlashGrenade(global::InventorySystem.Items.ThrowableProjectiles.ThrowableItem itemBase);

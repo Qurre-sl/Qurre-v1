@@ -6,5 +6,6 @@
         public Ammo(ItemType type);
 
         public global::InventorySystem.Items.Firearms.Ammo.AmmoItem Base { get; }
+        public int UnitPrice { get; set; }
     }
 }

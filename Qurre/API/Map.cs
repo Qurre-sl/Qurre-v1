@@ -49,6 +49,5 @@ namespace Qurre.API
         public static void SetIntercomSpeaker(Player player);
         public static void ShakeScreen(float times);
         public static void ShowHint(string message, float duration);
-        public static void SpawnGrenade(string grenadeType, global::UnityEngine.Vector3 position);
     }
 }
