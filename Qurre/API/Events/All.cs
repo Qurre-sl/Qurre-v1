@@ -891,4 +891,30 @@ namespace Qurre.API.Events
         public bool Tails { get; set; }
         public bool Allowed { get; set; }
     }
+    public class PreWindupEvent : EventArgs
+    {
+        public PreWindupEvent(global::PlayableScps.Scp096 scp096, Player player, float delay, bool allowed = true);
+
+        public global::PlayableScps.Scp096 Scp096 { get; }
+        public Player Player { get; }
+        public float Delay { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class StartPryGateEvent : EventArgs
+    {
+        public StartPryGateEvent(global::PlayableScps.Scp096 scp096, Player player, Door gate, bool allowed = true);
+
+        public global::PlayableScps.Scp096 Scp096 { get; }
+        public Player Player { get; }
+        public Door Gate { get; }
+        public bool Allowed { get; set; }
+    }
+    public class EndPryGateEvent : EventArgs
+    {
+        public EndPryGateEvent(global::PlayableScps.Scp096 scp096, Player player, Door gate);
+
+        public global::PlayableScps.Scp096 Scp096 { get; }
+        public Player Player { get; }
+        public Door Gate { get; }
+    }
 }

@@ -19,6 +19,9 @@ namespace Qurre.Events
         public static event Main.AllEvents<WindupEvent> Windup;
         public static event Main.AllEvents<CalmDownEvent> CalmDown;
         public static event Main.AllEvents<AddTargetEvent> AddTarget;
+        public static event Main.AllEvents<PreWindupEvent> PreWindup;
+        public static event Main.AllEvents<EndPryGateEvent> EndPryGate;
+        public static event Main.AllEvents<StartPryGateEvent> StartPryGate;
     }
     public static class Scp106
     {
