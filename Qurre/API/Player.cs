@@ -97,6 +97,9 @@ namespace Qurre.API
         public bool BypassMode { get; set; }
         public bool Muted { get; set; }
         public bool IntercomMuted { get; set; }
+        public void MuteInRound(bool value);
+        public VoicechatMuteStatus MuteStatus { get; set; }
+        public SpeakingFlags SpeakingFlags { get; set; }
         public bool GodMode { get; set; }
         public float Hp { get; set; }
         public global::PlayableScps.PlayableScp CurrentScp { get; set; }
