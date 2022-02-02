@@ -5,9 +5,10 @@ namespace Qurre.API.Events
 {
     public class BlinkEvent : EventArgs
     {
-        public BlinkEvent(Player scp, global::UnityEngine.Vector3 pos, bool allowed = true);
+        public BlinkEvent(Player scp, global::UnityEngine.Vector3 pos, List<Player> targets, bool allowed = true);
 
         public Player Scp { get; }
+        public List<Player> Targets { get; }
         public global::UnityEngine.Vector3 Position { get; set; }
         public bool Allowed { get; set; }
     }
