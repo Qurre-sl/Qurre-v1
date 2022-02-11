@@ -1,4 +1,5 @@
-﻿using Qurre.API.Controllers.Items;
+﻿using Qurre.API.Controllers;
+using Qurre.API.Controllers.Items;
 using System;
 using System.Collections.Generic;
 namespace Qurre.API.Events
@@ -917,5 +918,128 @@ namespace Qurre.API.Events
         public global::PlayableScps.Scp096 Scp096 { get; }
         public Player Player { get; }
         public Door Gate { get; }
+    }
+    public class ChangeCameraEvent : EventArgs
+    {
+        public ChangeCameraEvent(Player player, Camera camera, float powerCost, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public Camera Camera { get; set; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class Scp079InteractDoorEvent : EventArgs
+    {
+        public Scp079InteractDoorEvent(Player scp, Door door, float power, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public Door Door { get; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+
+    public class Scp079LockDoorEvent : EventArgs
+    {
+        public Scp079LockDoorEvent(Player scp, Door door, float power, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public Door Door { get; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class Scp079ElevatorTeleportEvent : EventArgs
+    {
+        public Scp079ElevatorTeleportEvent(Player scp, float power, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class Scp079InteractLiftEvent : EventArgs
+    {
+        public Scp079InteractLiftEvent(Player scp, Lift lift, float power, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public Lift Lift { get; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class Scp079InteractTeslaEvent : EventArgs
+    {
+        public Scp079InteractTeslaEvent(Player scp, Tesla tesla, float power, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public Tesla Tesla { get; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class Scp079LockdownEvent : EventArgs
+    {
+        public Scp079LockdownEvent(Player scp, Room room, List<Door> doors, float power, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public Room Room { get; }
+
+        public List<Door> Doors { get; set; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class Scp079SpeakerEvent : EventArgs
+    {
+        public Scp079SpeakerEvent(Player scp, GameObject speaker, Objects.Scp079SpeakerType type, float power, bool allowed = true);
+
+        public Player Scp079 { get; }
+
+        public Objects.Scp079SpeakerType Type { get; }
+
+        public GameObject SpeakerObject { get; }
+
+        public float PowerCost { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class ShowBadgeEvent : EventArgs
+    {
+        public ShowBadgeEvent(Player player, string badge, bool global, bool allowed = true);
+
+        public Player Player { get; }
+
+        public bool Global { get; }
+
+        public string Badge { get; set; }
+
+        public bool Allowed { get; set; }
+    }
+    public class HideBadgeEvent : EventArgs
+    {
+        public HideBadgeEvent(Player player, string badge, bool global, bool allowed = true);
+
+        public Player Player { get; }
+
+        public bool Global { get; }
+
+        public string Badge { get; set; }
+
+        public bool Allowed { get; set; }
     }
 }

@@ -54,5 +54,7 @@ namespace Qurre.Events
         public static event Main.AllEvents<LeaveEvent> Leave;
         public static event Main.AllEvents<DamageProcessEvent> DamageProcess;
         public static event Main.AllEvents<CoinFlipEvent> CoinFlip;
+        public static event Main.AllEvents<HideBadgeEvent> HideBadge;
+        public static event Main.AllEvents<ShowBadgeEvent> ShowBadge;
     }
 }

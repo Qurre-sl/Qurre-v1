@@ -53,5 +53,7 @@ namespace Qurre.Events.Invoke
         public static void TransmitPlayerData(TransmitPlayerDataEvent ev);
         public static void UnCuff(UnCuffEvent ev);
         public static void Zooming(ZoomingEvent ev);
+        public static void HideBadge(HideBadgeEvent ev);
+        public static void ShowBadge(ShowBadgeEvent ev);
     }
 }

@@ -21,6 +21,7 @@
         public global::UnityEngine.Color LightColor { get; set; }
         public float LightIntensity { get; set; }
         public bool IsLightsOff { get; }
+		public Tesla Tesla { get; }
 
         public void LightsOff(float duration);
     }

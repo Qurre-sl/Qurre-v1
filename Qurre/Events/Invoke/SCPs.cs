@@ -11,6 +11,14 @@ namespace Qurre.Events.Invoke
         public static void GeneratorActivate(GeneratorActivateEvent ev);
         public static void GetEXP(GetEXPEvent ev);
         public static void GetLVL(GetLVLEvent ev);
+        public static void ChangeCamera(ChangeCameraEvent ev);
+        public static void InteractDoor(Scp079InteractDoorEvent ev);
+        public static void LockDoor(Scp079LockDoorEvent ev);
+        public static void Lockdown(Scp079LockdownEvent ev);
+        public static void Speaker(Scp079SpeakerEvent ev);
+        public static void ElevatorTeleport(Scp079ElevatorTeleportEvent ev);
+        public static void InteractLift(Scp079InteractLiftEvent ev);
+        public static void InteractTesla(Scp079InteractTeslaEvent ev);
     }
     public static class Scp096
     {

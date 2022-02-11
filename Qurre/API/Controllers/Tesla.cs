@@ -10,6 +10,10 @@
         public global::UnityEngine.Vector3 SizeOfKiller { get; set; }
         public bool InProgress { get; set; }
         public float SizeOfTrigger { get; set; }
+		public List<RoleType> ImmunityRoles { get; set; }
+        public List<Player> ImmunityPlayers { get; set; }
+        public bool Enable { get; set; }
+        public bool Allow079Interact { get; set; }
         public string Name { get; set; }
 
         public void Destroy();

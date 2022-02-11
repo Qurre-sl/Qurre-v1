@@ -8,6 +8,7 @@
         public Camera079 Camera079 { get; set; }
         public Camera Camera { get; set; }
         public float MaxEnergy { get; set; }
+		public float LockdownDuration { get; set; }
         public float Energy { get; set; }
         public float Exp { get; set; }
         public string Speaker { get; set; }

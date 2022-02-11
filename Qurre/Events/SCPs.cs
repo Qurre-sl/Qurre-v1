@@ -12,6 +12,14 @@ namespace Qurre.Events
         public static event Main.AllEvents<GeneratorActivateEvent> GeneratorActivate;
         public static event Main.AllEvents<GetEXPEvent> GetEXP;
         public static event Main.AllEvents<GetLVLEvent> GetLVL;
+        public static event Main.AllEvents<ChangeCameraEvent> ChangeCamera;
+        public static event Main.AllEvents<Scp079InteractDoorEvent> InteractDoor;
+        public static event Main.AllEvents<Scp079LockDoorEvent> LockDoor;
+        public static event Main.AllEvents<Scp079SpeakerEvent> Speaker;
+        public static event Main.AllEvents<Scp079ElevatorTeleportEvent> ElevatorTeleport;
+        public static event Main.AllEvents<Scp079InteractLiftEvent> InteractLift;
+        public static event Main.AllEvents<Scp079InteractTeslaEvent> InteractTesla;
+        public static event Main.AllEvents<Scp079LockdownEvent> Lockdown;
     }
     public static class Scp096
     {
