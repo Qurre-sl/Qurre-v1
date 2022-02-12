@@ -980,13 +980,15 @@ namespace Qurre.API.Events
     }
     public class Scp079InteractTeslaEvent : EventArgs
     {
-        public Scp079InteractTeslaEvent(Player scp, Tesla tesla, float power, bool allowed = true);
+        public Scp079InteractTeslaEvent(Player scp, Tesla tesla, float power, bool instant = true, bool allowed = true);
 
         public Player Scp079 { get; }
 
         public Tesla Tesla { get; }
 
         public float PowerCost { get; set; }
+		
+		public bool Instant { get; set; }
 
         public bool Allowed { get; set; }
     }

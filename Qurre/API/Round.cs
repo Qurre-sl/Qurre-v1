@@ -16,6 +16,8 @@ namespace Qurre.API
         public static DateTime StartedTime { get; }
         public static int ScpKills { get; set; }
         public static int EscapedScientists { get; set; }
+		public static int UnitMaxCode { get; set; }
+		public static Dictionary<SpawnableTeamType, List<string>> UnitsToGenerate { get; }
 
         public static void AddUnit(TeamUnitType team, string unit);
         public static void CallCICar();

@@ -16,6 +16,9 @@
         public static Door GetDoor(this DoorType type);
         public static Door GetDoor(this global::UnityEngine.GameObject gameObject);
         public static Door GetDoor(this global::Interactables.Interobjects.DoorUtils.DoorVariant door);
+		public static Controllers.Camera GetCamera(this Camera079 cam);
+		public static Controllers.Camera GetCamera(this GameObject obj);
+		public static Controllers.Camera GetCamera(this ushort id);
         public static global::Interactables.Interobjects.DoorUtils.DoorVariant GetDoorPrefab(this DoorPrefabs prefab);
         public static Generator GetGenerator(this global::MapGeneration.Distributors.Scp079Generator generator079);
         public static Generator GetGenerator(this global::UnityEngine.GameObject gameObject);
