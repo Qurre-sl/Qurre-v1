@@ -61,7 +61,7 @@ Qurre_DataBase: undefined
 
 **0Harmony - Owned by [Andreas Pardeike](https://github.com/pardeike)**
 
-**MongoDB.* - Owned by [MongoDB](https://github.com/mongodb)**
+**MongoDB.\* - Owned by [MongoDB](https://github.com/mongodb)**
 
 **DnsClient - Owned by [Michael Conrad](https://github.com/MichaCo)**
 
