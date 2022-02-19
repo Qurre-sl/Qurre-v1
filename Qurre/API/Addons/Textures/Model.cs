@@ -1,4 +1,8 @@
-﻿namespace Qurre.API.Addons.Textures
+﻿using System.Collections.Generic;
+using System.Linq;
+using Mirror;
+using UnityEngine;
+namespace Qurre.API.Addons.Textures
 {
     /// <summary>
     ///  <para>Example:</para>
@@ -8,12 +12,33 @@
     /// </summary>
     public class Model
     {
-        public readonly global::UnityEngine.GameObject gameObject;
+        public readonly GameObject gameObject;
+        private readonly Dictionary<GameObject, ModelEnums> Parts = new();
 
-        public Model(string id, global::UnityEngine.Vector3 position, global::UnityEngine.Vector3 rotation = null, Model root = null);
+        public void AddPart(ModelPrimitive part) => Parts.Add(part.GameObject, ModelEnums.Primitive);
+        public void AddPart(ModelLight part) => Parts.Add(part.GameObject, ModelEnums.Light);
 
-        public void AddPart(ModelPrimitive part);
-        public void AddPart(ModelLight part);
-        public void Destroy();
+        public Model(string id, Vector3 position, Vector3 rotation = default, Model root = null)
+        {
+            gameObject = new GameObject(id);
+            gameObject.transform.parent = root?.gameObject?.transform;
+            gameObject.transform.localPosition = position;
+            gameObject.transform.localRotation = Quaternion.Euler(rotation);
+
+            NetworkServer.Spawn(gameObject);
+        }
+
+        public void Destroy()
+        {
+            if (Parts.Count == 0) return;
+            var _list = Parts.Select(x => x.Key).ToList();
+            _list.ForEach(part =>
+            {
+                NetworkServer.UnSpawn(part);
+                Object.Destroy(part);
+            });
+            Object.Destroy(gameObject);
+            Parts.Clear();
+        }
     }
 }

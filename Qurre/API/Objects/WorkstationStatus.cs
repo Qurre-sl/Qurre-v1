@@ -2,9 +2,9 @@
 {
     public enum WorkstationStatus : byte
     {
-        Offline = 0,
-        BootingUp = 1,
-        ShuttingDown = 2,
-        Online = 3
+        Offline,
+        BootingUp,
+        ShuttingDown,
+        Online
     }
 }

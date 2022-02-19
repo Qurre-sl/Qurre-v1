@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Qurre</name>
+    </assembly>
+    <members>
+        <member name="T:Qurre.API.Addons.Textures.Model">
+            <summary>
+             <para>Example:</para>
+             <para>var Model = new Model("Test", position, rotation);</para>
+             <para>Model.AddPart(new ModelPrimitive(Model, PrimitiveType.Cube, new Color32(0, 0, 0, 155), Vector3.zero, Vector3.zero, Vector3.one));</para>
+             <para>Model.AddPart(new ModelLight(Model, new Color(1, 0, 0), Vector3.zero, 1, 10));</para>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.DataBase.Collection.Find(MongoDB.Bson.BsonDocument)">
+            <summary>
+            <para>Finds all documents in the collection with the given parameters.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             List&lt;BsonDocument&gt; Documents = Collection.Find(new BsonDocument("UserId", Player.UserId));
+             </code>
+             Find and Parse
+             <code>
+             IEnumerable&lt;T&gt; Documents = Collection.Find(new BsonDocument("UserId", Player.UserId)).Select(x => Collection.ParseBson&lt;T&gt;(x));
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.DataBase.Collection.Find(System.Linq.Expressions.Expression{System.Func{MongoDB.Bson.BsonDocument,System.Boolean}})">
+            <summary>
+            <para>Finds all documents in the collection with a search format.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             List&lt;BsonDocument&gt; Documents = Collection.Find(_ => true);
+             </code>
+             Find and Parse
+             <code>
+             IEnumerable&lt;T&gt; Documents = Collection.Find(_ => true).Select(x => Collection.ParseBson&lt;T&gt;(x));
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.DataBase.Collection.UpdateOne(MongoDB.Driver.FilterDefinition{MongoDB.Bson.BsonDocument},MongoDB.Driver.UpdateDefinition{MongoDB.Bson.BsonDocument},MongoDB.Driver.UpdateOptions)">
+            <summary>
+            <para>Updates the first document in the collection that matches the parameters.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             var filter = Builds.Filter.Eq("UserId", Player.UserId);
+             var update = Builds.Update.Set("level", 10);
+             Collection.UpdateOne(filter, update);
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.DataBase.Collection.UpdateAll(MongoDB.Driver.FilterDefinition{MongoDB.Bson.BsonDocument},MongoDB.Driver.UpdateDefinition{MongoDB.Bson.BsonDocument},MongoDB.Driver.UpdateOptions)">
+            <summary>
+            <para>Updates all documents in the collection that match the parameters.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             var filter = Builds.Filter.Eq("UserId", Player.UserId);
+             var update = Builds.Update.Set("level", 10);
+             Collection.UpdateAll(filter, update);
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.DataBase.Collection.ReplaceOne(MongoDB.Driver.FilterDefinition{MongoDB.Bson.BsonDocument},MongoDB.Bson.BsonDocument,MongoDB.Driver.ReplaceOptions)">
+            <summary>
+            <para>Replaces the first document in the collection that matches the parameters.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             var filter = Builds.Filter.Eq("UserId", Player.UserId);
+             Collection.ReplaceOne(filter, BsonDocument);
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.DataBase.Collection.ParseBson``1(MongoDB.Bson.BsonDocument)">
+            <summary>
+            <para>Parse BsonDocument into your class.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             T Data = Collection.ParseBson&lt;T&gt;(BsonDocument);
+             or
+             MyClass Data = Collection.ParseBson&lt;MyClass&gt;(BsonDocument);
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="F:Qurre.API.DataBase.Collection.MongoDB">
+            <summary>
+            <para>MongoDB class, if you are missing something in this class.</para>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.DataBase.Client.GetDatabase(System.String)">
+            <summary>
+            MongoDB hierarchy:
+            <code>
+            ⠀| Client
+            ⠀| - DataBase
+            ⠀   | - Collection
+            ⠀      | - Document
+            </code>
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Qurre.API.Objects.AmmoType.Ammo556">
+            <summary>
+            Used by <see cref="F:ItemType.GunE11SR"/>
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.AmmoType.Ammo762">
+            <summary>
+            Used by and <see cref="F:ItemType.GunLogicer"/>
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.AmmoType.Ammo9">
+            <summary>
+            Used by <see cref="F:ItemType.GunCOM15"/>
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.AmmoType.Ammo12Gauge">
+            <summary>
+            Used by <see cref="F:ItemType.GunShotgun"/>
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.AmmoType.Ammo44Cal">
+            <summary>
+            44 caliber.
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelOne">
+            <summary>
+            Safe SCP.
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelTwo">
+            <summary>
+            <see cref="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelOne"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.Checkpoints"/>.
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelThree">
+            <summary>
+            <see cref="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelTwo"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.Intercom"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.AlphaWarhead"/>.
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelOne">
+            <summary>
+            <see cref="F:Qurre.API.Objects.KeycardPermissions.Checkpoints"/>, Opens Light Containment armory.
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelTwo">
+            <summary>
+            <see cref="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelOne"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.ExitGates"/>, Opens Heavy Containment armories.
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelThree">
+            <summary>
+            <see cref="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelTwo"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.Intercom"/>, Opens MicroHID room.
+            </summary>
+        </member>
+        <member name="F:Qurre.API.Objects.KeycardPermissions.ScpOverride">
+            <summary>
+            <see cref="F:Qurre.API.Objects.KeycardPermissions.Checkpoints"/>.
+            </summary>
+        </member>
+        <member name="P:Qurre.API.Server.RealEscape">
+            <summary>
+            <para>if true, then no items will be issued during the escape &amp; the escaped person will not change his location.</para>
+            </summary>
+        </member>
+        <member name="P:Qurre.API.Player.BlockSpawnTeleport">
+            <summary>
+            <para>After spawning, it becomes false again.</para>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.Audio.#ctor(System.String,System.Byte,System.Boolean)">
+            <summary>
+            <para>Plays music from a file.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             new Audio($"{PluginManager.PluginsDirectory}/Audio/OmegaWarhead.raw", 100, true);
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="M:Qurre.API.Audio.#ctor(System.IO.Stream,System.Byte,System.Boolean)">
+            <summary>
+            <para>Plays music from the stream.</para>
+            <para>Example:</para>
+             <example>
+             <code>
+             new Audio(new MemoryStream(audio), 100, false);
+             </code>
+             </example>
+            </summary>
+        </member>
+        <member name="P:Qurre.Plugin.Priority">
+            <summary>
+            <para>Plugin load priority.</para>
+            <para>The higher the number, the earlier the plugin will load.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

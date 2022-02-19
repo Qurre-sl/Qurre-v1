@@ -1,15 +1,15 @@
-﻿namespace Qurre.API.DataBase
+﻿using MongoDB.Driver;
+namespace Qurre.API.DataBase
 {
-    public class DataBase
+    public class Database
     {
-        public static DataBase Static { get; }
-        public bool Enabled { get; }
-        public bool Connected { get; }
-
-        public global::MongoDB.Driver.IMongoCollection<TDocument> GetCollection<TDocument>(global::MongoDB.Driver.IMongoDatabase database, string name);
-        public global::MongoDB.Driver.IMongoCollection<global::MongoDB.Bson.BsonDocument> GetCollection(global::MongoDB.Driver.IMongoDatabase database, string name);
-        public global::MongoDB.Driver.IMongoDatabase GetDatabase(string name);
-        public System.Collections.Generic.List<global::MongoDB.Bson.BsonDocument> GetDocuments(global::MongoDB.Driver.IMongoCollection<global::MongoDB.Bson.BsonDocument> collection, global::MongoDB.Bson.BsonDocument parameters);
-        public object GetValue(global::MongoDB.Bson.BsonDocument document, string key);
+        public Database(Client client, string name)
+        {
+            Name = name;
+            MongoDatabase = client.MClient.GetDatabase(name);
+        }
+        public readonly IMongoDatabase MongoDatabase;
+        public readonly string Name;
+        public Collection GetCollection(string name) => new(this, name);
     }
 }

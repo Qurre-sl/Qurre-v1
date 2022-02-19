@@ -1,14 +1,32 @@
-﻿namespace Qurre.API.Controllers.Items
+﻿using InventorySystem.Items.MicroHID;
+namespace Qurre.API.Controllers.Items
 {
     public class MicroHid : Item
     {
-        public MicroHid(global::InventorySystem.Items.MicroHID.MicroHIDItem itemBase);
-        public MicroHid(ItemType type);
-
-        public float Energy { get; set; }
-        public global::InventorySystem.Items.MicroHID.MicroHIDItem Base { get; }
-        public global::InventorySystem.Items.MicroHID.HidState State { get; set; }
-
-        public void Fire();
+        public MicroHid(MicroHIDItem itemBase)
+            : base(itemBase)
+        {
+            Base = itemBase;
+        }
+        public MicroHid(ItemType type)
+            : this((MicroHIDItem)Server.Host.Inventory.CreateItemInstance(type, false))
+        {
+        }
+        public float Energy
+        {
+            get => Base.RemainingEnergy;
+            set => Base.RemainingEnergy = value;
+        }
+        public new MicroHIDItem Base { get; }
+        public HidState State
+        {
+            get => Base.State;
+            set => Base.State = value;
+        }
+        public void Fire()
+        {
+            Base.UserInput = HidUserInput.Fire;
+            State = HidState.Firing;
+        }
     }
 }

@@ -2,10 +2,10 @@
 {
     public enum RadioStatus
     {
-        Disable = 0,
-        Short = 1,
-        Medium = 2,
-        Long = 3,
-        Ultra = 4
+        Disabled = -1,
+        Short,
+        Medium,
+        Long,
+        Ultra,
     }
 }

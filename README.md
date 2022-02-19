@@ -59,6 +59,16 @@ Qurre_DataBase: undefined
 
 ## Credits
 
+**0Harmony - Owned by [Andreas Pardeike](https://github.com/pardeike)**
+
+**MongoDB.* - Owned by [MongoDB](https://github.com/mongodb)**
+
+**DnsClient - Owned by [Michael Conrad](https://github.com/MichaCo)**
+
+**YamlDotNet - Owned by [Antoine Aubry](https://github.com/aaubry)**
+
+**Newtonsoft.Json - Owned by [James Newton-King](https://github.com/JamesNK)**
+
 **Assembly-CSharp - Owned by [Northwood Studios](https://github.com/northwood-studios)**
 
 **Some parts of the code may be similar to [Exiled](https://github.com/Exiled-Team/EXILED) or [Synapse](https://github.com/SynapseSL/Synapse)**

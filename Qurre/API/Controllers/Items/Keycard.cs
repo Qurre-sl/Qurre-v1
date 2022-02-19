@@ -1,11 +1,23 @@
-﻿namespace Qurre.API.Controllers.Items
+﻿using Interactables.Interobjects.DoorUtils;
+using InventorySystem.Items.Keycards;
+namespace Qurre.API.Controllers.Items
 {
     public class Keycard : Item
     {
-        public Keycard(global::InventorySystem.Items.Keycards.KeycardItem itemBase);
-        public Keycard(ItemType type);
-
-        public global::InventorySystem.Items.Keycards.KeycardItem Base { get; }
-        public global::Interactables.Interobjects.DoorUtils.KeycardPermissions Permissions { get; set; }
+        public Keycard(KeycardItem itemBase)
+            : base(itemBase)
+        {
+            Base = itemBase;
+        }
+        public Keycard(ItemType type)
+            : this((KeycardItem)Server.Host.Inventory.CreateItemInstance(type, false))
+        {
+        }
+        public new KeycardItem Base { get; }
+        public KeycardPermissions Permissions
+        {
+            get => Base.Permissions;
+            set => Base.Permissions = value;
+        }
     }
 }
