@@ -26,6 +26,7 @@ namespace Qurre.Events
         public static event AllEvents<Scp079InteractLiftEvent> InteractLift;
         public static event AllEvents<Scp079InteractTeslaEvent> InteractTesla;
         public static event AllEvents<Scp079LockdownEvent> Lockdown;
+        public static event AllEvents<Scp079RecontainEvent> Recontain;
         internal static void Invokes(GeneratorActivateEvent ev) => GeneratorActivate?.CustomInvoke(ev);
         internal static void Invokes(GetEXPEvent ev) => GetEXP?.CustomInvoke(ev);
         internal static void Invokes(GetLVLEvent ev) => GetLVL?.CustomInvoke(ev);
@@ -37,6 +38,7 @@ namespace Qurre.Events
         internal static void Invokes(Scp079InteractLiftEvent ev) => InteractLift?.CustomInvoke(ev);
         internal static void Invokes(Scp079InteractTeslaEvent ev) => InteractTesla?.CustomInvoke(ev);
         internal static void Invokes(Scp079LockdownEvent ev) => Lockdown?.Invoke(ev);
+        internal static void Invokes(Scp079RecontainEvent ev) => Recontain?.Invoke(ev);
     }
     #endregion
     #region Scp096

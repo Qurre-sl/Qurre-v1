@@ -8,15 +8,27 @@ namespace Qurre.API.Controllers
     {
         private string msg;
         private readonly List<Broadcast> broadcasts = new();
-        public MapBroadcast(string message, ushort time, bool instant)
+        public MapBroadcast(string message, ushort time, bool instant, bool adminBC)
         {
             msg = message;
             Time = time;
             Start();
-            foreach (Player pl in Player.List)
+            if (adminBC)
             {
-                var bc = pl.Broadcast(message, time, instant);
-                broadcasts.Add(bc);
+                var list = Player.List.Where(x => PermissionsHandler.IsPermitted(x.Sender.Permissions, PlayerPermissions.AdminChat));
+                foreach (Player pl in list)
+                {
+                    var bc = pl.Broadcast(message, time, instant);
+                    broadcasts.Add(bc);
+                }
+            }
+            else
+            {
+                foreach (Player pl in Player.List)
+                {
+                    var bc = pl.Broadcast(message, time, instant);
+                    broadcasts.Add(bc);
+                }
             }
         }
         public string Message

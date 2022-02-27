@@ -12,23 +12,24 @@ namespace Qurre.API
 		///<para>Example:</para>
 		/// <example>
 		/// <code>
-		/// new Audio($"{PluginManager.PluginsDirectory}/Audio/OmegaWarhead.raw", 100, true);
+		/// new Audio($"{PluginManager.PluginsDirectory}/Audio/OmegaWarhead.raw", 100, true, frameSize: 1920, sampleRate: 48000);
 		/// </code>
 		/// </example>
 		///</summary>
-		public Audio(string path, byte volume, bool instant = false) : this(new FileStream(path, FileMode.Open), volume, instant) { }
+		public Audio(string path, byte volume, bool instant = false, int frameSize = 1920, int sampleRate = 48000) :
+			this(new FileStream(path, FileMode.Open), volume, instant, frameSize, sampleRate) { }
 		///<summary>
 		///<para>Plays music from the stream.</para>
 		///<para>Example:</para>
 		/// <example>
 		/// <code>
-		/// new Audio(new MemoryStream(audio), 100, false);
+		/// new Audio(new MemoryStream(audio), 100, false, frameSize: 1920, sampleRate: 48000);
 		/// </code>
 		/// </example>
 		///</summary>
-		public Audio(Stream stream, byte volume, bool instant = false)
+		public Audio(Stream stream, byte volume, bool instant = false, int frameSize = 1920, int sampleRate = 48000)
 		{
-			Microphone = AudioExtensions.DissonanceComms.gameObject.AddComponent<AudioMicrophone>().Create(stream, volume, this);
+			Microphone = AudioExtensions.DissonanceComms.gameObject.AddComponent<AudioMicrophone>().Create(stream, volume, frameSize, sampleRate, this);
             if (instant && Audios.Count > 0)
 			{
 				var _cur = Audios.FirstOrDefault();

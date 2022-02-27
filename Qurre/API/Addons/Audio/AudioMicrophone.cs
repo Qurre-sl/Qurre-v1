@@ -12,22 +12,27 @@ namespace Qurre.API.Addons.Audio
 	{
 		internal static readonly List<AudioMicrophone> Cache = new();
 		~AudioMicrophone() => Dispose(false);
-		internal virtual IMicrophone Create(Stream stream, float volume, API.Audio audio)
+		internal virtual IMicrophone Create(Stream stream, float volume, int frameSize, int rate, API.Audio audio)
 		{
 			Stream = stream ?? throw new ArgumentNullException("[Qurre Addons > Audio] Stream is null");
 			Volume = Mathf.Clamp(volume, 0, 100);
 			Duration = Stream.GetDuration();
 			_audio = audio;
+			FrameSize = frameSize;
+			SampleRate = rate;
+			format = new(SampleRate, 1);
+			frame = new float[FrameSize];
+			frameBytes = new byte[FrameSize * 4];
 			Cache.Add(this);
 			return this;
 		}
 		private API.Audio _audio;
 		public Stream Stream { get; protected set; }
-		public const int FrameSize = 1920;
-		public const int SampleRate = 48000;
-		private readonly WaveFormat format = new(SampleRate, 1);
-		private readonly float[] frame = new float[FrameSize];
-		private readonly byte[] frameBytes = new byte[FrameSize * 4];
+		public int FrameSize { get; protected set; }
+		public int SampleRate { get; protected set; }
+		private WaveFormat format = new(48000, 1);
+		private float[] frame = new float[1920];
+		private byte[] frameBytes = new byte[1920 * 4];
 		private readonly List<IMicrophoneSubscriber> subscribers = new();
 		private DissonanceComms dissonanceComms;
 		private float elapsedTime;

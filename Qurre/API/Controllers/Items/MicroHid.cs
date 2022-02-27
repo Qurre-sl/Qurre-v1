@@ -3,15 +3,8 @@ namespace Qurre.API.Controllers.Items
 {
     public class MicroHid : Item
     {
-        public MicroHid(MicroHIDItem itemBase)
-            : base(itemBase)
-        {
-            Base = itemBase;
-        }
-        public MicroHid(ItemType type)
-            : this((MicroHIDItem)Server.Host.Inventory.CreateItemInstance(type, false))
-        {
-        }
+        public MicroHid(MicroHIDItem itemBase) : base(itemBase) => Base = itemBase;
+        public MicroHid(ItemType type) : this((MicroHIDItem)Server.Host.Inventory.CreateItemInstance(type, false)) { }
         public float Energy
         {
             get => Base.RemainingEnergy;

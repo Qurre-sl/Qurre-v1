@@ -99,7 +99,12 @@ namespace Qurre.API
 		}
 		public static MapBroadcast Broadcast(string message, ushort duration, bool instant = false)
 		{
-			var bc = new MapBroadcast(message, duration, instant);
+			var bc = new MapBroadcast(message, duration, instant, false);
+			return bc;
+		}
+		public static MapBroadcast BroadcastAdmin(string message, ushort duration, bool instant = false)
+		{
+			var bc = new MapBroadcast(message, duration, instant, true);
 			return bc;
 		}
 		public static void ClearBroadcasts() => Server.Host.Broadcasts.Clear();

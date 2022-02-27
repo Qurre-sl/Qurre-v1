@@ -7,6 +7,16 @@ using Mirror;
 using Qurre.API.Controllers.Items;
 using UnityEngine;
 using InventorySystem.Items.Firearms;
+using Firearm = Qurre.API.Controllers.Items.Firearm;
+using InventorySystem.Items.Keycards;
+using InventorySystem.Items.Usables;
+using InventorySystem.Items.Radio;
+using InventorySystem.Items.MicroHID;
+using InventorySystem.Items.Armor;
+using InventorySystem.Items.Firearms.Ammo;
+using InventorySystem.Items.Flashlight;
+using InventorySystem.Items.ThrowableProjectiles;
+using InventorySystem.Items.Usables.Scp330;
 namespace Qurre.API.Controllers
 {
     public class Item
@@ -68,7 +78,38 @@ namespace Qurre.API.Controllers
             if (itemBase == null) return null;
             if (BaseToItem.ContainsKey(itemBase))
                 return BaseToItem[itemBase];
-            return new Item(itemBase);
+            switch (itemBase)
+            {
+                case firearm gun:
+                    return new Firearm(gun);
+                case KeycardItem card:
+                    return new Keycard(card);
+                case UsableItem usable:
+                    {
+                        if (usable is Scp330Bag bag)
+                            return new Scp330(bag);
+                        return new Usable(usable);
+                    }
+                case RadioItem radio:
+                    return new Items.Radio(radio);
+                case MicroHIDItem hid:
+                    return new MicroHid(hid);
+                case BodyArmor armor:
+                    return new Armor(armor);
+                case AmmoItem ammo:
+                    return new Ammo(ammo);
+                case FlashlightItem flashlight:
+                    return new Flashlight(flashlight);
+                case ThrowableItem throwable:
+                    return throwable.Projectile switch
+                    {
+                        FlashbangGrenade _ => new GrenadeFlash(throwable),
+                        ExplosionGrenade _ => new GrenadeFrag(throwable),
+                        _ => new Throwable(throwable),
+                    };
+                default:
+                    return new Item(itemBase);
+            }
         }
         public static Item Get(ushort serial)
         {

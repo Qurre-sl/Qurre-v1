@@ -6,15 +6,8 @@ namespace Qurre.API.Controllers.Items
 {
     public class Armor : Item
     {
-        public Armor(BodyArmor itemBase)
-            : base(itemBase)
-        {
-            Base = itemBase;
-        }
-        public Armor(ItemType type)
-            : this((BodyArmor)Server.Host.Inventory.CreateItemInstance(type, false))
-        {
-        }
+        public Armor(BodyArmor itemBase) : base(itemBase) => Base = itemBase;
+        public Armor(ItemType type) : this((BodyArmor)Server.Host.Inventory.CreateItemInstance(type, false)) { }
         public new BodyArmor Base { get; }
         public bool Equippable => Base.AllowEquip;
         public bool Holsterable => Base.AllowHolster;

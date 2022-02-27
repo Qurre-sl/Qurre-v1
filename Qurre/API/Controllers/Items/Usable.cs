@@ -3,15 +3,8 @@ namespace Qurre.API.Controllers.Items
 {
     public class Usable : Item
     {
-        public Usable(UsableItem itemBase)
-            : base(itemBase)
-        {
-            Base = itemBase;
-        }
-        public Usable(ItemType type)
-            : this((UsableItem)Server.Host.Inventory.CreateItemInstance(type, false))
-        {
-        }
+        public Usable(UsableItem itemBase) : base(itemBase) => Base = itemBase;
+        public Usable(ItemType type) : this((UsableItem)Server.Host.Inventory.CreateItemInstance(type, false)) { }
         public new UsableItem Base { get; }
         public bool Equippable => Base.AllowEquip;
         public bool Holsterable => Base.AllowHolster;

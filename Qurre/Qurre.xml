@@ -181,24 +181,24 @@
             <para>After spawning, it becomes false again.</para>
             </summary>
         </member>
-        <member name="M:Qurre.API.Audio.#ctor(System.String,System.Byte,System.Boolean)">
+        <member name="M:Qurre.API.Audio.#ctor(System.String,System.Byte,System.Boolean,System.Int32,System.Int32)">
             <summary>
             <para>Plays music from a file.</para>
             <para>Example:</para>
              <example>
              <code>
-             new Audio($"{PluginManager.PluginsDirectory}/Audio/OmegaWarhead.raw", 100, true);
+             new Audio($"{PluginManager.PluginsDirectory}/Audio/OmegaWarhead.raw", 100, true, frameSize: 1920, sampleRate: 48000);
              </code>
              </example>
             </summary>
         </member>
-        <member name="M:Qurre.API.Audio.#ctor(System.IO.Stream,System.Byte,System.Boolean)">
+        <member name="M:Qurre.API.Audio.#ctor(System.IO.Stream,System.Byte,System.Boolean,System.Int32,System.Int32)">
             <summary>
             <para>Plays music from the stream.</para>
             <para>Example:</para>
              <example>
              <code>
-             new Audio(new MemoryStream(audio), 100, false);
+             new Audio(new MemoryStream(audio), 100, false, frameSize: 1920, sampleRate: 48000);
              </code>
              </example>
             </summary>

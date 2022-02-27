@@ -4,15 +4,8 @@ namespace Qurre.API.Controllers.Items
 {
     public class Radio : Item
     {
-        public Radio(RadioItem itemBase)
-            : base(itemBase)
-        {
-            Base = itemBase;
-        }
-        public Radio(ItemType type)
-            : this((RadioItem)Server.Host.Inventory.CreateItemInstance(type, false))
-        {
-        }
+        public Radio(RadioItem itemBase) : base(itemBase) => Base = itemBase;
+        public Radio(ItemType type) : this((RadioItem)Server.Host.Inventory.CreateItemInstance(type, false)) { }
         public new RadioItem Base { get; }
         public byte Battery
         {

@@ -474,6 +474,16 @@ namespace Qurre.API.Events
         public float PowerCost { get; set; }
         public bool Allowed { get; set; }
     }
+    public class Scp079RecontainEvent : EventArgs
+    {
+        public Scp079RecontainEvent(Recontainer079 recontainer, bool allowed = true)
+        {
+            Recontainer = recontainer;
+            Allowed = allowed;
+        }
+        public Recontainer079 Recontainer { get; }
+        public bool Allowed { get; set; }
+    }
     #endregion
     #region scp049
     public class StartRecallEvent : EventArgs

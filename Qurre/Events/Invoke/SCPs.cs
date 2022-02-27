@@ -28,6 +28,7 @@ namespace Qurre.Events.Invoke
         public static void ElevatorTeleport(Scp079ElevatorTeleportEvent ev) => Invokes(ev);
         public static void InteractLift(Scp079InteractLiftEvent ev) => Invokes(ev);
         public static void InteractTesla(Scp079InteractTeslaEvent ev) => Invokes(ev);
+        public static void Recontain(Scp079RecontainEvent ev) => Invokes(ev);
     }
     #endregion
     #region Scp096

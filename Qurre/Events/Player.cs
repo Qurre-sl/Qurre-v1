@@ -118,4 +118,4 @@ namespace Qurre.Events
         internal static void Invokes(HideBadgeEvent ev) => HideBadge.CustomInvoke(ev);
         internal static void Invokes(JumpEvent ev) => Jump.CustomInvoke(ev);
     }
-} 
+}
