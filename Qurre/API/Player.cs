@@ -20,6 +20,8 @@ using MapGeneration;
 using NorthwoodLib;
 using PlayerStatsSystem;
 using Qurre.API.Addons;
+using InventorySystem.Items.Firearms;
+using Firearm = Qurre.API.Controllers.Items.Firearm;
 namespace Qurre.API
 {
 	public class Player
@@ -647,8 +649,15 @@ namespace Qurre.API
 		public Item AddItem(ItemType itemType)
 		{
 			Item item = Item.Get(Inventory.ServerAddItem(itemType));
-			AttachmentsServerHandler.SetupProvidedWeapon(ReferenceHub, item.Base);
-			if (item is Firearm firearm) firearm.Ammo = firearm.MaxAmmo;
+			if (item is Firearm firearm)
+			{
+				if(AttachmentsServerHandler.PlayerPreferences.TryGetValue(ReferenceHub, out var _d) && _d.TryGetValue(itemType, out var _y))
+					firearm.Base.ApplyAttachmentsCode(_y, true);
+				FirearmStatusFlags status = FirearmStatusFlags.MagazineInserted;
+				if (firearm.Base.CombinedAttachments.AdditionalPros.HasFlagFast(AttachmentDescriptiveAdvantages.Flashlight))
+					status |= FirearmStatusFlags.FlashlightEnabled;
+				firearm.Base.Status = new FirearmStatus(firearm.MaxAmmo, status, firearm.Base.GetCurrentAttachmentsCode());
+			}
 			return item;
 		}
 		public void AddItem(ItemType itemType, int amount)

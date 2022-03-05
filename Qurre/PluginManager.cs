@@ -2,7 +2,6 @@
 using MEC;
 using System;
 using System.Collections.Generic;
-//using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,8 +11,7 @@ namespace Qurre
 	public static class PluginManager
 	{
 		public static readonly List<Plugin> plugins = new();
-		public static Version Version { get; } = new Version(1, 12, 1);
-		//private static string Domain { get; } = "localhost"; //qurre.team
+		public static Version Version { get; } = new Version(1, 12, 2);
 		public static string AppDataDirectory { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 		public static string QurreDirectory { get; private set; } = Path.Combine(AppDataDirectory, "Qurre");
 		public static string PluginsDirectory { get; private set; } = Path.Combine(QurreDirectory, "Plugins");
@@ -226,45 +224,10 @@ namespace Qurre
 			}
 		}
 		private static void DownloadDependencies()
-		{/*
-			try
-			{
-				var url = $"http://{Domain}/dependencies";
-				var req = WebRequest.Create(url);
-				var resp = req.GetResponse();
-				using var sr = new StreamReader(resp.GetResponseStream());
-				var response = sr.ReadToEnd().Trim();
-				foreach (string str in response.Split('\n'))
-				{
-					Assembly assembly = LoadFromUrl(str);
-					localLoaded.Add(assembly);
-					Log.Custom("Loaded dependency " + assembly.FullName, "Loader", ConsoleColor.Blue);
-				}
-			}
-			catch (Exception ex)
-			{
-				Log.Error($"Plan checking threw an error:\n{ex}");
-			}*/
+		{
 		}
 		private static void DownloadPlugins()
-		{/*
-			try
-			{
-				var url = $"http://{Domain}/plugins";
-				var req = WebRequest.Create(url);
-				var resp = req.GetResponse();
-                using var sr = new StreamReader(resp.GetResponseStream());
-                var response = sr.ReadToEnd().Trim();
-                foreach (string str in response.Split('\n'))
-                {
-                    Assembly assembly = LoadFromUrl(str);
-					LoadPlugin(assembly);
-                }
-            }
-			catch (Exception ex)
-			{
-				Log.Error($"Plan checking threw an error:\n{ex}");
-			}*/
+		{
 		}
 	}
 }
