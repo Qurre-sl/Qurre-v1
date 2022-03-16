@@ -11,9 +11,7 @@ namespace Qurre.API.Controllers
         {
             try
             {
-                var data = NetworkClient.prefabs.Values.ToList().Where(x => x.name == "LightSourceToy");
-                if (data.Count() == 0) return;
-                var mod = data.First();
+                var mod = Addons.Prefabs.Light;
                 if (!mod.TryGetComponent<LightSourceToy>(out var lightToyBase)) return;
                 Base = UnityEngine.Object.Instantiate(lightToyBase);
                 Base.transform.position = position;

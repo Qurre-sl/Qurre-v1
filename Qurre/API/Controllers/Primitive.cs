@@ -2,7 +2,6 @@
 using UnityEngine;
 using Mirror;
 using System;
-using System.Linq;
 namespace Qurre.API.Controllers
 {
     public class Primitive
@@ -12,9 +11,7 @@ namespace Qurre.API.Controllers
         {
             try
             {
-                var data = NetworkClient.prefabs.Values.ToList().Where(x => x.name == "PrimitiveObjectToy");
-                if (data.Count() == 0) return;
-                var mod = data.First();
+                var mod = Addons.Prefabs.Primitive;
                 if (!mod.TryGetComponent<AdminToyBase>(out var primitiveToyBase)) return;
                 AdminToyBase prim = UnityEngine.Object.Instantiate(primitiveToyBase, position, rotation);
                 Base = (PrimitiveObjectToy)prim;

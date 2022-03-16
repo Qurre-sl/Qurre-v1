@@ -1,17 +1,14 @@
 ﻿using AdminToys;
 using Mirror;
 using Qurre.API.Objects;
-using System.Linq;
 using UnityEngine;
 namespace Qurre.API.Controllers
 {
     public class ShootingTarget
     {
-        public ShootingTarget(ShootingTargetType type, Vector3 position, Quaternion rotation = default, Vector3 size = default)
+        public ShootingTarget(TargetPrefabs type, Vector3 position, Quaternion rotation = default, Vector3 size = default)
         {
-            var data = NetworkClient.prefabs.Values.ToList().Where(x => x.name == STTypeToPrefabName(type));
-            if (data.Count() == 0) return;
-            var mod = data.First();
+            var mod = type.GetPrefab();
             if (!mod.TryGetComponent<AdminToyBase>(out var primitiveToyBase)) return;
             var prim = Object.Instantiate(primitiveToyBase, position, rotation);
             Base = (AdminToys.ShootingTarget)prim;
@@ -50,7 +47,7 @@ namespace Qurre.API.Controllers
                 NetworkServer.Spawn(Base.gameObject);
             }
         }
-        public ShootingTargetType Type { get; }
+        public TargetPrefabs Type { get; }
         public void Clear() => Base.ClearTarget();
         public void Destroy()
         {
@@ -58,7 +55,5 @@ namespace Qurre.API.Controllers
             Map.ShootingTargets.Remove(this);
         }
         public AdminToys.ShootingTarget Base { get; }
-
-        private static string STTypeToPrefabName(ShootingTargetType type) => type == ShootingTargetType.SportTarget ? "sportTargetPrefab" : type == ShootingTargetType.DBoyTarget ? "dboyTargetPrefab" : "binaryTargetPrefab";
     }
 }

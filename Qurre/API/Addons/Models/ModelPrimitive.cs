@@ -1,7 +1,7 @@
 ﻿using Qurre.API.Controllers;
 using UnityEngine;
 using System;
-namespace Qurre.API.Addons.Textures
+namespace Qurre.API.Addons.Models
 {
     public class ModelPrimitive
     {
@@ -12,9 +12,9 @@ namespace Qurre.API.Addons.Textures
         {
             try
             {
-                Primitive = new Primitive(primitiveType, position, color);
+                Primitive = new(primitiveType, position, color);
                 GameObject = Primitive.Base.gameObject;
-                GameObject.transform.parent = model?.gameObject?.transform;
+                GameObject.transform.parent = model?.GameObject?.transform;
                 GameObject.transform.localPosition = position;
                 GameObject.transform.localRotation = Quaternion.Euler(rotation);
                 GameObject.transform.localScale = size;

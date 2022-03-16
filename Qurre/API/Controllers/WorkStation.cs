@@ -14,10 +14,10 @@ namespace Qurre.API.Controllers
         }
         public WorkStation(Vector3 position, Vector3 rotation, Vector3 scale)
         {
-            var bench = Object.Instantiate(LiteNetLib4MirrorNetworkManager.singleton.spawnPrefabs.Find(x => x.name == "Work Station"), position, Quaternion.Euler(rotation));
+            workStation = Object.Instantiate(Addons.Prefabs.WorkStation, position, Quaternion.Euler(rotation));
+            var bench = workStation.gameObject;
             bench.transform.localScale = scale;
             NetworkServer.Spawn(bench);
-            workStation = bench.GetComponent<WorkstationController>();
             Map.WorkStations.Add(this);
         }
         public GameObject GameObject => workStation.gameObject;

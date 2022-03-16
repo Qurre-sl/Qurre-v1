@@ -4,7 +4,7 @@
         <name>Qurre</name>
     </assembly>
     <members>
-        <member name="T:Qurre.API.Addons.Textures.Model">
+        <member name="T:Qurre.API.Addons.Models.Model">
             <summary>
              <para>Example:</para>
              <para>var Model = new Model("Test", position, rotation);</para>

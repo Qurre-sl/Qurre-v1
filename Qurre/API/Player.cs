@@ -28,7 +28,8 @@ namespace Qurre.API
 	{
 		private readonly ReferenceHub rh;
 		private readonly GameObject go;
-		private string ui;
+		private string ui = "";
+		private readonly string _nick = "";
 		private string _tag = "";
 		private Radio radio;
 		private Escape escape;
@@ -39,6 +40,7 @@ namespace Qurre.API
 			rh = RH;
 			go = RH.gameObject;
 			ui = RH.characterClassManager.UserId;
+			try { _nick = RH.nicknameSync.Network_myNickSync; } catch { }
 			Scp079Controller = new Scp079(this);
 			Scp096Controller = new Scp096(this);
 			Scp106Controller = new Scp106(this);
@@ -130,13 +132,17 @@ namespace Qurre.API
 					if (ui == null) ui = $"7{UnityEngine.Random.Range(0, 99999999)}{UnityEngine.Random.Range(0, 99999999)}@bot";
 					return ui;
 				}
-				string _ = ClassManager.UserId;
-				if (_.Contains("@"))
+				try
 				{
-					ui = _;
-					return _;
+					string _ = ClassManager.UserId;
+					if (_.Contains("@"))
+					{
+						ui = _;
+						return _;
+					}
+					else return ui;
 				}
-				else return ui;
+				catch { return ui; }
 			}
 			set => ClassManager.NetworkSyncedUserId = value;
 		}
@@ -152,7 +158,11 @@ namespace Qurre.API
 		}
 		public string Nickname
 		{
-			get => rh.nicknameSync.Network_myNickSync;
+			get
+			{
+				try { return rh.nicknameSync.Network_myNickSync; }
+				catch { return _nick; }
+			}
 			internal set => rh.nicknameSync.Network_myNickSync = value;
 		}
 		public bool DoNotTrack => ServerRoles.DoNotTrack;
@@ -651,7 +661,7 @@ namespace Qurre.API
 			Item item = Item.Get(Inventory.ServerAddItem(itemType));
 			if (item is Firearm firearm)
 			{
-				if(AttachmentsServerHandler.PlayerPreferences.TryGetValue(ReferenceHub, out var _d) && _d.TryGetValue(itemType, out var _y))
+				if (AttachmentsServerHandler.PlayerPreferences.TryGetValue(ReferenceHub, out var _d) && _d.TryGetValue(itemType, out var _y))
 					firearm.Base.ApplyAttachmentsCode(_y, true);
 				FirearmStatusFlags status = FirearmStatusFlags.MagazineInserted;
 				if (firearm.Base.CombinedAttachments.AdditionalPros.HasFlagFast(AttachmentDescriptiveAdvantages.Flashlight))
@@ -850,6 +860,11 @@ namespace Qurre.API
 		public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0) => PlayerEffectsController.ChangeByString(effect, intensity, duration);
 		public void ShowHint(string text, float duration = 1f) =>
 			HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, HintEffectPresets.FadeInAndOut(0f, 1f, 0f), duration));
+		public void ShowHint(string text, bool blink, float duration = 1f)
+		{
+			if (blink) HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, HintEffectPresets.FadeInAndOut(0f, 1f, 0f), duration));
+			else HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, null, duration));
+		}
 		public void BodyDelete()
 		{
 			foreach (var doll in Map.Ragdolls.Where(x => x.Owner == this)) doll.Destroy();

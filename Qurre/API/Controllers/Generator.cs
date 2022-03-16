@@ -88,5 +88,22 @@ namespace Qurre.API.Controllers
         }
         public bool Engaged { get => generator.Engaged; set => generator.Engaged = value; }
         public short Time { get => generator._syncTime; set => generator.Network_syncTime = value; }
+        public void Destroy()
+        {
+            NetworkServer.UnSpawn(GameObject);
+            Map.Generators.Remove(this);
+            Object.Destroy(GameObject);
+        }
+        public static Generator Create(Vector3 position, Quaternion? rotation = null)
+        {
+            Scp079Generator gen = Object.Instantiate(Addons.Prefabs.Generator);
+            gen.transform.position = position;
+            gen.transform.rotation = rotation ?? new Quaternion();
+            Generator generator = new(gen);
+            Map.Generators.Add(generator);
+            NetworkServer.Spawn(gen.gameObject);
+            gen.netIdentity.UpdateData();
+            return generator;
+        }
     }
 }

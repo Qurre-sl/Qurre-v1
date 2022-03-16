@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteNetLib;
+using System;
 using System.Reflection;
 namespace Qurre.API.Events
 {
@@ -114,6 +115,20 @@ namespace Qurre.API.Events
         public Player Target { get; }
         public string Reason { get; }
         public bool GlobalReport { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class PreAuthEvent : EventArgs
+    {
+        public PreAuthEvent(string userid, ConnectionRequest request, string reason, bool allowed = true)
+        {
+            Userid = userid;
+            Request = request;
+            Reason = reason;
+            Allowed = allowed;
+        }
+        public string Userid { get; }
+        public ConnectionRequest Request { get; }
+        public string Reason { get; set; }
         public bool Allowed { get; set; }
     }
 }

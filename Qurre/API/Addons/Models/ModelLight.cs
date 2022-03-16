@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using Light = Qurre.API.Controllers.Light;
-namespace Qurre.API.Addons.Textures
+namespace Qurre.API.Addons.Models
 {
     public class ModelLight
     {
@@ -12,9 +12,9 @@ namespace Qurre.API.Addons.Textures
         {
             try
             {
-                Light = new Light(position, color, lightIntensivity, lightRange, shadows);
+                Light = new(position, color, lightIntensivity, lightRange, shadows);
                 GameObject = Light.Base.gameObject;
-                GameObject.transform.parent = model?.gameObject?.transform;
+                GameObject.transform.parent = model?.GameObject?.transform;
                 GameObject.transform.localPosition = position;
             }
             catch (Exception ex)

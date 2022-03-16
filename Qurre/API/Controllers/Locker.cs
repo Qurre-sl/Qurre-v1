@@ -58,20 +58,28 @@ namespace Qurre.API.Controllers
         {
             get
             {
-                return Name switch
-                {
-                    "Generator SCP-079" => LockerType.Generator,
-                    "First Aid Kit" => LockerType.FirstAidKit,
-                    "Misc Locker" => LockerType.MiscLocker,
-                    "Glocker A" => LockerType.GlockerA,
-                    "Glocker B" => LockerType.GlockerB,
-                    "Pedestal" => LockerType.Pedestal,
-                    _ => LockerType.Unknown,
-                };
+                if (Name.Contains("AdrenalineMedkit")) return LockerType.AdrenalineMedkit;
+                if (Name.Contains("RegularMedkit")) return LockerType.RegularMedkit;
+                if (Name.Contains("Pedestal")) return LockerType.Pedestal;
+                if (Name.Contains("MiscLocker")) return LockerType.MiscLocker;
+                if (Name.Contains("RifleRack")) return LockerType.RifleRack;
+                if (Name.Contains("LargeGunLocker")) return LockerType.LargeGun;
+                return LockerType.Unknown;
             }
         }
         public AudioClip GrantedBeep => _locker._grantedBeep;
         public AudioClip DeniedBeep => _locker._deniedBeep;
+        public static Locker Create(Vector3 position, LockerPrefabs type, Quaternion? rotation = null)
+        {
+            __locker _l = Object.Instantiate(type.GetPrefab());
+            _l.transform.position = position;
+            _l.transform.rotation = rotation ?? new Quaternion(0, 0, 0, 0);
+            Locker locker = new(_l);
+            Map.Lockers.Add(locker);
+            NetworkServer.Spawn(_l.gameObject);
+            _l.netIdentity.UpdateData();
+            return locker;
+        }
         public class Chamber
         {
             public LockerChamber LockerChamber { get; private set; }

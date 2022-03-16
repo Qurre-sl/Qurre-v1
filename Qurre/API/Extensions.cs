@@ -1,8 +1,10 @@
 ﻿using CustomPlayerEffects;
+using Interactables.Interobjects;
 using Interactables.Interobjects.DoorUtils;
 using InventorySystem.Items.Firearms.Attachments;
 using MapGeneration;
 using MapGeneration.Distributors;
+using Mirror;
 using PlayerStatsSystem;
 using Qurre.API.Addons;
 using Qurre.API.Controllers;
@@ -22,14 +24,29 @@ namespace Qurre.API
 {
 	public static class Extensions
 	{
-		public static DoorVariant DoorPrefabLCZ { get; internal set; }
-		public static DoorVariant DoorPrefabHCZ { get; internal set; }
-		public static DoorVariant DoorPrefabEZ { get; internal set; }
-		public static DoorVariant GetDoorPrefab(this DoorPrefabs prefab)
+		public static BreakableDoor GetPrefab(this DoorPrefabs prefab)
 		{
-			if (prefab == DoorPrefabs.DoorLCZ) return DoorPrefabLCZ;
-			else if (prefab == DoorPrefabs.DoorHCZ) return DoorPrefabHCZ;
-			else return DoorPrefabEZ;
+			if (Prefabs.Doors.TryGetValue(prefab, out var door)) return door;
+			return Prefabs.Doors.First().Value;
+		}
+		public static GameObject GetPrefab(this TargetPrefabs prefab)
+		{
+			if (Prefabs.Targets.TryGetValue(prefab, out var target)) return target;
+			return Prefabs.Targets.First().Value;
+		}
+		public static MapGeneration.Distributors.Locker GetPrefab(this LockerPrefabs prefab)
+		{
+			if (prefab == LockerPrefabs.Pedestal)
+			{
+				int rand = UnityEngine.Random.Range(0, 100);
+				if (rand > 80) prefab = LockerPrefabs.Pedestal268;
+				else if (rand > 60) prefab = LockerPrefabs.Pedestal207;
+				else if (rand > 40) prefab = LockerPrefabs.Pedestal500;
+				else if (rand > 20) prefab = LockerPrefabs.Pedestal018;
+				else prefab = LockerPrefabs.Pedestal2176;
+			}
+			if (Prefabs.Lockers.TryGetValue(prefab, out var locker)) return locker;
+			return Prefabs.Lockers.First().Value;
 		}
 		public static Room GetRoom(this RoomName type) => Map.Rooms.FirstOrDefault(x => x.RoomName == type);
 		public static Room GetRoom(this RoomType type) => Map.Rooms.FirstOrDefault(x => x.Type == type);
@@ -63,6 +80,25 @@ namespace Qurre.API
 			}
 			found = list.First();
 			return true;
+		}
+		public static void UpdateData(this NetworkIdentity identity) => NetworkServer.SendToAll(identity.SpawnMsg());
+		public static SpawnMessage SpawnMsg(this NetworkIdentity identity)
+		{
+			var writer = NetworkWriterPool.GetWriter();
+			var writer2 = NetworkWriterPool.GetWriter();
+			var payload = NetworkServer.CreateSpawnMessagePayload(false, identity, writer, writer2);
+			return new SpawnMessage
+			{
+				netId = identity.netId,
+				isLocalPlayer = false,
+				isOwner = false,
+				sceneId = identity.sceneId,
+				assetId = identity.assetId,
+				position = identity.gameObject.transform.position,
+				rotation = identity.gameObject.transform.rotation,
+				scale = identity.gameObject.transform.localScale,
+				payload = payload
+			};
 		}
 		public static Team GetTeam(this RoleType roleType)
 		{

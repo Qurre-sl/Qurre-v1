@@ -4,6 +4,7 @@ using Interactables.Interobjects;
 using Mirror;
 using System.Collections.Generic;
 using Qurre.API.Objects;
+using Qurre.API.Modules;
 namespace Qurre.API.Controllers
 {
     public class Door
@@ -124,15 +125,24 @@ namespace Qurre.API.Controllers
             }
         }
         public List<Room> Rooms { get; } = new List<Room>();
+        public void Destroy()
+        {
+            NetworkServer.UnSpawn(GameObject);
+            Map.Doors.Remove(this);
+            Object.Destroy(GameObject);
+        }
         public static Door Spawn(Vector3 position, DoorPrefabs prefab, Quaternion? rotation = null, DoorPermissions permissions = null)
         {
-            DoorVariant doorVariant = Object.Instantiate(prefab.GetDoorPrefab());
+            DoorVariant doorVariant = Object.Instantiate(prefab.GetPrefab());
             doorVariant.transform.position = position;
             doorVariant.transform.rotation = rotation ?? new Quaternion(0, 0, 0, 0);
             doorVariant.RequiredPermissions = permissions ?? new DoorPermissions();
             var door = new Door(doorVariant);
             Map.Doors.Add(door);
             NetworkServer.Spawn(doorVariant.gameObject);
+            doorVariant.netIdentity.UpdateData();
+            var comp = door.GameObject.AddComponent<DoorsUpdater>();
+            if(comp) comp.Door = doorVariant;
             return door;
         }
     }

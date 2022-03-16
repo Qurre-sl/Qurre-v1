@@ -7,5 +7,6 @@ namespace Qurre.Events.Invoke
         public static void SendingRA(SendingRAEvent ev) => Invokes(ev);
         public static void RaRequestPlayerList(RaRequestPlayerListEvent ev) => Invokes(ev);
         public static void SendingConsole(SendingConsoleEvent ev) => Invokes(ev);
+        public static void PreAuth(PreAuthEvent ev) => Invokes(ev);
     }
 }
