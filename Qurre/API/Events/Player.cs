@@ -618,13 +618,9 @@ namespace Qurre.API.Events
             Invisible = invisible;
         }
         public Player Player { get; internal set; }
-
         public Player PlayerToShow { get; internal set; }
-
         public float Rotation { get; set; }
-
         public Vector3 Position { get; set; }
-
         public bool Invisible { get; set; }
     }
     public class FlashExplosionEvent : EventArgs
@@ -837,6 +833,18 @@ namespace Qurre.API.Events
         }
         public Player Player { get; }
         public Vector3 Position { get; set; }
+        public bool Allowed { get; set; }
+    }
+    public class HotKeyPressEvent : EventArgs
+    {
+        public HotKeyPressEvent(Player player, HotKeyType key, bool allowed = true)
+        {
+            Player = player;
+            HotKey = key;
+            Allowed = allowed;
+        }
+        public Player Player { get; }
+        public HotKeyType HotKey { get; set; }
         public bool Allowed { get; set; }
     }
 }

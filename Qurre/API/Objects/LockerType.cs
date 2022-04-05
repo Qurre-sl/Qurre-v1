@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum LockerType
+    public enum LockerType : byte
     {
         Unknown,
         AdrenalineMedkit,

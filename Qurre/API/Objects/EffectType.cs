@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum EffectType
+    public enum EffectType : byte
     {
         Amnesia,
         Asphyxiated,

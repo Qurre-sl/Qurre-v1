@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum Scp079SpeakerType
+    public enum Scp079SpeakerType : byte
     {
         StartSpeaker,
         EndSpeaker

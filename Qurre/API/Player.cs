@@ -22,6 +22,8 @@ using PlayerStatsSystem;
 using Qurre.API.Addons;
 using InventorySystem.Items.Firearms;
 using Firearm = Qurre.API.Controllers.Items.Firearm;
+using InventorySystem.Items.Usables.Scp330;
+using MEC;
 namespace Qurre.API
 {
 	public class Player
@@ -44,7 +46,7 @@ namespace Qurre.API
 			Scp079Controller = new Scp079(this);
 			Scp096Controller = new Scp096(this);
 			Scp106Controller = new Scp106(this);
-			Scp173Controller = new Scp173();
+			Scp173Controller = new Scp173(this);
 			Broadcasts = new ListBroadcasts();
 			Ammo = new AmmoBoxManager(this);
 			BlockSpawnTeleport = false;
@@ -170,7 +172,7 @@ namespace Qurre.API
 		public bool Overwatch
 		{
 			get => ServerRoles.OverwatchEnabled;
-			set => ServerRoles.UserCode_TargetSetOverwatch(NetworkIdentity.connectionToClient, value);
+			set => ServerRoles.SetOverwatchStatus(value);
 		}
 		public Player Cuffer
 		{
@@ -317,23 +319,24 @@ namespace Qurre.API
 		}
 		public float Ahp
 		{
-			get => PlayerStats.StatModules[1].CurValue;
+			get => PlayerStats.GetModule<AhpStat>().CurValue;
 			set
 			{
-				if (value > MaxAhp)
-					MaxAhp = Mathf.CeilToInt(value);
-				PlayerStats.StatModules[1].CurValue = value;
+				if (value > MaxAhp) MaxAhp = Mathf.CeilToInt(value);
+				foreach (var process in AhpActiveProcesses) process.CurrentAmount = value;
 			}
 		}
 		public float MaxAhp
 		{
-			get => ((AhpStat)PlayerStats.StatModules[1])._maxSoFar;
-			set => ((AhpStat)PlayerStats.StatModules[1])._maxSoFar = value;
+			get => PlayerStats.GetModule<AhpStat>()._maxSoFar;
+			set => PlayerStats.GetModule<AhpStat>()._maxSoFar = value;
 		}
 		public List<AhpStat.AhpProcess> AhpActiveProcesses
 		{
-			get => ((AhpStat)PlayerStats.StatModules[1])._activeProcesses;
+			get => PlayerStats.GetModule<AhpStat>()._activeProcesses;
 		}
+		public void AddAhp(float amount, float limit, float decay = 0, float efficacy = 0.7f, float sustain = 0, bool persistant = false) =>
+			PlayerStats.GetModule<AhpStat>().ServerAddProcess(amount, limit, decay, efficacy, sustain, persistant);
 		public ItemIdentifier CurrentItem
 		{
 			get => Inventory.NetworkCurItem;
@@ -656,6 +659,39 @@ namespace Qurre.API
 			return PlayerStats.DealDamage(new ScpDamageHandler(attacker.ReferenceHub, damage, deathReason));
 		}
 		public bool DealDamage(DamageHandlerBase handler) => PlayerStats.DealDamage(handler);
+		public void Heal(float Amount, bool Override)
+		{
+			if (Override) Hp += Amount;
+			else ((HealthStat)rh.playerStats.StatModules[0]).ServerHeal(Amount);
+		}
+		public bool AddCandy(CandyType Type)
+		{
+			var candyType = CandyKindID.None;
+			switch (Type)
+			{
+				case CandyType.None: candyType = CandyKindID.None; break;
+				case CandyType.Red: candyType = CandyKindID.Red; break;
+				case CandyType.Blue: candyType = CandyKindID.Blue; break;
+				case CandyType.Green: candyType = CandyKindID.Green; break;
+				case CandyType.Purple: candyType = CandyKindID.Purple; break;
+				case CandyType.Pink: candyType = CandyKindID.Pink; break;
+			}
+			if (Scp330Bag.TryGetBag(rh, out Scp330Bag bag))
+			{
+				bool result = bag.TryAddSpecific(candyType);
+				if (result) bag.ServerRefreshBag();
+				return result;
+			}
+			if (AllItems.Count > 7) return false;
+			Scp330 scp330 = (Scp330)AddItem(ItemType.SCP330);
+			Timing.CallDelayed(0.02f, () =>
+			{
+				foreach (CandyKindID item in scp330.Candies)
+					scp330.Remove(item);
+			});
+			scp330.Add(candyType);
+			return true;
+		}
 		public Item AddItem(ItemType itemType)
 		{
 			Item item = Item.Get(Inventory.ServerAddItem(itemType));
@@ -753,8 +789,7 @@ namespace Qurre.API
 		}
 		public void ClearInventory()
 		{
-			Inventory.UserInventory.Items.Clear();
-			Inventory.SendItemsNextFrame = true;
+			while (AllItems.Count > 0) RemoveItem(AllItems.ElementAt(0), true);
 			ItemsValue.Clear();
 		}
 		public void DropItems() => Inventory.ServerDropEverything();
@@ -776,8 +811,8 @@ namespace Qurre.API
 		public void Ban(int duration, string reason, string issuer = "API") => PlayerManager.localPlayer.GetComponent<BanPlayer>().BanUser(GameObject, duration, reason, issuer, false);
 		public void Kick(string reason, string issuer = "API") => Ban(0, reason, issuer);
 		public void Disconnect(string reason = null) => ServerConsole.Disconnect(GameObject, string.IsNullOrEmpty(reason) ? "" : reason);
-		public void Kill(DeathTranslation deathReason) => PlayerStats.DealDamage(new UniversalDamageHandler(-1, deathReason));
-		public void Kill(string deathReason = "") => PlayerStats.DealDamage(new CustomReasonDamageHandler(deathReason));
+		public void Kill(DeathTranslation deathReason) => PlayerStats.KillPlayer(new UniversalDamageHandler(-1, deathReason));
+		public void Kill(string deathReason = "") => PlayerStats.KillPlayer(new CustomReasonDamageHandler(deathReason));
 		public void ChangeModel(RoleType newModel)
 		{
 			GameObject gameObject = GameObject;
@@ -865,6 +900,8 @@ namespace Qurre.API
 			if (blink) HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, HintEffectPresets.FadeInAndOut(0f, 1f, 0f), duration));
 			else HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, null, duration));
 		}
+		public void ShowHint(string text, HintEffect[] effect, float duration = 1f) =>
+			HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, effect, duration));
 		public void BodyDelete()
 		{
 			foreach (var doll in Map.Ragdolls.Where(x => x.Owner == this)) doll.Destroy();

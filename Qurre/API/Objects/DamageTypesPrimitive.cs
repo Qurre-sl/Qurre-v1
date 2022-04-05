@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum DamageTypesPrimitive
+    public enum DamageTypesPrimitive : byte
     {
         Custom,
         Explosion,

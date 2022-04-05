@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum RemovableObject
+    public enum RemovableObject : byte
     {
         Doors,
         Workstations,

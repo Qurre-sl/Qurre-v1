@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum ScpAttackType
+    public enum ScpAttackType : byte
     {
         Scp049,
         Scp0492,

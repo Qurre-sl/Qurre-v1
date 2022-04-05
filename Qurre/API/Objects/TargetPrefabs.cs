@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum TargetPrefabs
+    public enum TargetPrefabs : byte
     {
         Sport,
         Dboy,

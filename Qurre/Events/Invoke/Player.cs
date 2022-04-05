@@ -60,5 +60,6 @@ namespace Qurre.Events.Invoke
         public static void PickupCandy(PickupCandyEvent ev) => Invokes(ev);
         public static void EatingScp330(EatingScp330Event ev) => Invokes(ev);
         public static void Jump(JumpEvent ev) => Invokes(ev);
+        public static void HotKeyPress(HotKeyPressEvent ev) => Invokes(ev);
     }
 }

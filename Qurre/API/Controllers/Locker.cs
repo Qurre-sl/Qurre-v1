@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using InventorySystem.Items.Pickups;
-using KeyPerms = Interactables.Interobjects.DoorUtils.KeycardPermissions;
+using Interactables.Interobjects.DoorUtils;
 namespace Qurre.API.Controllers
 {
     public class Locker
@@ -109,8 +109,8 @@ namespace Qurre.API.Controllers
             }
             public KeycardPermissions Permissions
             {
-                get => (KeycardPermissions)LockerChamber.RequiredPermissions;
-                set => LockerChamber.RequiredPermissions = (KeyPerms)value;
+                get => LockerChamber.RequiredPermissions;
+                set => LockerChamber.RequiredPermissions = value;
             }
         }
     }

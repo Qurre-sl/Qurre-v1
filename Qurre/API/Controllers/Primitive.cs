@@ -7,7 +7,7 @@ namespace Qurre.API.Controllers
     public class Primitive
     {
         public Primitive(PrimitiveType type) : this(type, Vector3.zero) { }
-        public Primitive(PrimitiveType type, Vector3 position, Color color = default, Quaternion rotation = default, Vector3 size = default, bool collider = true)
+        public Primitive(PrimitiveType type, Vector3 position, Color color = default, Quaternion rotation = default, Vector3 size = default, bool collider = true, bool _static = false)
         {
             try
             {
@@ -27,20 +27,29 @@ namespace Qurre.API.Controllers
                 Base.NetworkRotation = new LowPrecisionQuaternion(Base.transform.rotation);
                 Collider = collider;
                 Map.Primitives.Add(this);
+                Static = _static;
+                if (_static)
+                {
+                    _color = color;
+                    _type = type;
+                    UnityEngine.Object.Destroy(Base);
+                }
             }
             catch (Exception e)
             {
                 Log.Error($"{e}\n{e.StackTrace}");
             }
         }
+        private Color _color;
+        private PrimitiveType _type;
+        public bool Static { get; private set; }
         public Vector3 Position
         {
             get => Base.transform.position;
             set
             {
-                NetworkServer.UnSpawn(Base.gameObject);
+                if (Static) return;
                 Base.transform.position = value;
-                NetworkServer.Spawn(Base.gameObject);
                 Base.NetworkPosition = Base.transform.position;
             }
         }
@@ -49,9 +58,8 @@ namespace Qurre.API.Controllers
             get => Base.transform.localScale;
             set
             {
-                NetworkServer.UnSpawn(Base.gameObject);
+                if (Static) return;
                 Base.transform.localScale = value;
-                NetworkServer.Spawn(Base.gameObject);
                 Base.NetworkScale = Base.transform.localScale;
             }
         }
@@ -60,9 +68,8 @@ namespace Qurre.API.Controllers
             get => Base.transform.localRotation;
             set
             {
-                NetworkServer.UnSpawn(Base.gameObject);
+                if (Static) return;
                 Base.transform.localRotation = value;
-                NetworkServer.Spawn(Base.gameObject);
                 Base.NetworkRotation = new LowPrecisionQuaternion(Base.transform.rotation);
             }
         }
@@ -72,6 +79,7 @@ namespace Qurre.API.Controllers
             get => _collider;
             set
             {
+                if (Static) return;
                 _collider = value;
                 NetworkServer.UnSpawn(Base.gameObject);
                 Vector3 _s = Scale;
@@ -82,13 +90,20 @@ namespace Qurre.API.Controllers
         }
         public Color Color
         {
-            get => Base.MaterialColor;
-            set => Base.NetworkMaterialColor = value;
+            get => Static ? _color : Base.MaterialColor;
+            set { if (!Static) Base.NetworkMaterialColor = value; }
         }
         public PrimitiveType Type
         {
-            get => Base.PrimitiveType;
-            set => Base.NetworkPrimitiveType = value;
+            get => Static ? _type : Base.PrimitiveType;
+            set { if (!Static) Base.NetworkPrimitiveType = value; }
+        }
+        public void Break()
+        {
+            _color = Color;
+            _type = Type;
+            Static = true;
+            UnityEngine.Object.Destroy(Base);
         }
         public void Destroy()
         {

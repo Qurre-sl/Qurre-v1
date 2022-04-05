@@ -8,7 +8,7 @@ namespace Qurre.API.Addons.Models
         public readonly GameObject GameObject;
         public readonly Primitive Primitive;
 
-        public ModelPrimitive(Model model, PrimitiveType primitiveType, Color color, Vector3 position, Vector3 rotation, Vector3 size = default, bool collider = true)
+        public ModelPrimitive(Model model, PrimitiveType primitiveType, Color color, Vector3 position, Vector3 rotation, Vector3 size = default, bool collider = true, bool _static = false)
         {
             try
             {
@@ -19,6 +19,7 @@ namespace Qurre.API.Addons.Models
                 GameObject.transform.localRotation = Quaternion.Euler(rotation);
                 GameObject.transform.localScale = size;
                 Primitive.Collider = collider;
+                if (_static) Primitive.Break();
             }
             catch (Exception ex)
             {

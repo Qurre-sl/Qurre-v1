@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum Side
+    public enum Side : byte
     {
         SCP,
         MTF,

@@ -48,6 +48,18 @@ namespace Qurre.API
 			if (Prefabs.Lockers.TryGetValue(prefab, out var locker)) return locker;
 			return Prefabs.Lockers.First().Value;
 		}
+		public static HotKeyType GetKey(this ActionName act)
+		{
+			return act switch
+			{
+				ActionName.HotkeyGrenade => HotKeyType.Grenade,
+				ActionName.HotkeyKeycard => HotKeyType.Keycard,
+				ActionName.HotkeyMedical => HotKeyType.Medical,
+				ActionName.HotkeyPrimaryFirearm => HotKeyType.PrimaryGun,
+				ActionName.HotkeySecondaryFirearm => HotKeyType.SecondaryGun,
+				_ => HotKeyType.Unknow
+			};
+		}
 		public static Room GetRoom(this RoomName type) => Map.Rooms.FirstOrDefault(x => x.RoomName == type);
 		public static Room GetRoom(this RoomType type) => Map.Rooms.FirstOrDefault(x => x.Type == type);
 		public static Room GetRoom(this RoomIdentifier identifier) => Map.Rooms.FirstOrDefault(x => x.Identifier == identifier);

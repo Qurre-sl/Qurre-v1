@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum LiftType
+    public enum LiftType : byte
     {
         Unknown,
         GateA,

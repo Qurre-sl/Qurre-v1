@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum MovementDirection
+    public enum MovementDirection : byte
     {
         Stop,
         Forward,

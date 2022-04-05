@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum DoorType
+    public enum DoorType : byte
     {
         Unknown,
         LCZ_330,

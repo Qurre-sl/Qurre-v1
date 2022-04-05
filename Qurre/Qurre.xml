@@ -136,41 +136,6 @@
             44 caliber.
             </summary>
         </member>
-        <member name="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelOne">
-            <summary>
-            Safe SCP.
-            </summary>
-        </member>
-        <member name="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelTwo">
-            <summary>
-            <see cref="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelOne"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.Checkpoints"/>.
-            </summary>
-        </member>
-        <member name="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelThree">
-            <summary>
-            <see cref="F:Qurre.API.Objects.KeycardPermissions.ContainmentLevelTwo"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.Intercom"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.AlphaWarhead"/>.
-            </summary>
-        </member>
-        <member name="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelOne">
-            <summary>
-            <see cref="F:Qurre.API.Objects.KeycardPermissions.Checkpoints"/>, Opens Light Containment armory.
-            </summary>
-        </member>
-        <member name="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelTwo">
-            <summary>
-            <see cref="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelOne"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.ExitGates"/>, Opens Heavy Containment armories.
-            </summary>
-        </member>
-        <member name="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelThree">
-            <summary>
-            <see cref="F:Qurre.API.Objects.KeycardPermissions.ArmoryLevelTwo"/>, <see cref="F:Qurre.API.Objects.KeycardPermissions.Intercom"/>, Opens MicroHID room.
-            </summary>
-        </member>
-        <member name="F:Qurre.API.Objects.KeycardPermissions.ScpOverride">
-            <summary>
-            <see cref="F:Qurre.API.Objects.KeycardPermissions.Checkpoints"/>.
-            </summary>
-        </member>
         <member name="P:Qurre.API.Server.RealEscape">
             <summary>
             <para>if true, then no items will be issued during the escape &amp; the escaped person will not change his location.</para>

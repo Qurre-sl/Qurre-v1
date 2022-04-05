@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum ConfigObjects
+    public enum ConfigObjects : byte
     {
         Bool,
         Byte,

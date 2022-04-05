@@ -61,6 +61,7 @@ namespace Qurre.Events
         public static event AllEvents<HideBadgeEvent> HideBadge;
         public static event AllEvents<ShowBadgeEvent> ShowBadge;
         public static event AllEvents<JumpEvent> Jump;
+        public static event AllEvents<HotKeyPressEvent> HotKeyPress;
         internal static void Invokes(BannedEvent ev) => Banned.CustomInvoke(ev);
         internal static void Invokes(BanEvent ev) => Ban.CustomInvoke(ev);
         internal static void Invokes(KickEvent ev) => Kick.CustomInvoke(ev);
@@ -117,5 +118,6 @@ namespace Qurre.Events
         internal static void Invokes(ShowBadgeEvent ev) => ShowBadge.CustomInvoke(ev);
         internal static void Invokes(HideBadgeEvent ev) => HideBadge.CustomInvoke(ev);
         internal static void Invokes(JumpEvent ev) => Jump.CustomInvoke(ev);
+        internal static void Invokes(HotKeyPressEvent ev) => HotKeyPress.CustomInvoke(ev);
     }
 }

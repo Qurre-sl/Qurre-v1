@@ -77,7 +77,7 @@ namespace Qurre.API.Controllers
             catch { }
         }
         private int _id = 0;
-        private readonly global::Ragdoll ragdoll;
+        internal readonly global::Ragdoll ragdoll;
         public GameObject GameObject => ragdoll.gameObject;
         public string Name => ragdoll.name;
         public Vector3 Position

@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum ItemState
+    public enum ItemState : byte
     {
         Destroyed,
         Despawned,

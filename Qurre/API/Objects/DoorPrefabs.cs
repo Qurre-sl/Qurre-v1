@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum DoorPrefabs
+    public enum DoorPrefabs : byte
     {
         DoorLCZ,
         DoorHCZ,

@@ -322,12 +322,12 @@ namespace Qurre.API.Events
     #region scp079
     public class GeneratorActivateEvent : EventArgs
     {
-        public GeneratorActivateEvent(Controllers.Generator generator, bool allowed = true)
+        public GeneratorActivateEvent(Generator generator, bool allowed = true)
         {
             Generator = generator;
             Allowed = allowed;
         }
-        public Controllers.Generator Generator { get; }
+        public Generator Generator { get; }
         public bool Allowed { get; set; }
     }
     public class GetEXPEvent : EventArgs

@@ -11,7 +11,7 @@ namespace Qurre
 	public static class PluginManager
 	{
 		public static readonly List<Plugin> plugins = new();
-		public static Version Version { get; } = new Version(1, 13, 0);
+		public static Version Version { get; } = new Version(1, 13, 1);
 		public static string AppDataDirectory { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 		public static string QurreDirectory { get; private set; } = Path.Combine(AppDataDirectory, "Qurre");
 		public static string PluginsDirectory { get; private set; } = Path.Combine(QurreDirectory, "Plugins");
@@ -44,7 +44,7 @@ namespace Qurre
 
 			foreach (string mod in Directory.GetFiles(PluginsDirectory))
 			{
-                try
+				try
 				{
 					Log.Debug($"Loading {mod}");
 					byte[] file = global::Loader.ReadFile(mod);
@@ -104,11 +104,7 @@ namespace Qurre
 						continue;
 					}
 
-					if (Version < p.NeededQurreVersion)
-					{
-						Log.Warn($"Plugin {p.Name} not loaded. Requires Qurre version at least {p.NeededQurreVersion}, your version: {Version}");
-						continue;
-					}
+					if (!CheckPlugin(p)) continue;
 					p.Assembly = assembly;
 
 					plugins.Add(p);
@@ -119,6 +115,32 @@ namespace Qurre
 			{
 				Log.Error($"An error occurred while processing {assembly.FullName}\n{ex}");
 			}
+		}
+		public static bool CheckPlugin(Plugin plugin)
+		{
+			var needed = plugin.NeededQurreVersion;
+
+			if (Version.Major != needed.Major)
+			{
+				if (Version.Major > needed.Major)
+				{
+					Log.Warn($"Plugin {plugin.Name} not loaded because he is outdated. Qurre Version: {Version.ToString(3)}. Needed Version: {needed}.");
+					return false;
+				}
+
+				if (Version.Major < needed.Major)
+				{
+					Log.Warn($"Plugin {plugin.Name} not loaded because your Qurre version is outdated. Qurre Version: {Version.ToString(3)}. Needed Version: {needed}.");
+					return false;
+				}
+			}
+			else if (Version < needed)
+			{
+				Log.Warn($"Plugin {plugin.Name} not loaded. Requires Qurre version at least {needed}, your version: {Version}");
+				return false;
+			}
+
+			return true;
 		}
 		public static void Enable()
 		{

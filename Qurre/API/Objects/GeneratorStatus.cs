@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum GeneratorStatus
+    public enum GeneratorStatus : byte
     {
         Activated,
         Disabled,

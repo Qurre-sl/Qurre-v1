@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum RoomType
+    public enum RoomType : byte
     {
         Unknown,
         LczArmory,

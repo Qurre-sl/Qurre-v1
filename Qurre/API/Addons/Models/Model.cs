@@ -15,10 +15,13 @@ namespace Qurre.API.Addons.Models
         public readonly GameObject GameObject;
         private readonly Dictionary<GameObject, ModelEnums> Parts = new();
 
+        public void AddPart(ModelBody part) => Parts.Add(part.GameObject, ModelEnums.Body);
+        public void AddPart(ModelBot part) => Parts.Add(part.GameObject, ModelEnums.Bot);
         public void AddPart(ModelDoor part) => Parts.Add(part.GameObject, ModelEnums.Door);
         public void AddPart(ModelGenerator part) => Parts.Add(part.GameObject, ModelEnums.Generator);
         public void AddPart(ModelLight part) => Parts.Add(part.GameObject, ModelEnums.Light);
         public void AddPart(ModelLocker part) => Parts.Add(part.GameObject, ModelEnums.Locker);
+        public void AddPart(ModelPickup part) => Parts.Add(part.GameObject, ModelEnums.Pickup);
         public void AddPart(ModelPrimitive part) => Parts.Add(part.GameObject, ModelEnums.Primitive);
         public void AddPart(ModelTarget part) => Parts.Add(part.GameObject, ModelEnums.Target);
         public void AddPart(ModelWorkStation part) => Parts.Add(part.GameObject, ModelEnums.WorkStation);

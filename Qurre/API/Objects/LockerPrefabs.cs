@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-    public enum LockerPrefabs
+    public enum LockerPrefabs : byte
     {
         AdrenalineMedkit,
         RegularMedkit,

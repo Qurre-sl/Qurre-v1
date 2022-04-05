@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Objects
 {
-	public enum DamageTypes
+	public enum DamageTypes : byte
 	{
 		None,
 		SeveredHands,
