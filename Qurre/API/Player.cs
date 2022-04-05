@@ -703,6 +703,7 @@ namespace Qurre.API
 				if (firearm.Base.CombinedAttachments.AdditionalPros.HasFlagFast(AttachmentDescriptiveAdvantages.Flashlight))
 					status |= FirearmStatusFlags.FlashlightEnabled;
 				firearm.Base.Status = new FirearmStatus(firearm.MaxAmmo, status, firearm.Base.GetCurrentAttachmentsCode());
+
 			}
 			return item;
 		}
