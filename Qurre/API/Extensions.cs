@@ -2,6 +2,7 @@
 using Interactables.Interobjects;
 using Interactables.Interobjects.DoorUtils;
 using InventorySystem.Items.Firearms.Attachments;
+using InventorySystem.Items.Usables.Scp244.Hypothermia;
 using MapGeneration;
 using MapGeneration.Distributors;
 using Mirror;

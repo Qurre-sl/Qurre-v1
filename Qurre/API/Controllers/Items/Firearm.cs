@@ -5,6 +5,7 @@ using InventorySystem.Items.Firearms.BasicMessages;
 using InventorySystem.Items.Firearms.Modules;
 using Gun = InventorySystem.Items.Firearms.Firearm;
 using Qurre.API.Objects;
+using InventorySystem.Items.Firearms.Attachments.Components;
 namespace Qurre.API.Controllers.Items
 {
     public class Firearm : Item
@@ -29,7 +30,7 @@ namespace Qurre.API.Controllers.Items
         public byte MaxAmmo => Base.AmmoManagerModule.MaxAmmo;
         public AmmoType AmmoType => Base.AmmoType.GetAmmoType();
         public bool FlashlightEnabled => Base.Status.Flags.HasFlagFast(FirearmStatusFlags.FlashlightEnabled);
-        public FirearmAttachment[] Attachments
+        public Attachment[] Attachments
         {
             get => Base.Attachments;
             set => Base.Attachments = value;

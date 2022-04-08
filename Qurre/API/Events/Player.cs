@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static CharacterClassManager;
+using static PlayerMovementSync;
 namespace Qurre.API.Events
 {
     public class BannedEvent : EventArgs
@@ -535,16 +536,14 @@ namespace Qurre.API.Events
     }
     public class ThrowItemEvent : EventArgs
     {
-        public ThrowItemEvent(Player player, Item item, ThrowableNetworkHandler.RequestType request, bool allowed = true)
+        public ThrowItemEvent(Player player, Item item, bool allowed = true)
         {
             Player = player;
             Item = item;
-            Request = request;
             Allowed = allowed;
         }
         public Player Player { get; }
         public Item Item { get; }
-        public ThrowableNetworkHandler.RequestType Request { get; }
         public bool Allowed { get; set; }
     }
     public class TeslaTriggerEvent : EventArgs
@@ -563,17 +562,17 @@ namespace Qurre.API.Events
     }
     public class SpawnEvent : EventArgs
     {
-        public SpawnEvent(Player player, RoleType roleType, Vector3 position, float rotationY)
+        public SpawnEvent(Player player, RoleType roleType, Vector3 position, PlayerRotation rotation)
         {
             Player = player;
             RoleType = roleType;
             Position = position;
-            RotationY = rotationY;
+            Rotation = rotation;
         }
         public Player Player { get; private set; }
         public RoleType RoleType { get; private set; }
         public Vector3 Position { get; set; }
-        public float RotationY { get; set; }
+        public PlayerRotation Rotation { get; set; }
     }
     public class RadioUpdateEvent : EventArgs
     {
