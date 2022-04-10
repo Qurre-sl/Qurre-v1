@@ -202,7 +202,7 @@ namespace Qurre.API
 		public Vector3 Position
 		{
 			get => rh.playerMovementSync.GetRealPosition();
-			set => rh.playerMovementSync.OverridePosition(value);
+			set => rh.playerMovementSync.OverridePosition(value, 0f);
 		}
 		public Vector2 Rotation
 		{
@@ -700,7 +700,7 @@ namespace Qurre.API
 				if (AttachmentsServerHandler.PlayerPreferences.TryGetValue(ReferenceHub, out var _d) && _d.TryGetValue(itemType, out var _y))
 					firearm.Base.ApplyAttachmentsCode(_y, true);
 				FirearmStatusFlags status = FirearmStatusFlags.MagazineInserted;
-				if (firearm.Base.HasAdvantageFlag(AttachmentDescriptiveAdvantages.Flashlight))
+				if (firearm.Base.CombinedAttachments.AdditionalPros.HasFlagFast(AttachmentDescriptiveAdvantages.Flashlight))
 					status |= FirearmStatusFlags.FlashlightEnabled;
 				firearm.Base.Status = new FirearmStatus(firearm.MaxAmmo, status, firearm.Base.GetCurrentAttachmentsCode());
 			}
@@ -893,7 +893,14 @@ namespace Qurre.API
 		}
 		public void ChangeEffectIntensity<T>(byte intensity) where T : PlayerEffect => PlayerEffectsController.ChangeEffectIntensity<T>(intensity);
 		public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0) => PlayerEffectsController.ChangeByString(effect, intensity, duration);
-		public void ShowHint(string text, float duration = 1f, HintEffect[] effect = null) =>
+		public void ShowHint(string text, float duration = 1f) =>
+			HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, HintEffectPresets.FadeInAndOut(0f, 1f, 0f), duration));
+		public void ShowHint(string text, bool blink, float duration = 1f)
+		{
+			if (blink) HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, HintEffectPresets.FadeInAndOut(0f, 1f, 0f), duration));
+			else HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, null, duration));
+		}
+		public void ShowHint(string text, HintEffect[] effect, float duration = 1f) =>
 			HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, effect, duration));
 		public void BodyDelete()
 		{

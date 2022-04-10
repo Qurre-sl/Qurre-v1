@@ -10,6 +10,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("Qurre Team")]
 [assembly: ComVisible(false)]
 [assembly: Guid("e1cb0906-b953-41e5-a594-11f65a361ef8")]
-[assembly: AssemblyVersion("1.13.2")]
-[assembly: AssemblyFileVersion("1.13.2")]
+[assembly: AssemblyVersion("1.13.1")]
+[assembly: AssemblyFileVersion("1.13.1")]
 [assembly: NeutralResourcesLanguage("en-US")]

@@ -99,25 +99,25 @@ namespace Qurre.API.Controllers
                     case MovementDirection.Forward:
                         var pos = Position + Player.CameraTransform.forward / 10 * speed;
                         if (!Physics.Linecast(Position, pos, Player.Movement.CollidableSurfaces))
-                            Player.Movement.OverridePosition(pos, forceGround: true);
+                            Player.Movement.OverridePosition(pos, 0f, true);
                         else wall = true;
                         break;
                     case MovementDirection.BackWards:
                         pos = Position - Player.CameraTransform.forward / 10 * speed;
                         if (!Physics.Linecast(Position, pos, Player.Movement.CollidableSurfaces))
-                            Player.Movement.OverridePosition(pos, forceGround: true);
+                            Player.Movement.OverridePosition(pos, 0f, true);
                         else wall = true;
                         break;
                     case MovementDirection.Right:
                         pos = Position + Quaternion.AngleAxis(90, Vector3.up) * Player.CameraTransform.forward / 10 * speed;
                         if (!Physics.Linecast(Position, pos, Player.Movement.CollidableSurfaces))
-                            Player.Movement.OverridePosition(pos, forceGround: true);
+                            Player.Movement.OverridePosition(pos, 0f, true);
                         else wall = true;
                         break;
                     case MovementDirection.Left:
                         pos = Position - Quaternion.AngleAxis(90, Vector3.up) * Player.CameraTransform.forward / 10 * speed;
                         if (!Physics.Linecast(Position, pos, Player.Movement.CollidableSurfaces))
-                            Player.Movement.OverridePosition(pos, forceGround: true);
+                            Player.Movement.OverridePosition(pos, 0f, true);
                         else wall = true;
                         break;
                 }

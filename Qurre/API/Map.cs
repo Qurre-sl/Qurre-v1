@@ -145,9 +145,9 @@ namespace Qurre.API
 				throw new IndexOutOfRangeException($"[Qurre.API.Map.PlayAmbientSound] no, no, no, no more than {AmbientSoundPlayer.clips.Length} sounds.");
 			AmbientSoundPlayer.RpcPlaySound(AmbientSoundPlayer.clips[id].index);
 		}
-		public static void ShowHint(string message, float duration, Hints.HintEffect[] effect = null)
+		public static void ShowHint(string message, float duration)
 		{
-			foreach (Player player in Player.List) player.ShowHint(message, duration, effect);
+			foreach (Player player in Player.List) player.ShowHint(message, duration);
 		}
 		public static void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter)
 		{
