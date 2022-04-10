@@ -13,7 +13,9 @@ namespace Qurre.API.Addons.Models
         {
             try
             {
-                WorkStation = WorkStation.Create(position, Vector3.zero, Vector3.one);
+                Vector3 parpos = Vector3.zero;
+                try { parpos = model.GameObject.transform.position; } catch { }
+                WorkStation = new(position + parpos, Vector3.zero, Vector3.one);
                 GameObject = WorkStation.GameObject;
                 NetworkServer.UnSpawn(GameObject);
                 GameObject.transform.parent = model?.GameObject?.transform;
@@ -21,6 +23,7 @@ namespace Qurre.API.Addons.Models
                 GameObject.transform.localRotation = Quaternion.Euler(rotation);
                 GameObject.transform.localScale = size;
                 NetworkServer.Spawn(GameObject);
+                //Log.Info(GameObject.transform.position);
             }
             catch (Exception ex)
             {

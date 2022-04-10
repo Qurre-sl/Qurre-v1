@@ -32,7 +32,7 @@ namespace Qurre.API.Controllers
                 {
                     _color = color;
                     _type = type;
-                    UnityEngine.Object.Destroy(Base);
+                    MEC.Timing.CallDelayed(0.1f, () => UnityEngine.Object.Destroy(Base));
                 }
             }
             catch (Exception e)
@@ -65,11 +65,11 @@ namespace Qurre.API.Controllers
         }
         public Quaternion Rotation
         {
-            get => Base.transform.localRotation;
+            get => Base.transform.rotation;
             set
             {
                 if (Static) return;
-                Base.transform.localRotation = value;
+                Base.transform.rotation = value;
                 Base.NetworkRotation = new LowPrecisionQuaternion(Base.transform.rotation);
             }
         }
@@ -81,11 +81,9 @@ namespace Qurre.API.Controllers
             {
                 if (Static) return;
                 _collider = value;
-                NetworkServer.UnSpawn(Base.gameObject);
                 Vector3 _s = Scale;
                 if (_collider) Base.transform.localScale = new Vector3(Math.Abs(_s.x), Math.Abs(_s.y), Math.Abs(_s.z));
                 else Base.transform.localScale = new Vector3(-Math.Abs(_s.x), -Math.Abs(_s.y), -Math.Abs(_s.z));
-                NetworkServer.Spawn(Base.gameObject);
             }
         }
         public Color Color

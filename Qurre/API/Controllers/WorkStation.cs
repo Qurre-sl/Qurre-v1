@@ -45,11 +45,11 @@ namespace Qurre.API.Controllers
         }
         public Quaternion Rotation
         {
-            get => Transform.localRotation;
+            get => Transform.rotation;
             set
             {
                 NetworkServer.UnSpawn(GameObject);
-                Transform.localRotation = value;
+                Transform.rotation = value;
                 NetworkServer.Spawn(GameObject);
             }
         }

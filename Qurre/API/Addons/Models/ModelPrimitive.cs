@@ -19,7 +19,13 @@ namespace Qurre.API.Addons.Models
                 GameObject.transform.localRotation = Quaternion.Euler(rotation);
                 GameObject.transform.localScale = size;
                 Primitive.Collider = collider;
-                if (_static) Primitive.Break();
+                if (_static)
+                {
+                    Primitive.Position = GameObject.transform.position;
+                    Primitive.Rotation = GameObject.transform.rotation;
+                    Primitive.Scale = GameObject.transform.localScale;
+                    MEC.Timing.CallDelayed(0.2f, () => Primitive.Break());
+                }
             }
             catch (Exception ex)
             {
