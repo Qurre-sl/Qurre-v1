@@ -893,14 +893,7 @@ namespace Qurre.API
 		}
 		public void ChangeEffectIntensity<T>(byte intensity) where T : PlayerEffect => PlayerEffectsController.ChangeEffectIntensity<T>(intensity);
 		public void ChangeEffectIntensity(string effect, byte intensity, float duration = 0) => PlayerEffectsController.ChangeByString(effect, intensity, duration);
-		public void ShowHint(string text, float duration = 1f) =>
-			HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, HintEffectPresets.FadeInAndOut(0f, 1f, 0f), duration));
-		public void ShowHint(string text, bool blink, float duration = 1f)
-		{
-			if (blink) HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, HintEffectPresets.FadeInAndOut(0f, 1f, 0f), duration));
-			else HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, null, duration));
-		}
-		public void ShowHint(string text, HintEffect[] effect, float duration = 1f) =>
+		public void ShowHint(string text, float duration = 1f, HintEffect[] effect = null) =>
 			HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, effect, duration));
 		public void BodyDelete()
 		{

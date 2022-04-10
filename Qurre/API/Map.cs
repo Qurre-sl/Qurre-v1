@@ -145,9 +145,9 @@ namespace Qurre.API
 				throw new IndexOutOfRangeException($"[Qurre.API.Map.PlayAmbientSound] no, no, no, no more than {AmbientSoundPlayer.clips.Length} sounds.");
 			AmbientSoundPlayer.RpcPlaySound(AmbientSoundPlayer.clips[id].index);
 		}
-		public static void ShowHint(string message, float duration)
+		public static void ShowHint(string message, float duration, Hints.HintEffect[] effect = null)
 		{
-			foreach (Player player in Player.List) player.ShowHint(message, duration);
+			foreach (Player player in Player.List) player.ShowHint(message, duration, effect);
 		}
 		public static void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter)
 		{
@@ -266,6 +266,7 @@ namespace Qurre.API
 			ShootingTargets.Clear();
 			Cameras.Clear();
 			Patches.Events.player.Banned.Cached.Clear();
+			try { Addons.Models.Model.ClearCache(); } catch { }
 			try
 			{
 				foreach (var m in AudioMicrophone.Cache) m.Dispose();
