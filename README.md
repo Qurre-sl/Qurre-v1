@@ -1,5 +1,6 @@
-
+<a href="https://discord.gg/zGUqfJQebn" alt="Discord">
 <img src="https://cdn.scpsl.store/qurre/img/qurreLogo200x200-cyrcle.png" align="right" style="border-radius: 50%;" />
+</a>
 <p>
    <a href="https://discord.gg/zGUqfJQebn" alt="Discord">
       <img src="https://discord.com/api/guilds/779412392651653130/embed.png" alt="Discord"/>
