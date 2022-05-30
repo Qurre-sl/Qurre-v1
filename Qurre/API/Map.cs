@@ -20,7 +20,6 @@ using InventorySystem.Items.Pickups;
 using System;
 using PlayerStatsSystem;
 using Light = Qurre.API.Controllers.Light;
-using Qurre.API.Addons.Audio;
 using Camera = Qurre.API.Controllers.Camera;
 namespace Qurre.API
 {
@@ -97,16 +96,10 @@ namespace Qurre.API
 				foreach (BreakableWindow window in Object.FindObjectsOfType<BreakableWindow>()) window.health = value;
 			}
 		}
-		public static MapBroadcast Broadcast(string message, ushort duration, bool instant = false)
-		{
-			var bc = new MapBroadcast(message, duration, instant, false);
-			return bc;
-		}
-		public static MapBroadcast BroadcastAdmin(string message, ushort duration, bool instant = false)
-		{
-			var bc = new MapBroadcast(message, duration, instant, true);
-			return bc;
-		}
+		public static MapBroadcast Broadcast(string message, ushort duration, bool instant = false) =>
+			new(message, duration, instant, false);
+		public static MapBroadcast BroadcastAdmin(string message, ushort duration, bool instant = false) =>
+			new(message, duration, instant, true);
 		public static void ClearBroadcasts() => Server.Host.Broadcasts.Clear();
 		public static Vector3 GetRandomSpawnPoint(RoleType roleType)
 		{
@@ -122,7 +115,7 @@ namespace Qurre.API
 		public static void ShakeScreen(float times) => ExplosionCameraShake.singleton.Shake(times);
 		public static void SetIntercomSpeaker(Player player)
 		{
-			if (player != null)
+			if (player is not null)
 			{
 				GameObject gameObject = player.GameObject;
 				gameObject.GetComponent<CharacterClassManager>().IntercomMuted = false;
@@ -130,26 +123,25 @@ namespace Qurre.API
 				return;
 			}
 			foreach (CharacterClassManager ccm in Object.FindObjectsOfType<CharacterClassManager>())
-			{
-				if (ccm.IntercomMuted) ccm.IntercomMuted = false;
-			}
+				if (ccm.IntercomMuted)
+					ccm.IntercomMuted = false;
 		}
 		public static void PlayCIEntranceMusic() => RespawnEffectsController.ExecuteAllEffects(RespawnEffectsController.EffectType.UponRespawn, SpawnableTeamType.ChaosInsurgency);
 		public static void PlayIntercomSound(bool start) => PlayerManager.localPlayer.GetComponent<Intercom>().RpcPlaySound(start, 0);
-		public static void PlaceBlood(Vector3 position, int type, float size) => PlayerManager.localPlayer.GetComponent<CharacterClassManager>().RpcPlaceBlood(position, type, size);
+		public static void PlaceBlood(Vector3 position, BloodType type, float size = 1f) => PlayerManager.hostHub.characterClassManager.RpcPlaceBlood(position, (int)type, size);
 		public static AmbientSoundPlayer AmbientSoundPlayer { get; private set; }
 		public static void PlayAmbientSound() => AmbientSoundPlayer.GenerateRandom();
 		public static void PlayAmbientSound(int id)
 		{
 			if (id >= AmbientSoundPlayer.clips.Length)
-				throw new IndexOutOfRangeException($"[Qurre.API.Map.PlayAmbientSound] no, no, no, no more than {AmbientSoundPlayer.clips.Length} sounds.");
+				throw new IndexOutOfRangeException($"[Qurre.API.Map.PlayAmbientSound] no, no, no; no more than {AmbientSoundPlayer.clips.Length} sounds.");
 			AmbientSoundPlayer.RpcPlaySound(AmbientSoundPlayer.clips[id].index);
 		}
 		public static void ShowHint(string message, float duration, Hints.HintEffect[] effect = null)
 		{
 			foreach (Player player in Player.List) player.ShowHint(message, duration, effect);
 		}
-		public static void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter)
+		public static void AnnounceMtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter)
 		{
 			if (scpsLeft == 0) Cassie.Send($"MTFUnit epsilon 11 designated NATO_{mtfLetter} {mtfNumber} HasEntered AllRemaining NoSCPsLeft", true, true, true);
 			else Cassie.Send($"MTFUnit epsilon 11 designated NATO_{mtfLetter} {mtfNumber} HasEntered AllRemaining AwaitingRecontainment {scpsLeft} scpsubjects", true, true, true);
@@ -235,7 +227,7 @@ namespace Qurre.API
 					{
 						var room = Rooms.FirstOrDefault(x => x.Id == pair.Key);
 						var door = interactable.GetComponentInParent<DoorVariant>();
-						if (room == null || door == null) continue;
+						if (room is null || door is null) continue;
 						var sdoor = door.GetDoor();
 						sdoor.Rooms.Add(room);
 						room.Doors.Add(sdoor);
@@ -249,8 +241,12 @@ namespace Qurre.API
 		}
 		internal static void ClearObjects()
 		{
-			try { Teslas.ForEach(x => x.ImmunityRoles.Clear()); } catch { }
-			try { Teslas.ForEach(x => x.ImmunityPlayers.Clear()); } catch { }
+			foreach (var x in Teslas)
+			{
+				if (x is null) continue;
+				x.ImmunityRoles.Clear();
+				x.ImmunityPlayers.Clear();
+			}
 			Teslas.Clear();
 			Doors.Clear();
 			Lifts.Clear();
@@ -266,19 +262,12 @@ namespace Qurre.API
 			ShootingTargets.Clear();
 			Cameras.Clear();
 			Patches.Events.player.Banned.Cached.Clear();
+			Extensions.DamagesCached.Clear();
 			try { Addons.Models.Model.ClearCache(); } catch { }
-			try
-			{
-				foreach (var m in AudioMicrophone.Cache) m.Dispose();
-				AudioMicrophone.Cache.Clear();
-			}
-			catch { }
-			try
-			{
-				foreach (var a in Audio.Audios) try { a.Microphone.Dispose(); } catch { }
-				Audio.Audios.Clear();
-			}
-			catch { }
+			try { Audio._micro?._tasks.Clear(); Audio._micro = null; } catch { }
 		}
+
+		[Obsolete("Use \"AnnounceMtfEntrance\"")]
+		public static void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter) => AnnounceMtfEntrance(scpsLeft, mtfNumber, mtfLetter);
 	}
 }

@@ -11,8 +11,7 @@ namespace Qurre.API.Controllers
         {
             try
             {
-                var mod = Addons.Prefabs.Primitive;
-                if (!mod.TryGetComponent<AdminToyBase>(out var primitiveToyBase)) return;
+                if (!Addons.Prefabs.Primitive.TryGetComponent<AdminToyBase>(out var primitiveToyBase)) return;
                 AdminToyBase prim = UnityEngine.Object.Instantiate(primitiveToyBase, position, rotation);
                 Base = (PrimitiveObjectToy)prim;
                 Base.SpawnerFootprint = new Footprinting.Footprint(Server.Host.ReferenceHub);
@@ -43,6 +42,11 @@ namespace Qurre.API.Controllers
         private Color _color;
         private PrimitiveType _type;
         public bool Static { get; private set; }
+        public byte MovementSmoothing
+        {
+            get => Base.NetworkMovementSmoothing;
+            set => Base.NetworkMovementSmoothing = value;
+        }
         public Vector3 Position
         {
             get => Base.transform.position;
@@ -65,7 +69,7 @@ namespace Qurre.API.Controllers
         }
         public Quaternion Rotation
         {
-            get => Base.transform.localRotation;
+            get => Base.transform.rotation;
             set
             {
                 if (Static) return;

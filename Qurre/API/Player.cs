@@ -21,7 +21,6 @@ using NorthwoodLib;
 using PlayerStatsSystem;
 using Qurre.API.Addons;
 using InventorySystem.Items.Firearms;
-using Firearm = Qurre.API.Controllers.Items.Firearm;
 using InventorySystem.Items.Usables.Scp330;
 using MEC;
 namespace Qurre.API
@@ -35,14 +34,13 @@ namespace Qurre.API
 		private string _tag = "";
 		private Radio radio;
 		private Escape escape;
-		internal readonly List<Item> ItemsValue = new(8);
 		internal List<KillElement> _kills = new();
-		public Player(ReferenceHub RH)
+		internal Player(ReferenceHub _rh)
 		{
-			rh = RH;
-			go = RH.gameObject;
-			ui = RH.characterClassManager.UserId;
-			try { _nick = RH.nicknameSync.Network_myNickSync; } catch { }
+			rh = _rh;
+			go = _rh.gameObject;
+			ui = _rh.characterClassManager.UserId;
+			try { _nick = _rh.nicknameSync.Network_myNickSync; } catch { }
 			Scp079Controller = new Scp079(this);
 			Scp096Controller = new Scp096(this);
 			Scp106Controller = new Scp106(this);
@@ -51,14 +49,14 @@ namespace Qurre.API
 			Ammo = new AmmoBoxManager(this);
 			BlockSpawnTeleport = false;
 		}
-		public Player(GameObject gameObject) => new Player(ReferenceHub.GetHub(gameObject));
-		public static Dictionary<GameObject, Player> Dictionary { get; } = new();
-		public static Dictionary<int, Player> IdPlayers = new();
-		public static Dictionary<string, Player> UserIDPlayers { get; set; } = new();
-		public static Dictionary<string, Player> ArgsPlayers { get; set; } = new();
+		internal Player(GameObject gameObject) => new Player(ReferenceHub.GetHub(gameObject));
+		public static readonly Dictionary<GameObject, Player> Dictionary = new();
+		public static readonly Dictionary<int, Player> IdPlayers = new();
+		public static readonly Dictionary<string, Player> UserIDPlayers = new();
+		public static readonly Dictionary<string, Player> ArgsPlayers = new();
 		public static IEnumerable<Player> List => Dictionary.Values.Where(x => !x.Bot);
-		public IEnumerator<KillElement> Kills => (IEnumerator<KillElement>)_kills;
-		public int KillsCount => _kills.Count();
+		public IReadOnlyCollection<KillElement> Kills => _kills.AsReadOnly();
+		public int KillsCount => _kills.Count;
 		public int DeathsCount { get; internal set; }
 		public ReferenceHub ReferenceHub => rh;
 		public readonly Scp079 Scp079Controller;
@@ -71,12 +69,12 @@ namespace Qurre.API
 		{
 			get
 			{
-				if (rh == null || rh.gameObject == null) return go;
+				if (rh is null || rh.gameObject is null) return go;
 				else return rh.gameObject;
 			}
 		}
-		public Radio Radio { get { if (radio == null) { radio = GameObject.GetComponent<Radio>(); } return radio; } }
-		public Escape Escape { get { if (escape == null) { escape = ClassManager.GetComponent<Escape>(); } return escape; } }
+		public Radio Radio { get { if (radio is null) { radio = GameObject.GetComponent<Radio>(); } return radio; } }
+		public Escape Escape { get { if (escape is null) { escape = ClassManager.GetComponent<Escape>(); } return escape; } }
 		public AmmoBoxManager Ammo { get; }
 		public HintDisplay HintDisplay => rh.hints;
 		public Transform CameraTransform => rh.PlayerCameraReference;
@@ -94,6 +92,11 @@ namespace Qurre.API
 		public PlayerEffectsController PlayerEffectsController => rh.playerEffectsController;
 		public NicknameSync NicknameSync => rh.nicknameSync;
 		public PlayerMovementSync Movement => rh.playerMovementSync;
+		public string CustomInfo
+		{
+			get => NicknameSync.CustomPlayerInfo;
+			set => NicknameSync.CustomPlayerInfo = value;
+		}
 		public string Tag
 		{
 			get => _tag;
@@ -131,7 +134,7 @@ namespace Qurre.API
 			{
 				if (Bot)
 				{
-					if (ui == null) ui = $"7{UnityEngine.Random.Range(0, 99999999)}{UnityEngine.Random.Range(0, 99999999)}@bot";
+					if (ui is null) ui = $"7{UnityEngine.Random.Range(0, 99999999)}{UnityEngine.Random.Range(0, 99999999)}@bot";
 					return ui;
 				}
 				try
@@ -142,7 +145,7 @@ namespace Qurre.API
 						ui = _;
 						return _;
 					}
-					else return ui;
+					return ui;
 				}
 				catch { return ui; }
 			}
@@ -182,7 +185,6 @@ namespace Qurre.API
 					if (Get(disarmed.DisarmedPlayer) == this) return Get(disarmed.Disarmer);
 				return null;
 			}
-
 			set
 			{
 				for (int i = 0; i < DisarmedPlayers.Entries.Count; i++)
@@ -194,15 +196,14 @@ namespace Qurre.API
 					}
 				}
 
-				if (value != null)
-					Inventory.SetDisarmedStatus(value.Inventory);
+				if (value != null) Inventory.SetDisarmedStatus(value.Inventory);
 			}
 		}
 		public bool Cuffed => DisarmedPlayers.IsDisarmed(Inventory);
 		public Vector3 Position
 		{
 			get => rh.playerMovementSync.GetRealPosition();
-			set => rh.playerMovementSync.OverridePosition(value, 0f);
+			set => rh.playerMovementSync.OverridePosition(value);
 		}
 		public Vector2 Rotation
 		{
@@ -258,7 +259,7 @@ namespace Qurre.API
 		public bool FriendlyFire { get; set; }
 		public bool Zoomed { get; internal set; } = false;
 		public bool UseStamina { get; set; } = true;
-		public bool Invisible { get; set; }
+		public bool Invisible { get; set; } = false;
 		public bool Bot { get; internal set; } = false;
 		///<summary>
 		///<para>After spawning, it becomes false again.</para>
@@ -319,22 +320,26 @@ namespace Qurre.API
 		}
 		public float Ahp
 		{
-			get => PlayerStats.GetModule<AhpStat>().CurValue;
+			get => AhpActiveProcesses.FirstOrDefault()?.CurrentAmount ?? 0f;
 			set
 			{
 				if (value > MaxAhp) MaxAhp = Mathf.CeilToInt(value);
-				foreach (var process in AhpActiveProcesses) process.CurrentAmount = value;
+				AhpStat.AhpProcess process = AhpActiveProcesses.FirstOrDefault();
+				if (process is not null)
+				{
+					process.Limit = MaxAhp;
+					process.CurrentAmount = value;
+				}
+				else AddAhp(value, MaxAhp);
 			}
 		}
+		private float _maxAhp = 75f;
 		public float MaxAhp
 		{
-			get => PlayerStats.GetModule<AhpStat>()._maxSoFar;
-			set => PlayerStats.GetModule<AhpStat>()._maxSoFar = value;
+			get => _maxAhp;
+			set => _maxAhp = value;
 		}
-		public List<AhpStat.AhpProcess> AhpActiveProcesses
-		{
-			get => PlayerStats.GetModule<AhpStat>()._activeProcesses;
-		}
+		public List<AhpStat.AhpProcess> AhpActiveProcesses => PlayerStats.GetModule<AhpStat>()._activeProcesses;
 		public void AddAhp(float amount, float limit, float decay = 0, float efficacy = 0.7f, float sustain = 0, bool persistant = false) =>
 			PlayerStats.GetModule<AhpStat>().ServerAddProcess(amount, limit, decay, efficacy, sustain, persistant);
 		public ItemIdentifier CurrentItem
@@ -347,12 +352,11 @@ namespace Qurre.API
 			get => Inventory.CurInstance;
 			set => Inventory.CurInstance = value;
 		}
-		public IReadOnlyCollection<Item> AllItems => ItemsValue.AsReadOnly();
+		public IEnumerable<Item> AllItems => Inventory.UserInventory.Items.Select(x => Item.Get(x.Value));
 		public ItemType ItemTypeInHand => Inventory.CurItem.TypeId;
 		public Item ItemInHand
 		{
 			get => Item.Get(Inventory.CurInstance);
-
 			set
 			{
 				if (!Inventory.UserInventory.Items.TryGetValue(value.Serial, out _))
@@ -447,7 +451,7 @@ namespace Qurre.API
 			get
 			{
 				if (string.IsNullOrEmpty(ServerRoles.NetworkGlobalBadge)) return string.Empty;
-				return ServerRoles.NetworkGlobalBadge.Split(new string[] { "Badge text: [" }, StringSplitOptions.None)[1].Split(']')[0];
+				return ServerRoles.NetworkGlobalBadge.Split(new string[] { "Badge text: [" }, StringSplitOptions.None)[1]?.Split(']')[0] ?? string.Empty;
 			}
 		}
 		public int Ping => Mirror.LiteNetLib4Mirror.LiteNetLib4MirrorServer.Peers[Connection.connectionId].Ping;
@@ -478,11 +482,11 @@ namespace Qurre.API
 		}
 		public static IEnumerable<Player> Get(Team team) => List.Where(player => player.Team == team);
 		public static IEnumerable<Player> Get(RoleType role) => List.Where(player => player.Role == role);
-		public static Player Get(CommandSender sender) => sender == null ? null : Get(sender.SenderId);
-		public static Player Get(ReferenceHub referenceHub) => referenceHub == null ? null : Get(referenceHub.gameObject);
+		public static Player Get(CommandSender sender) => sender is null ? null : Get(sender.SenderId);
+		public static Player Get(ReferenceHub referenceHub) { try { return referenceHub is null ? null : Get(referenceHub.gameObject); } catch { return null; } }
 		public static Player Get(GameObject gameObject)
 		{
-			if (gameObject == null) return null;
+			if (gameObject is null) return null;
 			Dictionary.TryGetValue(gameObject, out Player player);
 			return player;
 		}
@@ -503,7 +507,7 @@ namespace Qurre.API
 			{
 				if (string.IsNullOrWhiteSpace(args))
 					return null;
-				if (ArgsPlayers.TryGetValue(args, out Player playerFound) && playerFound?.ReferenceHub != null)
+				if (ArgsPlayers.TryGetValue(args, out Player playerFound) && playerFound?.ReferenceHub is not null)
 					return playerFound;
 				if (int.TryParse(args, out int id))
 					return Get(id);
@@ -524,7 +528,7 @@ namespace Qurre.API
 					string firstString = args.ToLower();
 					foreach (Player player in Dictionary.Values)
 					{
-						if (player.Nickname == null) continue;
+						if (player.Nickname is null) continue;
 						if (!player.Nickname.Contains(args, StringComparison.OrdinalIgnoreCase))
 							continue;
 						string secondString = player.Nickname;
@@ -536,7 +540,7 @@ namespace Qurre.API
 						}
 					}
 				}
-				if (playerFound != null)
+				if (playerFound is not null)
 					ArgsPlayers[args] = playerFound;
 				return playerFound;
 			}
@@ -551,7 +555,7 @@ namespace Qurre.API
 		{
 			get
 			{
-				if (sendSpawnMessage == null)
+				if (sendSpawnMessage is null)
 					sendSpawnMessage = typeof(NetworkServer).GetMethod("SendSpawnMessage", BindingFlags.Instance | BindingFlags.InvokeMethod
 						| BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public);
 				return sendSpawnMessage;
@@ -583,9 +587,9 @@ namespace Qurre.API
 		public void AddDisplayInfo(PlayerInfoArea playerInfo) => NicknameSync.Network_playerInfoToShow |= playerInfo;
 		public void DimScreen()
 		{
-			var component = RoundSummary.singleton;
-			var writer = NetworkWriterPool.GetWriter();
-			var msg = new RpcMessage
+			RoundSummary component = RoundSummary.singleton;
+			PooledNetworkWriter writer = NetworkWriterPool.GetWriter();
+			RpcMessage msg = new()
 			{
 				netId = component.netId,
 				componentIndex = component.ComponentIndex,
@@ -597,10 +601,10 @@ namespace Qurre.API
 		}
 		public void ShakeScreen(bool achieve = false)
 		{
-			var component = AlphaWarheadController.Host;
-			var writer = NetworkWriterPool.GetWriter();
+			AlphaWarheadController component = AlphaWarheadController.Host;
+			PooledNetworkWriter writer = NetworkWriterPool.GetWriter();
 			writer.WriteBoolean(achieve);
-			var msg = new RpcMessage
+			RpcMessage msg = new()
 			{
 				netId = component.netId,
 				componentIndex = component.ComponentIndex,
@@ -610,37 +614,18 @@ namespace Qurre.API
 			Connection.Send(msg);
 			NetworkWriterPool.Recycle(writer);
 		}
-		public void PlaceBlood(Vector3 pos, int type = 1, float size = 2f)
-		{
-			var component = ClassManager;
-			var writer = NetworkWriterPool.GetWriter();
-			writer.WriteVector3(pos);
-			writer.WriteInt32(type);
-			writer.WriteSingle(size);
-			var msg = new RpcMessage
-			{
-				netId = component.netId,
-				componentIndex = component.ComponentIndex,
-				functionHash = typeof(CharacterClassManager).FullName.GetStableHashCode() * 503 + "RpcPlaceBlood".GetStableHashCode(),
-				payload = writer.ToArraySegment()
-			};
-			Connection.Send(msg);
-			NetworkWriterPool.Recycle(writer);
-		}
 		public void SetRole(RoleType newRole, bool lite = false, CharacterClassManager.SpawnReason reason = 0) => ClassManager.SetClassIDAdv(newRole, lite, reason);
 		public void ChangeBody(RoleType newRole, bool spawnRagdoll = false, Vector3 newPosition = default, Vector2 newRotation = default, string deathReason = "")
 		{
+			ClassManager.SetClassIDAdv(newRole, true, CharacterClassManager.SpawnReason.None);
+			if (newPosition != default) Position = newPosition;
+			if (newRotation != default) Rotation = newRotation;
 			if (spawnRagdoll) Controllers.Ragdoll.Create(Role, Position, default, new CustomReasonDamageHandler(deathReason), this);
-			if (newPosition == default) newPosition = Position;
-			if (newRotation == default) newRotation = Rotation;
-			ChangeModel(newRole);
-			Position = newPosition;
-			Rotation = newRotation;
 		}
 		public Controllers.Broadcast Broadcast(string message, ushort time, bool instant = false) => Broadcast(time, message, instant);
 		public Controllers.Broadcast Broadcast(ushort time, string message, bool instant = false)
 		{
-			var bc = new Controllers.Broadcast(this, message, time);
+			Controllers.Broadcast bc = new(this, message, time);
 			Broadcasts.Add(bc, instant);
 			return bc;
 		}
@@ -655,7 +640,7 @@ namespace Qurre.API
 		}
 		public bool Damage(float damage, DeathTranslation deathReason, Player attacker)
 		{
-			if (attacker == null) return PlayerStats.DealDamage(new UniversalDamageHandler(damage, deathReason));
+			if (attacker is null) return PlayerStats.DealDamage(new UniversalDamageHandler(damage, deathReason));
 			return PlayerStats.DealDamage(new ScpDamageHandler(attacker.ReferenceHub, damage, deathReason));
 		}
 		public bool DealDamage(DamageHandlerBase handler) => PlayerStats.DealDamage(handler);
@@ -666,7 +651,7 @@ namespace Qurre.API
 		}
 		public bool AddCandy(CandyType Type)
 		{
-			var candyType = CandyKindID.None;
+			CandyKindID candyType = CandyKindID.None;
 			switch (Type)
 			{
 				case CandyType.None: candyType = CandyKindID.None; break;
@@ -682,7 +667,7 @@ namespace Qurre.API
 				if (result) bag.ServerRefreshBag();
 				return result;
 			}
-			if (AllItems.Count > 7) return false;
+			if (AllItems.Count() > 7) return false;
 			Scp330 scp330 = (Scp330)AddItem(ItemType.SCP330);
 			Timing.CallDelayed(0.02f, () =>
 			{
@@ -695,14 +680,15 @@ namespace Qurre.API
 		public Item AddItem(ItemType itemType)
 		{
 			Item item = Item.Get(Inventory.ServerAddItem(itemType));
-			if (item is Firearm firearm)
+			if (item is Gun gun)
 			{
-				if (AttachmentsServerHandler.PlayerPreferences.TryGetValue(ReferenceHub, out var _d) && _d.TryGetValue(itemType, out var _y))
-					firearm.Base.ApplyAttachmentsCode(_y, true);
+				if (AttachmentsServerHandler.PlayerPreferences.TryGetValue(ReferenceHub, out Dictionary<ItemType, uint> _d)
+					&& _d.TryGetValue(itemType, out uint _y))
+					gun.Base.ApplyAttachmentsCode(_y, true);
 				FirearmStatusFlags status = FirearmStatusFlags.MagazineInserted;
-				if (firearm.Base.CombinedAttachments.AdditionalPros.HasFlagFast(AttachmentDescriptiveAdvantages.Flashlight))
+				if (gun.Base.HasAdvantageFlag(AttachmentDescriptiveAdvantages.Flashlight))
 					status |= FirearmStatusFlags.FlashlightEnabled;
-				firearm.Base.Status = new FirearmStatus(firearm.MaxAmmo, status, firearm.Base.GetCurrentAttachmentsCode());
+				gun.Base.Status = new FirearmStatus(gun.MaxAmmo, status, gun.Base.GetCurrentAttachmentsCode());
 			}
 			return item;
 		}
@@ -726,9 +712,7 @@ namespace Qurre.API
 			Inventory.UserInventory.Items[itemBase.PickupDropModel.NetworkInfo.Serial] = itemBase;
 
 			itemBase.OnAdded(itemBase.PickupDropModel);
-			if (itemBase is InventorySystem.Items.Firearms.Firearm)
-				AttachmentsServerHandler.SetupProvidedWeapon(ReferenceHub, itemBase);
-			ItemsValue.Add(item);
+			if (itemBase is Firearm) AttachmentsServerHandler.SetupProvidedWeapon(ReferenceHub, itemBase);
 
 			Inventory.SendItemsNextFrame = true;
 			return item;
@@ -750,19 +734,14 @@ namespace Qurre.API
 		public int CountItems(ItemType item) => Inventory.UserInventory.Items.Count(tempItem => tempItem.Value.ItemTypeId == item);
 		public bool RemoveItem(Item item, bool destroy = true)
 		{
-			if (!ItemsValue.Contains(item)) return false;
 			if (!Inventory.UserInventory.Items.ContainsKey(item.Serial))
-			{
-				ItemsValue.Remove(item);
 				return false;
-			}
 			if (destroy) Inventory.ServerRemoveItem(item.Serial, null);
 			else
 			{
-				if (ItemInHand != null && ItemInHand.Serial == item.Serial)
+				if (ItemInHand is not null && ItemInHand.Serial == item.Serial)
 					Inventory.NetworkCurItem = ItemIdentifier.None;
 				Inventory.UserInventory.Items.Remove(item.Serial);
-				ItemsValue.Remove(item);
 				Inventory.SendItemsNextFrame = true;
 			}
 
@@ -789,8 +768,8 @@ namespace Qurre.API
 		}
 		public void ClearInventory()
 		{
-			while (AllItems.Count > 0) RemoveItem(AllItems.ElementAt(0), true);
-			ItemsValue.Clear();
+			while (Inventory.UserInventory.Items.Count > 0)
+				Inventory.ServerRemoveItem(Inventory.UserInventory.Items.ElementAt(0).Key, null);
 		}
 		public void DropItems() => Inventory.ServerDropEverything();
 		public Throwable ThrowGrenade(GrenadeType type, bool fullForce = true)
@@ -859,11 +838,11 @@ namespace Qurre.API
 		public void DisableEffect<T>() where T : PlayerEffect => PlayerEffectsController.DisableEffect<T>();
 		public void DisableEffect(EffectType effect)
 		{
-			if (TryGetEffect(effect, out var pEffect)) pEffect.IsEnabled = false;
+			if (TryGetEffect(effect, out PlayerEffect pEffect)) pEffect.IsEnabled = false;
 		}
 		public void EnableEffect(EffectType effect, float duration = 0f, bool addDurationIfActive = false)
 		{
-			if (TryGetEffect(effect, out var pEffect)) PlayerEffectsController.EnableEffect(pEffect, duration, addDurationIfActive);
+			if (TryGetEffect(effect, out PlayerEffect pEffect)) PlayerEffectsController.EnableEffect(pEffect, duration, addDurationIfActive);
 		}
 		public void EnableEffect<T>(float duration = 0f, bool addDurationIfActive = false) where T : PlayerEffect => PlayerEffectsController.EnableEffect<T>(duration, addDurationIfActive);
 		public bool EnableEffect(string effect, float duration = 0f, bool addDurationIfActive = false) => PlayerEffectsController.EnableByString(effect, duration, addDurationIfActive);
@@ -877,14 +856,14 @@ namespace Qurre.API
 		}
 		public PlayerEffect GetEffect(EffectType effect)
 		{
-			var type = effect.Type();
-			PlayerEffectsController.AllEffects.TryGetValue(type, out var pEffect);
+			Type type = effect.Type();
+			PlayerEffectsController.AllEffects.TryGetValue(type, out PlayerEffect pEffect);
 			return pEffect;
 		}
 		public bool TryGetEffect(EffectType effect, out PlayerEffect playerEffect)
 		{
 			playerEffect = GetEffect(effect);
-			return playerEffect != null;
+			return playerEffect is not null;
 		}
 		public byte GetEffectIntensity<T>() where T : PlayerEffect
 		{
@@ -897,19 +876,25 @@ namespace Qurre.API
 			HintDisplay.Show(new TextHint(text, new HintParameter[] { new StringHintParameter("") }, effect, duration));
 		public void BodyDelete()
 		{
-			foreach (var doll in Map.Ragdolls.Where(x => x.Owner == this)) doll.Destroy();
+			foreach (Controllers.Ragdoll doll in Map.Ragdolls.Where(x => x.Owner == this)) doll.Destroy();
 		}
 		public List<string> GetGameObjectsInRange(float range)
 		{
 			List<string> gameObjects = new();
-			foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType<GameObject>()) { if (Vector3.Distance(obj.transform.position, Position) <= range && !obj.name.Contains("mixamorig") && !obj.name.Contains("Pos")) { gameObjects.Add(obj.name.Trim() + "\n"); } }
+			foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType<GameObject>())
+			{
+				if (Vector3.Distance(obj.transform.position, Position) <= range && !obj.name.Contains("mixamorig") && !obj.name.Contains("Pos"))
+				{
+					gameObjects.Add(obj.name.Trim() + "\n");
+				}
+			}
 			return gameObjects;
 		}
 		public void Reconnect()
 		{
 			GameObject localPlayer = PlayerManager.localPlayer;
 			NetworkIdentity component = localPlayer.GetComponent<NetworkIdentity>();
-			ObjectDestroyMessage msg = default(ObjectDestroyMessage);
+			ObjectDestroyMessage msg = default;
 			msg.netId = component.netId;
 			NetworkConnection connectionToClient = GameObject.GetComponent<NetworkIdentity>().connectionToClient;
 			if (GameObject != localPlayer)
@@ -924,39 +909,17 @@ namespace Qurre.API
 
 		private Team GetTeam(RoleType rt)
 		{
-			switch (rt)
+			return rt switch
 			{
-				case RoleType.ChaosConscript:
-				case RoleType.ChaosMarauder:
-				case RoleType.ChaosRepressor:
-				case RoleType.ChaosRifleman:
-					return Team.CHI;
-				case RoleType.Scientist:
-					return Team.RSC;
-				case RoleType.ClassD:
-					return Team.CDP;
-				case RoleType.Scp049:
-				case RoleType.Scp93953:
-				case RoleType.Scp93989:
-				case RoleType.Scp0492:
-				case RoleType.Scp079:
-				case RoleType.Scp096:
-				case RoleType.Scp106:
-				case RoleType.Scp173:
-					return Team.SCP;
-				case RoleType.Spectator:
-					return Team.RIP;
-				case RoleType.FacilityGuard:
-				case RoleType.NtfCaptain:
-				case RoleType.NtfPrivate:
-				case RoleType.NtfSergeant:
-				case RoleType.NtfSpecialist:
-					return Team.MTF;
-				case RoleType.Tutorial:
-					return Team.TUT;
-				default:
-					return Team.RIP;
-			}
+				RoleType.ChaosConscript or RoleType.ChaosMarauder or RoleType.ChaosRepressor or RoleType.ChaosRifleman => Team.CHI,
+				RoleType.Scientist => Team.RSC,
+				RoleType.ClassD => Team.CDP,
+				RoleType.Scp049 or RoleType.Scp93953 or RoleType.Scp93989 or RoleType.Scp0492 or RoleType.Scp079 or RoleType.Scp096 or RoleType.Scp106 or RoleType.Scp173 => Team.SCP,
+				RoleType.Spectator => Team.RIP,
+				RoleType.FacilityGuard or RoleType.NtfCaptain or RoleType.NtfPrivate or RoleType.NtfSergeant or RoleType.NtfSpecialist => Team.MTF,
+				RoleType.Tutorial => Team.TUT,
+				_ => Team.RIP,
+			};
 		}
 		private Side GetSide(Team team)
 		{
@@ -972,7 +935,7 @@ namespace Qurre.API
 		internal void CheckEscape()
 		{
 			RoleType newRole = RoleType.None;
-			var changeTeam = false;
+			bool changeTeam = false;
 
 			if (Cuffed && CharacterClassManager.CuffedChangeTeam)
 			{
@@ -1004,12 +967,12 @@ namespace Qurre.API
 					break;
 			}
 			if (newRole == RoleType.None) return;
-			var ev = new Events.EscapeEvent(this, newRole);
+			Events.EscapeEvent ev = new(this, newRole);
 			Qurre.Events.Invoke.Player.Escape(ev);
 			if (!ev.Allowed) return;
 			newRole = ev.NewRole;
 
-			var isClassD = Role == RoleType.ClassD;
+			bool isClassD = Role == RoleType.ClassD;
 
 			if (!Server.RealEscape)
 			{
@@ -1021,7 +984,7 @@ namespace Qurre.API
 
 			Escape.TargetShowEscapeMessage(Connection, isClassD, changeTeam);
 
-			var tickets = Respawning.RespawnTickets.Singleton;
+			Respawning.RespawnTickets tickets = Respawning.RespawnTickets.Singleton;
 			switch (Team)
 			{
 				case Team.MTF when changeTeam:
@@ -1080,7 +1043,7 @@ namespace Qurre.API
 			{
 				get
 				{
-					if (player.Inventory.UserInventory.ReserveAmmo.TryGetValue(ammo.GetItemType(), out var amount))
+					if (player.Inventory.UserInventory.ReserveAmmo.TryGetValue(ammo.GetItemType(), out ushort amount))
 						return amount;
 					return 0;
 				}

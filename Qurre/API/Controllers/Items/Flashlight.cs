@@ -1,5 +1,6 @@
 ﻿using InventorySystem.Items;
 using InventorySystem.Items.Flashlight;
+using Utils.Networking;
 namespace Qurre.API.Controllers.Items
 {
     public class Flashlight : Item
@@ -10,7 +11,11 @@ namespace Qurre.API.Controllers.Items
         public bool Active
         {
             get => Base.IsEmittingLight;
-            set => Base.IsEmittingLight = value;
+            set
+            {
+                Base.IsEmittingLight = value;
+                new FlashlightNetworkHandler.FlashlightMessage(Serial, value).SendToAuthenticated();
+            }
         }
     }
 }

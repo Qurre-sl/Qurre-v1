@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Mirror;
 using System.Linq;
-using InventorySystem.Items;
-using firearm = InventorySystem.Items.Firearms.Firearm;
-using InventorySystem.Items.Pickups;
-using Mirror;
-using Qurre.API.Controllers.Items;
 using UnityEngine;
+using System.Collections.Generic;
+using InventorySystem.Items;
+using InventorySystem.Items.Pickups;
 using InventorySystem.Items.Firearms;
-using Firearm = Qurre.API.Controllers.Items.Firearm;
 using InventorySystem.Items.Keycards;
 using InventorySystem.Items.Usables;
 using InventorySystem.Items.Radio;
@@ -17,6 +14,7 @@ using InventorySystem.Items.Firearms.Ammo;
 using InventorySystem.Items.Flashlight;
 using InventorySystem.Items.ThrowableProjectiles;
 using InventorySystem.Items.Usables.Scp330;
+using Qurre.API.Controllers.Items;
 namespace Qurre.API.Controllers
 {
     public class Item
@@ -80,8 +78,8 @@ namespace Qurre.API.Controllers
                 return BaseToItem[itemBase];
             switch (itemBase)
             {
-                case firearm gun:
-                    return new Firearm(gun);
+                case Firearm gun:
+                    return new Gun(gun);
                 case KeycardItem card:
                     return new Keycard(card);
                 case UsableItem usable:
@@ -113,9 +111,8 @@ namespace Qurre.API.Controllers
         }
         public static Item Get(ushort serial)
         {
-            var _ = Object.FindObjectsOfType<ItemBase>().Where(x => x.ItemSerial == serial);
-            if (_.Count() == 0) return null;
-            return Get(_.First());
+            if (Object.FindObjectsOfType<ItemBase>().TryFind(out ItemBase _bs, x => x.ItemSerial == serial)) return Get(_bs);
+            return null;
         }
         public void Give(Player player) => player.AddItem(Base);
         public virtual Pickup Spawn(Vector3 position, Quaternion rotation = default)
@@ -129,9 +126,9 @@ namespace Qurre.API.Controllers
             ItemPickupBase ipb = Object.Instantiate(Base.PickupDropModel, position, rotation);
             if (ipb is FirearmPickup firearmPickup)
             {
-                if (this is Items.Firearm firearm)
+                if (this is Gun gun)
                 {
-                    firearmPickup.Status = new FirearmStatus(firearm.Ammo, FirearmStatusFlags.MagazineInserted, firearmPickup.Status.Attachments);
+                    firearmPickup.Status = new FirearmStatus(gun.Ammo, FirearmStatusFlags.MagazineInserted, firearmPickup.Status.Attachments);
                 }
                 else
                 {

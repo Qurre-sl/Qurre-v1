@@ -54,17 +54,23 @@ namespace Qurre.API.Controllers
         }
         public LockerLoot[] Loot => _locker.Loot;
         public Chamber[] Chambers { get; private set; }
+        private LockerType _typeCached = LockerType.Unknown;
         public LockerType Type
         {
             get
             {
-                if (Name.Contains("AdrenalineMedkit")) return LockerType.AdrenalineMedkit;
-                if (Name.Contains("RegularMedkit")) return LockerType.RegularMedkit;
-                if (Name.Contains("Pedestal")) return LockerType.Pedestal;
-                if (Name.Contains("MiscLocker")) return LockerType.MiscLocker;
-                if (Name.Contains("RifleRack")) return LockerType.RifleRack;
-                if (Name.Contains("LargeGunLocker")) return LockerType.LargeGun;
-                return LockerType.Unknown;
+                if (_typeCached is LockerType.Unknown) _typeCached = _get();
+                return _typeCached;
+                LockerType _get()
+                {
+                    if (Name.Contains("AdrenalineMedkit")) return LockerType.AdrenalineMedkit;
+                    if (Name.Contains("RegularMedkit")) return LockerType.RegularMedkit;
+                    if (Name.Contains("Pedestal")) return LockerType.Pedestal;
+                    if (Name.Contains("MiscLocker")) return LockerType.MiscLocker;
+                    if (Name.Contains("RifleRack")) return LockerType.RifleRack;
+                    if (Name.Contains("LargeGunLocker")) return LockerType.LargeGun;
+                    return LockerType.Unknown;
+                };
             }
         }
         public AudioClip GrantedBeep => _locker._grantedBeep;

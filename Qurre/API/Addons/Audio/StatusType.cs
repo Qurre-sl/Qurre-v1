@@ -1,6 +1,6 @@
 ﻿namespace Qurre.API.Addons.Audio
 {
-	public enum AudioStatusType
+	public enum StatusType
 	{
 		Stopped,
 		Playing,

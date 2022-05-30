@@ -35,5 +35,7 @@
 		Bleeding,
 		Poison,
 		Asphyxiation,
+		Hypothermia,
+		ParticleDisruptor,
 	}
 }

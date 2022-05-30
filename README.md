@@ -41,12 +41,8 @@ Qurre_AllUnit: false
 Qurre_OnlyTutorialUnit: false
 #Allow the appearance of blood?
 Qurre_Spawn_Blood: true
-#Can other SCPs look at SCP-173?
-Qurre_ScpTrigger173: false
 #SCP 079 & SCP 096 will not see the wearer of SCP 268
 Qurre_Better268: false
-#If enabled, will spawn those who entered after the start of the round
-Qurre_LateJoinSpawn: true
 #Those who can use the "reload" command
 Qurre_ReloadAccess: owner, 746538986@steam,309800126721@discord
 Qurre_Banned: banned

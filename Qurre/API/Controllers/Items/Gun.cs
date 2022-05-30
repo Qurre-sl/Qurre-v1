@@ -3,13 +3,13 @@ using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Attachments;
 using InventorySystem.Items.Firearms.BasicMessages;
 using InventorySystem.Items.Firearms.Modules;
-using Gun = InventorySystem.Items.Firearms.Firearm;
 using Qurre.API.Objects;
+using InventorySystem.Items.Firearms.Attachments.Components;
 namespace Qurre.API.Controllers.Items
 {
-    public class Firearm : Item
+    public class Gun : Item
     {
-        public Firearm(Gun itemBase) : base(itemBase)
+        public Gun(Firearm itemBase) : base(itemBase)
         {
             Base = itemBase;
             Base.AmmoManagerModule = Base switch
@@ -19,8 +19,8 @@ namespace Qurre.API.Controllers.Items
                 _ => new ClipLoadedInternalMagAmmoManager(Base, 6),
             };
         }
-        public Firearm(ItemType type) : this((Gun)Server.Host.Inventory.CreateItemInstance(type, false)) { }
-        public new Gun Base { get; }
+        public Gun(ItemType type) : this((Firearm)Server.Host.Inventory.CreateItemInstance(type, false)) { }
+        public new Firearm Base { get; }
         public byte Ammo
         {
             get => Base.Status.Ammo;
@@ -29,7 +29,7 @@ namespace Qurre.API.Controllers.Items
         public byte MaxAmmo => Base.AmmoManagerModule.MaxAmmo;
         public AmmoType AmmoType => Base.AmmoType.GetAmmoType();
         public bool FlashlightEnabled => Base.Status.Flags.HasFlagFast(FirearmStatusFlags.FlashlightEnabled);
-        public FirearmAttachment[] Attachments
+        public Attachment[] Attachments
         {
             get => Base.Attachments;
             set => Base.Attachments = value;

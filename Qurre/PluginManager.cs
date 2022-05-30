@@ -10,8 +10,10 @@ namespace Qurre
 {
 	public static class PluginManager
 	{
-		public static readonly List<Plugin> plugins = new();
-		public static Version Version { get; } = new Version(1, 13, 4);
+		internal static readonly List<Plugin> _plugins = new();
+		internal static Harmony _harmony;
+		
+		public static Version Version { get; } = new Version(1, 14, 0);
 		public static string AppDataDirectory { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 		public static string QurreDirectory { get; private set; } = Path.Combine(AppDataDirectory, "Qurre");
 		public static string PluginsDirectory { get; private set; } = Path.Combine(QurreDirectory, "Plugins");
@@ -21,7 +23,6 @@ namespace Qurre
 		public static string LogsDirectory { get; private set; } = Path.Combine(QurreDirectory, "Logs");
 		public static string ManagedAssembliesDirectory { get; private set; } = Path.Combine(Path.Combine(Environment.CurrentDirectory, "SCPSL_Data"), "Managed");
 		public static string ConfigsPath { get; internal set; }
-		internal static Harmony hInstance;
 		internal static IEnumerator<float> LoadPlugins()
 		{
 			if (!Directory.Exists(PluginsDirectory))
@@ -29,31 +30,24 @@ namespace Qurre
 				Log.Warn($"Plugins directory not found - creating: {PluginsDirectory}");
 				Directory.CreateDirectory(PluginsDirectory);
 			}
-			try
-			{
-				LoadDependencies();
-			}
-			catch (Exception ex)
-			{
-				ServerConsole.AddLog(ex.ToString(), ConsoleColor.Red);
-			}
+
+			try { LoadDependencies(); }
+			catch (Exception ex) { ServerConsole.AddLog(ex.ToString(), ConsoleColor.Red); }
 
 			PatchMethods();
 
 			yield return Timing.WaitForSeconds(0.5f);
 
-			foreach (string mod in Directory.GetFiles(PluginsDirectory))
+			foreach (string plugin in Directory.GetFiles(PluginsDirectory))
 			{
 				try
 				{
-					Log.Debug($"Loading {mod}");
-					byte[] file = global::Loader.ReadFile(mod);
-					Assembly assembly = Assembly.Load(file);
-					LoadPlugin(assembly);
+					Log.Debug($"Loading {plugin}");
+					LoadPlugin(Assembly.Load(global::Loader.ReadFile(plugin)));
 				}
 				catch (Exception ex)
 				{
-					Log.Error($"An error occurred while loading {mod}\n{ex}");
+					Log.Error($"An error occurred while loading {plugin}\n{ex}");
 				}
 			}
 			DownloadPlugins();
@@ -64,11 +58,9 @@ namespace Qurre
 		{
 			if (!Directory.Exists(LoadedDependenciesDirectory))
 				Directory.CreateDirectory(LoadedDependenciesDirectory);
-			string[] depends = Directory.GetFiles(LoadedDependenciesDirectory);
-			foreach (string dll in depends)
+			foreach (string dll in Directory.GetFiles(LoadedDependenciesDirectory))
 			{
-				if (!dll.EndsWith(".dll")) continue;
-				if (global::Loader.Loaded(dll)) continue;
+				if (!dll.EndsWith(".dll") || global::Loader.Loaded(dll)) continue;
 				Assembly assembly = Assembly.Load(global::Loader.ReadFile(dll));
 				global::Loader.LocalLoaded.Add(assembly);
 				Log.Custom("Loaded dependency " + assembly.FullName, "Loader", ConsoleColor.Blue);
@@ -107,7 +99,7 @@ namespace Qurre
 					if (!CheckPlugin(p)) continue;
 					p.Assembly = assembly;
 
-					plugins.Add(p);
+					_plugins.Add(p);
 					Log.Debug($"{type.FullName} loaded");
 				}
 			}
@@ -118,25 +110,25 @@ namespace Qurre
 		}
 		public static bool CheckPlugin(Plugin plugin)
 		{
-			var needed = plugin.NeededQurreVersion;
-
-			if (Version.Major != needed.Major)
+			if (Version.Major != plugin.NeededQurreVersion.Major)
 			{
-				if (Version.Major > needed.Major)
+				if (Version.Major > plugin.NeededQurreVersion.Major)
 				{
-					Log.Warn($"Plugin {plugin.Name} not loaded because he is outdated. Qurre Version: {Version.ToString(3)}. Needed Version: {needed}.");
+					Log.Warn($"Plugin {plugin.Name} not loaded because he is outdated. Qurre Version: {Version.ToString(3)}. " +
+                        $"Needed Version: {plugin.NeededQurreVersion}.");
 					return false;
 				}
 
-				if (Version.Major < needed.Major)
+				if (Version.Major < plugin.NeededQurreVersion.Major)
 				{
-					Log.Warn($"Plugin {plugin.Name} not loaded because your Qurre version is outdated. Qurre Version: {Version.ToString(3)}. Needed Version: {needed}.");
+					Log.Warn($"Plugin {plugin.Name} not loaded because your Qurre version is outdated. Qurre Version: {Version.ToString(3)}. " +
+                        $"Needed Version: {plugin.NeededQurreVersion}.");
 					return false;
 				}
 			}
-			else if (Version < needed)
+			else if (Version < plugin.NeededQurreVersion)
 			{
-				Log.Warn($"Plugin {plugin.Name} not loaded. Requires Qurre version at least {needed}, your version: {Version}");
+				Log.Warn($"Plugin {plugin.Name} not loaded. Requires Qurre version at least {plugin.NeededQurreVersion}, your version: {Version}");
 				return false;
 			}
 
@@ -144,7 +136,7 @@ namespace Qurre
 		}
 		public static void Enable()
 		{
-			foreach (Plugin plugin in plugins.OrderBy(o => o.Priority).Reverse())
+			foreach (Plugin plugin in _plugins.OrderByDescending(o => o.Priority))
 			{
 				try
 				{
@@ -158,9 +150,9 @@ namespace Qurre
 				}
 			}
 		}
-		public static void Reload()
+		public static void InvokeReload()
 		{
-			foreach (Plugin plugin in plugins)
+			foreach (Plugin plugin in _plugins)
 			{
 				try
 				{
@@ -175,7 +167,7 @@ namespace Qurre
 		}
 		public static void Disable()
 		{
-			foreach (Plugin plugin in plugins)
+			foreach (Plugin plugin in _plugins)
 			{
 				try
 				{
@@ -193,10 +185,10 @@ namespace Qurre
 		{
 			try
 			{
-				Log.Info($"Reloading Plugins...");
+				Log.Info("Reloading Plugins...");
 				Disable();
-				Reload();
-				plugins.Clear();
+				InvokeReload();
+				_plugins.Clear();
 				UnPatchMethods();
 
 				Timing.RunCoroutine(LoadPlugins());
@@ -210,8 +202,8 @@ namespace Qurre
 		{
 			try
 			{
-				hInstance = new Harmony("qurre.patches");
-				hInstance.PatchAll();
+				_harmony = new Harmony("qurre.patches");
+				_harmony.PatchAll();
 				Log.Info("Harmony successfully Patched");
 			}
 			catch (Exception ex)
@@ -223,7 +215,7 @@ namespace Qurre
 		{
 			try
 			{
-				hInstance.UnpatchAll(null);
+				_harmony.UnpatchAll(_harmony.Id);
 				Log.Info("Harmony successfully UnPatched");
 			}
 			catch (Exception ex)
@@ -235,8 +227,8 @@ namespace Qurre
 		{
 			try
 			{
-				WebClient wc = new();
-				Assembly assembly = Assembly.Load(wc.DownloadData(link));
+				WebClient _web = new();
+				Assembly assembly = Assembly.Load(_web.DownloadData(link));
 				return assembly;
 			}
 			catch (Exception e)
@@ -245,11 +237,8 @@ namespace Qurre
 				return null;
 			}
 		}
-		private static void DownloadDependencies()
-		{
-		}
-		private static void DownloadPlugins()
-		{
-		}
+		// soon?
+		private static void DownloadDependencies(){}
+		private static void DownloadPlugins(){}
 	}
 }

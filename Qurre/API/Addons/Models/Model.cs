@@ -73,7 +73,7 @@ namespace Qurre.API.Addons.Models
         }
         public void AddPart(ModelWorkStation part, bool addToList = true)
         {
-            if(addToList) WorkStations.Add(part);
+            if (addToList) WorkStations.Add(part);
             Parts.Add(part.GameObject, ModelEnums.WorkStation);
         }
 

@@ -488,14 +488,16 @@ namespace Qurre.API.Events
     #region scp049
     public class StartRecallEvent : EventArgs
     {
-        public StartRecallEvent(Player scp049, Player target, bool allowed = true)
+        public StartRecallEvent(Player scp049, Player target, Controllers.Ragdoll ragdoll, bool allowed = true)
         {
             Scp049 = scp049;
             Target = target;
+            Ragdoll = ragdoll;
             Allowed = allowed;
         }
         public Player Scp049 { get; }
         public Player Target { get; }
+        public Controllers.Ragdoll Ragdoll { get; }
         public bool Allowed { get; set; }
     }
     public class FinishRecallEvent : EventArgs

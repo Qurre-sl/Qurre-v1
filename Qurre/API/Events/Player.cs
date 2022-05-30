@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static CharacterClassManager;
+using static PlayerMovementSync;
 namespace Qurre.API.Events
 {
     public class BannedEvent : EventArgs
@@ -192,7 +193,7 @@ namespace Qurre.API.Events
         public Player Target { get; }
         public DamageTypes DamageType { get; }
         public DamageTypesPrimitive PrimitiveType { get; }
-        public DamageHandlerBase DamageInfo { get; set; }
+        public DamageHandlerBase DamageInfo { get; }
     }
     public class EscapeEvent : EventArgs
     {
@@ -253,71 +254,103 @@ namespace Qurre.API.Events
     }
     public class DamageEvent : EventArgs
     {
-        private DamageHandlerBase damageInfo;
-        public DamageEvent(Player attacker, Player target, DamageHandlerBase dInfo, DamageTypes type, float amount, bool allowed = true)
+        public DamageEvent(Player attacker, Player target, DamageHandlerBase dInfo, float amount, bool allowed = true)
         {
             Attacker = attacker;
             Target = target;
             DamageInfo = dInfo;
-            DamageType = type;
             Amount = amount;
             Allowed = allowed;
-            PrimitiveType = damageInfo.GetDamageTypesPrimitive();
         }
+        private DamageTypes _type = DamageTypes.None;
+        private DamageTypesPrimitive _primType = DamageTypesPrimitive.Unknow;
         public Player Attacker { get; }
         public Player Target { get; }
-        public DamageHandlerBase DamageInfo
+        public DamageHandlerBase DamageInfo { get; }
+        public DamageTypes DamageType
         {
-            get => damageInfo;
-            private set => damageInfo = value;
+            get
+            {
+                if (_type is DamageTypes.None) _type = DamageInfo.GetDamageType();
+                return _type;
+            }
         }
-        public DamageTypes DamageType { get; }
-        public DamageTypesPrimitive PrimitiveType { get; }
+        public DamageTypesPrimitive PrimitiveType
+        {
+            get
+            {
+                if (_primType is DamageTypesPrimitive.Unknow) _primType = DamageInfo.GetDamageTypesPrimitive();
+                return _primType;
+            }
+        }
         public float Amount { get; set; }
         public bool Allowed { get; set; }
     }
     public class DamageProcessEvent : EventArgs
     {
-        private DamageHandlerBase damageInfo;
-        public DamageProcessEvent(Player attacker, Player target, DamageHandlerBase dInfo, DamageTypes type, float amount, bool friendlyFire, bool allowed = true)
+        public DamageProcessEvent(Player attacker, Player target, DamageHandlerBase dInfo, float amount, bool friendlyFire, bool allowed = true)
         {
             Attacker = attacker;
             Target = target;
             DamageInfo = dInfo;
-            DamageType = type;
             Amount = amount;
             FriendlyFire = friendlyFire;
             Allowed = allowed;
-            PrimitiveType = damageInfo.GetDamageTypesPrimitive();
         }
+        private DamageTypes _type = DamageTypes.None;
+        private DamageTypesPrimitive _primType = DamageTypesPrimitive.Unknow;
         public Player Attacker { get; }
         public Player Target { get; }
-        public DamageHandlerBase DamageInfo
+        public DamageHandlerBase DamageInfo { get; }
+        public DamageTypes DamageType
         {
-            get => damageInfo;
-            private set => damageInfo = value;
+            get
+            {
+                if (_type is DamageTypes.None) _type = DamageInfo.GetDamageType();
+                return _type;
+            }
         }
-        public DamageTypes DamageType { get; }
-        public DamageTypesPrimitive PrimitiveType { get; }
+        public DamageTypesPrimitive PrimitiveType
+        {
+            get
+            {
+                if (_primType is DamageTypesPrimitive.Unknow) _primType = DamageInfo.GetDamageTypesPrimitive();
+                return _primType;
+            }
+        }
         public float Amount { get; set; }
         public bool FriendlyFire { get; set; }
         public bool Allowed { get; set; }
     }
     public class DiesEvent : EventArgs
     {
-        public DiesEvent(Player killer, Player target, DamageHandlerBase damageInfo, DamageTypes type, bool allowed = true)
+        public DiesEvent(Player killer, Player target, DamageHandlerBase damageInfo, bool allowed = true)
         {
             Killer = killer;
             Target = target;
-            DamageType = type;
             DamageInfo = damageInfo;
             Allowed = allowed;
-            PrimitiveType = damageInfo.GetDamageTypesPrimitive();
         }
+        private DamageTypes _type = DamageTypes.None;
+        private DamageTypesPrimitive _primType = DamageTypesPrimitive.Unknow;
         public Player Killer { get; }
         public Player Target { get; }
-        public DamageTypes DamageType { get; }
-        public DamageTypesPrimitive PrimitiveType { get; }
+        public DamageTypes DamageType
+        {
+            get
+            {
+                if (_type is DamageTypes.None) _type = DamageInfo.GetDamageType();
+                return _type;
+            }
+        }
+        public DamageTypesPrimitive PrimitiveType
+        {
+            get
+            {
+                if (_primType is DamageTypesPrimitive.Unknow) _primType = DamageInfo.GetDamageTypesPrimitive();
+                return _primType;
+            }
+        }
         public DamageHandlerBase DamageInfo { get; }
         public bool Allowed { get; set; }
     }
@@ -535,16 +568,14 @@ namespace Qurre.API.Events
     }
     public class ThrowItemEvent : EventArgs
     {
-        public ThrowItemEvent(Player player, Item item, ThrowableNetworkHandler.RequestType request, bool allowed = true)
+        public ThrowItemEvent(Player player, Item item, bool allowed = true)
         {
             Player = player;
             Item = item;
-            Request = request;
             Allowed = allowed;
         }
         public Player Player { get; }
         public Item Item { get; }
-        public ThrowableNetworkHandler.RequestType Request { get; }
         public bool Allowed { get; set; }
     }
     public class TeslaTriggerEvent : EventArgs
@@ -563,17 +594,17 @@ namespace Qurre.API.Events
     }
     public class SpawnEvent : EventArgs
     {
-        public SpawnEvent(Player player, RoleType roleType, Vector3 position, float rotationY)
+        public SpawnEvent(Player player, RoleType roleType, Vector3 position, PlayerRotation rotation)
         {
             Player = player;
             RoleType = roleType;
             Position = position;
-            RotationY = rotationY;
+            Rotation = rotation;
         }
         public Player Player { get; private set; }
         public RoleType RoleType { get; private set; }
         public Vector3 Position { get; set; }
-        public float RotationY { get; set; }
+        public PlayerRotation Rotation { get; set; }
     }
     public class RadioUpdateEvent : EventArgs
     {

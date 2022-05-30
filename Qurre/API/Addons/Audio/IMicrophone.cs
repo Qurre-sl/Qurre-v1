@@ -1,18 +1,13 @@
-﻿using Dissonance;
-using Dissonance.Audio.Capture;
-using System.IO;
+﻿using Dissonance.Audio.Capture;
+using System.Collections.Generic;
 namespace Qurre.API.Addons.Audio
 {
 	public interface IMicrophone : IMicrophoneCapture
 	{
-		AudioStatusType Status { get; }
-		DissonanceComms DissonanceComms { get; }
-		Stream Stream { get; }
-		float Volume { get; set; }
-		RoomChannel RoomChannel { get; }
-		string Name { get; }
-		void PauseCapture();
-		void ResetMicrophone(string name, bool Instant);
-		void Dispose();
+		StatusType Status { get; }
+		IReadOnlyCollection<AudioTask> Tasks { get; }
+		void Pause();
+		void Resume();
+		void Skip();
 	}
 }

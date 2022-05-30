@@ -38,14 +38,36 @@ namespace Qurre.API
             set
             {
                 ServerConsole.FriendlyFire = value;
+                ServerConfigSynchronizer.Singleton.RefreshMainBools();
+                PlayerStatsSystem.AttackerDamageHandler.RefreshConfigs();
                 foreach (Player pl in Player.List) pl.FriendlyFire = value;
             }
+        }
+        public static bool HeavilyModded
+        {
+            get => CustomNetworkManager.HeavilyModded;
+            set => CustomNetworkManager.HeavilyModded = value;
+        }
+        public static float SpawnProtectDuration
+        {
+            get => CharacterClassManager.SProtectedDuration;
+            set => CharacterClassManager.SProtectedDuration = value;
+        }
+        public static float LaterJoinTime
+        {
+            get => CharacterClassManager.LaterJoinTime;
+            set => CharacterClassManager.LaterJoinTime = value;
+        }
+        public static bool LaterJoinEnabled
+        {
+            get => CharacterClassManager.LaterJoinEnabled;
+            set => CharacterClassManager.LaterJoinEnabled = value;
         }
         public static Player Host
         {
             get
             {
-                if (host == null || host.ReferenceHub == null) host = new Player(PlayerManager.hostHub);
+                if (host is null || host.ReferenceHub is null) host = new Player(PlayerManager.hostHub);
                 return host;
             }
         }
@@ -53,14 +75,14 @@ namespace Qurre.API
         {
             get
             {
-                if (hinv == null) hinv = ReferenceHub.GetHub(PlayerManager.localPlayer).inventory;
+                if (hinv is null) hinv = ReferenceHub.GetHub(PlayerManager.localPlayer).inventory;
                 return hinv;
             }
         }
         public static int MaxConnections
         {
-            get => new CustomNetworkManager().maxConnections;
-            set => new CustomNetworkManager().maxConnections = value;
+            get => Mirror.LiteNetLib4Mirror.LiteNetLib4MirrorNetworkManager.singleton.maxConnections;
+            set => Mirror.LiteNetLib4Mirror.LiteNetLib4MirrorNetworkManager.singleton.maxConnections = value;
         }
         public static List<TObject> GetObjectsOf<TObject>() where TObject : UnityEngine.Object => UnityEngine.Object.FindObjectsOfType<TObject>().ToList();
         public static TObject GetObjectOf<TObject>() where TObject : UnityEngine.Object => UnityEngine.Object.FindObjectOfType<TObject>();
@@ -69,6 +91,7 @@ namespace Qurre.API
             ServerStatic.StopNextRound = ServerStatic.NextRoundAction.Restart;
             RoundRestart.ChangeLevel(true);
         }
+        public static void Exit() => Shutdown.Quit();
         public static void InvokeStaticMethod(this Type type, string methodName, object[] param)
         {
             BindingFlags flags = BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic |

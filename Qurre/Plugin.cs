@@ -10,7 +10,7 @@ namespace Qurre
 {
 	public abstract class Plugin
 	{
-		public static Config Config { get; set; }
+		public static Config Config { get; internal set; }
 		public ListConfigs CustomConfigs { get; } = new();
 		public virtual string Developer { get; } = "";
 		public virtual string Name { get; } = "";
@@ -24,8 +24,8 @@ namespace Qurre
 		public abstract void Enable();
 		public abstract void Disable();
 		public virtual void Reload() => Log.Debug($"Reloaded.\nPlugin - {Name}\nDeveloper - {Developer}\nVersion - {Version}\nNeeded Qurre Version - {NeededQurreVersion}");
-		internal Assembly Assembly;
-		internal Dictionary<Type, Dictionary<Type, ICommand>> Commands = new()
+		public Assembly Assembly { get; internal protected set; }
+		public Dictionary<Type, Dictionary<Type, ICommand>> Commands { get; protected set; } = new()
 		{
 			{ typeof(GameConsoleCommandHandler), new Dictionary<Type, ICommand>() },
 			{ typeof(ClientCommandHandler), new Dictionary<Type, ICommand>() },
@@ -33,7 +33,7 @@ namespace Qurre
 		};
 		public virtual void RegisterCommands()
 		{
-			foreach (var type in Assembly.GetTypes())
+			foreach (Type type in Assembly.GetTypes())
 			{
 				if (type.GetInterface("ICommand") != typeof(ICommand) || !Attribute.IsDefined(type, typeof(CommandHandlerAttribute)))
 					continue;
@@ -45,20 +45,28 @@ namespace Qurre
 						if (customAttributeData.AttributeType != typeof(CommandHandlerAttribute))
 							continue;
 
-						var commandType = (Type)customAttributeData.ConstructorArguments?[0].Value;
+						Type commandType = (Type)customAttributeData.ConstructorArguments?[0].Value;
 
-						if (!Commands.TryGetValue(commandType, out var typeCmds))
+						if (!Commands.TryGetValue(commandType, out Dictionary<Type, ICommand> typeCmds))
 							continue;
 
 						if (!typeCmds.TryGetValue(type, out ICommand cmd))
 							cmd = (ICommand)Activator.CreateInstance(type);
 
-						if (commandType == typeof(RemoteAdminCommandHandler))
-							CommandProcessor.RemoteAdminCommandHandler.RegisterCommand(cmd);
-						else if (commandType == typeof(GameConsoleCommandHandler))
-							QueryProcessor.DotCommandHandler.RegisterCommand(cmd);
-						else if (commandType == typeof(ClientCommandHandler))
-							GameCore.Console.singleton.ConsoleCommandHandler.RegisterCommand(cmd);
+						switch (commandType.Name)
+						{
+							case nameof(RemoteAdminCommandHandler):
+								CommandProcessor.RemoteAdminCommandHandler.RegisterCommand(cmd);
+								break;
+
+							case nameof(GameConsoleCommandHandler):
+								GameCore.Console.singleton.ConsoleCommandHandler.RegisterCommand(cmd);
+								break;
+
+							case nameof(ClientCommandHandler):
+								QueryProcessor.DotCommandHandler.RegisterCommand(cmd);
+								break;
+						}
 
 						Commands[commandType][type] = cmd;
 					}
@@ -71,16 +79,24 @@ namespace Qurre
 		}
 		public virtual void UnregisterCommands()
 		{
-			foreach (var types in Commands)
+			foreach (KeyValuePair<Type, Dictionary<Type, ICommand>> types in Commands)
 			{
 				foreach (ICommand cmd in types.Value.Values)
 				{
-					if (types.Key == typeof(RemoteAdminCommandHandler))
-						CommandProcessor.RemoteAdminCommandHandler.UnregisterCommand(cmd);
-					else if (types.Key == typeof(GameConsoleCommandHandler))
-						GameCore.Console.singleton.ConsoleCommandHandler.UnregisterCommand(cmd);
-					else if (types.Key == typeof(ClientCommandHandler))
-						QueryProcessor.DotCommandHandler.UnregisterCommand(cmd);
+					switch (types.Key.Name)
+					{
+						case nameof(RemoteAdminCommandHandler):
+							CommandProcessor.RemoteAdminCommandHandler.UnregisterCommand(cmd);
+							break;
+
+						case nameof(GameConsoleCommandHandler):
+							GameCore.Console.singleton.ConsoleCommandHandler.UnregisterCommand(cmd);
+							break;
+
+						case nameof(ClientCommandHandler):
+							QueryProcessor.DotCommandHandler.UnregisterCommand(cmd);
+							break;
+					}
 				}
 			}
 		}

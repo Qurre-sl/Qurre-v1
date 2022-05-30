@@ -15,8 +15,7 @@ namespace Qurre.API.Controllers
             Start();
             if (adminBC)
             {
-                var list = Player.List.Where(x => PermissionsHandler.IsPermitted(x.Sender.Permissions, PlayerPermissions.AdminChat));
-                foreach (Player pl in list)
+                foreach (Player pl in Player.List.Where(x => PermissionsHandler.IsPermitted(x.Sender.Permissions, PlayerPermissions.AdminChat)))
                 {
                     var bc = pl.Broadcast(message, time, instant);
                     broadcasts.Add(bc);
