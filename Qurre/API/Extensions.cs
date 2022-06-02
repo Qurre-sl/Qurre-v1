@@ -343,6 +343,19 @@ namespace Qurre.API
 				(list[n], list[k]) = (list[k], list[n]);
 			}
 		}
+		public static byte Clamp(this byte value, byte min, byte max)
+		{
+			if (value < min)
+			{
+				value = min;
+			}
+			else if (value > max)
+			{
+				value = max;
+			}
+
+			return value;
+		}
 		public static void CopyProperties(this object target, object source)
 		{
 			Type type = target.GetType();

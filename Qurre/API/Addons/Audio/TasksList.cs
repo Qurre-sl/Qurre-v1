@@ -6,6 +6,7 @@ namespace Qurre.API.Addons.Audio
     {
         internal IReadOnlyCollection<AudioTask> ReadOnly => Cache.AsReadOnly();
         internal bool Contains(AudioTask task) => Cache.Contains(task);
+        internal void Insert(int index, AudioTask item) => Cache.Insert(index, item);
         internal int Count => Cache.Count;
         internal AudioTask this[int index]
         {
