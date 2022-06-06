@@ -20,7 +20,7 @@
 </p>
 
 # Qurre
-Framework for SCP:SL servers with unique functions & api
+Framework for SCP:SL servers with copied functions & api
 
 # Installation
 * Move `Assembly-CSharp.dll` into the `SCPSL_Data/Managed` 
@@ -70,4 +70,6 @@ Qurre_DataBase: undefined
 
 **Assembly-CSharp - Owned by [Northwood Studios](https://github.com/northwood-studios)**
 
-**Some parts of the code may be similar to [Exiled](https://github.com/Exiled-Team/EXILED) or [Synapse](https://github.com/SynapseSL/Synapse)**
+**AudioPlayer - Owned by [Jesus-QC](https://github.com/Jesus-QC)**
+
+**Almost all parts of the code are copied from [Exiled](https://github.com/Exiled-Team/EXILED) and [Synapse](https://github.com/SynapseSL/Synapse)**
