@@ -26,17 +26,16 @@ namespace Qurre.API.Addons.Audio
             _stream = null;
             _def = false;
             Destroyed = false;
-            FrameSize = 980;
+            FrameSize = 1920;
             SampleRate = _mpeg.SampleRate;
             Format = new(_mpeg.SampleRate, 1);
-            UpdateInterval = 0.022f;
         }
         public AudioStream(Stream stream, int frameSize = 1920, int sampleRate = 48000)
         {
             if (stream is null) throw new ArgumentNullException("Qurre Audio: Stream is null");
             if (!stream.CanRead)
             {
-                Log.Error($"Stream cannot be read stream");
+                Log.Error("Audio: Stream cannot be read stream");
                 throw new ArgumentException("Qurre Audio: Stream cannot be read stream");
             }
             _mpeg = null;
@@ -46,13 +45,11 @@ namespace Qurre.API.Addons.Audio
             FrameSize = frameSize;
             SampleRate = sampleRate;
             Format = new(SampleRate, 1);
-            UpdateInterval = 0.04f;
         }
 
         public readonly WaveFormat Format;
         public readonly int FrameSize;
         public readonly int SampleRate;
-        public readonly float UpdateInterval;
 
         public long Length => _def ? _stream.Length : _mpeg.Length;
         public long Position
@@ -64,8 +61,8 @@ namespace Qurre.API.Addons.Audio
                 else _mpeg.Position = value;
             }
         }
-        public TimeSpan Duration => _def ? TimeSpan.FromSeconds(_stream.Length / FrameSize * 4 * UpdateInterval) : _mpeg.Duration;
-        public TimeSpan Progression => _def ? TimeSpan.FromSeconds(_stream.Position / FrameSize * 4 * UpdateInterval) :
+        public TimeSpan Duration => _def ? TimeSpan.FromSeconds(_stream.Length / FrameSize * 4 * 0.04f) : _mpeg.Duration;
+        public TimeSpan Progression => _def ? TimeSpan.FromSeconds(_stream.Position / FrameSize * 4 * 0.04f) :
             TimeSpan.FromSeconds(_mpeg.Position / 4.0 / _mpeg.SampleRate);
 
         public bool Destroyed { get; private set; }

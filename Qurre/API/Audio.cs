@@ -16,7 +16,8 @@ namespace Qurre.API
 		/// </example>
 		///</summary>
 		public static AudioTask PlayFromFile(string path, byte volume, bool instant = false, bool loop = false, int frameSize = 1920, int sampleRate = 48000,
-			string playerName = "Qurre Audio") => Play(new AudioStream(new FileStream(path, FileMode.Open), frameSize, sampleRate), volume, instant, loop, playerName);
+			string playerName = "Qurre Audio") => Play(new AudioStream(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read),
+				frameSize, sampleRate), volume, instant, loop, playerName);
 		///<summary>
 		///<para>Plays music from a url.</para>
 		///<para>Example:</para>
