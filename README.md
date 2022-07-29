@@ -66,8 +66,6 @@ Qurre_DataBase: undefined
 
 **Newtonsoft.Json - Owned by [James Newton-King](https://github.com/JamesNK)**
 
-**NLayer - Owned by [NAudio](https://github.com/naudio)**
-
 **Assembly-CSharp - Owned by [Northwood Studios](https://github.com/northwood-studios)**
 
 **Some parts of the code may be similar to [Exiled](https://github.com/Exiled-Team/EXILED) or [Synapse](https://github.com/SynapseSL/Synapse)**
