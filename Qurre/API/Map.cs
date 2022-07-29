@@ -265,6 +265,8 @@ namespace Qurre.API
 			Extensions.DamagesCached.Clear();
 			try { Addons.Models.Model.ClearCache(); } catch { }
 			try { Audio._micro?._tasks.Clear(); Audio._micro = null; } catch { }
+			Room.NetworkIdentities.Clear();
+			MEC.Timing.KillCoroutines("Qurre.Controllers.Doors.UpdateNetwork");
 		}
 
 		[Obsolete("Use \"AnnounceMtfEntrance\"")]

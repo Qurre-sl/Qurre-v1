@@ -168,57 +168,35 @@
              </example>
             </summary>
         </member>
-        <member name="M:Qurre.API.Audio.Play(System.IO.Stream,System.Byte,System.Boolean,System.Boolean,System.Int32,System.Int32,System.String)">
+        <member name="M:Qurre.API.Audio.PlayFromStream(System.IO.Stream,System.Byte,System.Boolean,System.Boolean,System.Int32,System.Int32,System.String)">
             <summary>
             <para>Plays music from the stream.</para>
             <para>Example:</para>
              <example>
              <code>
-             Audio.Play(new MemoryStream(audio), 100, instant: true, loop: false, frameSize: 1920, sampleRate: 48000);
+             Audio.PlayFromStream(new MemoryStream(audio), 100, instant: true, loop: false, frameSize: 1920, sampleRate: 48000);
              </code>
              </example>
             </summary>
         </member>
-        <member name="M:Qurre.API.Audio.PlayFromFileMP3(System.String,System.Byte,System.Boolean,System.Boolean,System.String)">
+        <member name="M:Qurre.API.Audio.Play(Qurre.API.Addons.Audio.IAudioStream,System.Byte,System.Boolean,System.Boolean,System.String)">
             <summary>
-            <para>Plays MP3 music from a file.</para>
+            <para>Plays music from the Audio Stream.</para>
             <para>Example:</para>
              <example>
              <code>
-             Audio.PlayFromFileMP3($"{PluginManager.PluginsDirectory}/Audio/OmegaWarhead.raw", 100, instant: true, loop: false);
+             Audio.Play(new AudioStream(stream), 100, instant: true, loop: false, frameSize: 1920, sampleRate: 48000);
              </code>
              </example>
             </summary>
         </member>
-        <member name="M:Qurre.API.Audio.PlayFromUrlMP3(System.String,System.Byte,System.Boolean,System.Boolean,System.String)">
+        <member name="M:Qurre.API.Audio.Play(Qurre.API.Addons.Audio.AudioTask,System.Boolean)">
             <summary>
-            <para>Plays MP3 music from a url.</para>
+            <para>Plays music from the Audio Task.</para>
             <para>Example:</para>
              <example>
              <code>
-             Audio.PlayFromUrlMP3("https://cdn.scpsl.store/qurre/audio/OmegaWarhead.mp3", 100, instant: true, loop: false, frameSize: 1920);
-             </code>
-             </example>
-            </summary>
-        </member>
-        <member name="M:Qurre.API.Audio.PlayMP3(System.IO.Stream,System.Byte,System.Boolean,System.Boolean,System.String)">
-            <summary>
-            <para>Plays MP3 music from the stream.</para>
-            <para>Example:</para>
-             <example>
-             <code>
-             Audio.PlayMP3(new MemoryStream(audio), 100, instant: true, loop: false, frameSize: 1920);
-             </code>
-             </example>
-            </summary>
-        </member>
-        <member name="M:Qurre.API.Audio.Play(Qurre.API.Addons.Audio.AudioStream,System.Byte,System.Boolean,System.Boolean,System.String)">
-            <summary>
-            <para>Plays music from the stream.</para>
-            <para>Example:</para>
-             <example>
-             <code>
-             Audio.Play(new AudioStream(audio), 100, instant: true, loop: false, frameSize: 1920, sampleRate: 48000);
+             Audio.Play(new AudioTask(...), instant: true);
              </code>
              </example>
             </summary>

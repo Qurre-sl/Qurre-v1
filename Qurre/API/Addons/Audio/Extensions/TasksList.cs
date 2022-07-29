@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-namespace Qurre.API.Addons.Audio
+namespace Qurre.API.Addons.Audio.Extensions
 {
     internal class TasksList
     {

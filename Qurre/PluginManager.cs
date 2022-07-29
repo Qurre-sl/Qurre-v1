@@ -12,8 +12,8 @@ namespace Qurre
 	{
 		internal static readonly List<Plugin> _plugins = new();
 		internal static Harmony _harmony;
-		
-		public static Version Version { get; } = new Version(1, 14, 0);
+
+		public static Version Version { get; } = new Version(1, 14, 3);
 		public static string AppDataDirectory { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 		public static string QurreDirectory { get; private set; } = Path.Combine(AppDataDirectory, "Qurre");
 		public static string PluginsDirectory { get; private set; } = Path.Combine(QurreDirectory, "Plugins");
@@ -25,6 +25,7 @@ namespace Qurre
 		public static string ConfigsPath { get; internal set; }
 		internal static IEnumerator<float> LoadPlugins()
 		{
+			//Harmony.DEBUG = true;
 			if (!Directory.Exists(PluginsDirectory))
 			{
 				Log.Warn($"Plugins directory not found - creating: {PluginsDirectory}");

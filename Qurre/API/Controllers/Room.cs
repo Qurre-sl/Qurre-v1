@@ -4,6 +4,7 @@ using Qurre.API.Objects;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Guid = System.Guid;
 namespace Qurre.API.Controllers
 {
     public class Room
@@ -21,6 +22,8 @@ namespace Qurre.API.Controllers
 
             foreach (var cam in GameObject.GetComponentsInChildren<Camera079>())
                 Cameras.Add(new Camera(cam, this));
+
+            NetworkIdentity = GetNetworkIdentity(Identifier.Name);
         }
         internal FlickerableLightController LightController { get; set; }
         public void LightsOff(float duration) => LightController.ServerFlickerLights(duration);
@@ -45,25 +48,28 @@ namespace Qurre.API.Controllers
         }
         public GameObject GameObject { get; }
         public RoomIdentifier Identifier { get; }
+#nullable enable
+        public NetworkIdentity? NetworkIdentity { get; }
+#nullable restore
         public Transform Transform => GameObject.transform;
         public Vector3 Position
         {
             get => Transform.position;
             set
             {
-                NetworkServer.UnSpawn(GameObject);
-                Transform.position = value;
-                NetworkServer.Spawn(GameObject);
+                if (NetworkIdentity is null) return;
+                NetworkIdentity.transform.position = value;
+                NetworkIdentity.UpdateData();
             }
         }
         public Quaternion Rotation
         {
-            get => Transform.localRotation;
+            get => Transform.rotation;
             set
             {
-                NetworkServer.UnSpawn(GameObject);
-                Transform.localRotation = value;
-                NetworkServer.Spawn(GameObject);
+                if (NetworkIdentity is null) return;
+                NetworkIdentity.transform.rotation = value;
+                NetworkIdentity.UpdateData();
             }
         }
         public Vector3 Scale
@@ -71,9 +77,9 @@ namespace Qurre.API.Controllers
             get => Transform.localScale;
             set
             {
-                NetworkServer.UnSpawn(GameObject);
-                Transform.localScale = value;
-                NetworkServer.Spawn(GameObject);
+                if (NetworkIdentity is null) return;
+                NetworkIdentity.transform.localScale = value;
+                NetworkIdentity.UpdateData();
             }
         }
         public string Name => GameObject.name;
@@ -169,5 +175,26 @@ namespace Qurre.API.Controllers
                 };
             }
         }
+        internal static readonly List<NetworkIdentity> NetworkIdentities = new();
+        private static NetworkIdentity GetNetworkIdentity(RoomName room)
+        {
+            if (NetworkIdentities.Count == 0)
+                NetworkIdentities.AddRange(Object.FindObjectsOfType<NetworkIdentity>().Where(x => x.name.Contains("All")));
+            return room switch
+            {
+                MapGeneration.RoomName.Lcz330 => NetworkIdentities.FirstOrDefault(x => x.assetId == new Guid("17f38aa5-1bc8-8bc4-0ad1-fffcbe4214ae")),
+                MapGeneration.RoomName.Hcz939 => NetworkIdentities.FirstOrDefault(x => x.assetId == new Guid("d1566564-d477-24c4-c953-c619898e4751")),
+                MapGeneration.RoomName.Hcz106 => NetworkIdentities.FirstOrDefault(x => x.assetId == new Guid("c1ae9ee4-cc8e-0794-3b2c-358aa6e57565")),
+                _ => null,
+            };
+        }
+        /*
+        private NetworkIdentity GetNetworkIdentity()
+        {
+            if (NetworkIdentities.Count == 0)
+                NetworkIdentities.AddRange(Object.FindObjectsOfType<NetworkIdentity>().Where(x => x.name.Contains("All")));
+            return NetworkIdentities.FirstOrDefault(x => Vector3.Distance(x.transform.position, Position) < 0.1f);
+        }
+        */
     }
 }

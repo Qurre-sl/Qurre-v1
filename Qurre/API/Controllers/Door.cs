@@ -142,7 +142,7 @@ namespace Qurre.API.Controllers
             NetworkServer.Spawn(doorVariant.gameObject);
             doorVariant.netIdentity.UpdateData();
             var comp = door.GameObject.AddComponent<DoorsUpdater>();
-            if(comp) comp.Door = doorVariant;
+            if (comp) comp.Door = doorVariant;
             return door;
         }
     }

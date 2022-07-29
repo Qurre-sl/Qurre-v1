@@ -23,6 +23,7 @@ namespace Qurre.API.Addons.Models
                 GameObject.transform.localRotation = Quaternion.Euler(rotation);
                 GameObject.transform.localScale = size;
                 NetworkServer.Spawn(GameObject);
+                Door.DoorVariant.netIdentity.UpdateData();
             }
             catch (Exception ex)
             {

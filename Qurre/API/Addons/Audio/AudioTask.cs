@@ -3,7 +3,7 @@ namespace Qurre.API.Addons.Audio
 {
     public struct AudioTask : IDisposable
     {
-        internal AudioTask(AudioStream stream, byte volume, bool loop, string playerName = "Qurre Audio")
+        internal AudioTask(IAudioStream stream, byte volume, bool loop, string playerName = "Qurre Audio")
         {
             Stream = stream;
             _volume = volume.Clamp(0, 100);
@@ -24,7 +24,7 @@ namespace Qurre.API.Addons.Audio
                 API.Audio._micro.UpdateListeners(this);
             }
         }
-        public AudioStream Stream { get; private set; }
+        public IAudioStream Stream { get; private set; }
         public readonly TimeSpan Duration;
 
         private bool _clearedCache = false;

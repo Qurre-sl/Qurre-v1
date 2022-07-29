@@ -1,11 +1,9 @@
-﻿using Dissonance;
-using Dissonance.Audio.Capture;
+﻿using Dissonance.Audio.Capture;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using ZXC;
-namespace Qurre.API.Addons.Audio
+namespace Qurre.API.Addons.Audio.Extensions
 {
     internal class Microphone : MonoBehaviour, IMicrophone
     {
@@ -47,7 +45,7 @@ namespace Qurre.API.Addons.Audio
             if (Status is not StatusType.Playing)
                 return false;
 
-            AudioStream stream = _tasks[0].Stream;
+            IAudioStream stream = _tasks[0].Stream;
 
             _elapsedTime += Time.unscaledDeltaTime;
 

@@ -580,16 +580,23 @@ namespace Qurre.API.Events
     }
     public class TeslaTriggerEvent : EventArgs
     {
-        public TeslaTriggerEvent(Player player, Tesla tesla, bool inHurtingRange, bool triggerable = true)
+        public TeslaTriggerEvent(Player player, Tesla tesla, bool inIdlingRange, bool inRageRange)
         {
             Player = player;
             Tesla = tesla;
-            InHurtingRange = inHurtingRange;
-            Triggerable = triggerable;
+            InIdlingRange = inIdlingRange;
+            InRageRange = inRageRange;
+            Allowed = true;
         }
         public Player Player { get; }
         public Tesla Tesla { get; }
+        public bool InIdlingRange { get; }
+        public bool InRageRange { get; }
+        public bool Allowed { get; set; }
+
+        [Obsolete("Removed due to optimization")]
         public bool InHurtingRange { get; }
+        [Obsolete("Use \"Allowed\"")]
         public bool Triggerable { get; set; }
     }
     public class SpawnEvent : EventArgs
@@ -726,30 +733,34 @@ namespace Qurre.API.Events
     }
     public class SinkholeWalkingEvent : EventArgs
     {
-        public SinkholeWalkingEvent(Player pl, Sinkhole sinkhole, List<EffectType> effects, Dictionary<EffectType, float> durations, bool allowed = true)
+        public SinkholeWalkingEvent(Player pl, Sinkhole sinkhole, HazardEventsType ev, bool allowed = true)
         {
             Player = pl;
             Sinkhole = sinkhole;
-            Effects = effects;
-            Durations = durations;
+            Event = ev;
             Allowed = allowed;
         }
         public Player Player { get; }
         public Sinkhole Sinkhole { get; }
-        public List<EffectType> Effects { get; }
-        public Dictionary<EffectType, float> Durations { get; }
+        public HazardEventsType Event { get; }
         public bool Allowed { get; set; }
+        [Obsolete("removed")]
+        public List<EffectType> Effects { get; }
+        [Obsolete("removed")]
+        public Dictionary<EffectType, float> Durations { get; }
     }
     public class TantrumWalkingEvent : EventArgs
     {
-        public TantrumWalkingEvent(Player pl, TantrumEnvironmentalHazard tantrum, bool allowed = true)
+        public TantrumWalkingEvent(Player pl, TantrumEnvironmentalHazard tantrum, HazardEventsType ev, bool allowed = true)
         {
             Player = pl;
             Tantrum = tantrum;
+            Event = ev;
             Allowed = allowed;
         }
         public Player Player { get; }
         public TantrumEnvironmentalHazard Tantrum { get; }
+        public HazardEventsType Event { get; }
         public bool Allowed { get; set; }
     }
     public class ChangeSpectateEvent : EventArgs

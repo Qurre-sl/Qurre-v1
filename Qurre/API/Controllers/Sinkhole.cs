@@ -43,11 +43,7 @@ namespace Qurre.API.Controllers
                 NetworkServer.Spawn(GameObject);
             }
         }
-        public bool ImmunityScps
-        {
-            get => sinkhole.SCPImmune;
-            set => sinkhole.SCPImmune = value;
-        }
+        public bool ImmunityScps { get; set; }
         public float DistanceToGiveEffect
         {
             get => sinkhole.DistanceToBeAffected;

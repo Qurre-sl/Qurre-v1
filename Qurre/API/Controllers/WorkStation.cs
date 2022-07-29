@@ -7,7 +7,7 @@ namespace Qurre.API.Controllers
 {
     public class WorkStation
     {
-        private readonly WorkstationController workStation;
+        internal readonly WorkstationController workStation;
         internal WorkStation(WorkstationController station)
         {
             workStation = station;
@@ -68,6 +68,6 @@ namespace Qurre.API.Controllers
             get => Status == WorkstationStatus.Online;
             set => Status = value ? WorkstationStatus.Online : WorkstationStatus.Offline;
         }
-        public static WorkStation Create(Vector3 position, Vector3 rotation, Vector3 scale) => new WorkStation(position, rotation, scale);
+        public static WorkStation Create(Vector3 position, Vector3 rotation, Vector3 scale) => new(position, rotation, scale);
     }
 }
