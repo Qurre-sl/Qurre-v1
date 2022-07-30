@@ -3,7 +3,7 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Qurre.API.Addons.Audio.Extensions
+namespace Qurre.API.Addons.Audio
 {
     internal class Microphone : MonoBehaviour, IMicrophone
     {
@@ -21,16 +21,8 @@ namespace Qurre.API.Addons.Audio.Extensions
 
         internal void UpdateFrames(AudioTask task)
         {
-            _frame = new float[task.Stream.FrameSize];
-            _frameBytes = new byte[task.Stream.FrameSize * 4];
-        }
-        internal void UpdateListeners(AudioTask task)
-        {
-            foreach (var channel in Radio.comms.PlayerChannels._openChannelsBySubId.Values)
-            {
-                Radio.comms.PlayerChannels.Close(channel);
-                Radio.comms.PlayerChannels.Open(channel.TargetId, amplitudeMultiplier: (float)task.Volume / 100);
-            }
+            _frame = new float[task.FrameSize];
+            _frameBytes = new byte[task.FrameSize * 4];
         }
 
         public virtual void Subscribe(IMicrophoneSubscriber listener) => _subs.Add(listener);
@@ -42,10 +34,10 @@ namespace Qurre.API.Addons.Audio.Extensions
                 StopCapture();
                 return true;
             }
-            if (Status is not StatusType.Playing)
-                return false;
+            if (Status != StatusType.Playing)
+                return true;
 
-            IAudioStream stream = _tasks[0].Stream;
+            AudioTask task = _tasks[0];
 
             _elapsedTime += Time.unscaledDeltaTime;
 
@@ -53,20 +45,20 @@ namespace Qurre.API.Addons.Audio.Extensions
             {
                 _elapsedTime -= 0.04f;
 
-                var readLength = stream.Read(_frameBytes, 0, _frameBytes.Length);
+                var readLength = task.Stream.Read(_frameBytes, 0, _frameBytes.Length);
 
                 Array.Clear(_frame, 0, _frame.Length);
 
                 Buffer.BlockCopy(_frameBytes, 0, _frame, 0, readLength);
 
                 foreach (var subscriber in _subs)
-                    subscriber.ReceiveMicrophoneData(new ArraySegment<float>(_frame), stream.Format);
+                    subscriber.ReceiveMicrophoneData(new ArraySegment<float>(_frame), task.Format);
             }
 
-            if (!stream.CheckEnd())
+            if (task.Stream.Position != task.Stream.Length)
                 return false;
 
-            if (_tasks[0].Loop) stream.Position = 0;
+            if (task.Loop) task.Stream.Position = 0;
             else StopCapture();
 
             return false;
@@ -81,9 +73,28 @@ namespace Qurre.API.Addons.Audio.Extensions
         public virtual WaveFormat StartCapture(string name)
         {
             if (_tasks.Count == 0) throw new NullReferenceException(GetType().FullName);
-            AudioTask task = _tasks[0];
-            try { UpdateListeners(task); } catch { }
+            try
+            {
+                foreach (var channel in Radio.comms.PlayerChannels._openChannelsBySubId.Values)
+                {
+                    Radio.comms.PlayerChannels.Close(channel);
+                    Radio.comms.PlayerChannels.Open(channel.TargetId);
+                }
+            }
+            catch { }
             Server.Host.Radio.Network_syncPrimaryVoicechatButton = true;
+            AudioTask task = _tasks[0];
+
+            if (task.Stream is null)
+            {
+                Log.Error($"Stream is null. Microphone: '{name}'; Task Player Name: '{task.PlayerName}'");
+                return task.Format;
+            }
+            else if (!task.Stream.CanRead)
+            {
+                Log.Error($"Stream cannot be read. Microphone: '{name}'; Task Player Name: '{task.PlayerName}'");
+                return task.Format;
+            }
 
             Radio.comms._capture._micName = task.PlayerName;
             Radio.comms._capture._microphone = this;
@@ -99,7 +110,7 @@ namespace Qurre.API.Addons.Audio.Extensions
 
             task.Active = true;
 
-            return task.Stream.Format;
+            return task.Format;
         }
         public virtual void StopCapture()
         {
@@ -111,8 +122,10 @@ namespace Qurre.API.Addons.Audio.Extensions
 
             AudioTask task = _tasks[0];
             _tasks.Remove(task);
+            task.Alive = false;
+            task.Active = false;
 
-            MEC.Timing.CallDelayed(0.1f, () => { if (_tasks.Count > 0) ResetMicrophone(); });
+            if (_tasks.Count > 0) ResetMicrophone();
         }
         public virtual void Pause()
         {
@@ -131,7 +144,7 @@ namespace Qurre.API.Addons.Audio.Extensions
         public virtual void Skip()
         {
             StopCapture();
-            ResetMicrophone();
+            Radio.comms.ResetMicrophoneCapture();
         }
     }
 }

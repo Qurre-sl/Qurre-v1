@@ -1,6 +1,6 @@
 ﻿using Qurre.API.Addons.Audio;
-using Qurre.API.Addons.Audio.Extensions;
 using System.IO;
+using System.Linq;
 namespace Qurre.API
 {
 	public static class Audio
@@ -14,9 +14,8 @@ namespace Qurre.API
 		/// </code>
 		/// </example>
 		///</summary>
-		public static AudioTask PlayFromFile(string path, byte volume, bool instant = false, bool loop = false, int frameSize = 1920, int sampleRate = 48000,
-			string playerName = "Qurre Audio") => Play(new AudioStream(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read),
-				frameSize, sampleRate), volume, instant, loop, playerName);
+		public static void PlayFromFile(string path, byte volume, bool instant = false, bool loop = false, int frameSize = 1920, int sampleRate = 48000,
+			string playerName = "Qurre Audio") => Play(new FileStream(path, FileMode.Open), volume, instant, loop, frameSize, sampleRate, playerName);
 		///<summary>
 		///<para>Plays music from a url.</para>
 		///<para>Example:</para>
@@ -26,61 +25,41 @@ namespace Qurre.API
 		/// </code>
 		/// </example>
 		///</summary>
-		public static AudioTask PlayFromUrl(string url, byte volume, bool instant = false, bool loop = false, int frameSize = 1920, int sampleRate = 48000,
+		public static void PlayFromUrl(string url, byte volume, bool instant = false, bool loop = false, int frameSize = 1920, int sampleRate = 48000,
 			string playerName = "Qurre Audio")
 		{
 			using System.Net.WebClient _web = new();
 			byte[] byteData = _web.DownloadData(url);
-			return Play(new AudioStream(new MemoryStream(byteData), frameSize, sampleRate), volume, instant, loop, playerName);
+			Play(new MemoryStream(byteData), volume, instant, loop, frameSize, sampleRate, playerName);
 		}
 		///<summary>
 		///<para>Plays music from the stream.</para>
 		///<para>Example:</para>
 		/// <example>
 		/// <code>
-		/// Audio.PlayFromStream(new MemoryStream(audio), 100, instant: true, loop: false, frameSize: 1920, sampleRate: 48000);
+		/// Audio.Play(new MemoryStream(audio), 100, instant: true, loop: false, frameSize: 1920, sampleRate: 48000);
 		/// </code>
 		/// </example>
 		///</summary>
-		public static AudioTask PlayFromStream(Stream stream, byte volume, bool instant = false, bool loop = false, int frameSize = 1920, int sampleRate = 48000,
-			string playerName = "Qurre Audio") => Play(new AudioStream(stream, frameSize, sampleRate), volume, instant, loop, playerName);
-
-		///<summary>
-		///<para>Plays music from the Audio Stream.</para>
-		///<para>Example:</para>
-		/// <example>
-		/// <code>
-		/// Audio.Play(new AudioStream(stream), 100, instant: true, loop: false, frameSize: 1920, sampleRate: 48000);
-		/// </code>
-		/// </example>
-		///</summary>
-		public static AudioTask Play(IAudioStream stream, byte volume, bool instant = false, bool loop = false, string playerName = "Qurre Audio")
-			=> Play(new(stream, volume, loop, playerName), instant);
-
-
-		///<summary>
-		///<para>Plays music from the Audio Task.</para>
-		///<para>Example:</para>
-		/// <example>
-		/// <code>
-		/// Audio.Play(new AudioTask(...), instant: true);
-		/// </code>
-		/// </example>
-		///</summary>
-		public static AudioTask Play(AudioTask task, bool instant = false)
+		public static void Play(Stream stream, byte volume, bool instant = false, bool loop = false, int frameSize = 1920, int sampleRate = 48000,
+			string playerName = "Qurre Audio")
 		{
-			if (_micro is null) _micro = Radio.comms.gameObject.AddComponent<Microphone>();
+			if (stream is null) throw new System.NullReferenceException("Qurre.API.Audio.Play: Stream is null");
+			if (_micro is null)
+				_micro = Radio.comms.gameObject.AddComponent<Microphone>();
+			AudioTask task = new(stream, volume, loop, frameSize, sampleRate, playerName);
 			if (instant && _micro._tasks.Count > 0)
 			{
-				_micro._tasks.Insert(1, task);
-				_micro.StopCapture();
+				var _oldTask = _micro._tasks[0];
+				_micro._tasks[0] = task;
+				_micro.UpdateFrames(task);
+				_oldTask.Dispose();
 			}
 			else
 			{
 				_micro._tasks.Add(task);
 				if (_micro._tasks.Count == 1) _micro.ResetMicrophone();
 			}
-			return task;
 		}
 		internal static Microphone _micro;
 		public static IMicrophone Microphone => _micro;
