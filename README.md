@@ -22,6 +22,8 @@
 # Qurre
 Framework for SCP:SL servers with unique functions & api
 
+# Project archived
+
 # Installation
 * Move `Assembly-CSharp.dll` into the `SCPSL_Data/Managed` 
 * Move the rest of the files/folders to `~/.config` (`%AppData%` on Windows)
